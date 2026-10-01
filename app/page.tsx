@@ -215,9 +215,14 @@ export default function HomePage() {
         <strong>Convalidación pendiente (situación a 30-9-2026).</strong>
         <p>
           El artículo 86.2 de la CE exige el pronunciamiento expreso del Congreso dentro de los
-          treinta días siguientes a la promulgación: no hay convalidación tácita. La Junta de
-          Portavoces ha convocado un pleno extraordinario para el viernes 2 de octubre de 2026, a
-          las 11:00, que votará por separado los dos decretos de vivienda. Hasta la votación la
+          treinta días siguientes a la promulgación: no hay convalidación tácita. Según
+          información de prensa del 29 de septiembre de 2026 (
+          <a href="https://www.moncloa.com/2026/09/29/convalidacion-decretos-vivienda-pleno-congreso-3439659/" rel="noreferrer">
+            moncloa.com
+          </a>
+          ), la Junta de Portavoces habría convocado un pleno extraordinario para el viernes 2
+          de octubre de 2026, a las 11:00, que votaría por separado los dos decretos de
+          vivienda; no es un horario oficial publicado por el Congreso. Hasta la votación la
           norma rige con plena eficacia; si el Congreso deroga alguno, cesa de inmediato sin
           anular los efectos ya producidos. El Congreso puede además convalidar y acordar su
           tramitación como proyecto de ley, lo que abre la puerta a modificar el contenido

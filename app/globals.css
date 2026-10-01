@@ -127,6 +127,17 @@ li {
   overflow-wrap: anywhere;
 }
 
+/* En escritorio la barra lateral es fija y ocupa --sidebar-w a la izquierda del
+   viewport. Sin este desplazamiento, .main-content y .site-footer se centran en
+   el viewport completo y la barra tapa el borde izquierdo del contenido. Con el
+   padding, el centrado con margin auto se calcula sobre lo que queda a la
+   derecha de la barra. No toca el móvil: allí la barra está fuera de pantalla. */
+@media (min-width: 1024px) {
+  body {
+    padding-left: var(--sidebar-w);
+  }
+}
+
 /* --------------------------------------------------------------------------
    Sidebar
    -------------------------------------------------------------------------- */
@@ -958,6 +969,7 @@ th:last-child {
     background: #fff;
     color: #000;
     overflow: visible;
+    padding-left: 0;
   }
 
   .main-content {

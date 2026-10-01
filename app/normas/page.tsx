@@ -72,7 +72,7 @@ export default function NormasPage() {
         <li>
           <b className="tono-rdl26">RDL 26/2026</b> — «BOE» núm. 241, de 30 de septiembre de 2026,
           páginas 127818 a 127913 (<b>96 páginas</b>). Veinte artículos en seis títulos y una
-          disposición adicional primera, una segunda, tres transitorias, derogatoria única y once
+          disposición adicional primera, una segunda, dos transitorias, derogatoria única y once
           disposiciones finales. Entra en vigor el <b>1 de octubre de 2026</b>.{' '}
           <Cite norma="rdl26" art="disposición final undécima.1" />
         </li>

@@ -31,6 +31,12 @@ type Fila = {
   estado: Estado;
   condicion: string;
   nota?: string;
+  /**
+   * Overrides the pill text while keeping the tone of `estado`. Used for
+   * measures whose effect is deferred to a later date: they are enacted but
+   * do not apply yet, so "Activa" would claim they can be relied on today.
+   */
+  etiqueta?: string;
 };
 
 const FILAS: Fila[] = [
@@ -78,6 +84,7 @@ const FILAS: Fila[] = [
   {
     medida: 'Prórroga indefinida de cinco y siete años e indemnización de doce mensualidades',
     estado: 'activa',
+    etiqueta: 'Vigente desde 2-10-2026',
     condicion:
       'Desde el 2-10-2026, para los vencimientos posteriores a esa fecha; la DA 1.ª desplaza a la prórroga extraordinaria de la DF 5.ª',
   },
@@ -95,11 +102,13 @@ const FILAS: Fila[] = [
   {
     medida: 'IVA de estancias cortas y de obras de renovación al 10 %',
     estado: 'activa',
+    etiqueta: 'Vigente desde 1-12-2026',
     condicion: 'Con efectos desde el 1-12-2026',
   },
   {
     medida: 'Nueva escala de imputación de rentas (IRPF)',
     estado: 'activa',
+    etiqueta: 'Vigente desde 1-1-2027',
     condicion: 'Con efectos desde el 1-1-2027',
   },
   {
@@ -159,7 +168,9 @@ export default function EstadoPage() {
 
       <p>
         Cada medida de la tabla está en uno de cuatro estados.{' '}
-        <b>Activa</b> es lo que puede aplicarse hoy.{' '}
+        <b>Activa</b> es lo que puede aplicarse hoy. Cuando el efecto está diferido a una
+        fecha posterior, la etiqueta indica desde cuándo rige (por ejemplo «Vigente desde
+        1-12-2026») en lugar de «Activa»: la medida está aprobada pero aún no es aplicable.{' '}
         <b>Potestativa</b> existe pero depende de que el ayuntamiento la recoja en su ordenanza.{' '}
         <b>Pendiente</b> son preceptos que ya existen pero necesitan un acto posterior para
         funcionar.{' '}
@@ -184,7 +195,7 @@ export default function EstadoPage() {
                   {fila.nota && <div className="nota-cell">{fila.nota}</div>}
                 </td>
                 <td>
-                  <span className={`pill pill-${fila.estado}`}>{ESTADO_TXT[fila.estado]}</span>
+                  <span className={`pill pill-${fila.estado}`}>{fila.etiqueta ?? ESTADO_TXT[fila.estado]}</span>
                 </td>
                 <td>{fila.condicion}</td>
               </tr>
@@ -216,9 +227,14 @@ export default function EstadoPage() {
         El artículo 86.2 CE exige el pronunciamiento expreso del Congreso dentro de los{' '}
         <b>treinta días</b> siguientes a la promulgación: no hay convalidación tácita, y el cómputo
         es en días naturales.{' '}
-        <Cite norma="ce" art="86.2" /> La Junta de Portavoces ha convocado un pleno extraordinario
-        para el viernes 2 de octubre de 2026, a las 11:00, que votará por separado los dos
-        decretos. Hasta la votación, la norma rige con plena eficacia; si se deroga, cesa de
+        <Cite norma="ce" art="86.2" /> Según información de prensa del 29 de septiembre de
+        2026 (
+        <a href="https://www.moncloa.com/2026/09/29/convalidacion-decretos-vivienda-pleno-congreso-3439659/" rel="noreferrer">
+          moncloa.com
+        </a>
+        ), la Junta de Portavoces habría convocado un pleno extraordinario para el viernes 2
+        de octubre de 2026, a las 11:00, que votaría por separado los dos decretos; no es un
+        horario oficial publicado por el Congreso. Hasta la votación, la norma rige con plena eficacia; si se deroga, cesa de
         inmediato <b>sin anular los efectos ya producidos</b>. El Congreso puede además
         convalidarla y acordar su tramitación como proyecto de ley, lo que abre la puerta a
         modificar el contenido después.{' '}

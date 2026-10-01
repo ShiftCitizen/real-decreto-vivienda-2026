@@ -155,7 +155,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     etiqueta: 'RDL 8/2023',
     titulo:
       'Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan medidas para afrontar las consecuencias económicas y sociales derivadas de los conflictos en Ucrania y Oriente Próximo, así como para paliar los efectos de la sequía',
-    boe: 'BOE-A-2023-24634',
+    boe: 'BOE-A-2023-26452',
     eli: 'https://www.boe.es/eli/es/rdl/2023/12/27/8',
     tono: 'neutro',
   },
@@ -163,7 +163,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     id: 'reglamentoUe',
     etiqueta: 'Reglamento (UE) 2024/1028',
     titulo:
-      'Reglamento (UE) 2024/1028 del Parlamento Europeo y del Consejo, de 11 de abril, por el que se establecen reglas armónicas para el intercambio de datos a corto plazo en materia de alquileres de corta duración',
+      'Reglamento (UE) 2024/1028 del Parlamento Europeo y del Consejo, de 11 de abril de 2024, sobre la recogida y el intercambio de datos relativos a los servicios de alquiler de alojamientos de corta duración y por el que se modifica el Reglamento (UE) 2018/1724',
     eli: 'https://eur-lex.europa.eu/eli/reg/2024/1028/oj',
     tono: 'neutro',
   },

@@ -876,7 +876,9 @@ export default function DesahuciosPage() {
         <p>
           Si alquila como turismo, lo que le afecta es fiscal: la{' '}
           <b>salida de la exención del IVA</b> para arrendamientos amueblados con servicios propios
-          de hostelería o de más de 30 noches desde el 1 de diciembre de 2026, y el{' '}
+          de hostelería o cuando la duración a favor de un mismo arrendatario no supere las 30
+          noches, salvo que la vivienda sea la residencia habitual del arrendador, desde el 1 de
+          diciembre de 2026, y el{' '}
           <b>recargo de IBI</b> de hasta el 150 % en zona tensionada.{' '}
           <Link href="/fiscal">Ver la parte fiscal</Link>.
         </p>
