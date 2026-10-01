@@ -76,7 +76,7 @@ const FIGURAS = [
 export default function HomePage() {
   return (
     <>
-      <figure className="hero wide">
+      <figure className="hero">
         <img
           src="/assets/hero.jpg"
           alt="Composición arquitectónica: edificio residencial contemporáneo con acento burdeos sobre horizonte urbano suave"
@@ -86,10 +86,7 @@ export default function HomePage() {
           fetchPriority="high"
         />
         <figcaption>
-          Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes
-          para la protección de la función social de la vivienda y la ampliación de la oferta
-          de vivienda asequible · y Real Decreto-ley 27/2026, de 29 de septiembre, de medidas
-          urgentes en materia de vivienda para dar respuesta a la emergencia habitacional
+          Medidas urgentes de vivienda
         </figcaption>
       </figure>
 
@@ -132,7 +129,7 @@ export default function HomePage() {
         <Link href="/desahucios-y-alquiler#coordinacion">ver la coordinación</Link>).
       </p>
 
-      <div className="figs wide">
+      <div className="figs">
         {FIGURAS.map((fig) => (
           <div className="fig" key={fig.label}>
             <span className="fig-label">{fig.label}</span>
@@ -247,10 +244,12 @@ export default function HomePage() {
       <h2 id={slugify('Cómo leer las citas')}>Cómo leer las citas</h2>
 
       <p>
-        Hay dos reales decretos-ley y cada uno tiene el suyo: un «art. 1 RDL 26/2026» y
-        un «art. 1 RDL 27/2026» no son lo mismo, y una referencia sin el nombre de su norma no
-        significa nada. Por eso ninguna referencia de este sitio aparece sin ese nombre: cada una
-        lleva una etiqueta de color, y el color dice a qué decreto o ley pertenece el precepto.
+        Toda referencia de este sitio va acompañada del nombre de su norma, porque el número de
+        artículo por sí solo no basta: los dos decretos tienen ambos un artículo 1 y, sin embargo,
+        el del RDL 26/2026 pone freno a la compra especulativa mientras que el del RDL 27/2026
+        reescribe la prórroga del arrendamiento. Una cita con el número solo, sin el nombre de la
+        norma, no diría cuál de los dos es. El color de cada etiqueta dice a qué decreto o ley
+        pertenece el precepto.
       </p>
 
       <ul className="cite-legend">

@@ -158,10 +158,12 @@ export default function EstadoPage() {
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
-        Cuatro estados, no nueve. <b>Activa</b> es lo que puede aplicarse hoy.{' '}
+        Cada medida de la tabla está en uno de cuatro estados.{' '}
+        <b>Activa</b> es lo que puede aplicarse hoy.{' '}
         <b>Potestativa</b> existe pero depende de que el ayuntamiento la recoja en su ordenanza.{' '}
-        <b>Pendiente</b> son preceptos que existen pero necesitan un acto posterior para funcionar.{' '}
-        <b>Bloqueada</b> significa que hay una prohibición expresa de commercialization hasta que
+        <b>Pendiente</b> son preceptos que ya existen pero necesitan un acto posterior para
+        funcionar.{' '}
+        <b>Bloqueada</b> significa que hay una prohibición expresa de comercialización hasta que
         salga el instrumento que la levanta.
       </p>
 

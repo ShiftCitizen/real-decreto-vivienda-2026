@@ -174,6 +174,13 @@ These have already caused real bugs here. Re-introducing them will cause them ag
 
 - All styles live in `app/globals.css`. There are no CSS modules and no
   Tailwind. Keep it that way.
+- **`.main-content` and `.site-footer` must stay the same width** (860px box,
+  24px padding, 812px of content), and there is deliberately **no per-block
+  measure cap**. A cap written in `ch` is the trap: `ch` resolves against each
+  child's own `font-size`, so `.main-content > * { max-width: 68ch }` gave
+  paragraphs 612px, `h2` 782px and `h3` 629px — every level aligned to a
+  different right edge. If you need a cap, use an absolute length. `.lead`'s
+  own `58ch` cap had the same defect.
 - The global reset sets `box-sizing: border-box` on everything, and
   `overflow-wrap: anywhere` is global so long `<code>` filenames cannot push the
   document sideways. Do not shorten an example filename to make it fit — the real

@@ -24,7 +24,6 @@
   --wbg: #f8f0e0;
   --lead-rule: #c9b0b6;
   --sidebar-w: 310px;
-  --measure: 68ch;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -120,14 +119,10 @@ li {
   padding: 40px 24px 24px;
 }
 
-.main-content > * {
-  max-width: var(--measure);
-}
-
-.main-content > .wide {
-  max-width: none;
-}
-
+/* El contenido llega al borde interior del pie: main y .site-footer comparten
+   la misma caja de 860px con 24px de padding, así que el texto, las tablas y
+   los cuadros terminan en la misma línea vertical. No hay tope de medida por
+   bloque; en pantallas estrechas manda el ancho del contenedor. */
 .main-content a:not(.cite a) {
   overflow-wrap: anywhere;
 }
@@ -506,7 +501,6 @@ h2 + h3 {
   margin: 0 0 1.35em;
   padding-bottom: 1.1em;
   border-bottom: 1px solid var(--lead-rule);
-  max-width: 58ch;
   font-weight: 400;
 }
 
