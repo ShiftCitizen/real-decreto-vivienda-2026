@@ -1,0 +1,15 @@
+# Files the Vercel CLI uploads. Without this, Vercel falls back to .gitignore,
+# but `public/` is treated as a static-asset directory and gets uploaded
+# regardless — including `public/search-index.json`, the reduced DEV index that
+# `predev` writes.
+#
+# That file shadows the real one in production: Vercel serves prerendered routes
+# plus whatever is in public/, never out/. So a stale section-less index would
+# silently kill section search online while the build log still reports the
+# correct entry count. Do not delete this file, and add any other generated file
+# placed in public/ here too.
+public/search-index.json
+
+# Never deploy a local build: Vercel runs its own `npm run build`, and shipping
+# out/ risks serving stale HTML that predates the build.
+out

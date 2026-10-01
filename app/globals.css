@@ -1,0 +1,1013 @@
+/* ==========================================================================
+   Vivienda 2026 — hoja de estilos única.
+
+   Las reglas originales de styles.css se han portado tal cual (serif, paleta
+   con prefers-color-scheme, .figs/.box/.hero y el bloque de impresión) y se han
+   añadido las que necesitan el nuevo shell: sidebar, buscador, FAQ, citas y los
+   estados .pill. No hay CSS modules ni Tailwind, y no debe haberlos.
+   ========================================================================== */
+
+:root {
+  --ink: #1c252e;
+  --mute: #5a6570;
+  --rule: #d8ddd9;
+  --bg: #f4f5f2;
+  --card: #fafaf8;
+  /* Acento 1: el RDL 26/2026. Burdeos, como en el sitio anterior. */
+  --ac: #6b2737;
+  --ac-soft: #f3e8eb;
+  /* Acento 2: el RDL 27/2026. Verde azulado, para que un "art. 10" del
+     segundo decreto no se confunda con uno del primero. */
+  --ac2: #1f5a5e;
+  --ac2-soft: #e2eeee;
+  --warn: #6f4a10;
+  --wbg: #f8f0e0;
+  --lead-rule: #c9b0b6;
+  --sidebar-w: 310px;
+  --measure: 68ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e4e6e4;
+    --mute: #9aa3ad;
+    --rule: #2c3640;
+    --bg: #11161c;
+    --card: #171e26;
+    --ac: #d99aa8;
+    --ac-soft: #2a1f24;
+    --ac2: #6cc3c8;
+    --ac2-soft: #16302f;
+    --warn: #e2bd7a;
+    --wbg: #262013;
+    --lead-rule: #5c4048;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 18px/1.7 Charter, 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open,
+body.search-open {
+  overflow: hidden;
+}
+
+a {
+  color: var(--ac);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 3px;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+li {
+  margin: 0.35em 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--card);
+  color: var(--ink);
+  padding: 10px 16px;
+  border: 2px solid var(--ac);
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Shell
+   -------------------------------------------------------------------------- */
+
+.page-wrapper {
+  display: block;
+}
+
+.main-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 24px;
+}
+
+.main-content > * {
+  max-width: var(--measure);
+}
+
+.main-content > .wide {
+  max-width: none;
+}
+
+.main-content a:not(.cite a) {
+  overflow-wrap: anywhere;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar
+   -------------------------------------------------------------------------- */
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-w);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--rule);
+  background: var(--card);
+  z-index: 30;
+}
+
+.sidebar-header {
+  padding: 20px 22px 14px;
+  border-bottom: 1px solid var(--rule);
+  flex: none;
+}
+
+.sidebar-brand {
+  display: block;
+  font: 700 19px Georgia, serif;
+  color: var(--ac);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-subtitle {
+  margin-top: 5px;
+  font: 12.5px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+.search-trigger {
+  margin: 14px 22px 4px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 14px system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  flex: none;
+}
+
+.search-trigger:hover {
+  color: var(--ink);
+  border-color: var(--ac);
+}
+
+.search-trigger kbd {
+  margin-left: auto;
+  font: 11px system-ui, sans-serif;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+/* The nav is the only part that scrolls, so the header and the search trigger
+   stay put on very short viewports. The scrollbar is hidden but the region
+   remains scrollable — removing either would clip the nav on a laptop. */
+.sidebar-nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 14px 14px 28px;
+  scrollbar-width: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-section {
+  margin-bottom: 18px;
+}
+
+.nav-section-title {
+  font: 600 11px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--mute);
+  padding: 0 8px 6px;
+}
+
+.nav-link {
+  display: block;
+  padding: 5px 8px;
+  border-radius: 3px;
+  color: var(--ink);
+  text-decoration: none;
+  font: 15px/1.35 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.nav-link:hover {
+  background: var(--bg);
+}
+
+.nav-link.active {
+  color: var(--ac);
+  box-shadow: inset 2px 0 0 var(--ac);
+}
+
+.nav-section-toc .nav-link {
+  font-size: 13.5px;
+  color: var(--mute);
+  padding-left: 12px;
+}
+
+.nav-section-toc .nav-link:hover {
+  color: var(--ink);
+}
+
+.sidebar-legend {
+  margin-top: 18px;
+  padding: 12px 10px 0;
+  border-top: 1px solid var(--rule);
+  font: 12.5px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+.sidebar-legend p {
+  margin: 0;
+}
+
+.mobile-bar,
+.sidebar-overlay {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Buscador (⌘K)
+   -------------------------------------------------------------------------- */
+
+.search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(10, 14, 18, 0.55);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 16px 16px;
+}
+
+.search-panel {
+  width: 100%;
+  max-width: 640px;
+  max-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.search-icon {
+  font-size: 19px;
+  color: var(--mute);
+}
+
+.search-input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 17px system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: 4px 0;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-close {
+  border: 0;
+  background: transparent;
+  color: var(--mute);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.search-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.search-results {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.search-group {
+  margin: 0 0 8px;
+}
+
+.search-group-title {
+  margin: 4px 0 2px;
+  padding: 0 8px;
+  font: 600 10.5px/1.5 system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+}
+
+.search-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-group li {
+  margin: 0;
+}
+
+.search-result {
+  display: block;
+  padding: 7px 9px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.search-result[data-active='true'] {
+  background: var(--ac-soft);
+}
+
+.search-result-title {
+  display: block;
+  font: 15px/1.35 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.search-result-meta {
+  display: block;
+  font: 11.5px/1.4 system-ui, sans-serif;
+  color: var(--mute);
+}
+
+.search-result-excerpt {
+  display: block;
+  margin-top: 3px;
+  font: 13px/1.45 system-ui, sans-serif;
+  color: var(--mute);
+}
+
+.search-hint,
+.search-footnote {
+  padding: 8px 12px;
+  margin: 0;
+  font: 13px/1.5 system-ui, sans-serif;
+  color: var(--mute);
+}
+
+.search-footnote {
+  border-top: 1px solid var(--rule);
+  text-align: center;
+}
+
+.search-footnote kbd {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Citas: art. N + etiqueta de norma con color
+   -------------------------------------------------------------------------- */
+
+.cite {
+  font-style: normal;
+}
+
+.cite-art {
+  font: 500 0.86em system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+.cite-norma {
+  display: inline-block;
+  margin-left: 0.32em;
+  padding: 0.05em 0.42em;
+  border-radius: 3px;
+  font: 600 0.72em/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  letter-spacing: 0.01em;
+  vertical-align: 0.1em;
+  color: var(--mute);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.tono-rdl26 {
+  color: var(--ac);
+  background: var(--ac-soft);
+  border-color: transparent;
+}
+
+.tono-rdl27 {
+  color: var(--ac2);
+  background: var(--ac2-soft);
+  border-color: transparent;
+}
+
+.cite[data-norma='rdl26'] .cite-art {
+  color: var(--ac);
+}
+
+.cite[data-norma='rdl27'] .cite-art {
+  color: var(--ac2);
+}
+
+/* --------------------------------------------------------------------------
+   Tipografía de página (reglas originales de styles.css)
+   -------------------------------------------------------------------------- */
+
+h1 {
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0.2em 0 0.35em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-size: 23px;
+  margin: 1.5em 0 0.45em;
+  padding-top: 0.9em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 1.5em;
+}
+
+h3 {
+  font-size: 18.5px;
+  margin: 1.55em 0 0.25em;
+  font-weight: 700;
+  scroll-margin-top: 1.5em;
+}
+
+h2 + h3 {
+  margin-top: 0.9em;
+}
+
+.lead {
+  font-size: 20.5px;
+  line-height: 1.55;
+  color: var(--mute);
+  margin: 0 0 1.35em;
+  padding-bottom: 1.1em;
+  border-bottom: 1px solid var(--lead-rule);
+  max-width: 58ch;
+  font-weight: 400;
+}
+
+.meta,
+.note,
+th,
+td,
+.fig span {
+  font: 15px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.meta {
+  color: var(--mute);
+  margin: 0 0 0.6em;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+}
+
+/* --------------------------------------------------------------------------
+   Cifras destacadas
+   -------------------------------------------------------------------------- */
+
+.figs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 24px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  margin: 1.7em 0;
+  padding: 20px 0;
+}
+
+.fig {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.fig-label {
+  font: 600 12px/1.35 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fig b {
+  display: block;
+  font: 700 26px/1.15 Georgia, serif;
+  color: var(--ac);
+  letter-spacing: -0.02em;
+}
+
+.fig-ref {
+  font: 13px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+/* --------------------------------------------------------------------------
+   Tablas
+   -------------------------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+th {
+  text-align: left;
+  border-bottom: 2px solid var(--ink);
+  padding: 8px 10px 8px 0;
+  font-weight: 600;
+}
+
+td {
+  padding: 9px 10px 9px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+td:last-child,
+th:last-child {
+  padding-right: 0;
+}
+
+/* La primera columna de la cronología lleva ancho explícito: con `width: 100%`
+   sobre la tabla, el navegador repartía el sobrante entre las dos columnas y las
+   fechas se partían en dos líneas. */
+.col-fecha {
+  width: 11.5em;
+  white-space: nowrap;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --------------------------------------------------------------------------
+   Estados (pills)
+   -------------------------------------------------------------------------- */
+
+.pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font: 600 12px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--mute);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+}
+
+/* Vocabulary: activa / pendiente / bloqueada / potestativa. Four tones, mapped
+   from the literal status words in the data, not one class per string. */
+.pill-activa {
+  color: var(--ac);
+  background: var(--ac-soft);
+  border-color: transparent;
+}
+
+.pill-pendiente {
+  color: var(--warn);
+  background: var(--wbg);
+  border-color: transparent;
+}
+
+.pill-bloqueada {
+  color: var(--mute);
+  background: transparent;
+  border-style: dashed;
+}
+
+.pill-potestativa {
+  color: var(--ac2);
+  background: var(--ac2-soft);
+  border-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Cajas
+   -------------------------------------------------------------------------- */
+
+.box {
+  border-left: 3px solid var(--ac);
+  background: var(--card);
+  padding: 14px 18px;
+  margin: 1.5em 0;
+  font-size: 16.5px;
+  border-radius: 0 4px 4px 0;
+}
+
+.box.warn {
+  border-color: var(--warn);
+  background: var(--wbg);
+}
+
+.box p {
+  margin: 0.4em 0;
+}
+
+.box strong:first-child {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14.5px;
+  letter-spacing: 0.01em;
+}
+
+.box.ac2 {
+  border-color: var(--ac2);
+}
+
+/* --------------------------------------------------------------------------
+   FAQ
+   -------------------------------------------------------------------------- */
+
+.faq {
+  margin: 1.4em 0 2em;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.faq-item > summary {
+  cursor: pointer;
+  padding: 0.75em 1.6em 0.75em 0;
+  position: relative;
+  font-weight: 700;
+  font-size: 17.5px;
+  list-style: none;
+}
+
+.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item > summary::after {
+  content: '+';
+  position: absolute;
+  right: 0.2em;
+  top: 0.6em;
+  font: 400 20px/1 system-ui, sans-serif;
+  color: var(--ac);
+}
+
+.faq-item[open] > summary::after {
+  content: '−';
+}
+
+.faq-answer {
+  padding-bottom: 0.9em;
+}
+
+.faq-answer p {
+  margin: 0.5em 0;
+}
+
+.faq-answer .cite-block {
+  display: block;
+  margin-top: 0.55em;
+  font: 13.5px/1.9 system-ui, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Leyenda de citas
+   -------------------------------------------------------------------------- */
+
+.cite-legend {
+  font: 13.5px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.cite-legend ul {
+  list-style: none;
+  margin: 0.6em 0 0;
+  padding: 0;
+}
+
+.cite-legend li {
+  margin: 0.35em 0;
+}
+
+/* --------------------------------------------------------------------------
+   Cabecera de la página
+   -------------------------------------------------------------------------- */
+
+.page-meta {
+  font: 13px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+.upd {
+  font: 13px system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+/* --------------------------------------------------------------------------
+   Portada
+   -------------------------------------------------------------------------- */
+
+.hero {
+  margin: 0 0 1.8em;
+  padding: 0;
+  max-width: none;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--card);
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1168 / 784;
+  object-fit: cover;
+  /* El acento de la composición está a la derecha: recortarla al centro la
+     deja sin el elemento que da nombre a la imagen. */
+  object-position: right center;
+}
+
+.hero figcaption {
+  font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+  padding: 10px 2px 0;
+  letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   Pie
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  max-width: 860px;
+  margin: 48px auto 0;
+  padding: 22px 24px 52px;
+  border-top: 1px solid var(--rule);
+  font: 14px/1.65 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+/* --------------------------------------------------------------------------
+   Adaptación a pantallas estrechas
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    width: min(320px, 84vw);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 14, 18, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 25;
+  }
+
+  .sidebar-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 10px 16px;
+    background: var(--card);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 34px;
+    height: 30px;
+    padding: 0 6px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 2px;
+    background: var(--ink);
+  }
+
+  .mobile-title {
+    font: 700 15px Georgia, serif;
+    color: var(--ac);
+  }
+
+  .main-content {
+    padding: 26px 20px 20px;
+  }
+
+  .site-footer {
+    padding: 20px 20px 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    margin: 0 -8px 1.4em;
+    border-radius: 0;
+  }
+
+  .hero img {
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
+    object-position: 70% center;
+  }
+
+  .hero figcaption {
+    font-size: 12.5px;
+    padding-top: 8px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  .lead {
+    font-size: 19px;
+  }
+
+  .figs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 18px;
+    padding: 16px 0;
+  }
+
+  .fig b {
+    font-size: 22px;
+  }
+
+  body {
+    font-size: 17px;
+  }
+
+  /* nowrap en la fecha deja de caber junto al texto a 320 px; la celda se
+     parte en dos líneas y el scroll horizontal sobra. */
+  .col-fecha {
+    width: auto;
+    white-space: normal;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Impresión
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .sidebar,
+  .mobile-bar,
+  .sidebar-overlay,
+  .search-trigger,
+  .search-modal,
+  .skip-link,
+  .faq-item > summary::after {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    background: #fff;
+    color: #000;
+    overflow: visible;
+  }
+
+  .main-content {
+    max-width: none;
+    padding: 0;
+  }
+
+  .lead {
+    border-bottom-color: #ccc;
+  }
+
+  .box {
+    border: 1px solid #999;
+    border-left-width: 3px;
+    background: none;
+  }
+
+  /* Un <details> cerrado no imprime su contenido: sin esto la página
+     impresa pierde la mitad de las preguntas.
+     ElDisplay del hijo no basta: un <details> cerrado expone su contenido
+     no-sUMMARY dentro de ::details-content, que el navegador pinta con
+     content-visibility: hidden (y con block-size colapsado para la
+     animación de apertura). Hay que tocar ese pseudoelemento; el
+     display:block de abajo sólo sirve en navegadores que no lo
+     soportan, y se deja por eso. */
+  details.faq-item::details-content {
+    content-visibility: visible !important;
+    block-size: auto !important;
+  }
+
+  .faq-item > div,
+  .faq-answer {
+    display: block !important;
+  }
+
+  table,
+  .figs,
+  .hero {
+    break-inside: avoid;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+}

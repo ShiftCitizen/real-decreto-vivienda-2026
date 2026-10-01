@@ -1,0 +1,312 @@
+/**
+ * Generates search-index.json for the ⌘K palette.
+ *
+ * Pages come from lib/nav.ts, FAQ and norma entries from lib/faq.ts and
+ * lib/normas.ts. Sections are read back out of the *built* HTML in out/, so the
+ * index can never drift from the anchors that actually ship — and the prose is
+ * never duplicated into a data file that could fall out of date.
+ *
+ * Runs the citation audit at the same time: every "art." / "artículo N" in the
+ * built text must name its norm, either through a <cite> element or in its own
+ * clause. A bare article number on a legal-information site is a defect, not a
+ * style choice, and there are two decrees with an article 1.
+ */
+import { readFileSync, readdirSync, writeFileSync, statSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { NAV_SECTIONS } from '../lib/nav.ts';
+import { FAQ } from '../lib/faq.ts';
+import { NORMA_IDS, NORMAS } from '../lib/normas.ts';
+
+const OUT_DIR = 'out';
+
+// Two modes:
+//   default (postbuild) -> section entries included, read from out/*.html.
+//   --dev (predev)      -> no sections: there is no built HTML to read.
+//
+// postbuild runs *after* Next has copied public/ into out/, so the production
+// index goes straight into out/. But Vercel does not serve out/ at all — it
+// serves prerendered routes plus whatever is in public/. So the production
+// build writes BOTH; writing only out/ made /search-index.json 404 online, and
+// writing the dev copy to public/ made it silently serve a section-less index
+// instead. Both paths must hold the full index.
+const isDev = process.argv.includes('--dev');
+const TARGETS = isDev
+  ? ['public/search-index.json']
+  : ['out/search-index.json', 'public/search-index.json'];
+
+// Script and style *content* is not markup, so a plain tag strip does not
+// remove it. Next ships the RSC flight payload as a series of
+// <script>self.__next_f.push(...)</script> blocks at the end of <body>; without
+// this the last anchored section on a page slices straight through them and
+// indexes several kB of escaped JSON. Drop the whole element, content included.
+const dropNonContent = (html) =>
+  html.replace(/<(script|style|noscript|template)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ');
+
+/** Strips tags and collapses whitespace, for plain-text excerpts. */
+const plain = (html) =>
+  dropNonContent(html)
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+// Section bodies are capped so one enormous page cannot dominate the index.
+const MAX_BODY = 1200;
+const MAX_EXCERPT = 160;
+
+function* htmlFiles(dir) {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) {
+      yield* htmlFiles(full);
+    } else if (entry.endsWith('.html')) {
+      yield full;
+    }
+  }
+}
+
+/** Route for a built file, e.g. out/estado/index.html -> /estado/ */
+function routeFor(file) {
+  const rel = file.slice(OUT_DIR.length + 1).replace(/\/index\.html$/, '').replace(/\.html$/, '');
+  return rel === 'index' ? '/' : `/${rel}`;
+}
+
+/** Nav label for a route, so section entries can name the page they came from. */
+function pageLabel(route) {
+  const wanted = route === '/' ? '/' : `${route}/`;
+  for (const nav of NAV_SECTIONS) {
+    const hit = nav.links.find((link) => (link.href === '/' ? '/' : `${link.href}/`) === wanted);
+    if (hit) return hit.label;
+  }
+  return undefined;
+}
+
+const entries = [];
+
+// --- Pages -----------------------------------------------------------------
+for (const section of NAV_SECTIONS) {
+  for (const link of section.links) {
+    entries.push({
+      type: 'page',
+      title: link.label,
+      href: link.href === '/' ? '/' : `${link.href}/`,
+      section: section.title,
+      keywords: `${link.label} ${link.resumen}`,
+      excerpt: link.resumen.slice(0, MAX_EXCERPT),
+    });
+  }
+}
+
+// --- Sections (h2/h3 anchors from the built HTML) ---------------------------
+// Never read sections in dev: out/ is either absent or stale there, and stale
+// anchors would point at ids the dev server no longer renders.
+const built = !isDev && existsSync(OUT_DIR);
+if (!isDev && !built) {
+  console.warn('warning: out/ not found, skipping sections.');
+}
+
+// --- Citation audit ---------------------------------------------------------
+// The rule is "every article reference names its norm", not "every article
+// reference lives in a <Cite>". Both forms satisfy it, and the difference is
+// only meaningful where a norm has no <Cite> to sit in: a typed data row, a
+// table cell, a heading.
+//
+// So: drop the <cite> elements, then for each surviving reference look at its
+// clause — from the last sentence break before it to the first one after it —
+// and require a norm name in there. "art. 347 de la Ley de los Mercados de
+// Valores" passes; "Línea de avales de 2.000 M€ (art. 16)" fails, because the
+// reader cannot tell which of the two decrees' article 16 is meant.
+const ART_REF = /\bart(?:ículos?|\.)?\s*\d+(?:\.\d+)*(?:[ªº°])?/gi;
+// A clause break is a full stop, colon, semicolon or the end of a quoted
+// passage. Commas deliberately do not break: "los artículos 1566 y 1581 del
+// Código Civil" names its norm across a comma, and treating that as two
+// clauses would flag it for no reason.
+const CLAUSE_BREAK = /[.;:»]/;
+
+/**
+ * True when the full stop at `i` belongs to an article reference rather than to
+ * a sentence: "17.6", "10.Ocho", "91.Uno.2.10".
+ *
+ * Without this the scan truncates "art. 10.5 y 10.6 de la LAU" at the dot in
+ * "10.6" and judges the reference by a clause that no longer contains its norm.
+ * The digit on the left is what keeps "art. 5. El plazo vence" splitting in two.
+ */
+function isReferenceDot(text, i) {
+  return (
+    text[i] === '.' && /\d/.test(text[i - 1] ?? '') && /[\p{L}\p{N}]/u.test(text[i + 1] ?? '')
+  );
+}
+
+const NORM_WORDS = [
+  // Abbreviations and short labels from lib/normas.ts.
+  /\bRDL\s+\d{1,2}\/\d{4}\b/,
+  /\b(?:Real\s+)?[Dd]ecreto-ley\s+\d{1,2}\/\d{4}\b/,
+  /\bLAU\b/,
+  /\bLEC\b/,
+  /\bLIRPF\b/,
+  /\bLIVA\b/,
+  /\bLRHL\b/,
+  /\bLMV\b/,
+  /\bCE\b/,
+  /\bReglamento\s*\(UE\)/,
+  /\bReglamento\s+de\s+gesti[óo]n\s+tributaria\b/,
+  /\bLey\s+12\/2023\b/,
+  /\bLey\s+11\/2009\b/,
+  /\bLey\s+5\/2019\b/,
+  // Norms the pages name by their official number rather than by an acronym.
+  /\bLey\s+29\/1994\b/,
+  /\bLey\s+33\/2003\b/,
+  // Full names, as they read in prose.
+  /\bLey\s+de\s+Arrendamientos\s+Urbanos\b/,
+  /\bLey\s+de\s+Enjuiciamiento\s+Civil\b/,
+  /\bLey\s+de\s+los\s+Mercados\s+de\s+Valores\b/,
+  /\bLey\s+del\s+IVA\b/,
+  /\bLey\s+del\s+IRPF\b/,
+  /\bLey\s+del\s+Impuesto\s+sobre\s+Sociedades\b/,
+  /\bConstituci[óo]n\b/,
+  /\bC[óo]digo\s+Civil\b/,
+];
+
+const namesItsNorm = (clause) => NORM_WORDS.some((re) => re.test(clause));
+
+/** The clause a match sits in, for judging whether it names its own norm. */
+function clauseAround(text, start, end) {
+  let from = 0;
+  for (let i = start - 1; i >= 0; i -= 1) {
+    if (CLAUSE_BREAK.test(text[i]) && !isReferenceDot(text, i)) {
+      from = i + 1;
+      break;
+    }
+  }
+  let to = Math.min(text.length, end + 200);
+  for (let i = end; i < text.length && i < end + 200; i += 1) {
+    if (CLAUSE_BREAK.test(text[i]) && !isReferenceDot(text, i)) {
+      to = i;
+      break;
+    }
+  }
+  return text.slice(from, to);
+}
+
+const citationFailures = [];
+const seenAnchors = new Map();
+
+for (const file of built ? htmlFiles(OUT_DIR) : []) {
+  const route = routeFor(file);
+  const html = readFileSync(file, 'utf8');
+
+  if (!isDev) {
+    const outsideCites = html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, ' ');
+    const text = plain(outsideCites);
+    for (const m of text.matchAll(ART_REF)) {
+      const start = m.index ?? 0;
+      const clause = clauseAround(text, start, start + m[0].length);
+      if (!namesItsNorm(clause)) {
+        citationFailures.push({ route, match: m[0].trim(), clause: clause.slice(0, 90) });
+      }
+    }
+  }
+
+  // Every heading, anchored or not: the unanchored ones still bound the section
+  // above them, so they are needed to slice bodies correctly.
+  const headings = [...html.matchAll(/<(h[1-6])([^>]*)>([\s\S]*?)<\/\1>/g)];
+
+  headings.forEach((match, i) => {
+    const [raw, tag, attrs, inner] = match;
+    const level = Number(tag.slice(1));
+    const id = /\sid="([^"]+)"/.exec(attrs)?.[1];
+    if (!id) return;
+
+    const title = plain(inner);
+    if (!title) return;
+
+    // A duplicated id is a silent failure: the DOM keeps only the first, so
+    // every deep link for the second opens the wrong place and no browser
+    // reports an error.
+    const key = `${route}#${id}`;
+    if (seenAnchors.has(key)) {
+      throw new Error(
+        `duplicate anchor "${key}": already used by ${seenAnchors.get(key)}. ` +
+          'Give one heading an explicit distinct id.',
+      );
+    }
+    seenAnchors.set(key, title);
+
+    // Body runs from just after this heading to the next heading of the same
+    // or higher rank. This is what puts table cells into the searchable text.
+    let end = headings[i + 1]?.index ?? html.length;
+    for (let j = i + 1; j < headings.length; j += 1) {
+      if (Number(headings[j][1].slice(1)) <= level) {
+        end = headings[j].index;
+        break;
+      }
+    }
+    const body = plain(html.slice(match.index + raw.length, end)).slice(0, MAX_BODY);
+
+    entries.push({
+      type: 'section',
+      title,
+      href: `${route}#${id}`,
+      section: pageLabel(route) ?? 'Sección',
+      keywords: `${title} ${body}`,
+      ...(body ? { excerpt: body.slice(0, MAX_EXCERPT) } : {}),
+      level,
+    });
+  });
+}
+
+if (citationFailures.length > 0) {
+  const shown = citationFailures.slice(0, 40);
+  const lines = shown.map((f) => `  ${f.route}: ${JSON.stringify(f.match)} in ${JSON.stringify(f.clause)}`);
+  throw new Error(
+    `citation audit failed: ${citationFailures.length} article reference(s) that do not name their norm. ` +
+      'Either wrap it in <Cite norma="..." art="..." /> or name the norm in the same clause.\n' +
+      lines.join('\n') +
+      (citationFailures.length > shown.length
+        ? `\n  … and ${citationFailures.length - shown.length} more`
+        : ''),
+  );
+}
+
+// --- FAQ -------------------------------------------------------------------
+for (const item of FAQ) {
+  const body = item.respuesta.join(' ');
+  entries.push({
+    type: 'faq',
+    title: item.pregunta,
+    href: `/#${item.id}`,
+    section: 'Preguntas frecuentes',
+    keywords: `${item.pregunta} ${body}`,
+    excerpt: body.slice(0, MAX_EXCERPT),
+  });
+}
+
+// --- Normas ----------------------------------------------------------------
+for (const id of NORMA_IDS) {
+  const norma = NORMAS[id];
+  entries.push({
+    type: 'norma',
+    title: `${norma.etiqueta} — ${norma.titulo}`,
+    href: `/normas/#${id}`,
+    section: 'Normas citadas',
+    keywords: `${norma.etiqueta} ${norma.titulo} ${norma.boe ?? ''}`,
+    excerpt: norma.titulo.slice(0, MAX_EXCERPT),
+  });
+}
+
+const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0) + 1 }), {});
+const json = JSON.stringify(entries);
+for (const target of TARGETS) {
+  writeFileSync(target, json);
+}
+
+const bytes = Buffer.byteLength(json);
+console.log('search index:', counts);
+console.log(
+  `total ${entries.length} entries, ${(bytes / 1024).toFixed(1)} kB raw -> ${TARGETS.join(', ')}`,
+);
+if (isDev) {
+  console.log('dev mode: section entries omitted (no built HTML available)');
+} else {
+  console.log(`citation audit: 0 article references that fail to name their norm`);
+}

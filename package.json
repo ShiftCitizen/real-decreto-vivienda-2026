@@ -1,0 +1,25 @@
+{
+  "name": "real-decreto-vivienda-2026",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/build-search-index.mjs --dev",
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "node scripts/build-search-index.mjs",
+    "typecheck": "tsc --noEmit",
+    "start": "serve out"
+  },
+  "dependencies": {
+    "next": "^16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "serve": "^14.2.6",
+    "typescript": "^5.7.3"
+  }
+}

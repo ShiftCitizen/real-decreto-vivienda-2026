@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Vivienda 2026">
+  <rect width="32" height="32" rx="6" fill="#7a1f2b" />
+  <path
+    d="M8 15.5 16 8l8 7.5V24a1 1 0 0 1-1 1h-4.5v-5.5h-5V25H9a1 1 0 0 1-1-1z"
+    fill="none"
+    stroke="#f6f2ec"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+</svg>
