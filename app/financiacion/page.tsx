@@ -49,7 +49,7 @@ export default function FinanciacionPage() {
           El <Cite norma="rdl26" art="16" /> crea una línea de <b>2.000 M€</b> para promotores de
           vivienda social o asequible. El <Cite norma="rdl26" art="17" /> crea <b>otra</b> línea,
           de <b>280 M€</b>, para pymes de construcción industrializada, con otorgamiento hasta
-          2040. Los <b>artículos 18 y 86 bis del RDL 26/2026 no llevan ninguna cifra</b>: son
+          2040. El <b>artículo 18 del RDL 26/2026 y el artículo 86 bis del RDL 8/2023 no llevan ninguna cifra</b>: son
           únicamente el <i>régimen de cobranza</i> de cada línea. Cualquier resumen que sume las
           dos líneas en una sola, o que atribuya los 280 M€ al artículo 18 del RDL 26/2026, está mal.
         </p>
@@ -61,8 +61,8 @@ export default function FinanciacionPage() {
         <li>
           <b>Art. 11 (RDL 26/2026):</b> el régimen patrimonial de CASA 47 se rige por sus normas de creación y, en
           lo no previsto, por la Ley 33/2003. En la enajenación de viviendas de la Entidad —o
-          promovidas en solares residentiales enajenados por ella— el precio de venta no puede
-          superar el{' '}
+          promovidas en solares residenciales enajenados por ella— el precio de venta no puede
+          superar el producto de su <b>superficie registral</b> por el{' '}
           <b>módulo más alto</b> de la legislación autonómica en vivienda protegida vigente en el
           momento de la transmisión.{' '}
           Esa limitación{' '}
@@ -70,7 +70,7 @@ export default function FinanciacionPage() {
           escrituras y se hace constar en el Registro de la Propiedad; en las viviendas calificadas
           con algún régimen de protección pública, empieza a regir finalizado el plazo de
           protección.{' '}
-          <Cite norma="rdl26" art="11.Uno" />
+          <Cite norma="rdl26" art="11" />
         </li>
         <li>
           <b>Art. 12 (RDL 26/2026):</b> se aportan a CASA 47, por orden ministerial y con pleno carácter
@@ -229,16 +229,16 @@ export default function FinanciacionPage() {
           <b>10.000 € anuales</b> —frente a los 5.000 € del SIALP ordinario— y{' '}
           <b>sin garantía mínima del 85 %</b> que sí exige el plan de ahorro a largo plazo
           ordinario.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Nueve.1.c y e" /> Solo pueden integrarse
+          <Cite norma="rdl26" art="6.Segundo.Siete.1.c y e" /> Solo pueden integrarse
           acciones de sociedades del EEE, participaciones de IIC que cumplan los requisitos del
           capítulo II y renta fija con calificación crediticia mínima BBB, sin derivados; y{' '}
           <b>al menos el 30 %</b> del valor de cada conjunto de activos debe corresponder a
           instrumentos de renta variable.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Nueve.3" /> Si un activo deja de ser
+          <Cite norma="rdl26" art="6.Segundo.Siete.3" /> Si un activo deja de ser
           elegible, la entidad dispone de un <b>plazo de subsanación de tres meses</b>; si no se
           corrige, el seguro pierde la consideración de SIALP Financia Europa y deja de aplicarse la
           exención.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Nueve.3" />
+          <Cite norma="rdl26" art="6.Segundo.Siete.3" />
         </li>
       </ul>
 
@@ -263,12 +263,12 @@ export default function FinanciacionPage() {
           <Cite norma="rdl26" art="disposición adicional segunda" />
         </li>
         <li>
-          <b>DF 3.ª (reglamento del IRPF):</b> se amplía la declaración informativa anual de las
-          entidades que comercializan Planes de Ahorro a Largo Plazo, que debe presentarse en el
-          mes de febrero, con datos de titulares, importes y rendimientos, y{' '}
-          <b>la información específica de los SIALP Financia Europa</b>; y se regulan los cambios de
-          tributación de los rendimientos de las cuentas de reinversión.{' '}
-          <Cite norma="rdl26" art="disposición final tercera.Dos, Tres y Cuatro" />
+          <b>DF 3.ª (reglamento del IRPF):</b> modifica el RIRPF en tres materias independientes:
+          el concepto de vivienda habitual a efectos de exención por reinversión (<Cite norma="rdl26" art="disposición final tercera.Uno" />);
+          la ampliación de la declaración informativa de Planes de Ahorro a Largo Plazo para incluir
+          los SIALP Financia Europa (<Cite norma="rdl26" art="disposición final tercera.Dos" />);
+          y las normas sobre retenciones e ingresos a cuenta (<Cite norma="rdl26" art="disposición final tercera.Tres y Cuatro" />).
+          La tributación de las cuentas de reinversión se regula en la disposición adicional sexagésima sexta de la LIRPF (<Cite norma="rdl26" art="6.Segundo.Doce" />).
         </li>
         <li>
           <b>DF 4.ª</b> (reglamento de gestión tributaria): nuevo{' '}

@@ -50,10 +50,10 @@ export default function DesahuciosPage() {
         asequible o social durante un plazo mínimo de cinco años; residencia de personas que
         precisen atención sociosanitaria; residencia de colectivos socialmente vulnerables por
         parte de entidades del tercer sector; protección de las víctimas de violencia de género,
-        tanto de atención como residencial; y penetración del comprador que acredite su adhesión
-        a un Código de Buenas Prácticas acordado con la autoridad competente en materia de
-        vivienda.{' '}
-        <Cite norma="rdl26" art="1.2" />
+        tanto de atención como residencial; y cuando la persona jurídica compradora acredite su
+        adhesión a un Código de Buenas Prácticas acordado con la autoridad competente en materia de
+        vivienda (las entidades públicas se entienden adheridas).{' '}
+        <Cite norma="rdl26" art="1.2.e" />
       </p>
 
       <p>
@@ -119,25 +119,19 @@ export default function DesahuciosPage() {
           El primero:{' '}
           <b>la suspensión no cancela la deuda de renta.</b> El precepto lo dice expresamente:
           «La suspensión o la compensación no supondrán la desaparición de la obligación de
-          mantenerse al corriente de la renta debida». Seguir pagando es condición para que la
-          suspensión siga sirviendo de algo.
+          mantenerse al corriente de la renta debida». El texto enumera además las causas de alzado
+          de la suspensión (extinción de la vulnerabilidad, alternativa habitacional ofrecida o
+          rechazada sin causa justificada, o transcurso del plazo de tres años).
         </p>
         <p>
-          El segundo es la causa más malentendida de todo el decreto.{' '}
-          <b>Un demandante persona física con dos o menos viviendas es el caso en el que la
-          suspensión procede, no el caso en el que se pierde.</b> El artículo 2.2 del RDL 26/2026
-          termina así:
-          «Tampoco prevalecerá la situación de vulnerabilidad económica de la parte demandada
-          cuando la parte demandante sea una persona física titular de dos o menos viviendas».
-          Es decir, cuando el dueño es una persona física con pocas viviendas,{' '}
-          <i>no</i> se le antepone su propia vulnerabilidad económica a la del inquilino,{' '}
-          <i>sino</i> que la del inquilino prevalece y el proceso se suspende. La frase no dice que
-          no procede la suspensión; dice que, para ese propietario, no puede oponer su vulnerabilidad
-          para impedirla.{' '}
-          <Cite norma="rdl26" art="2.2" /> La suspensión no procede
-          solo cuando el tribunal aprecie que debe prevalecer la vulnerabilidad del demandante{' '}
-          <i>salvo</i> que se trate de una persona jurídica o de una persona física que tenga la
-          condición de gran tenedor.
+          El segundo se refiere a los supuestos del artículo 2.2 del RDL 26/2026:{' '}
+          «No procederá la suspensión cuando el tribunal aprecie, atendidas las circunstancias
+          concurrentes, que debe prevalecer la situación de vulnerabilidad económica o habitacional
+          de la parte demandante, salvo que se trate de una persona jurídica, o de una persona
+          física que tenga la condición de gran tenedor. Tampoco prevalecerá la situación de
+          vulnerabilidad económica de la parte demandada cuando la parte demandante sea una persona
+          física titular de dos o menos viviendas.»{' '}
+          <Cite norma="rdl26" art="2.2" /> El texto no garantiza la suspensión en ninguno de los dos casos.
         </p>
       </div>
 
@@ -199,7 +193,7 @@ export default function DesahuciosPage() {
       </h2>
 
       <p>
-        El artículo 3 modifica veinte puntos de la Ley de Arrendamientos Urbanos. Estos son los
+        El artículo 3 modifica veintidós apartados de la Ley de Arrendamientos Urbanos. Estos son los
         que cambian la respuesta a una pregunta práctica.
       </p>
 
@@ -419,14 +413,16 @@ export default function DesahuciosPage() {
           original. Lo que sí hace el decreto es condicionar la extensión a que el arrendador la
           acepte obligatoriamente salvo que haya otros términos pactados, se haya suscrito un
           contrato nuevo, o el arrendador haya comunicado la necesidad de ocupar la vivienda en
-          los plazos y condiciones del artículo 9.3 LEC —con causa real y acreditada—.
+          los plazos y condiciones del artículo 9.3 LAU —con causa real y acreditada—.
         </p>
         <p>
-          Y hay una incompatibilidad que la página anterior no recogía:{' '}
-          <b>esta prórroga extraordinaria es incompatible con la del artículo 10.3 de la LAU, que se
-          aplicará con carácter preferente</b>. Es decir, si el caso encaja en la prórroga voluntaria
-          del artículo 10.3 de la LAU, mandan los dos años de la DF 5.ª.{' '}
-          <Cite norma="rdl26" art="disposición final quinta.1" />
+          La DF 5.ª.1 establece que esta prórroga extraordinaria es incompatible con la del
+          artículo 10.3 de la LAU (en su redacción anterior), la cual «se aplicará con carácter
+          preferente». Por la disposición adicional primera.3 del RDL 27/2026, esa referencia debe
+          entenderse hecha al nuevo artículo 10.6 de la LAU (prórroga extraordinaria en zona
+          tensionada de hasta tres años), aplicable con carácter preferente.{' '}
+          <Cite norma="rdl26" art="disposición final quinta.1" />{' '}
+          <Cite norma="rdl27" art="disposición adicional primera.3" />
         </p>
         <p>
           No procede cuando arrendador y arrendatario acuerden renovar o celebrar un contrato
@@ -482,9 +478,10 @@ export default function DesahuciosPage() {
         <b>No procede la indemnización</b> cuando, respecto del vencimiento de que se trate, el
         arrendatario reúna los requisitos para obtener <b>a su solicitud</b> una prórroga legal de
         aceptación obligatoria para el arrendador,{' '}
-        <b>aunque no la hubiera solicitado</b>. Tampoco procede en los seis casos del apartado 2,
-        que deben hacerse constar de forma expresa, detallada y por escrito en la notificación de
-        preaviso:{' '}
+        <b>aunque no la hubiera solicitado</b>. El pago de la indemnización se realiza en el momento
+        de la entrega de la vivienda, salvo en el supuesto (a). Tampoco procede en los seis casos del
+        apartado 2, que deben hacerse constar de forma expresa, detallada y por escrito en la
+        notificación de preaviso:{' '}
         <Cite norma="lau" art="10.2" />
       </p>
 
@@ -501,10 +498,10 @@ export default function DesahuciosPage() {
               <td>Necesidad de la vivienda (a)</td>
               <td>
                 Que el arrendador, siendo persona física, la necesite para vivienda permanente
-                para sí o para familiares de segundo grado de consanguinidad o por adopción, o
+                para sí o para familiares en primer grado de consanguinidad o por adopción, o
                 para su cónyuge en caso de sentencia firme de separación, divorcio o nulidad. Si
-                transcurridos tres meses desde la entrega no la han ocupado, el arrendatario
-                tiene derecho a la indemnización, exigible desde ese momento.
+                transcurridos tres meses desde la entrega no la han ocupado (salvo causa de fuerza mayor),
+                el arrendatario tiene derecho a la indemnización, exigible desde ese momento.
               </td>
             </tr>
             <tr>
@@ -566,8 +563,9 @@ export default function DesahuciosPage() {
       </h3>
 
       <p>
-        Son dos mecanismos nuevos, y la diferencia entre ellos decide a quién
-        favorece la prórroga.
+        Las prórrogas extraordinarias de los apartados 10.2 y 10.3 de la LAU anterior pasan a ser
+        los apartados 10.5 y 10.6 en la redacción del RDL 27/2026. Se renumeran y reordenan respecto
+        del texto previo, manteniendo su contenido esencial.
       </p>
 
       <ScrollTable label="Comparación de las dos prórrogas extraordinarias del artículo 10">
@@ -654,7 +652,9 @@ export default function DesahuciosPage() {
           acuerden su prórroga conforme a los apartados 3 y 4 del artículo 10 LAU o suscriban un
           contrato nuevo. Y la extinción por voluntad del arrendador sin causa del apartado 2
           devengará en favor del arrendatario{' '}
-          <b>el derecho a indemnización del artículo 10.1 de la LAU</b>.
+          <b>el derecho a indemnización del artículo 10.1 de la LAU</b> (la indemnización solo se
+          devenga cuando la extinción por voluntad del arrendador se produce «sin que medie ninguna de
+          las causas previstas en el artículo 10.2»).
         </li>
         <li>
           A efectos de la DF 5.ª, las referencias a los apartados primero y segundo del artículo 10
@@ -680,7 +680,7 @@ export default function DesahuciosPage() {
         <li>
           La nueva prórroga se aplica a los contratos de vivienda habitual{' '}
           <b>vigentes el 2 de octubre de 2026</b>, respecto de los vencimientos del contrato o de
-          cualquiera de sus prórrogas que se produzcan después de esa fecha.{' '}
+          cualquiera de sus prórrogas que se produzcan con posterioridad al día siguiente a dicha fecha.{' '}
           <Cite norma="rdl27" art="disposición transitoria única.1" />
         </li>
         <li>
@@ -692,7 +692,10 @@ export default function DesahuciosPage() {
           Los contratos que ya estaban en el periodo de prórroga del artículo 10.1 de la LAU{' '}
           <b>anterior</b> continúan en él hasta su término, y solo a su término se les aplica el
           régimen nuevo.{' '}
-          <Cite norma="rdl27" art="disposición transitoria única.3" />
+          <Cite norma="rdl27" art="disposición transitoria única.3" /> (Nota: el apartado 1 de la DT
+          única remite erróneamente a «el apartado 4» para referirse a esta regla de continuidad de
+          contratos en prórroga anterior, cuando el régimen se regula en el apartado 3 de la propia
+          disposición transitoria).
         </li>
         <li>
           La remisión al artículo 10 LAU contenida en la disposición transitoria cuarta.1 de la Ley

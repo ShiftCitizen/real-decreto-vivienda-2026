@@ -125,7 +125,7 @@ export default function HomePage() {
         prevalece sobre la prórroga extraordinaria de la DF 5.ª cuando procede el{' '}
         <Cite norma="lau" art="10.1" />, y si el primer decreto se aplicó a un contrato que el
         arrendador ya había
-        negado, el contrato se extingue igualmente, con derecho a indemnización (
+        negado, el contrato se extingue igualmente con derecho a indemnización solo cuando la extinción por voluntad del arrendador se produzca sin que medie ninguna de las causas previstas en el artículo 10.2 de la LAU (<Cite norma="rdl27" art="disposición adicional primera.2" />,{' '}
         <Link href="/desahucios-y-alquiler#coordinacion">ver la coordinación</Link>).
       </p>
 
@@ -250,11 +250,9 @@ export default function HomePage() {
 
       <p>
         Toda referencia de este sitio va acompañada del nombre de su norma, porque el número de
-        artículo por sí solo no basta: los dos decretos tienen ambos un artículo 1 y, sin embargo,
-        el del RDL 26/2026 pone freno a la compra especulativa mientras que el del RDL 27/2026
-        reescribe la prórroga del arrendamiento. Una cita con el número solo, sin el nombre de la
-        norma, no diría cuál de los dos es. El color de cada etiqueta dice a qué decreto o ley
-        pertenece el precepto.
+        artículo por sí solo no basta para identificar el texto aplicable. Una cita con el número
+        solo, sin el nombre de la norma, no diría a cuál de las distintas disposiciones pertenece.
+        El color de cada etiqueta dice a qué decreto o ley pertenece el precepto.
       </p>
 
       <ul className="cite-legend">

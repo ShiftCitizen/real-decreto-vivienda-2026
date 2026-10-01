@@ -86,7 +86,7 @@ const FILAS: Fila[] = [
     estado: 'activa',
     etiqueta: 'Vigente desde 2-10-2026',
     condicion:
-      'Desde el 2-10-2026, para los vencimientos posteriores a esa fecha; la DA 1.ª desplaza a la prórroga extraordinaria de la DF 5.ª',
+      'Desde el 2-10-2026, para los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha; la DA 1.ª desplaza a la prórroga extraordinaria de la DF 5.ª',
   },
   {
     medida: 'Recargos de IBI (vivienda desocupada y alojamiento turístico)',
@@ -159,7 +159,8 @@ export default function EstadoPage() {
     <>
       <h1>Estado de aplicación y advertencias</h1>
       <p className="lead">
-        Qué rige desde el 1 y el 2 de octubre de 2026, qué depende todavía de una ordenanza, un
+        RDL 26/2026 entra en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026 (día siguiente a su
+        publicación). Qué medidas rigen de inmediato, cuáles dependen todavía de una ordenanza, un
         convenio o un acuerdo ministerial, y las cuatro advertencias que conviene leer antes de
         fiarse de una cifra.
       </p>
@@ -224,9 +225,8 @@ export default function EstadoPage() {
       <h3 id={slugify('Convalidación')}>Convalidación</h3>
 
       <p>
-        El artículo 86.2 CE exige el pronunciamiento expreso del Congreso dentro de los{' '}
-        <b>treinta días</b> siguientes a la promulgación: no hay convalidación tácita, y el cómputo
-        es en días naturales.{' '}
+        El artículo 86.2 CE exige que el Congreso se pronuncie «en el plazo de los treinta días
+        siguientes a su promulgación»; este sitio no afirma cómo se computa dicho plazo.{' '}
         <Cite norma="ce" art="86.2" /> Según información de prensa del 29 de septiembre de
         2026 (
         <a href="https://www.moncloa.com/2026/09/29/convalidacion-decretos-vivienda-pleno-congreso-3439659/" rel="noreferrer">
@@ -292,11 +292,7 @@ export default function EstadoPage() {
           aquí. Si alguien necesita esa previsión, tiene que mirar el resultado de la sesión, no
           esta página.
         </p>
-        <p>
-          Tampoco se afirma nada sobre el cómputo de plazos de convalidación «en días hábiles»: el
-          artículo 86.2 CE fija treinta días, sin esa modificación, y no existe base para leerlo de
-          otra manera.
-        </p>
+
       </div>
 
       <p className="page-meta">

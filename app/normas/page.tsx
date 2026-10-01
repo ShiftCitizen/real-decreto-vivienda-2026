@@ -63,9 +63,8 @@ export default function NormasPage() {
 
       <p>
         Ambos fueron aprobados en el Consejo de Ministros de 29 de septiembre de 2026 y
-        suscritos por el Rey el mismo día; se publicaron con un día de diferencia. Los dos tienen{' '}
-        su propio <b>art. 1 RDL 26/2026</b> y <b>art. 1 RDL 27/2026</b>, y por eso el color de la
-        etiqueta es la única manera rápida de saber cuál se está citando.
+        suscritos por el Rey el mismo día; se publicaron con un día de diferencia. El color de la
+        etiqueta es la manera rápida de saber cuál se está citando en cada referencia.
       </p>
 
       <ul>
@@ -87,14 +86,14 @@ export default function NormasPage() {
       <h2 id={slugify('Por qué importa distinguirlos')}>Por qué importa distinguirlos</h2>
 
       <p>
-        El RDL 26/2026 <b>reforma</b> la LAU en veinte puntos; el RDL 27/2026 <b>reescribe</b> su
+        El RDL 26/2026 <b>reforma</b> la LAU en veintidós apartados; el RDL 27/2026 <b>reescribe</b> su
         artículo 10 de la LAU y nada más. Consecuencias que se confunden con frecuencia:
       </p>
 
       <ul>
         <li>
           El artículo 10 de la LAU según el <span className="tono-rdl27">RDL 27/2026</span> es el
-          que <b>sustituye</b> las prórrogas anuales de hasta tres años; el artículo 10, apartado{' '}
+          que <b>sustituye</b> las prórrogas anuales de hasta tres años; el artículo 3, apartado{' '}
           <b>Ocho</b> del <span className="tono-rdl26">RDL 26/2026</span> es el que lo había
           modificado antes, con otro régimen.{' '}
           <Cite norma="rdl26" art="3.Ocho" />
@@ -102,8 +101,9 @@ export default function NormasPage() {
         <li>
           La prórroga extraordinaria de la DF 5.ª pertenece al{' '}
           <span className="tono-rdl26">RDL 26/2026</span> y es de <b>dos años</b>; las dos
-          prórrogas extraordinarias nuevas —un año por vulnerabilidad y hasta tres años en zona
-          tensionada— están en el <span className="tono-rdl27">RDL 27/2026</span>.{' '}
+          prórrogas extraordinarias renumeradas —un año por vulnerabilidad y hasta tres años en zona
+          tensionada— están en los apartados 5 y 6 del artículo 10 de la LAU según el{' '}
+          <span className="tono-rdl27">RDL 27/2026</span>.{' '}
           <Cite norma="rdl26" art="disposición final quinta.1" />{' '}
           <Cite norma="lau" art="10.5 y 10.6" />
         </li>

@@ -19,7 +19,7 @@ export type CronologiaEntry = {
 export const CRONOLOGIA: CronologiaEntry[] = [
   {
     fecha: '2-10-2026',
-    que: 'Entrada en vigor del RDL 27/2026: los contratos de arrendamiento de vivienda habitual se prorrogan obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, y la indemnización por no renovación pasa a ser de doce mensualidades de renta.',
+    que: 'Entrada en vigor del RDL 27/2026: los contratos de arrendamiento de vivienda habitual se prorrogan obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, y la indemnización por no renovación pasa a ser de doce mensualidades de renta (aplica a los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha).',
     citas: [
       { norma: 'rdl27', art: 'único.1' },
       { norma: 'lau', art: '10.1' },
@@ -37,7 +37,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
   },
   {
     fecha: '1-12-2026',
-    que: 'Efectos del IVA: sale de la exención el alquiler amueblado con servicios propios de hostelería o de hasta 30 noches, y las ejecuciones de obra de renovación en viviendas destinadas a arrendamiento como vivienda habitual tributan al 10 %.',
+    que: 'Efectos del IVA: sale de la exención el alquiler amueblado con servicios propios de hostelería o de hasta 30 noches (excepto si en este segundo caso es la residencia habitual del arrendador), y las ejecuciones de obra de renovación en viviendas destinadas a arrendamiento como vivienda habitual tributan al 10 %.',
     citas: [
       { norma: 'rdl26', art: '7.Uno y Tres' },
       { norma: 'liva', art: '20.Uno.23.e' },

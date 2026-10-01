@@ -56,7 +56,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     id: 'rdl27',
     etiqueta: 'RDL 27/2026',
     titulo:
-      'Real Decreto-ley 27/2026, de 29 de septiembre, de medidas urgentes en materia de vivienda para dar respuesta a la emergencia habitacional',
+      'Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual',
     boe: 'BOE-A-2026-20385',
     eli: 'https://www.boe.es/eli/es/rdl/2026/09/29/27',
     tono: 'rdl27',
@@ -75,7 +75,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     etiqueta: 'LEC',
     titulo:
       'Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil',
-    boe: 'BOE-A-2000-3',
+    boe: 'BOE-A-2000-323',
     eli: 'https://www.boe.es/eli/es/l/2000/01/07/1',
     tono: 'neutro',
   },
@@ -84,7 +84,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     etiqueta: 'Ley 12/2023',
     titulo:
       'Ley 12/2023, de 24 de mayo, por el derecho a la vivienda',
-    boe: 'BOE-A-2023-11471',
+    boe: 'BOE-A-2023-12203',
     eli: 'https://www.boe.es/eli/es/l/2023/05/24/12',
     tono: 'neutro',
   },
@@ -111,7 +111,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     etiqueta: 'LRHL',
     titulo:
       'Texto refundido de la Ley Reguladora de las Haciendas Locales, aprobado por Real Decreto Legislativo 2/2004, de 5 de marzo',
-    boe: 'BOE-A-2004-5758',
+    boe: 'BOE-A-2004-4214',
     eli: 'https://www.boe.es/eli/es/rdl/2004/03/05/2',
     tono: 'neutro',
   },
@@ -120,7 +120,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     etiqueta: 'LMV',
     titulo:
       'Ley 6/2023, de 17 de marzo, de los Mercados de Valores y de los Servicios de Inversión',
-    boe: 'BOE-A-2023-6614',
+    boe: 'BOE-A-2023-7053',
     eli: 'https://www.boe.es/eli/es/l/2023/03/17/6',
     tono: 'neutro',
   },
@@ -137,7 +137,7 @@ export const NORMAS: Record<NormaId, Norma> = {
     etiqueta: 'Ley 11/2009',
     titulo:
       'Ley 11/2009, de 26 de octubre, por la que se regulan las Sociedades Anónimas Cotizadas de Inversión en el Mercado Inmobiliario',
-    boe: 'BOE-A-2009-19595',
+    boe: 'BOE-A-2009-17000',
     eli: 'https://www.boe.es/eli/es/l/2009/10/26/11',
     tono: 'neutro',
   },

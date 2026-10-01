@@ -97,26 +97,32 @@ export default function FiscalPage() {
         reducción del artículo 23.2 LIRPF <i>en su redacción vigente a 31 de diciembre de
         2021</i>— de los celebrados entre la entrada en vigor de esa ley y el 1 de diciembre de
         2026, a los que se aplica la redacción vigente a 31 de diciembre de 2025. Con
-        independencia de la fecha, la reducción del 80 % por prórroga tácita se aplica a los{' '}
-        <b>contratos cuya prórroga se produzca después del 1 de diciembre de 2026</b>.{' '}
-        <Cite norma="rdl26" art="6.Segundo.Catorce" />
+        independencia de la fecha, la reducción del 80 % por prórroga del contrato exige que
+        el cumplimiento del plazo mínimo de cinco años del artículo 9 de la LAU tenga lugar con
+        posterioridad al 1 de diciembre de 2026, siempre que el arrendador no sea gran tenedor y
+        la renta no supere el límite máximo del sistema de índices de referencia.{' '}
+        <Cite norma="rdl26" art="6.Segundo.Catorce" /> <Cite norma="lirpf" art="disposición transitoria trigésima octava.2" />
       </p>
 
       <h3>Lo que cambia de verdad en el IRPF</h3>
 
-      <div className="box warn">
-        <strong>La deducción del 10 % por alquiler no es nueva.</strong>
+      <div className="box">
+        <strong>Nueva deducción por alquiler de vivienda habitual en el IRPF.</strong>
         <p>
-          Ya existía en el artículo 68 LIRPF. Lo que hace el decreto es <b>ampliar su efecto</b>: el
-          nuevo apartado 6 del artículo 68 LIRPF crea la deducción —10 % de lo pagado, con base imponible
-          inferior a 33.007,20 €; base máxima de 11.630 € hasta 23.007,20 € y decreciente entre
-          ambas cifras; y sin otra vivienda a menos de 50 km salvo resolución judicial o
-          administrativa que lo impida— y, sobre todo, modifica el{' '}
-          <b>artículo 67.1 LIRPF</b> para que la cuota líquida estatal reste la{' '}
-          <b>totalidad</b> de esa deducción.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Tres y Cuatro" /> Antes se restaba el 50 % de
-          las deducciones de los apartados 2 a 5; con el nuevo apartado 6 la deducción del 10 %{' '}
-          <b>se resta al 100 %</b>. Ese es el cambio, no la creación del beneficio.
+          Se introduce una deducción del 10 % por el alquiler de vivienda habitual en la cuota
+          líquida estatal. Aplica a contribuyentes con suma de base imponible general y del ahorro
+          inferior a 33.007,20 €. La base máxima de la deducción es de 11.630 € anuales para bases
+          imponibles hasta 23.007,20 €, reduciéndose en 1,163 por cada euro de exceso sobre esa cifra
+          hasta 33.007,20 €.{' '}
+          <Cite norma="rdl26" art="6.Segundo.Tres y Cuatro" /> <Cite norma="lirpf" art="68.6" />
+        </p>
+        <p>
+          <b>Requisito de titularidad:</b> se exige que durante al menos la mitad del período
+          impositivo, ni el contribuyente ni ninguno de los miembros de su unidad familiar sean
+          titulares de la totalidad del pleno dominio o de un derecho real de uso o disfrute sobre
+          otra vivienda apta para habitar a una distancia inferior a 50 km, salvo que una resolución
+          administrativa o judicial les impida su uso como residencia.{' '}
+          <Cite norma="rdl26" art="6.Segundo.Trece" />
         </p>
       </div>
 
@@ -125,29 +131,33 @@ export default function FiscalPage() {
       <ul>
         <li>
           <b>Exención por venta a entes públicos de vivienda social</b> (hasta el 31-12-2027):
-          exenta del todo hasta 200.000 € de valor de transmisión y decreciente hasta 800.000 €.{' '}
-          <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1" /> Requiere que la
-          vivienda haya permanecido <b>desocupada de forma continuada y sin causa justificada
-          durante los dos años</b> anteriores a la transmisión —las causas justificadas son las que
-          enumera el artículo 72.4 LRHL— y que la transmisión se realice una vez transcurridos{' '}
-          <b>treinta días hábiles</b> desde la entrada en vigor del decreto.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Doce.1" />
+          exenta del todo hasta 200.000 € de valor de transmisión y decreciente hasta un valor de
+          transmisión total inferior a 800.000 €. Requiere que la vivienda haya permanecido{' '}
+          <b>desocupada de forma continuada y sin causa justificada durante los dos años</b> anteriores
+          a la transmisión —las causas justificadas son las que enumera el artículo 72.4 bis LRHL—.{' '}
+          <Cite norma="rdl26" art="6.Segundo.Once" />{' '}
+          <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1-2" />
         </li>
         <li>
           <b>Reinversión en la Cuenta de Ahorro e Inversión Financia Europa Reinversión:</b> la
-          parte no exenta puede reinvertirse en el plazo de <b>seis meses</b> desde la transmisión,
-          con un máximo acumulado de <b>800.000 €</b>. Si a la fecha de la transmisión no hubiera
-          entrado en vigor la orden ministerial de información, el plazo de seis meses se computa
-          desde la entrada en vigor de esa orden.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Doce.5" />
+          exención por reinversión exige que la transmisión se realice una vez transcurridos{' '}
+          <b>treinta días hábiles</b> desde la entrada en vigor del decreto. La parte no exenta
+          puede reinvertirse en el plazo de <b>seis meses</b> desde la transmisión (o desde la entrada
+          en vigor de la orden ministerial de información si esta fuera posterior), con un máximo
+          acumulado de <b>800.000 €</b>.{' '}
+          <Cite norma="rdl26" art="6.Segundo.Doce" />{' '}
+          <Cite norma="lirpf" art="disposición adicional sexagésima sexta.5" />{' '}
+          <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1" />
         </li>
         <li>
-          <b>Imputación de rentas inmobiliarias</b> (desde el 1-1-2027): se aplica un 1,1 % hasta
-          100.000 € de suma de valores catastrales, un 1,5 % al resto hasta 400.000 €, un 2 % al
-          resto hasta 500.000 €, un 3 % al resto hasta 1.000.000 € y un 3 % en adelante. Si el
-          inmueble careciera de valor catastral o no se hubiera notificado, se computa el 50 % del
-          mayor valor verificado por la Administración o el precio de adquisición.{' '}
-          <Cite norma="rdl26" art="6.Tercero.Dos" />
+          <b>Imputación de rentas inmobiliarias</b> (desde el 1-1-2027): escala sobre la suma de
+          valores catastrales de los inmuebles imputables: 1,1 % sobre los primeros 100.000 € (cuota
+          de 1.100 €); 1,5 % sobre los siguientes 400.000 € (hasta 500.000 €, cuota de 7.100 €);
+          2 % sobre los siguientes 500.000 € (hasta 1.000.000 €, cuota de 17.100 €); y 3 % sobre el
+          exceso de 1.000.000 €. Si el inmueble careciera de valor catastral o no se hubiera
+          notificado, se computa el 50 % del mayor valor verificado por la Administración o el
+          precio de adquisición.{' '}
+          <Cite norma="rdl26" art="6.Tercero.Dos" /> <Cite norma="lirpf" art="85.1" />
         </li>
         <li>
           <b>Rendimiento en caso de parentesco:</b> si el arrendatario es cónyuge o pariente
@@ -171,22 +181,26 @@ export default function FiscalPage() {
       <ul>
         <li>
           <b>Sale de la exención</b> (con efectos desde el 1-12-2026) el arrendamiento de
-          apartamentos o viviendas amueblados cuando el arrendador se obligue a prestar
-          servicios complementarios propios de la industria hotelera —restaurante, limpieza, lavado
-          de ropa— o cuando la duración a favor de un mismo arrendatario no supere las{' '}
-          <b>30 noches</b>, salvo que la vivienda sea la residencia habitual del arrendador.{' '}
-          <Cite norma="liva" art="20.Uno.23.e" /> Tributan al 10 %.{' '}
-          <Cite norma="liva" art="91.Uno.2.2" />
+          apartamentos o viviendas amueblados en dos supuestos independientes: primero, cuando el
+          arrendador se obligue a la prestación de servicios complementarios propios de la industria
+          hotelera; o segundo, cuando la duración de la cesión a favor de un mismo arrendatario sea
+          igual o inferior a <b>30 noches</b>, salvo que la cesión se produce en la vivienda en la
+          que el arrendador tenga su residencia habitual, en cuyo caso estará exenta.{' '}
+          <Cite norma="rdl26" art="7.Uno" /> <Cite norma="liva" art="20.Uno.23.e" /> Tributan al
+          10 %. <Cite norma="liva" art="91.Uno.2.2" />
         </li>
         <li>
           <b>Tipo del 10 % para obras de renovación y reparación</b> en edificios o partes de
-          ellos destinados a vivienda, con requisitos: que el destinatario sea persona física sin
-          condición de empresario o profesional para uso particular, o una comunidad de
-          propietarios, o una vivienda destinada a arrendamiento como vivienda habitual cualquiera
-          que sea la condición del arrendador; que la contraprestación se haya pagado con tarjeta,
-          transferencia bancaria, cheque nominativo o ingreso en cuenta de entidad de crédito; y
-          los demás requisitos de antigüedad y composición de materiales.{' '}
-          <Cite norma="liva" art="91.Uno.2.10" />
+          ellos destinados a vivienda, cuando se cumplan los siguientes requisitos: que el
+          destinatario sea persona física sin condición de empresario o profesional para uso
+          particular, una comunidad de propietarios, o se trate de una vivienda destinada a
+          arrendamiento como vivienda habitual cualquiera que sea la condición del arrendador; que
+          la construcción o rehabilitación de la vivienda haya concluido al menos dos años antes
+          del inicio de las obras; que la persona que realice las obras no aporte materiales para
+          su ejecución o, si los aporta, su coste no exceda del 40 % de la base imponible de la
+          operación; y que la contraprestación se haya pagado mediante tarjeta de crédito o débito,
+          transferencia bancaria, cheque nominativo o ingreso en cuentas de entidades de crédito.{' '}
+          <Cite norma="rdl26" art="7.Tres" /> <Cite norma="liva" art="91.Uno.2.10" />
         </li>
         <li>
           <b>Tipo superreducido</b> para viviendas protegidas de calificación permanente o
@@ -215,44 +229,56 @@ export default function FiscalPage() {
           </thead>
           <tbody>
             <tr>
-              <td rowSpan={4}>
+              <td rowSpan={3}>
                 <b>Vivienda desocupada con carácter permanente</b>
                 <br />
                 <b>FUERA</b> de zona tensionada (art. 72.4 bis LRHL, párrafo primero)
               </td>
               <td>Hasta el 50 %</td>
               <td>
-                Desocupación continuada y sin causa justificada <b>más de dos años</b>, y que los
-                inmuebles pertenezcan a <b>titulares de cuatro o más</b> inmuebles de uso
-                residencial.
+                Desocupación continuada y sin causa justificada <b>más de dos años</b>, para
+                inmuebles de <b>titulares de cuatro o más</b> inmuebles de uso residencial.
               </td>
             </tr>
             <tr>
-              <td>Hasta el 100 %</td>
+              <td>Hasta el 100 % (sustituye al 50 % base)</td>
               <td>
-                El periodo de desocupación <b>supera los tres años</b>. Puede modularse según el
-                tiempo de desocupación.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Hasta <b>50 puntos porcentuales adicionales</b> sobre el anterior
-              </td>
-              <td>
-                Que el inmueble pertenezca a titulares de <b>dos o más</b> inmuebles de uso
-                residencial desocupados <b>en el mismo término municipal</b>.
+                El periodo de desocupación <b>supera los tres años</b>.
               </td>
             </tr>
             <tr>
               <td>
-                Mismos tramos que dentro de zona tensionada
+                Hasta <b>50 puntos porcentuales adicionales</b> sobre la base máxima anterior
               </td>
               <td>
-                <b>DENTRO</b> de zona tensionada (art. 72.4 bis LRHL, párrafo segundo): hasta el
-                50 % a
-                los dos años; hasta el 100 % para titulares de cuatro o más inmuebles; y hasta 50
-                puntos porcentuales adicionales si el periodo de desocupación supera los tres
-                años <b>y</b> el titular tiene cuatro o más inmuebles.
+                Inmuebles de titulares de <b>dos o más</b> inmuebles de uso residencial desocupados{' '}
+                <b>en el mismo término municipal</b>.
+              </td>
+            </tr>
+            <tr>
+              <td rowSpan={3}>
+                <b>Vivienda desocupada con carácter permanente</b>
+                <br />
+                <b>DENTRO</b> de zona tensionada (art. 72.4 bis LRHL, párrafo segundo)
+              </td>
+              <td>Hasta el 50 %</td>
+              <td>
+                Desocupación continuada y sin causa justificada <b>más de dos años</b>.
+              </td>
+            </tr>
+            <tr>
+              <td>Hasta el 100 % (sustituye al 50 % base)</td>
+              <td>
+                Inmuebles de titulares de <b>cuatro o más</b> inmuebles de uso residencial.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Hasta <b>50 puntos porcentuales adicionales</b> sobre la base máxima anterior
+              </td>
+              <td>
+                Desocupación <b>más de tres años</b> y titular de <b>cuatro o más</b> inmuebles de
+                uso residencial.
               </td>
             </tr>
             <tr>
@@ -262,38 +288,36 @@ export default function FiscalPage() {
                 Solo en zona tensionada
               </td>
               <td>Hasta el 50 %</td>
-              <td>Inmueble de uso residencial destinado a alojamiento turístico.</td>
+              <td>Inmueble de uso residencial destinado a alojamiento de uso turístico (identificado según normativa autonómica).</td>
             </tr>
             <tr>
               <td>Hasta el 100 %</td>
-              <td>Titulares de <b>dos o más</b> inmuebles de uso residencial.</td>
+              <td>Titulares de <b>dos o más</b> inmuebles de uso residencial destinados a alojamientos de uso turístico.</td>
             </tr>
             <tr>
               <td>Hasta el <b>150 %</b></td>
-              <td>Titulares de <b>cuatro o más</b> inmuebles de uso residencial.</td>
+              <td>Titulares de <b>cuatro o más</b> inmuebles de uso residencial destinados a alojamientos de uso turístico.</td>
             </tr>
           </tbody>
         </table>
       </ScrollTable>
 
       <div className="box warn">
-        <strong>Dos precisiones que el texto anterior mezclaba.</strong>
+        <strong>Estructura de los recargos del IBI.</strong>
         <p>
-          Primera: los tres tramos de la vivienda desocupada —50 %, 100 % por tres años y +50
-          puntos— son <b>acumulables</b> y se sitúan <b>fuera</b> de zona tensionada; dentro de la
-          zona, el tercer escalón exige además cuatro o más inmuebles del titular.{' '}
+          En el recargo por vivienda desocupada (art. 72.4 bis LRHL), el recargo consiste en una{' '}
+          <b>base máxima del 50 % o del 100 % (el 100 % sustituye al 50 %), más hasta 50 puntos</b>{' '}
+          porcentuales adicionales según el número de inmuebles y tiempo de desocupación. El
+          régimen difiere según el inmueble esté dentro o fuera de zona tensionada.{' '}
           <Cite norma="lrhl" art="72.4 bis" />
         </p>
         <p>
-          Segunda: el <b>100 % por cuatro o más inmuebles</b> pertenece al régimen <b>de zona
-          tensionada</b>. Fuera de ella, el disparador del 100 % no es el número de inmuebles sino{' '}
-          <b>los tres años de desocupación</b>. Y el recargo por vivienda desocupada, en ambos
-          regímenes, <b>exige ordenanza fiscal municipal</b>: es potestativo, no automático.
+          En ambos regímenes se exige ordenanza fiscal municipal: el recargo es potestativo, no automático.
         </p>
       </div>
 
       <p>
-        En ambos apartados se establece en todo caso un <b>catálogo de causas justificadas</b>{' '}
+        En los dos regímenes del apartado 4 bis se establece en todo caso un <b>catálogo de causas justificadas</b>{' '}
         (traslado por razones laborales o de formación, cambio de domicilio por dependencia o
         salud, segunda residencia con un máximo de cuatro años, actuaciones de obra o
         rehabilitación, litigio o causa pendiente de resolución judicial o administrativa, o
@@ -310,8 +334,11 @@ export default function FiscalPage() {
         de los beneficios no distribuidos derive del ejercicio de la actividad de arrendamiento de
         viviendas, en cualquiera de las modalidades de la LAU, o de cualquier otro arrendamiento o
         cesión de uso de inmuebles residenciales, <b>incluidos los destinados a alojamiento u
-        hospedaje, fines turísticos o de corta duración</b>. Se devenga el día del acuerdo de
-        aplicación del resultado por la junta general, y se autoliquida e ingresa en dos meses.{' '}
+        hospedaje, fines turísticos o de corta duración</b>. El gravamen del 25 % se aplica solo sobre
+        la parte de los beneficios no distribuidos que proceda de rentas que no hayan tributado al
+        tipo general y que no se encuentren dentro del plazo de reinversión del artículo 6.1.b de la
+        Ley 11/2009. Se devenga el día del acuerdo de aplicación del resultado por la junta general, y
+        se autoliquida e ingresa en dos meses.{' '}
         <Cite norma="rdl26" art="9.Uno.1" />
       </p>
 
@@ -329,11 +356,11 @@ export default function FiscalPage() {
       <div className="box">
         <strong>El umbral del 80 % no es plano.</strong>
         <p>
-          La <b>disposición transitoria cuarta</b> lo modula para los dos primeros años:{' '}
-          <b>más del 60 %</b> basta en los períodos impositivos iniciados dentro de{' '}
-          <b>2026</b>, y <b>más del 70 %</b> en los iniciados dentro de <b>2027</b>. En ambos
-          años se sigue exigiendo, para la reducción del 100 %, el reintegro del beneficio en el
-          plazo de tres años.{' '}
+          La <b>disposición transitoria cuarta</b> de la Ley 11/2009 (añadida por el RDL 26/2026) lo
+          modula: <b>más del 60 %</b> basta en los períodos impositivos iniciados dentro de{' '}
+          <b>2026</b> que no hubieran finalizado a la entrada en vigor, y <b>más del 70 %</b> en los
+          iniciados dentro de <b>2027</b>. En ambos años se sigue exigiendo, para la reducción del
+          100 %, la reinversión del beneficio en el plazo de tres años.{' '}
           <Cite norma="rdl26" art="9.Dos" /> Quien diga «el 80 %» sin más está
           simplificando: en 2026 y 2027 los umbrales reales son otros dos.
         </p>

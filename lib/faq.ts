@@ -23,7 +23,7 @@ export const FAQ: FaqEntry[] = [
     id: 'en-vigor',
     pregunta: '¿Está en vigor ya?',
     respuesta: [
-      'Cada real decreto-ley tiene su propia fecha de entrada en vigor: el RDL 26/2026 entró en vigor el 1 de octubre de 2026, el día siguiente al de su publicación en el «BOE» núm. 241, y el RDL 27/2026 el 2 de octubre de 2026, tras publicarse en el núm. 243 del 1 de octubre.',
+      'Cada real decreto-ley tiene su propia fecha de entrada en vigor (el día siguiente al de su publicación): el RDL 26/2026 entra en vigor el 1-10-2026 y el RDL 27/2026 el 2-10-2026.',
       'Lo que todavía no ha ocurrido es la convalidación en el Congreso de los Diputados. Mientras no se vote, la normativa rige con plena eficacia; si el Congreso la deroga, cesa de inmediato sin anular los efectos ya producidos.',
     ],
     citas: [
@@ -64,9 +64,9 @@ export const FAQ: FaqEntry[] = [
     id: 'indemnizacion',
     pregunta: '¿Cuánto me deben si no me renuevan?',
     respuesta: [
-      'Desde el 2 de octubre de 2026, el arrendador que notifique válidamente su voluntad de no renovar debe indemnizar al arrendatario con una cantidad equivalente, al menos, al importe de doce mensualidades de renta de una vivienda de análogas características a la arrendada.',
+      'Desde el 2 de octubre de 2026, el arrendador que notifique válidamente su voluntad de no renovar debe indemnizar al arrendatario con una cantidad equivalente, al menos, al importe de doce mensualidades de renta de una vivienda de análogas características a la arrendada. El pago de la indemnización se realiza en el momento de la entrega de la vivienda, salvo en el supuesto (a) de necesidad del arrendador.',
       'El cálculo se hace, siempre que ello sea posible, en base al sistema estatal de referencia de precios de alquiler de vivienda, y en ningún caso por debajo del importe equivalente a una mensualidad de renta por cada año que el arrendatario haya residido en la vivienda, prorrateándose por meses los períodos inferiores al año y por días los inferiores al mes.',
-      'No procede esa indemnización en seis casos, que deben hacerse constar de forma expresa, detallada y por escrito en la notificación de preaviso: que el arrendador necesite la vivienda para sí o para familiares de segundo grado de consanguinidad, por adopción o para su cónyuge en caso de separación, divorcio o nulidad; que el arrendatario no haya habitado la vivienda más de seis meses en los doce anteriores a la notificación sin causa justificada; que disponga de otra vivienda apta en el mismo municipio; que las partes suscriban un contrato nuevo; que el arrendatario rechace una oferta fehaciente; o que concurra otra circunstancia debidamente justificada que, en el caso concreto, determine la prevalencia de los intereses del arrendador cuando este tenga vulnerabilidad acreditada.',
+      'No procede esa indemnización en los supuestos del artículo 10.2 de la LAU, que deben hacerse constar de forma expresa, detallada y por escrito en la notificación de preaviso: (a) que el arrendador persona física necesite la vivienda para sí o para sus familiares en primer grado de consanguinidad o por adopción, o para su cónyuge en caso de sentencia firme de separación, divorcio o nulidad (debiendo ocuparla en tres meses salvo causa de fuerza mayor); (b) que el arrendatario no haya habitado la vivienda durante más de seis meses en los doce anteriores a la notificación, salvo causa justificada o que sigan habitándola las personas del artículo 7.1 LAU; (c) que disponga de otra vivienda apta en el mismo municipio; (d) que las partes suscriban un contrato nuevo; (e) que el arrendatario rechace una oferta fehaciente de contrato que garantice una duración mínima de cinco años (siete si el arrendador es persona jurídica) y cuya renta cumpla el artículo 17.6 LAU aun fuera de zona tensionada; o (f) otra circunstancia debidamente justificada cuando el arrendador tenga vulnerabilidad acreditada.',
       'Tampoco procede cuando, respecto del vencimiento de que se trate, el arrendatario reúna los requisitos para obtener a su solicitud una prórroga legal de aceptación obligatoria para el arrendador, aunque no la hubiera solicitado.',
     ],
     citas: [
@@ -107,11 +107,11 @@ export const FAQ: FaqEntry[] = [
     pregunta: '¿Qué es vivienda asequible?',
     respuesta: [
       'Aquella cuyas condiciones de precio de venta o alquiler, incluidos todos los gastos asociados al mismo, no superen el treinta por ciento de la renta mediana de la unidad de convivencia habitual del municipio en el que se ubique el inmueble. Los gastos asociados a los anejos no podrán suponer un incremento del precio de alquiler respecto al determinado para la vivienda.',
-      'La definición del artículo 14 del RDL 26/2026 se reutiliza después como condición en otros preceptos: en la DA 20.ª de la Ley 33/2003, que fija el precio máximo permanente de las viviendas de CASA 47, y en la reducción del 25 % al 50 % para las SOCIMI con más del 80 % de parque asequible.',
+      'El artículo 14 del RDL 26/2026 define la vivienda asequible (límite del 30 % de la renta mediana). Esta definición se distingue de la del precio máximo de enajenación en CASA 47 (art. 11 RDL 26/2026 y DA 20.ª.2 de la Ley 33/2003), que se calcula como superficie registral por el módulo más alto de vivienda protegida de la comunidad autónoma. En las SOCIMI, el gravamen especial del 25 % se reduce en un 50 % (o un 100 % si se reinvierte en tres años) cuando más del 80 % de las viviendas se destinen a arrendamiento asequible o protegido (art. 9.5 de la Ley 11/2009).',
     ],
     citas: [
       { norma: 'rdl26', art: '14' },
-      { norma: 'rdl26', art: '11.Uno' },
+      { norma: 'rdl26', art: '11' },
       { norma: 'rdl26', art: '9.Uno.5' },
     ],
   },
@@ -136,7 +136,7 @@ export const FAQ: FaqEntry[] = [
     respuesta: [
       'Para la plataforma, hay un régimen sancionador completamente nuevo. El RDL 26/2026 añade un Título V a la LAU con multa de un millón de euros para las infracciones muy graves, quinientos mil para las graves y cien mil para las leves, por no recoger y transmitir, o transmitir mal, los datos a la Ventanilla Única Digital de Arrendamientos en los términos del Reglamento (UE) 2024/1028.',
       'La cuantía puede incrementarse por la gravedad del hecho, la reincidencia en dos años, el beneficio económico obtenido y el criterio de proporcionalidad, hasta alcanzar el 2 % del volumen de negocio total anual global del ejercicio anterior en las muy graves y el 1 % en las graves. Las infracciones muy graves prescriben a los cinco años, las graves a los tres y las leves al año.',
-      'Para el propietario, en cambio, la fiscalidad es la parte dura: los arrendamientos con servicios propios de hostelería, o cuando la duración a favor de un mismo arrendatario no supere las 30 noches, salvo que la vivienda sea la residencia habitual del arrendador, salen de la exención del IVA y tributan al 10 % desde el 1 de diciembre de 2026; y en los municipios situados en zona de mercado residencial tensionado se crea un recargo de IBI de hasta el 150 % de la cuota líquida para titulares de cuatro o más inmuebles de uso turístico.',
+      'Para el propietario, en cambio, la fiscalidad es la parte dura: los arrendamientos en que el arrendador se obligue a la prestación de servicios propios de la industria hotelera, o cuando la duración de la cesión a un mismo arrendatario sea igual o inferior a 30 noches (excepto si la cesión se produce en la vivienda en la que el arrendador tenga su residencia habitual, en cuyo caso estará exenta), salen de la exención del IVA y tributan al 10 % desde el 1 de diciembre de 2026; y en los municipios situados en zona de mercado residencial tensionado se crea un recargo de IBI de hasta el 150 % de la cuota líquida para titulares de cuatro o más inmuebles de uso turístico.',
     ],
     citas: [
       { norma: 'lau', art: '43.2' },
