@@ -103,7 +103,13 @@ export async function POST(request: Request) {
   }
   const indice = (await indiceRes.json()) as EntradaIndice[];
   const utiles = buscar(indice, pregunta).slice(0, 3);
-  const contexto = utiles.map((r) => `### ${r.titulo}\n${r.extracto}`).join('\n\n');
+  // Contexto con el texto indexado completo (no el extracto de 160): las
+  // respuestas FAQ van íntegras y las secciones hasta el tope del índice.
+  // Con extractos recortados a mitad de frase el modelo se negaba con razón.
+  const contexto = utiles
+    .map((r) => `### ${r.titulo}\n${r.contexto}`)
+    .join('\n\n')
+    .slice(0, 3000);
 
   // Sin contexto con peso suficiente: negativa fija, sin llamar al modelo.
   if (utiles.length === 0 || contexto.trim().length < 40) {

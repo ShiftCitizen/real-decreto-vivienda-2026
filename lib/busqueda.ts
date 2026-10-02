@@ -22,6 +22,8 @@ export type ResultadoBusqueda = {
   href: string;
   seccion: string;
   extracto: string;
+  /** Texto completo indexado (respuesta FAQ íntegra o cuerpo de sección hasta MAX_BODY). */
+  contexto: string;
 };
 
 /** Minúsculas sin tildes, igual que en la paleta de búsqueda. */
@@ -30,6 +32,45 @@ export function normalizar(texto: string): string {
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
     .toLowerCase();
+}
+
+// Palabras que no discriminan nada en preguntas en lenguaje natural
+// («qué pueden esperar las SOCIMIs?» solo pregunta por «socimis»).
+const VACIAS = new Set([
+  'que',
+  'qué',
+  'puede',
+  'pueden',
+  'espera',
+  'esperar',
+  'esperan',
+  'las',
+  'los',
+  'una',
+  'para',
+  'como',
+  'cómo',
+  'este',
+  'esta',
+  'estos',
+  'estas',
+  'ese',
+  'esa',
+  'del',
+  'les',
+]);
+
+/**
+ * Coincidencia tolerante con el plural: «socimis» vale si el texto trae
+ * «socimi». Solo se prueba la forma sin -s final para palabras de cinco o
+ * más letras, así «tres» nunca se convierte en «tre».
+ */
+function contiene(haystack: string, palabra: string): boolean {
+  if (haystack.includes(palabra)) return true;
+  if (palabra.length >= 5 && palabra.endsWith('s')) {
+    return haystack.includes(palabra.slice(0, -1));
+  }
+  return false;
 }
 
 /**
@@ -47,7 +88,10 @@ export function buscar(
   max = 8,
 ): ResultadoBusqueda[] {
   const aguja = normalizar(consulta.trim());
-  const palabras = aguja.split(/\s+/).filter((w) => w.length >= 2);
+  const palabras = aguja
+    .split(/\s+/)
+    .map((w) => w.replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, ''))
+    .filter((w) => w.length >= 2 && !VACIAS.has(w));
   const candidatas: { entrada: EntradaIndice; puntos: number }[] = [];
   for (const entrada of entradas) {
     if (!aguja) {
@@ -61,8 +105,8 @@ export function buscar(
     else if (titulo.includes(aguja)) puntos = 5;
     else {
       const texto = `${titulo} ${normalizar(entrada.keywords)}`;
-      if (palabras.length === 0 || !palabras.every((w) => texto.includes(w))) continue;
-      const enTitulo = palabras.filter((w) => titulo.includes(w)).length;
+      if (palabras.length === 0 || !palabras.every((w) => contiene(texto, w))) continue;
+      const enTitulo = palabras.filter((w) => contiene(titulo, w)).length;
       puntos = 2 + Math.min(enTitulo, 2);
     }
     candidatas.push({ entrada, puntos });
@@ -73,5 +117,6 @@ export function buscar(
     href: entrada.href,
     seccion: entrada.section,
     extracto: (entrada.excerpt ?? '').slice(0, 160),
+    contexto: entrada.keywords,
   }));
 }
