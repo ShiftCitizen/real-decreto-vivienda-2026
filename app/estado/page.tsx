@@ -7,7 +7,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Estado y advertencias',
   description:
-    'Qué está ya en vigor desde octubre de 2026, qué depende de un acuerdo ministerial u ordenanza, y las advertencias que conviene leer antes de fiarse de una cifra.',
+    'Ambos decretos fueron derogados el 2-10-2026 al rechazar el Congreso su convalidación. Tabla con las medidas que contenían y su estado tras la derogación, más cuatro advertencias clave.',
 };
 
 /**
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
  * literal strings, no way to compare them, and no CSS. Four values is enough to
  * say everything a reader needs — can I rely on this today?
  */
-type Estado = 'activa' | 'potestativa' | 'pendiente' | 'bloqueada';
+type Estado = 'derogada' | 'potestativa' | 'pendiente' | 'bloqueada';
 
 const ESTADO_TXT: Record<Estado, string> = {
-  activa: 'Activa',
+  derogada: 'Derogada',
   potestativa: 'Potestativa',
   pendiente: 'Pendiente',
   bloqueada: 'Bloqueada',
@@ -43,116 +43,109 @@ type Fila = {
 const FILAS: Fila[] = [
   {
     medida: 'Freno a la compra especulativa del 70 %',
-    estado: 'activa',
-    condicion: 'Hasta el 31-12-2028',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Suspensión de desahucios',
-    estado: 'activa',
-    condicion:
-      'Hasta el 31-12-2030; alcanza a las ejecuciones en curso en las que no se hubiera practicado el lanzamiento',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Enervación extraordinaria',
-    estado: 'activa',
-    condicion: 'Plazo improrrogable de dos meses para la administración competente',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Reforma de la LAU (temporada, habitaciones, gastos, garantías)',
-    estado: 'activa',
-    condicion: 'Sin perjuicio de la normativa autonómica en temporada y habitaciones',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Régimen sancionador de plataformas de corta duración (Título V LAU)',
-    estado: 'activa',
-    condicion: 'Multas de 100.000 a 1.000.000 €; el artículo 47.3 permite requerir la subsanación en quince días antes de incoar',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Prohibición de los seguros de impago de renta en la LAU',
-    estado: 'activa',
-    condicion:
-      'Nueva regla del art. 36.5 de la LAU para la garantía adicional, con prohibición de seguros de impago; el régimen anterior se conserva en los casos que especifica la DT cuarta.1 de la Ley 12/2023',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Prórroga extraordinaria de dos años (DF 5.ª)',
-    estado: 'activa',
-    condicion: 'Solo contratos cuyo periodo de prórroga termine antes del 31-12-2028, y siempre que el arrendatario lleve los ocho meses al corriente',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Límite del 2 % a la actualización de la renta (DF 6.ª)',
-    estado: 'activa',
-    condicion: 'Límite hasta el 31-12-2027',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Prórroga indefinida de cinco y siete años e indemnización de doce mensualidades',
-    estado: 'activa',
-    etiqueta: 'Vigente desde 2-10-2026',
-    condicion:
-      'Desde el 2-10-2026, para los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha; la DA 1.ª desplaza a la prórroga extraordinaria de la DF 5.ª',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 27/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Recargos de IBI (vivienda desocupada y alojamiento turístico)',
-    estado: 'potestativa',
-    condicion: 'Requieren ordenanza fiscal municipal',
-    nota: 'Fuera de zona tensionada el 100 % depende de tres años de desocupación; dentro, de ser titular de cuatro o más inmuebles',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    nota: 'Eran potestativos y requerían ordenanza municipal; el decreto que los habilitaba fue derogado',
   },
   {
     medida: 'Exención por transmisión de vivienda a entes públicos',
-    estado: 'activa',
-    condicion: 'Hasta el 31-12-2027; exige dos años de desocupación sin causa justificada',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'IVA de estancias cortas y de obras de renovación al 10 %',
-    estado: 'activa',
-    etiqueta: 'Vigente desde 1-12-2026',
-    condicion: 'Con efectos desde el 1-12-2026',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Nueva escala de imputación de rentas (IRPF)',
-    estado: 'activa',
-    etiqueta: 'Vigente desde 1-1-2027',
-    condicion: 'Con efectos desde el 1-1-2027',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'TU CASA (préstamo al 0 %)',
-    estado: 'pendiente',
-    condicion: 'Falta el Acuerdo del Consejo de Ministros que fije beneficiarios, límites e importe inicial',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Línea de avales de 2.000 M€ (art. 16 RDL 26/2026)',
-    estado: 'pendiente',
-    condicion: 'Requiere los convenios con el ICO',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Línea de avales de 280 M€ (art. 17 RDL 26/2026)',
-    estado: 'pendiente',
-    condicion:
-      'Requiere el convenio con el ICO; el art. 18 RDL 26/2026 es solo su régimen de cobranza',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Registro de IIC Elegibles',
-    estado: 'pendiente',
-    condicion: 'La CNMV debe crearlo en el plazo de cuatro meses (DA 2.ª)',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Proveedor social de vivienda asequible y cooperativas',
-    estado: 'pendiente',
-    condicion: 'Reglamento en el plazo de seis meses (DA 1.ª)',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Comercialización de la Cuenta Financia Europa y del SIALPFE',
-    estado: 'bloqueada',
-    condicion: 'Hasta la orden ministerial de información específica',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Activos IIC dentro de la Cuenta',
-    estado: 'bloqueada',
-    condicion: 'Solo tras la inscripción de la IIC en el Registro de IIC Elegibles',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Movilización entre entidades proveedoras',
-    estado: 'bloqueada',
-    condicion: 'Hasta la orden del artículo 347 de la Ley de los Mercados de Valores (DF 8.ª.2, seis meses)',
+    estado: 'derogada',
+    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
   },
 ];
 
@@ -172,16 +165,12 @@ export default function EstadoPage() {
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
-        La tabla resume lo que contenían los decretos; desde el 2-10-2026 ninguna medida
-        se aplica. Cada medida está en uno de cuatro estados.{' '}
-        <b>Activa</b> es lo que puede aplicarse hoy. Cuando el efecto está diferido a una
-        fecha posterior, la etiqueta indica desde cuándo rige (por ejemplo «Vigente desde
-        1-12-2026») en lugar de «Activa»: la medida está aprobada pero aún no es aplicable.{' '}
-        <b>Potestativa</b> existe pero depende de que el ayuntamiento la recoja en su ordenanza.{' '}
-        <b>Pendiente</b> son preceptos que ya existen pero necesitan un acto posterior para
-        funcionar.{' '}
-        <b>Bloqueada</b> significa que hay una prohibición expresa de comercialización hasta que
-        salga el instrumento que la levanta.
+        La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de
+        la convalidación, <b>ninguna medida se aplica</b>: todas figuran como <b>Derogada</b>.
+        La columna «Condición» indica en qué decreto estaba cada medida y que fue derogada
+        ese día. Las etiquetas <b>Potestativa</b>, <b>Pendiente</b> y <b>Bloqueada</b> se
+        conservan solo para referencia histórica (indicaban el estado que habrían tenido de
+        seguir en vigor los decretos), pero no tienen efecto práctico tras la derogación.
       </p>
 
       <ScrollTable label="Estado de aplicación de cada medida de los reales decretos-ley 26/2026 y 27/2026">

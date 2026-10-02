@@ -8,7 +8,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Desahucios y alquiler',
   description:
-    'Freno a la compra especulativa, suspensión de lanzamientos, enervación extraordinaria, reforma de la LAU, prórroga de cinco y siete años y régimen sancionador de las plataformas de corta duración.',
+    'El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía prórroga indefinida. Ambos fueron derogados el 2-10-2026: no se aplican.',
 };
 
 export default function DesahuciosPage() {
@@ -16,21 +16,21 @@ export default function DesahuciosPage() {
     <>
       <h1>Desahucios y alquiler</h1>
       <p className="lead">
-        Freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación
-        extraordinaria, prórroga indefinida de cinco y siete años y reforma de la LAU, incluido
-        un régimen sancionador nuevo para las plataformas de alquiler de corta duración.
+        El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta
+        2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una
+        prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026:
+        ninguna de estas medidas se aplica.
       </p>
 
       <AvisoEstado />
 
       <div className="box">
-        <strong>Cómo está organizado esta página.</strong>
+        <strong>Cómo está organizada esta página.</strong>
         <p>
-          Las dos primeras secciones son el <span className="tono-rdl26">RDL 26/2026</span>. La
-          sección «Coordinación» y las tres que la siguen son el{' '}
-          <span className="tono-rdl27">RDL 27/2026</span> y el nuevo régimen sancionador, que
-          no es del segundo decreto sino un Título V añadido a la LAU por el primero. Cada
-          referencia lleva la etiqueta de su norma.
+          Las dos primeras secciones describen lo que contenía el <span className="tono-rdl26">RDL
+          26/2026</span>. La sección «Coordinación» y las tres que la siguen corresponden al{' '}
+          <span className="tono-rdl27">RDL 27/2026</span> y al nuevo régimen sancionador (Título V
+          de la LAU, añadido por el RDL 26/2026). Cada referencia lleva la etiqueta de su norma.
         </p>
       </div>
 

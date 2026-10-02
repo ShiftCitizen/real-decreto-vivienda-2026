@@ -7,7 +7,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Financiación y cuenta',
   description:
-    'Movilización del parque público, líneas de avales, el préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa, con sus requisitos de pendientes de desarrollo.',
+    'El RDL 26/2026 preveía movilización de parque público, líneas de avales, TU CASA y Cuenta Financia Europa. Derogado el 2-10-2026: no se aplica.',
 };
 
 const TUCASA = [
@@ -40,8 +40,10 @@ export default function FinanciacionPage() {
     <>
       <h1>Financiación, parque público y cuenta de ahorro</h1>
       <p className="lead">
-        Movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo
-        TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI).
+        El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y
+        280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa
+        (Títulos III a VI). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se
+        aplica.
       </p>
 
       <AvisoEstado />

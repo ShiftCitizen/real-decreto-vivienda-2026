@@ -6,53 +6,86 @@ import ScrollTable from '@/components/ScrollTable';
 import { CRONOLOGIA } from '@/lib/cronologia';
 import { slugify } from '@/lib/slug';
 
+/**
+ * MAIN PAGE — DOCUMENTACIÓN DE MANTENIMIENTO (requerido por spec)
+ *
+ * Textos clave y su ubicación:
+ * - Banner "derogados": components/AvisoEstado.tsx (lee de lib/estado-votacion.ts)
+ * - Bloque "En 1 minuto": app/page.tsx líneas ~135–161 (id #en-1-minuto)
+ * - Sección "Resultado de la votación": app/page.tsx líneas ~187–236
+ * - Cronología: lib/cronologia.ts (CRONOLOGIA array)
+ * - FAQ: lib/faq.ts (FAQ array) → renderizado por components/FaqList.tsx
+ * - Figuras/valores: app/page.tsx FIGURAS array
+ *
+ * Cómo actualizar el estado tras novedades (p.ej. tramitación como proyecto de ley):
+ * 1. Edita lib/estado-votacion.ts:
+ *    - status: 'derogados' | 'convalidados_parcialmente' | 'en_tramite_proyecto_ley'
+ *    - resultados.rdl26 / rdl27: votos a favor/en contra/abstenciones
+ *    - fechaVotacion: 'YYYY-MM-DD' (si hubo nueva votación)
+ *    - lastUpdated: 'YYYY-MM-DD'
+ *    - notaFutura: texto breve sobre posibles escenarios
+ * 2. Reconstruye y despliega: `npm run build && git push`
+ *    El banner (AvisoEstado), la sección de resultado y la página /estado/ se actualizan
+ *    automáticamente al leer de ese único archivo.
+ *
+ * Archivos modificados principalmente en esta actualización post-votación:
+ * - lib/estado-votacion.ts (configuración central de estado)
+ * - components/AvisoEstado.tsx (banner)
+ * - lib/cronologia.ts (nuevo hito 2-10-2026)
+ * - lib/faq.ts (respuestas post-votación)
+ * - app/page.tsx (meta, intro, FIGURAS, "En 1 minuto", "Resultado", TOC)
+ * - app/estado/page.tsx (metadata, tabla FILAS, textos explicativos)
+ * - app/desahucios-y-alquiler/page.tsx, app/fiscal/page.tsx, app/financiacion/page.tsx (leads)
+ * - app/layout.tsx (metadata SEO/OG)
+ */
+
 const FIGURAS = [
   {
     label: 'Suspensión de desahucios',
     valor: '31-12-2030',
-    nota: 'hasta esa fecha',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '2' },
   },
   {
     label: 'Umbral de tasación',
     valor: '70 %',
-    nota: 'hasta 2028',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '1' },
   },
   {
     label: 'Tope vivienda asequible',
     valor: '30 %',
-    nota: 'de la renta mediana',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '14' },
   },
   {
     label: 'Línea de avales',
     valor: '2.000 M€',
-    nota: 'modifica el art. 86 del RDL 8/2023',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '16' },
   },
   {
     label: 'Línea de avales industrialización',
     valor: '280 M€',
-    nota: 'hasta 2040 · el art. 18 del RDL 26/2026 es solo régimen de cobranza',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '17.2' },
   },
   {
     label: 'TU CASA',
     valor: '0 %',
-    nota: 'hasta el menor de 50.000 € o 20 %',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '19' },
   },
   {
     label: 'Recargo IBI turístico máximo',
     valor: '150 %',
-    nota: 'solo en zona tensionada',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '8.Cuatro' },
   },
@@ -61,14 +94,14 @@ const FIGURAS = [
     // `norma` says which decree introduces it, `cita` names the norm to cite.
     label: 'Multa por plataforma turística',
     valor: '1 M€',
-    nota: 'infracción muy grave · nuevo Título V del RDL 26/2026',
+    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'lau' as const, art: '43.2' },
   },
   {
     label: 'Indemnización por no renovación',
     valor: '12 rentas',
-    nota: 'nueva redacción del RDL 27/2026',
+    nota: 'derogado — no se aplica',
     norma: 'rdl27' as const,
     cita: { norma: 'lau' as const, art: '10.1' },
   },
@@ -93,8 +126,8 @@ export default function HomePage() {
 
       <p className="meta">
         Jefatura del Estado · «BOE» núm. 241, de 30 de septiembre de 2026 (BOE-A-2026-20266) y
-        núm. 243, de 1 de octubre de 2026 (BOE-A-2026-20385) · en vigor desde el 1 y el 2 de
-        octubre de 2026 respectivamente
+        núm. 243, de 1 de octubre de 2026 (BOE-A-2026-20385) · derogados por el Congreso el
+        2 de octubre de 2026 (rechazo de la convalidación)
       </p>
 
       <h1>Vivienda: los reales decretos-ley 26/2026 y 27/2026</h1>
@@ -106,29 +139,31 @@ export default function HomePage() {
 
       <p>
         Dos reales decretos-ley publicados con un día de diferencia y aprobados en el mismo
-        Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos, actúa
-        en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación de
-        vivienda asequible, y cierra con la Cuenta de Ahorro e Inversión Financia Europa. El
-        segundo es un texto breve de ocho páginas con un único artículo, y se ocupa de una sola
+        Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos,
+        actuaba en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación
+        de vivienda asequible, y cerraba con la Cuenta de Ahorro e Inversión Financia Europa. El
+        segundo era un texto breve de ocho páginas con un único artículo, y se ocupaba de una sola
         cosa: el futuro de los contratos de arrendamiento de vivienda habitual.
       </p>
 
       <p>
-        Lo más urgente del primero es el régimen de desahucios. Si la administración competente
-        no ofrece alternativa habitacional a un arrendatario vulnerable, dispone de dos meses
-        improrrogables para pagar o consignar la deuda; si no lo hace, queda subrogada y no hay
-        lanzamiento (<Cite norma="rdl26" art="5.Dos" />). El segundo cambia el cálculo
-        del inquilino: los contratos de vivienda habitual pasan a prorrogarse obligatoriamente
-        por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, salvo
-        que este notifique su voluntad de no renovar con seis meses de antelación, y esa no
-        renovación obliga a pagar, como mínimo, el importe de doce mensualidades de renta de
-        una vivienda de análogas características a la arrendada, salvo que proceda alguna de las
-        excepciones de los apartados 10.1 y 10.2 de la LAU. No deroga al primero, pero
-        su disposición adicional primera fija la relación entre ambos: la prórroga indefinida
-        prevalece sobre la prórroga extraordinaria de la DF 5.ª cuando procede el{' '}
-        <Cite norma="lau" art="10.1" />, y si el primer decreto se aplicó a un contrato que el
-        arrendador ya había
-        negado, el contrato se extingue igualmente con derecho a indemnización solo cuando la extinción por voluntad del arrendador se produzca sin que medie ninguna de las causas previstas en el artículo 10.2 de la LAU (<Cite norma="rdl27" art="disposición adicional primera.2" />,{' '}
+        Lo más urgente del primero era el régimen de desahucios. Si la administración competente
+        no ofrecía alternativa habitacional a un arrendatario vulnerable, disponía de dos meses
+        improrrogables para pagar o consignar la deuda; si no lo hacía, quedaba subrogada y no
+        había lanzamiento (<Cite norma="rdl26" art="5.Dos" />). El segundo cambiaba el cálculo
+        del inquilino: los contratos de vivienda habitual habrían pasado a prorrogarse
+        obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador era
+        persona jurídica, salvo que este notificase su voluntad de no renovar con seis meses de
+        antelación, y esa no renovación obligaría a pagar, como mínimo, el importe de doce
+        mensualidades de renta de una vivienda de análogas características a la arrendada, salvo
+        que procediese alguna de las excepciones de los apartados 10.1 y 10.2 de la LAU. No
+        derogaba al primero, pero su disposición adicional primera fijaba la relación entre
+        ambos: la prórroga indefinida prevalecía sobre la prórroga extraordinaria de la DF 5.ª
+        cuando procedía el <Cite norma="lau" art="10.1" />, y si el primer decreto se hubiese
+        aplicado a un contrato que el arrendador ya había negado, el contrato se extinguía
+        igualmente con derecho a indemnización solo cuando la extinción por voluntad del
+        arrendador se produjese sin que mediase ninguna de las causas previstas en el artículo
+        10.2 de la LAU (<Cite norma="rdl27" art="disposición adicional primera.2" />,{' '}
         <Link href="/desahucios-y-alquiler#coordinacion">ver la coordinación</Link>).
       </p>
 
@@ -158,6 +193,14 @@ export default function HomePage() {
             medidas como proyecto de ley, pero no hay nada cerrado.
           </li>
         </ul>
+      </div>
+
+      <div className="box warn">
+        <strong>Votación del 2 de octubre de 2026.</strong> El Congreso rechazó la
+        convalidación de ambos decretos: RDL 26/2026, 172 a favor / 178 en contra /
+        0 abstenciones; RDL 27/2026, 166–167 a favor / 184 en contra / 0
+        abstenciones (<Cite norma="ce" art="86.2" />). Al no convalidarse,
+        quedaron derogados y dejan de estar en vigor desde ese día.
       </div>
 
       <nav className="indice-pagina" aria-label="En esta página">
