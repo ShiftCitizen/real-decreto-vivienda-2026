@@ -69,9 +69,9 @@ const CANDIDATE_SRCS = [
   ['/vercel/output/static', join('/vercel', 'output', 'static')],
 ];
 
-/** Recursive list of names, for an error message: enough to locate the HTML
- *  without dumping megabytes of markup into the build log. */
-function* tree(dir, depth = 3, prefix = '') {
+/** Recursive list of names for an error message. HTML files carry their size,
+ *  because "exists" and "is a real page" are different questions here. */
+function* tree(dir, depth = 4, prefix = '') {
   if (depth < 0) return;
   let entries;
   try {
@@ -80,10 +80,19 @@ function* tree(dir, depth = 3, prefix = '') {
     yield `${prefix}${dir} (unreadable)`;
     return;
   }
-  for (const entry of entries.slice(0, 40)) {
-    yield `${prefix}${entry.name}${entry.isDirectory() ? '/' : ''}`;
+  for (const entry of entries) {
+    const full = join(dir, entry.name);
     if (entry.isDirectory()) {
-      yield* tree(join(dir, entry.name), depth - 1, `${prefix}  `);
+      yield `${prefix}${entry.name}/`;
+      yield* tree(full, depth - 1, `${prefix}  `);
+    } else if (entry.name.endsWith('.html')) {
+      let size = '?';
+      try {
+        size = `${statSync(full).size}B`;
+      } catch {}
+      yield `${prefix}${entry.name} (${size})`;
+    } else {
+      yield `${prefix}${entry.name}`;
     }
   }
 }
@@ -197,15 +206,19 @@ if (!isDev && !built) {
   // while the deploy still reports success. See CANDIDATE_SRCS for why the
   // obvious location can be empty on Vercel.
   const tried = CANDIDATE_SRCS.map(([label, dir]) => `  ${label} -> ${dir}`).join('\n');
+  // Target the two trees that actually decide this: where Next wrote the
+  // pages, and where the adapter put them.
   const dumps = [
-    ...tree(join(ROOT, DIST_DIR), 2),
-    ...tree(join(ROOT, '.vercel', 'output'), 2),
-    ...tree('/vercel/output', 2),
-  ].slice(0, 120);
+    `${DIST_DIR}/server/app:`,
+    ...tree(join(ROOT, DIST_DIR, 'server', 'app'), 3),
+    '',
+    'build output:',
+    ...tree('/vercel/output', 3),
+    ...tree(join(ROOT, '.vercel', 'output'), 3),
+  ].slice(0, 400);
   throw new Error(
     `no built HTML in any known location (script root: ${ROOT}, cwd: ${process.cwd()}):\n` +
       `${tried}\n` +
-      'Build output tree:\n' +
       dumps.map((line) => `  ${line}`).join('\n') +
       '\nRun after `next build` in the project root, or pass --dev for the reduced index.',
   );
