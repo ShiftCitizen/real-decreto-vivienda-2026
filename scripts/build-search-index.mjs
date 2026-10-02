@@ -343,9 +343,25 @@ const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0
 if (!isDev && (counts.section ?? 0) === 0) {
   // Same reason as above: the site always has anchored sections, so zero
   // means the HTML was found but yielded nothing (or the glob silently
-  // matched elsewhere). Ship nothing rather than a starved index.
+  // matched elsewhere). Ship nothing rather than a starved index. The
+  // inventory below shows what postbuild actually saw, so a remote builder
+  // whose output layout differs can be diagnosed from the build log alone.
+  const rows = [];
+  let files = 0;
+  try {
+    for (const file of htmlFiles(SRC_DIR)) {
+      files += 1;
+      const html = readFileSync(file, 'utf8');
+      const heads = (html.match(/<h[1-6][\s>]/g) ?? []).length;
+      const ids = (html.match(/ id="/g) ?? []).length;
+      if (rows.length < 15) rows.push(`${file.slice(SRC_DIR.length + 1)} ${html.length}B h=${heads} id=${ids}`);
+    }
+  } catch (e) {
+    rows.push(`inventory failed: ${e instanceof Error ? e.message : e}`);
+  }
   throw new Error(
-    `zero section entries from ${SRC_DIR}/ (script root: ${ROOT}, cwd: ${process.cwd()}): refusing to write a section-less index.`,
+    `zero section entries from ${SRC_DIR}/ (script root: ${ROOT}, cwd: ${process.cwd()}, html files seen: ${files}): refusing to write a section-less index.\n` +
+      rows.join('\n'),
   );
 }
 const json = JSON.stringify(entries);
