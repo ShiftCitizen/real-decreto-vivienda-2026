@@ -12,13 +12,20 @@
  * style choice, and there are two decrees with an article 1.
  */
 import { readFileSync, readdirSync, writeFileSync, statSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { NAV_SECTIONS } from '../lib/nav.ts';
 import { FAQ } from '../lib/faq.ts';
 import { NORMA_IDS, NORMAS } from '../lib/normas.ts';
 
-const EXPORT_DIR = 'out';
-const PRENDER_DIR = join('.next', 'server', 'app');
+// Resolve everything from the script's location, never from CWD: installers
+// and CI builders (Vercel included) may invoke the script from another
+// working directory, and a relative '.next/...' would then silently point
+// at nothing.
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+const EXPORT_DIR = join(ROOT, 'out');
+const PRENDER_DIR = join(ROOT, '.next', 'server', 'app');
 
 // Source of built HTML for sections and the citation audit. Hybrid builds
 // prerender pages into .next/server/app/<route>.html (fresh, from the build
@@ -39,8 +46,8 @@ const SRC_DIR = !process.argv.includes('--dev') && existsSync(PRENDER_DIR) ? PRE
 // .vercelignore keeps public/search-index.json out of CLI uploads.
 const isDev = process.argv.includes('--dev');
 const TARGETS = isDev || SRC_DIR !== EXPORT_DIR
-  ? ['public/search-index.json']
-  : ['out/search-index.json', 'public/search-index.json'];
+  ? [join(ROOT, 'public', 'search-index.json')]
+  : [join(ROOT, 'out', 'search-index.json'), join(ROOT, 'public', 'search-index.json')];
 
 // Script and style *content* is not markup, so a plain tag strip does not
 // remove it. Next ships the RSC flight payload as a series of
@@ -123,7 +130,7 @@ if (!isDev && !built) {
   // build ran somewhere without the prerender output — check the Build
   // Command (must be `npm run build`, see vercel.json) and the working dir.
   throw new Error(
-    `no built HTML in ${SRC_DIR}/ (cwd: ${process.cwd()}): ` +
+    `no built HTML in ${SRC_DIR}/ (script root: ${ROOT}, cwd: ${process.cwd()}): ` +
       'run after `next build` in the project root, or pass --dev for the reduced index.',
   );
 }
@@ -338,7 +345,7 @@ if (!isDev && (counts.section ?? 0) === 0) {
   // means the HTML was found but yielded nothing (or the glob silently
   // matched elsewhere). Ship nothing rather than a starved index.
   throw new Error(
-    `zero section entries from ${SRC_DIR}/ (cwd: ${process.cwd()}): refusing to write a section-less index.`,
+    `zero section entries from ${SRC_DIR}/ (script root: ${ROOT}, cwd: ${process.cwd()}): refusing to write a section-less index.`,
   );
 }
 const json = JSON.stringify(entries);
