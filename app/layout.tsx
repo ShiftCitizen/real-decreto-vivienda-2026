@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import SiteNav from '@/components/SiteNav';
+import WebMcpTools from '@/components/WebMcpTools';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -15,10 +17,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es">
       <body>
+        {/* Excepción aprobada por el propietario a la regla de no usar CDN:
+            AgentLane registra las herramientas del sitio en
+            document.modelContext para que los agentes las descubran vía
+            WebMCP. data-domain es un identificador público del sitio. */}
+        <Script
+          src="https://cdn.agentlane.com/v1/snippet.js"
+          data-domain="dom-cfb1061sr1jh"
+          strategy="beforeInteractive"
+        />
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>
         <SiteNav />
+        <WebMcpTools />
         <main className="main-content" id="contenido">
           {children}
         </main>

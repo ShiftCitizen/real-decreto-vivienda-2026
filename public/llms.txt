@@ -1,0 +1,28 @@
+# Vivienda 2026: RDL 26/2026 y RDL 27/2026
+
+> Ayuda de lectura, en español, sobre dos reales decretos-ley españoles de vivienda de 2026: el RDL 26/2026 (función social de la vivienda y oferta de vivienda asequible; en vigor desde el 1-10-2026) y el RDL 27/2026 (estabilidad de los contratos de arrendamiento de vivienda habitual; en vigor desde el 2-10-2026). Es material divulgativo, sin valor de asesoramiento jurídico; prevalece el texto oficial del BOE.
+
+El sitio tiene seis páginas estáticas, sin JavaScript necesario para leerlas: todo el contenido está en el HTML. Cada referencia a un artículo nombra su norma (RDL 26/2026, RDL 27/2026, LAU, LEC, Ley 12/2023, LIRPF, LIVA, LRHL, LMV, CE y otras). El estado de la convalidación parlamentaria cambia con el tiempo: comprobarlo en la página de estado antes de afirmar vigencia. En navegadores compatibles con WebMCP, cada página expone además dos herramientas de solo lectura (buscar_en_el_sitio y leer_pagina) que responden sobre este mismo contenido.
+
+## Páginas
+
+- [Resumen](https://real-decreto-vivienda-2026.vercel.app/): qué cambian los dos decretos, cifras destacadas, cronología, tercer sector, preguntas frecuentes y cómo leer las citas.
+- [Desahucios y alquiler](https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/): freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga indefinida de cinco y siete años con indemnización, y régimen sancionador de plataformas de corta duración.
+- [Fiscalidad](https://real-decreto-vivienda-2026.vercel.app/fiscal/): IRPF por alquiler, deducción por alquiler habitual, IVA de estancias cortas y obras, recargos de IBI, gravamen especial de las SOCIMI e IIVTNU.
+- [Financiación y cuenta](https://real-decreto-vivienda-2026.vercel.app/financiacion/): parque público y CASA 47, avales, préstamo TU CASA y Cuenta de Ahorro e Inversión Financia Europa.
+- [Estado y advertencias](https://real-decreto-vivienda-2026.vercel.app/estado/): qué está en vigor, qué depende de un acto posterior y advertencias (convalidación, preámbulo frente a articulado, competencias autonómicas).
+- [Normas citadas](https://real-decreto-vivienda-2026.vercel.app/normas/): reales decretos-ley, leyes y reglamentos citados, con identificador BOE y enlace permanente.
+
+## Fuentes oficiales
+
+- [RDL 26/2026 en el BOE](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20266): texto oficial del decreto de 96 páginas (BOE-A-2026-20266).
+- [RDL 27/2026 en el BOE](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20385): texto oficial del decreto de 8 páginas (BOE-A-2026-20385).
+
+## Datos legibles por máquina
+
+- [Índice de búsqueda](https://real-decreto-vivienda-2026.vercel.app/search-index.json): índice JSON con las páginas, secciones con ancla, preguntas frecuentes y normas del sitio; cada entrada lleva título, href, sección y extracto.
+- [Mapa del sitio](https://real-decreto-vivienda-2026.vercel.app/sitemap.xml): las seis páginas con fecha de última modificación.
+
+## Optional
+
+- [Repositorio y estado del proyecto](https://real-decreto-vivienda-2026.vercel.app/estado/): historial de actualizaciones del análisis.

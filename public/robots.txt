@@ -1,0 +1,66 @@
+# This site is a public reading aid about two Spanish housing decrees.
+# Every crawler is welcome: search indexers, AI answer engines and
+# model-training crawlers alike. Nothing here is paywalled.
+#
+# The three bot families are named explicitly (training, search-index and
+# live user-fetch agents use different tokens per operator) so no tool has
+# to guess whether it is covered by the wildcard below.
+
+User-agent: *
+Allow: /
+
+# OpenAI: search index, live user fetch, training
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+# Anthropic: search index, live user fetch, training (+ legacy token)
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity: search index and live user fetch
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Other search and answer-engine crawlers (Bing feeds Copilot)
+User-agent: Bingbot
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+User-agent: YouBot
+Allow: /
+
+# Training-data crawlers
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: Meta-ExternalAgent
+Allow: /
+User-agent: FacebookBot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://real-decreto-vivienda-2026.vercel.app/sitemap.xml
