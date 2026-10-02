@@ -26,7 +26,10 @@ import type { EntradaIndice } from '@/lib/busqueda';
  */
 
 const NIM_BASE = 'https://integrate.api.nvidia.com/v1';
-const MODELO_POR_DEFECTO = 'meta/llama-3.1-8b-instruct';
+// Modelo pequeño disponible en la clave (verificado contra /v1/models):
+// el 3.1 8B no está servido en esta cuenta; el 3.2 11B instruct es el
+// instruct general más pequeño. NIM_MODEL_ID lo sustituye si hace falta.
+const MODELO_POR_DEFECTO = 'meta/llama-3.2-11b-vision-instruct';
 const MAX_PREGUNTA = 500;
 const MAX_TOKENS_SALIDA = 350;
 const CUOTA_MAX = 10;
