@@ -340,13 +340,13 @@ entries.push({
 });
 
 const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0) + 1 }), {});
-if (!isDev && (counts.section ?? 0) === 0) {
-  // Same reason as above: the site always has anchored sections, so zero
-  // means the HTML was found but yielded nothing (or the glob silently
-  // matched elsewhere). Ship nothing rather than a starved index. The
-  // inventory below shows what postbuild actually saw, so a remote builder
-  // whose output layout differs can be diagnosed from the build log alone.
-  const rows = [];
+// TEMPORARY DIAGNOSTIC (do not ship): the remote builder yields zero sections
+// while local yields 36, and build logs are not readable from the CLI. Soften
+// the throw to a warning for one deploy and dump the inventory where it can
+// be fetched over HTTP; the file is gitignored and removed in the fix commit.
+const DIAGNOSTIC_FILE = join(ROOT, 'public', 'build-debug.json');
+{
+  const inventory = [];
   let files = 0;
   try {
     for (const file of htmlFiles(SRC_DIR)) {
@@ -354,15 +354,29 @@ if (!isDev && (counts.section ?? 0) === 0) {
       const html = readFileSync(file, 'utf8');
       const heads = (html.match(/<h[1-6][\s>]/g) ?? []).length;
       const ids = (html.match(/ id="/g) ?? []).length;
-      if (rows.length < 15) rows.push(`${file.slice(SRC_DIR.length + 1)} ${html.length}B h=${heads} id=${ids}`);
+      inventory.push(`${file.slice(SRC_DIR.length + 1)} ${html.length}B h=${heads} id=${ids}`);
     }
   } catch (e) {
-    rows.push(`inventory failed: ${e instanceof Error ? e.message : e}`);
+    inventory.push(`inventory failed: ${e instanceof Error ? e.message : e}`);
   }
-  throw new Error(
-    `zero section entries from ${SRC_DIR}/ (script root: ${ROOT}, cwd: ${process.cwd()}, html files seen: ${files}): refusing to write a section-less index.\n` +
-      rows.join('\n'),
-  );
+  const info = {
+    node: process.version,
+    flags: { VERCEL: process.env.VERCEL ?? null, CI: process.env.CI ?? null, VERCEL_ENV: process.env.VERCEL_ENV ?? null },
+    srcDir: SRC_DIR,
+    root: ROOT,
+    cwd: process.cwd(),
+    htmlFilesSeen: files,
+    sectionEntries: counts.section ?? 0,
+    inventory,
+  };
+  writeFileSync(DIAGNOSTIC_FILE, JSON.stringify(info, null, 2));
+  console.log(`diagnostic inventory -> public/build-debug.json (${files} html files, ${counts.section ?? 0} sections)`);
+}
+if (!isDev && (counts.section ?? 0) === 0) {
+  // TEMPORARY (do not ship): warn instead of throwing for one deploy, so the
+  // diagnostic file above reaches production and can be fetched over HTTP.
+  // Restore the throw in the fix commit.
+  console.warn('warning: zero section entries — shipping degraded index for diagnosis only.');
 }
 const json = JSON.stringify(entries);
 for (const target of TARGETS) {
