@@ -4,19 +4,21 @@ Guidance for AI agents working in this repository. Read before editing.
 
 ## What this project is
 
-A statically exported Next.js 16 + TypeScript site that explains two Spanish
+A hybrid Next.js 16 + TypeScript site that explains two Spanish
 **reales decreto-ley** on housing (RDL 26/2026 and RDL 27/2026). It is a reading
 aid, not legal advice, and the site says so.
 
-**There is no server and no database.** Every change must still work as flat
-files in `out/`.
+**There is no database.** All six pages are statically prerendered; the only
+server code is `POST /api/chat`, the chatbot proxy (it holds the NIM key
+server-side so the widget cannot become a free ChatGPT). Every other change
+must still work as static output.
 
 ## Commands
 
 ```bash
 npm run typecheck   # tsc --noEmit  — run this after every change
-npm run build       # static export + regenerates the search index
-npm start           # serve out/ locally (needs a prior build)
+npm run build       # hybrid build + regenerates the search index
+npm start           # next start locally (needs a prior build; the API only lives here or on Vercel)
 npm run dev         # dev server
 ```
 
@@ -30,20 +32,28 @@ them off the `postbuild` line of a real build.
 
 ## Hard constraints
 
-### 1. Static export rules
+### 1. Hybrid build rules
 
-`next.config.mjs` sets `output: 'export'` and `trailingSlash: true`. Therefore:
+`next.config.mjs` sets `trailingSlash: true` and deliberately no longer sets
+`output: 'export'` — `/api/chat` is a dynamic route handler, so a pure export
+build would reject it. Therefore:
 
+- All six pages stay statically prerendered; the **only** server code allowed
+  is `POST /api/chat`. No server actions, no other route handlers, no dynamic
+  rendering, no ISR anywhere else.
 - `redirects()`, `rewrites()` and `headers()` in `next.config.mjs` are
   **silently ignored**. They belong in `vercel.json` if you need them.
-- `next start` is **rejected by Next**. Use `npm start`, which serves `out/`.
-- No server actions, no route handlers, no dynamic rendering, no ISR.
+- `npm start` runs `next start` (needs a prior build). There is no `out/`
+  anymore; do not recreate it and do not serve the site with a static server
+  when verifying the chatbot — the API only exists under `next start` or on
+  Vercel.
 - **`.vercelignore` is not optional here.** Vercel only falls back to
   `.gitignore`; it treats `public/` as a static-asset directory and uploads it
-  regardless. So the reduced dev index from `predev` ships and **shadows** the
-  built `out/search-index.json`, silently killing section search in production
-  while the build log still reports the full entry count. If you add another
-  generated file to `public/`, add it there too.
+  regardless. So the reduced dev index from `predev` ships and would **shadow**
+  the built `public/search-index.json`, silently killing section search in
+  production while the build log still reports the full entry count. If you add
+  another generated file to `public/`, add it there too. (The stale `out` line
+  in that file is vestigial and harmless; leave it.)
 - **Deploys are manual.** The git remote is a Cursor host, which Vercel's Git
   integration does not support (GitHub/GitLab/Bitbucket only), so there is no
   webhook and `git push` deploys nothing. Run `npx vercel --prod` yourself.
@@ -53,14 +63,15 @@ them off the `postbuild` line of a real build.
 
 ### 2. The search index is generated, not authored
 
-`out/search-index.json` (prod) and `public/search-index.json` (dev) are build
-artefacts, both gitignored. Never hand-edit either.
+`public/search-index.json` is a build artefact, gitignored. Never hand-edit it.
 
 - **Prod:** `postbuild` (`scripts/build-search-index.mjs`) reads section anchors
-  back out of the built `out/*.html`. If you add or rename an anchored heading,
-  rebuild — the index follows automatically.
+  back out of the freshly prerendered `.next/server/app/*.html` — never out of
+  a reused `out/` directory, which no longer exists and would be stale if it
+  did. If you add or rename an anchored heading, rebuild — the index follows
+  automatically.
 - **Dev:** `predev` writes a reduced index (no section entries) because there is
-  no `out/` to read. This is expected, not a bug.
+  no built HTML to read. This is expected, not a bug.
 - Section entries carry their **body text** (first `MAX_BODY` chars) in
   `keywords`. That is what makes `<table>` and `<li>` content matchable. A term
   that falls past the cap is genuinely unsearchable — that is the trade-off, not
@@ -87,10 +98,10 @@ a **closed** `<details>`. Without `openFromHash()` the user clicks a search
 result and gets the question with no answer. Keep both halves of that: the
 `useEffect` **mount** path (arriving from another route, or a direct URL load) and
 the `hashchange` path (the palette navigates via the client router, and the
-component does not re-mount when only the hash changes). Client components are
-still server-rendered, so the `<details>` and their answers are still in
-`out/index.html` for the index scraper — that is unchanged, but do not "optimise"
-the FAQ back out of SSR.
+  component does not re-mount when only the hash changes). Client components are
+  still server-rendered, so the `<details>` and their answers are still in
+  the prerendered HTML for the index scraper — that is unchanged, but do not "optimise"
+  the FAQ back out of SSR.
 
 `FAQ` ids are deep-link targets; keep them stable unless you intend to break the
 link.
@@ -122,6 +133,21 @@ Two traps in `<Cite>`:
 
 It was removed in Next 16. Use `npm run typecheck`. If you add linting, wire up
 ESLint directly — do not restore a `next lint` script.
+
+### 6. The chatbot must never become a free ChatGPT
+
+`POST /api/chat` holds `NIM_API_KEY` server-side; the widget is a dumb
+single-shot form. Keep every limit on the server and never trust the client:
+
+- The NIM key lives **only** in Vercel env vars. Grep for it before every
+  commit; it must appear nowhere in the repo, the bundle, logs, or error
+  messages returned to the browser.
+- Retrieval first: if nothing in the generated index clears the bar, return
+  the fixed refusal **without calling the model**. No history, 500-char input
+  cap, low temperature, ~350 output tokens, best-effort per-IP quota.
+- The system prompt answers **solely** from the injected excerpts, demands
+  page citations, and refuses everything else. The widget repeats the
+  no-legal-advice note under every answer.
 
 ## React gotchas in this codebase
 
@@ -168,7 +194,8 @@ These have already caused real bugs here. Re-introducing them will cause them ag
   typechecking. The only legitimate non-ASCII characters in the source are `€`,
   `⌘` and `⌕`.
 - Mermaid-style diagrams are npm imports if you add any. Do not introduce CDN
-  `<script>` tags.
+  `<script>` tags — the single exception is the owner-approved AgentLane
+  snippet in `app/layout.tsx`.
 
 ## Styling
 

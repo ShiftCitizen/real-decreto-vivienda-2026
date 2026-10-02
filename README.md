@@ -4,8 +4,9 @@ Sitio de lectura que explica qué cambian los **reales decreto-ley 26/2026** y
 **27/2026** (vivienda), en cifras y en fechas. No es asesoramiento jurídico y el
 sitio lo dice explícitamente en `/estado`.
 
-Sitio estático: Next.js 16 con `output: 'export'`. **No hay servidor ni base de
-datos**; todo son ficheros planos en `out/`.
+Sitio híbrido Next.js 16: las seis páginas se prerenderizan como estáticas y
+hay una única ruta dinámica, `POST /api/chat` (el proxy del asistente, que
+guarda la clave de NIM en el servidor). **No hay base de datos**.
 
 ## Puesta en marcha
 
@@ -15,8 +16,8 @@ con *type stripping* nativo).
 ```bash
 npm install
 npm run typecheck   # tsc --noEmit
-npm run build       # export estático + regenera el índice de búsqueda
-npm start           # sirve out/ (necesita un build previo)
+npm run build       # build híbrido + regenera el índice de búsqueda
+npm start           # next start (necesita un build previo; la API solo vive aquí o en Vercel)
 npm run dev         # servidor de desarrollo
 ```
 
@@ -50,8 +51,12 @@ components/
   ScrollTable.tsx             envolvente accesible para tablas anchas
   SiteNav.tsx                 sidebar, cajón móvil, disparador de búsqueda, índice «En esta página»
   SearchPalette.tsx           paleta ⌘K / Ctrl-K
+  ChatWidget.tsx              asistente (pregunta suelta, vía /api/chat)
+  WebMcpTools.tsx             herramientas WebMCP de solo lectura (solo Chrome con bandera)
 lib/
-  normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts
+  normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts   busqueda.ts
+app/api/chat/
+  route.ts                    proxy a NVIDIA NIM con cuota, tope y negativa sin LLM
 scripts/
   build-search-index.mjs      postbuild: índice + auditoría de citas
 ```
@@ -74,14 +79,15 @@ HTML ya construido**.
 
 ## El índice de búsqueda
 
-`out/search-index.json` y `public/search-index.json` son **artefactos de build**,
-no ficheros escritos a mano, y están en `.gitignore`.
+`public/search-index.json` es un **artefacto de build**, no un fichero escrito
+a mano, y está en `.gitignore`.
 
 - `postbuild` lee las anclas de las secciones directamente del HTML ya
-  construido. Si añades o renuebas un encabezado con `id`, reconstruye y el
-  índice se actualiza solo.
+  construido (`.next/server/app/*.html` del build que acaba de correr; nunca
+  de un `out/` reutilizado). Si añades o renombras un encabezado con `id`,
+  reconstruye y el índice se actualiza solo.
 - `predev` escribe un índice reducido (sin entradas de sección) porque en
-  desarrollo no hay `out/`. Es lo esperado, no un fallo.
+  desarrollo no hay HTML construido. Es lo esperado, no un fallo.
 - Las entradas de sección llevan los primeros `MAX_BODY` caracteres de su
   cuerpo, y eso es lo que hace buscables las tablas y las listas.
 

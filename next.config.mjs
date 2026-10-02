@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  // Static site: no server, no database. Everything must work as flat files in out/.
-  output: 'export',
+  // Hybrid: pages stay statically prerendered, but /api/chat is a dynamic
+  // route handler (it holds the NIM key server-side), so `output: 'export'`
+  // had to go. See AGENTS.md for what this changes about local commands.
   trailingSlash: true,
-  // Note: `output: 'export'` silently ignores redirects/rewrites/headers here.
-  // Legacy .html -> route redirects would need a vercel.json.
+  // Note: redirects/rewrites/headers in this file are silently ignored by
+  // Next. They belong in vercel.json if you need them.
 };
 
 export default nextConfig;

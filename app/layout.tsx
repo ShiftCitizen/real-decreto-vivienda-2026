@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import SiteNav from '@/components/SiteNav';
 import WebMcpTools from '@/components/WebMcpTools';
+import ChatWidget from '@/components/ChatWidget';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   },
   description:
     'Análisis del Real Decreto-ley 26/2026 y del Real Decreto-ley 27/2026: función social de la vivienda, alquiler, fiscalidad, financiación y régimen sancionador.',
+  authors: [{ name: 'Carlos Marchena', url: 'https://www.linkedin.com/in/cmarchena/' }],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -31,10 +33,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </a>
         <SiteNav />
         <WebMcpTools />
+        <ChatWidget />
         <main className="main-content" id="contenido">
           {children}
         </main>
-        <footer className="site-footer">
+        <footer className="site-footer" id="autor">
           Análisis divulgativo, sin valor de asesoramiento jurídico; prevalece el texto
           oficial (
           <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,
@@ -42,7 +45,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,
           01-10-2026), con los que se ha contrastado el articulado.
           <br />
-          Cocreado con Claude · © Carlos Marchena 2026
+          ©{' '}
+          <a href="https://www.linkedin.com/in/cmarchena/" target="_blank" rel="noreferrer">
+            Carlos Marchena
+          </a>{' '}
+          2026 · Resumen no oficial elaborado con ayuda de herramientas de inteligencia
+          artificial. El texto oficial es el publicado en el BOE.
         </footer>
       </body>
     </html>

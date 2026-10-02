@@ -17,20 +17,28 @@ import { NAV_SECTIONS } from '../lib/nav.ts';
 import { FAQ } from '../lib/faq.ts';
 import { NORMA_IDS, NORMAS } from '../lib/normas.ts';
 
-const OUT_DIR = 'out';
+const EXPORT_DIR = 'out';
+const PRENDER_DIR = join('.next', 'server', 'app');
+
+// Source of built HTML for sections and the citation audit. Hybrid builds
+// prerender pages into .next/server/app/<route>.html (fresh, from the build
+// that just ran); the old static export used out/<route>/index.html. Prefer
+// the fresh prerender output whenever it exists — a stale out/ left over
+// from an earlier export build must never feed the index silently.
+const SRC_DIR = !process.argv.includes('--dev') && existsSync(PRENDER_DIR) ? PRENDER_DIR : EXPORT_DIR;
 
 // Two modes:
-//   default (postbuild) -> section entries included, read from out/*.html.
+//   default (postbuild) -> section entries included, read from built HTML.
 //   --dev (predev)      -> no sections: there is no built HTML to read.
 //
-// postbuild runs *after* Next has copied public/ into out/, so the production
-// index goes straight into out/. But Vercel does not serve out/ at all — it
-// serves prerendered routes plus whatever is in public/. So the production
-// build writes BOTH; writing only out/ made /search-index.json 404 online, and
-// writing the dev copy to public/ made it silently serve a section-less index
-// instead. Both paths must hold the full index.
+// The production build writes the full index to public/search-index.json,
+// which Vercel serves as a static asset alongside the prerendered routes.
+// (When the export build existed, it also went straight into out/ because
+// postbuild ran after Next copied public/ there.) Writing the dev copy to
+// public/ would silently serve a section-less index instead, which is why
+// .vercelignore keeps public/search-index.json out of CLI uploads.
 const isDev = process.argv.includes('--dev');
-const TARGETS = isDev
+const TARGETS = isDev || SRC_DIR !== EXPORT_DIR
   ? ['public/search-index.json']
   : ['out/search-index.json', 'public/search-index.json'];
 
@@ -65,10 +73,17 @@ function* htmlFiles(dir) {
   }
 }
 
-/** Route for a built file, e.g. out/estado/index.html -> /estado/ */
+/** Route for a built file, e.g. out/estado/index.html or
+ *  .next/server/app/estado.html -> /estado, and index.html -> / */
 function routeFor(file) {
-  const rel = file.slice(OUT_DIR.length + 1).replace(/\/index\.html$/, '').replace(/\.html$/, '');
-  return rel === 'index' ? '/' : `/${rel}`;
+  const rel = file
+    .slice(SRC_DIR.length + 1)
+    .replace(/\/index\.html$/, '')
+    .replace(/\.html$/, '');
+  // Internal files (_not-found, route groups) are not site routes.
+  if (rel === 'index' || rel === '') return '/';
+  if (rel.startsWith('_') || rel.includes('/_')) return null;
+  return `/${rel}`;
 }
 
 /** Nav label for a route, so section entries can name the page they came from. */
@@ -98,11 +113,11 @@ for (const section of NAV_SECTIONS) {
 }
 
 // --- Sections (h2/h3 anchors from the built HTML) ---------------------------
-// Never read sections in dev: out/ is either absent or stale there, and stale
+// Never read sections in dev: there is no built HTML there, and stale
 // anchors would point at ids the dev server no longer renders.
-const built = !isDev && existsSync(OUT_DIR);
+const built = !isDev && existsSync(SRC_DIR);
 if (!isDev && !built) {
-  console.warn('warning: out/ not found, skipping sections.');
+  console.warn(`warning: ${SRC_DIR}/ not found, skipping sections.`);
 }
 
 // --- Citation audit ---------------------------------------------------------
@@ -191,8 +206,9 @@ function clauseAround(text, start, end) {
 const citationFailures = [];
 const seenAnchors = new Map();
 
-for (const file of built ? htmlFiles(OUT_DIR) : []) {
+for (const file of built ? htmlFiles(SRC_DIR) : []) {
   const route = routeFor(file);
+  if (route === null) continue;
   const html = readFileSync(file, 'utf8');
 
   if (!isDev) {
@@ -293,6 +309,20 @@ for (const id of NORMA_IDS) {
     excerpt: norma.titulo.slice(0, MAX_EXCERPT),
   });
 }
+
+// --- Autor -----------------------------------------------------------------
+// Entrada estática: el nombre vive en el pie de layout, sin ancla propia
+// salvo el id del footer, así que se declara aquí en vez de leerse del HTML.
+entries.push({
+  type: 'autor',
+  title: 'Carlos Marchena — autor del análisis',
+  href: '/#autor',
+  section: 'Autor',
+  keywords:
+    'Carlos Marchena autor análisis resumen no oficial inteligencia artificial LinkedIn',
+  excerpt:
+    'Resumen no oficial elaborado por Carlos Marchena con ayuda de herramientas de inteligencia artificial.',
+});
 
 const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0) + 1 }), {});
 const json = JSON.stringify(entries);

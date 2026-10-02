@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-type EntryType = 'page' | 'section' | 'faq' | 'norma';
+type EntryType = 'page' | 'section' | 'faq' | 'norma' | 'autor';
 
 type Entry = {
   type: EntryType;
@@ -18,9 +18,10 @@ const TYPE_LABEL: Record<EntryType, string> = {
   section: 'Secciones',
   faq: 'Preguntas',
   norma: 'Normas',
+  autor: 'Autor',
 };
 
-const GROUP_ORDER: EntryType[] = ['page', 'section', 'faq', 'norma'];
+const GROUP_ORDER: EntryType[] = ['page', 'section', 'faq', 'norma', 'autor'];
 
 /**
  * Accent- and case-insensitive normalisation, applied once per entry at load so
