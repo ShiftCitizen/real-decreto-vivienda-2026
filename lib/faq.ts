@@ -23,8 +23,8 @@ export const FAQ: FaqEntry[] = [
     id: 'en-vigor',
     pregunta: '¿Está en vigor ya?',
     respuesta: [
-      'Cada real decreto-ley tiene su propia fecha de entrada en vigor (el día siguiente al de su publicación): el RDL 26/2026 entra en vigor el 1-10-2026 y el RDL 27/2026 el 2-10-2026.',
-      'Lo que todavía no ha ocurrido es la convalidación en el Congreso de los Diputados. Mientras no se vote, la normativa rige con plena eficacia; si el Congreso la deroga, cesa de inmediato sin anular los efectos ya producidos.',
+      'No. El 2 de octubre de 2026 el Congreso rechazó la convalidación de los dos decretos (172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el RDL 27/2026) y ambos quedaron derogados: dejan de estar en vigor desde ese día.',
+      'Rigen la LAU y las demás normas anteriores a los decretos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.',
     ],
     citas: [
       { norma: 'rdl26', art: 'disposición final undécima.1' },
@@ -36,12 +36,10 @@ export const FAQ: FaqEntry[] = [
     id: 'subir-renta',
     pregunta: '¿Me pueden subir la renta?',
     respuesta: [
-      'Solo si hay pacto expreso. Desde el 1 de octubre de 2026, en defecto de pacto expreso no se aplica actualización de rentas a los contratos: la renta solo puede actualizarse en la fecha en que se cumpla cada año de vigencia y en los términos pactados por las partes.',
-      'Si el pacto existe pero no detalla el índice o la metodología de referencia, la actualización se hace por referencia a la variación anual del IRAV, y en todo caso el incremento no puede superar esa variación.',
-      'Hasta el 31 de diciembre de 2027 hay además un límite extraordinario: si la renta supera el límite máximo del precio aplicable conforme al sistema de índices de precios de referencia, no procede incremento alguno; en los demás casos, el pactado o, a falta de pacto, un máximo del 2 %.',
+      'El tope extraordinario no se aplica: formaba parte del RDL 26/2026, derogado el 2-10-2026. La actualización de la renta es la pactada en cada contrato.',
+      'El límite del 2 % y la regla del índice de referencia eran de la disposición final sexta del RDL 26/2026: al derogarse, no se aplican.',
     ],
     citas: [
-      { norma: 'lau', art: '18.1' },
       { norma: 'rdl26', art: '3.Once' },
       { norma: 'rdl26', art: 'disposición final sexta' },
     ],
@@ -50,9 +48,8 @@ export const FAQ: FaqEntry[] = [
     id: 'desahucio',
     pregunta: '¿Me pueden hacer un desahucio?',
     respuesta: [
-      'Puede, pero hay dos frenos nuevos. Si se acredita la vulnerabilidad económica y falta alternativa habitacional, la administración competente dispone de un plazo máximo e improrrogable de dos meses para ofrecer una alternativa adecuada o, en su defecto, pagar o consignar la deuda. Durante ese plazo quedan suspendidos el procedimiento y el lanzamiento.',
-      'Si la administración no actúa, queda subrogada automáticamente en la posición deudora del arrendatario: no hay lugar para el lanzamiento y el contrato se mantiene vigente hasta su expiración mientras persista la situación de vulnerabilidad.',
-      'Aparte de eso, y hasta el 31 de diciembre de 2030, se suspende el proceso cuando el demandante es una entidad que adquiere inmuebles o carteras de préstamo hipotecario impagados por un precio claramente inferior al de tasación, para eludir los mecanismos de función social de la vivienda. En el caso del apartado segundo, la suspensión o la compensación no supondrán la desaparición de la obligación de mantenerse al corriente de la renta debida.',
+      'La suspensión de desahucios y la enervación extraordinaria eran medidas del RDL 26/2026, derogado el 2-10-2026: no se aplican. Los procesos siguen las reglas anteriores de la LAU y la LEC.',
+      'El plazo de dos meses para la administración y la subrogación automática en la deuda tampoco llegaron a aplicarse.',
     ],
     citas: [
       { norma: 'lec', art: '22.6' },
@@ -64,10 +61,8 @@ export const FAQ: FaqEntry[] = [
     id: 'indemnizacion',
     pregunta: '¿Cuánto me deben si no me renuevan?',
     respuesta: [
-      'Desde el 2 de octubre de 2026, el arrendador que notifique válidamente su voluntad de no renovar debe indemnizar al arrendatario con una cantidad equivalente, al menos, al importe de doce mensualidades de renta de una vivienda de análogas características a la arrendada. El pago de la indemnización se realiza en el momento de la entrega de la vivienda, salvo en el supuesto (a) de necesidad del arrendador.',
-      'El cálculo se hace, siempre que ello sea posible, en base al sistema estatal de referencia de precios de alquiler de vivienda, y en ningún caso por debajo del importe equivalente a una mensualidad de renta por cada año que el arrendatario haya residido en la vivienda, prorrateándose por meses los períodos inferiores al año y por días los inferiores al mes.',
-      'No procede esa indemnización en los supuestos del artículo 10.2 de la LAU, que deben hacerse constar de forma expresa, detallada y por escrito en la notificación de preaviso: (a) que el arrendador persona física necesite la vivienda para sí o para sus familiares en segundo grado de consanguinidad o por adopción, o para su cónyuge en caso de sentencia firme de separación, divorcio o nulidad (debiendo ocuparla en tres meses salvo causa de fuerza mayor); (b) que el arrendatario no haya habitado la vivienda durante más de seis meses en los doce anteriores a la notificación, salvo causa justificada o que sigan habitándola las personas del artículo 7.1 LAU; (c) que disponga de otra vivienda apta en el mismo municipio; (d) que las partes suscriban un contrato nuevo; (e) que el arrendatario rechace una oferta fehaciente de contrato que garantice una duración mínima de cinco años (siete si el arrendador es persona jurídica) y cuya renta cumpla el artículo 17.6 LAU aun fuera de zona tensionada; o (f) otra circunstancia debidamente justificada cuando el arrendador tenga vulnerabilidad acreditada.',
-      'Tampoco procede cuando, respecto del vencimiento de que se trate, el arrendatario reúna los requisitos para obtener a su solicitud una prórroga legal de aceptación obligatoria para el arrendador, aunque no la hubiera solicitado.',
+      'No hay indemnización de doce mensualidades: era del art. 10.1 de la LAU en la redacción del RDL 27/2026, derogado el 2-10-2026. Tampoco hay prórroga indefinida de cinco y siete años.',
+      'Las seis excepciones del apartado 10.2 (necesidad del arrendador, no ocupación, otra vivienda, contrato nuevo, rechazo de oferta y vulnerabilidad del arrendador) tampoco se aplican: eran del mismo texto derogado.',
     ],
     citas: [
       { norma: 'lau', art: '10.1' },
@@ -79,9 +74,8 @@ export const FAQ: FaqEntry[] = [
     id: 'aplicacion-contrato',
     pregunta: '¿Cuándo se aplica a mi contrato?',
     respuesta: [
-      'La nueva prórroga de cinco o siete años se aplica a los contratos de vivienda habitual vigentes el 2 de octubre de 2026, respecto de los vencimientos del contrato o de cualquiera de sus prórrogas que se produzcan con posterioridad al día siguiente a esa fecha.',
-      'Hay tres reglas transitorias que conviene conocer: si a la entrada en vigor quedaban menos de seis meses para el vencimiento, el preaviso del arrendador puede efectuarse con una antelación mínima de cuatro meses; los contratos que ya se encontraban en el periodo de prórroga del anterior artículo 10.1 de la LAU continúan en él hasta su término, y solo a su término se les aplica el régimen nuevo; y los contratos en situación de tácita reconducción conforme al artículo 1566 del Código Civil quedan sujetos al artículo 10 de la LAU a partir del primer vencimiento que se produzca una vez transcurridos cuatro meses desde la entrada en vigor.',
-      'Las comunicaciones o requerimientos para poner fin a la tácita reconducción, formulados válidamente con anterioridad al 2 de octubre de 2026, conservan su eficacia y no dan lugar a la indemnización de doce mensualidades.',
+      'Ninguna de las reglas transitorias se aplica: el régimen nuevo de cinco o siete años no llegó a entrar en vigor al derogarse el RDL 27/2026 el 2-10-2026. Los contratos se rigen por la LAU anterior a los decretos.',
+      'Tampoco cuentan los preavisos reducidos de cuatro meses ni las reglas de tácita reconducción del texto derogado.',
     ],
     citas: [
       { norma: 'rdl27', art: 'disposición transitoria única.1' },
@@ -94,7 +88,7 @@ export const FAQ: FaqEntry[] = [
     pregunta: '¿Soy gran tenedor?',
     respuesta: [
       'Es la persona física o jurídica titular de más de diez inmuebles urbanos de uso residencial, o de una superficie construida de más de 1.500 m² de uso residencial, excluyendo en todo caso garajes y trasteros. La condición se acredita mediante certificación del Registro de la Propiedad.',
-      'La reforma añade un criterio que puede cambiar la respuesta: cuando una finca registral comprende un edificio compuesto por varias unidades susceptibles de uso residencial, se entiende que cada una de esas unidades constituye un inmueble independiente a efectos de cómputo, con independencia de que no exista división horizontal inscrita.',
+      'La reforma añadía un criterio que habría podido cambiar la respuesta: que cada unidad de una finca registral contase como inmueble independiente. Pero ese criterio era del RDL 26/2026, derogado el 2-10-2026, y no se aplica.',
       'La definición puede particularizarse en la declaración de entorno de mercado residencial tensionado hasta aquellos titulares de cinco o más inmuebles de uso residencial ubicadas en ese ámbito, cuando así sea motivado por la comunidad autónoma en la correspondiente memoria justificativa.',
     ],
     citas: [
@@ -106,8 +100,8 @@ export const FAQ: FaqEntry[] = [
     id: 'vivienda-asequible',
     pregunta: '¿Qué es vivienda asequible?',
     respuesta: [
-      'Aquella cuyas condiciones de precio de venta o alquiler, incluidos todos los gastos asociados al mismo, no superen el treinta por ciento de la renta mediana de la unidad de convivencia habitual del municipio en el que se ubique el inmueble. Los gastos asociados a los anejos no podrán suponer un incremento del precio de alquiler respecto al determinado para la vivienda.',
-      'El artículo 14 del RDL 26/2026 define la vivienda asequible (límite del 30 % de la renta mediana). Esta definición se distingue de la del precio máximo de enajenación en CASA 47 (art. 11 RDL 26/2026 y DA 20.ª.2 de la Ley 33/2003), que se calcula como superficie registral por el módulo más alto de vivienda protegida de la comunidad autónoma. En las SOCIMI, el gravamen especial del 25 % se reduce en un 50 % (o un 100 % si se reinvierte en tres años) cuando más del 80 % de las viviendas se destinen a arrendamiento asequible o protegido (art. 9.5 de la Ley 11/2009). En los períodos impositivos iniciados en 2026 y no concluidos a la entrada en vigor basta más del 60 %, y en los iniciados en 2027 basta más del 70 %, manteniéndose en ambos casos la exigencia de reinversión en tres años para la reducción del 100 %.',
+      'El RDL 26/2026 definía como vivienda asequible la que no superase el treinta por ciento de la renta mediana de la unidad de convivencia habitual del municipio, sin incrementos por anejos. Al derogarse el 2-10-2026, esa definición no se aplica.',
+      'El gravamen especial del 25 % se habría reducido en un 50 % (o un 100 % con reinversión en tres años) cuando más del 80 % de las viviendas se destinasen a arrendamiento asequible o protegido (art. 9.5 de la Ley 11/2009). Los umbrales transitorios de más del 60 % en 2026 y más del 70 % en 2027 tampoco se aplican: eran del mismo decreto derogado.',
     ],
     citas: [
       { norma: 'rdl26', art: '14' },
@@ -120,7 +114,7 @@ export const FAQ: FaqEntry[] = [
     id: 'cuenta-financia-europa',
     pregunta: '¿Puedo participar en la Cuenta Financia Europa?',
     respuesta: [
-      'Todavía no. La Cuenta de Ahorro e Inversión Financia Europa no puede ser objeto de comercialización ni de contratación hasta la entrada en vigor de la orden ministerial que instrumente el cumplimiento de las obligaciones de información específicas, y los Seguros Individuales de Ahorro a Largo Plazo Financia Europa quedan bajo la misma condición.',
+      'Nunca llegó a existir: la Cuenta de Ahorro e Inversión Financia Europa no llegó a comercializarse porque el RDL 26/2026 quedó derogado el 2-10-2026 antes de la orden ministerial que debía permitirlo, y los Seguros Individuales de Ahorro a Largo Plazo Financia Europa quedaron bajo la misma condición.',
       'Tampoco pueden efectuarse movilizaciones entre entidades proveedoras hasta la entrada en vigor de la orden ministerial prevista en el artículo 347.7 de la Ley de los Mercados de Valores, que el RDL obliga a aprobar en el plazo de seis meses.',
       'Hasta que funcione el Registro de IIC Elegibles, las entidades sí pueden comercializarla, pero solo con los activos elegibles distintos de participaciones o acciones de IIC, que únicamente podrán incluirse una vez inscritas en ese Registro. La CNMV dispone de cuatro meses para crearlo.',
     ],
@@ -135,6 +129,7 @@ export const FAQ: FaqEntry[] = [
     id: 'alquileres-turisticos',
     pregunta: '¿Qué pasa con los alquileres turísticos?',
     respuesta: [
+      'Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.',
       'Para la plataforma, hay un régimen sancionador completamente nuevo. El RDL 26/2026 añade un Título V a la LAU con multa de un millón de euros para las infracciones muy graves, quinientos mil para las graves y cien mil para las leves, por no recoger y transmitir, o transmitir mal, los datos a la Ventanilla Única Digital de Arrendamientos en los términos del Reglamento (UE) 2024/1028.',
       'La cuantía puede incrementarse por la gravedad del hecho, la reincidencia en dos años, el beneficio económico obtenido y el criterio de proporcionalidad, hasta alcanzar el 2 % del volumen de negocio total anual global del ejercicio anterior en las muy graves y el 1 % en las graves. Las infracciones muy graves prescriben a los cinco años, las graves a los tres y las leves al año.',
       'Para el propietario, en cambio, la fiscalidad es la parte dura: los arrendamientos en que el arrendador se obligue a la prestación de servicios propios de la industria hotelera, o cuando la duración de la cesión a un mismo arrendatario sea igual o inferior a 30 noches (excepto si la cesión se produce en la vivienda en la que el arrendador tenga su residencia habitual, en cuyo caso estará exenta), salen de la exención del IVA y tributan al 10 % desde el 1 de diciembre de 2026; y en los municipios situados en zona de mercado residencial tensionado se crea un recargo de IBI de hasta el 150 % de la cuota líquida para titulares de cuatro o más inmuebles de uso turístico.',
@@ -150,6 +145,7 @@ export const FAQ: FaqEntry[] = [
     id: 'deduccion-alquiler-requisitos',
     pregunta: '¿Qué exige la deducción por alquiler en el IRPF?',
     respuesta: [
+      'Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.',
       'La deducción es del 10 % de lo pagado por alquiler de vivienda habitual, para bases imponibles inferiores a 33.007,20 €, con base máxima de 11.630 € anuales (art. 68.6 de la LIRPF, añadido por el art. 6.Segundo.Cuatro del RDL 26/2026).',
       'Pide que, durante al menos la mitad del período impositivo, ni el contribuyente ni nadie de su unidad familiar sean titulares, de manera individual o conjuntamente, de la totalidad del pleno dominio o de un derecho real de uso o disfrute constituido sobre otra vivienda distante a menos de 50 km de la arrendada, salvo que exista una resolución administrativa o judicial que les impida su uso como residencia.',
     ],
@@ -162,6 +158,7 @@ export const FAQ: FaqEntry[] = [
     id: 'reinversion-financia-europa',
     pregunta: '¿Cómo funciona la reinversión en la Cuenta Financia Europa Reinversión?',
     respuesta: [
+      'Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.',
       'Solo vale para transmisiones realizadas una vez transcurridos treinta días hábiles desde la entrada en vigor del decreto. Hay que reinvertir, en seis meses desde la transmisión (o desde la orden ministerial de información si es posterior), el valor de transmisión que proporcionalmente se corresponda con la ganancia patrimonial no exenta (disposición adicional 65.1 de la LIRPF, introducida por el art. 6.Segundo.Once del RDL 26/2026).',
       'El importe total acumulado aportado a esa cuenta no puede exceder de 800.000 € (disposición adicional 66.5 de la LIRPF y art. 6.Segundo.Doce del RDL 26/2026).',
     ],
@@ -176,6 +173,7 @@ export const FAQ: FaqEntry[] = [
     id: 'vivienda-habitual-mayores-65',
     pregunta: '¿Sigue siendo vivienda habitual si me mudo por edad o dependencia?',
     respuesta: [
+      'Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.',
       'Para las exenciones por transmisión cuenta como habitual la vivienda de las personas mayores de 65 años o en situación de dependencia severa o gran dependencia que trasladan su residencia a un centro especializado o al domicilio de un familiar hasta el tercer grado por consanguinidad o afinidad.',
       'Y en separación, divorcio o nulidad, la del cónyuge que debe abandonar el domicilio, siempre que el requisito de ocupación efectiva concurra en el cónyuge que permaneció en la misma (DF 3.ª del RDL 26/2026).',
     ],
@@ -185,6 +183,7 @@ export const FAQ: FaqEntry[] = [
     id: 'iva-superreducido-protegida',
     pregunta: '¿Qué viviendas llevan IVA superreducido?',
     respuesta: [
+      'Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.',
       'Con efectos desde el 1-12-2026, las calificadas como protección oficial de régimen especial o de promoción pública y las protegidas con calificación permanente o indefinida, cuando las entregas se efectúen por sus promotores, incluidos los garajes y anexos situados en el mismo edificio que se transmitan conjuntamente, con un máximo de dos plazas de garaje (art. 7.Cuatro del RDL 26/2026 y art. 91.Dos.1.6 de la LIVA).',
       'Y las que adquieran las entidades del régimen especial de arrendamiento de vivienda si a sus rentas se aplica la bonificación del artículo 49.1 de la Ley del Impuesto sobre Sociedades.',
     ],
@@ -197,6 +196,7 @@ export const FAQ: FaqEntry[] = [
     id: 'cuenta-tributacion-10-000',
     pregunta: '¿Cómo tributa la Cuenta Financia Europa a los cinco años?',
     respuesta: [
+      'Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.',
       'Las ganancias no se integran hasta disponer total o parcialmente. En la cuenta de la modalidad general, la parte atribuible a aportaciones que hayan permanecido más de cinco años queda excluida en un 100 % hasta 10.000 € por contribuyente y en un 20 % sobre el resto (art. 95 ter, apartado 4, de la LIRPF, introducido por el art. 6.Segundo.Cinco del RDL 26/2026).',
       'En la cuenta de reinversión, esa misma parte queda excluida en un 20 %, sin la exclusión del 100 % de los primeros 10.000 € (disposición adicional 66.2 de la LIRPF y art. 6.Segundo.Doce del RDL 26/2026).',
     ],

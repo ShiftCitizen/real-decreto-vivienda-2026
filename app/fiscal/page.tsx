@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
@@ -53,6 +54,8 @@ export default function FiscalPage() {
         por vivienda desocupada de forma permanente y por alojamientos turísticos, y el gravamen
         especial de las SOCIMI (Título II).
       </p>
+
+      <AvisoEstado />
 
       <h2 id={slugify('Art. 6 (RDL 26/2026). IRPF')}>Art. 6 (RDL 26/2026). IRPF</h2>
 

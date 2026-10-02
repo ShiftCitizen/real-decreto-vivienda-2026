@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
@@ -160,16 +161,19 @@ export default function EstadoPage() {
     <>
       <h1>Estado de aplicación y advertencias</h1>
       <p className="lead">
-        RDL 26/2026 entra en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026 (día siguiente a su
-        publicación). Qué medidas rigen de inmediato, cuáles dependen todavía de una ordenanza, un
-        convenio o un acuerdo ministerial, y las cuatro advertencias que conviene leer antes de
-        fiarse de una cifra.
+        RDL 26/2026 entró en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026, pero ambos
+        quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación.
+        Qué medidas contenían, cuáles dependían todavía de un acuerdo ministerial u
+        ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.
       </p>
+
+      <AvisoEstado />
 
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
-        Cada medida de la tabla está en uno de cuatro estados.{' '}
+        La tabla resume lo que contenían los decretos; desde el 2-10-2026 ninguna medida
+        se aplica. Cada medida está en uno de cuatro estados.{' '}
         <b>Activa</b> es lo que puede aplicarse hoy. Cuando el efecto está diferido a una
         fecha posterior, la etiqueta indica desde cuándo rige (por ejemplo «Vigente desde
         1-12-2026») en lugar de «Activa»: la medida está aprobada pero aún no es aplicable.{' '}
@@ -226,20 +230,11 @@ export default function EstadoPage() {
       <h3 id={slugify('Convalidación')}>Convalidación</h3>
 
       <p>
-        El artículo 86.2 CE exige que el Congreso se pronuncie «en el plazo de los treinta días
-        siguientes a su promulgación»; este sitio no afirma cómo se computa dicho plazo.{' '}
-        <Cite norma="ce" art="86.2" /> Según información de prensa del 29 de septiembre de
-        2026 (
-        <a href="https://www.moncloa.com/2026/09/29/convalidacion-decretos-vivienda-pleno-congreso-3439659/" rel="noreferrer">
-          moncloa.com
-        </a>
-        ), la Junta de Portavoces habría convocado un pleno extraordinario para el viernes 2
-        de octubre de 2026, a las 11:00, que votaría por separado los dos decretos; no es un
-        horario oficial publicado por el Congreso. Hasta la votación, la norma rige con plena eficacia; si se deroga, cesa de
-        inmediato <b>sin anular los efectos ya producidos</b>. El Congreso puede además
-        convalidarla y acordar su tramitación como proyecto de ley, lo que abre la puerta a
-        modificar el contenido después.{' '}
-        <Cite norma="ce" art="86.1" /> Actualizar esta página tras la votación.
+        El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026:
+        172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el
+        RDL 27/2026. Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
+        <Cite norma="ce" art="86.2" /> Si alguna medida se tramita como proyecto de ley,
+        este sitio se actualizará desde ese texto.
       </p>
 
       <h3 id={slugify('Preámbulo y articulado')}>Preámbulo y articulado</h3>
@@ -286,18 +281,16 @@ export default function EstadoPage() {
       <div className="box warn">
         <strong>Lo que este sitio no afirma.</strong>
         <p>
-          No se publica aquí ninguna previsión sobre el <b>resultado</b> de la votación de
-          convalidación, ni sobre qué apoyos tendrá cada decreto. La convalidación depende
-          de una votación que aún no se ha celebrado y no puede anticiparse desde el articulado; la
-          que sí puede comprobarse es la eficacia actual de las normas, que es la que se analiza
-          aquí. Si alguien necesita esa previsión, tiene que mirar el resultado de la sesión, no
-          esta página.
+          No se publica aquí ninguna previsión sobre <b>futuras</b> votaciones o sobre qué
+          apoyos tendría una tramitación como proyecto de ley. El resultado conocido
+          (rechazo de ambos decretos el 2-10-2026) está en la portada; lo demás pertenece
+          a la sesión futura, no a esta página.
         </p>
 
       </div>
 
       <p className="page-meta">
-        Última revisión: 1 de octubre de 2026, 12:00. Articulado contrastado con{' '}
+        Última revisión: 2 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

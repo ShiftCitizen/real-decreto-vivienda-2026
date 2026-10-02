@@ -52,7 +52,7 @@ components/
   SiteNav.tsx                 sidebar, cajón móvil, disparador de búsqueda, índice «En esta página»
   SearchPalette.tsx           paleta ⌘K / Ctrl-K
   ChatWidget.tsx              asistente (pregunta suelta, vía /api/chat)
-  WebMcpTools.tsx             herramientas WebMCP de solo lectura (solo Chrome con bandera)
+  WebMcpTools.tsx             eight read-only English WebMCP tools (Chrome with flag only)
 lib/
   normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts   busqueda.ts
 app/api/chat/
@@ -103,6 +103,22 @@ de desarrollo que escribe `predev` llega a producción y **hace sombra** al
 bueno: se pierde la búsqueda por secciones sin que el log del build dé ninguna
 pista. No borres ese fichero, y añade aquí cualquier otro fichero generado que
 acaba en `public/`.
+
+## Estado post-votación (2-10-2026: ambos derogados)
+
+Textos clave y cómo actualizarlos si hay novedades:
+
+- `lib/estado-votacion.ts` — único lugar con el resultado (estado, votos,
+  fechas, nota futura). El banner, la sección de resultado y `/estado/` leen
+  de aquí: cambia este archivo y reconstruye.
+- `components/AvisoEstado.tsx` — banner que se muestra en portada, `/estado/`
+  y las tres páginas de análisis.
+- Portada (`app/page.tsx`): bloque «En 1 minuto», índice anclado y sección
+  «Resultado de la votación».
+- `lib/faq.ts` — respuestas reescritas en pasado; `lib/cronologia.ts` — hito
+  del rechazo y notas de «no se aplica».
+- El asistente (`app/api/chat/route.ts`) ya sabe que están derogados; su
+  contexto viene del índice, así que sigue al contenido automáticamente.
 
 ## Despliegue
 

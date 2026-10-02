@@ -1,5 +1,5 @@
 /**
- * Lógica de búsqueda compartida con las herramientas WebMCP.
+ * Shared search logic used by the WebMCP tools (search_site) and /api/chat.
  *
  * Intencionadamente sin dependencias del DOM para poder probarse en Node.
  * La puntuación replica la de la paleta de búsqueda (SearchPalette): el

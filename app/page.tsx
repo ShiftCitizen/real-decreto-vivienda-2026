@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import FaqList from '@/components/FaqList';
 import ScrollTable from '@/components/ScrollTable';
@@ -131,6 +132,46 @@ export default function HomePage() {
         <Link href="/desahucios-y-alquiler#coordinacion">ver la coordinación</Link>).
       </p>
 
+      <h2 id={slugify('En 1 minuto')}>En 1 minuto</h2>
+
+      <div className="box">
+        <ul>
+          <li>
+            <strong>Qué ha pasado:</strong> el Congreso ha rechazado los dos decretos de
+            vivienda; ambos quedan derogados.
+          </li>
+          <li>
+            <strong>Para inquilinos:</strong> no entran en vigor la moratoria de desahucios,
+            los límites extra a subidas de renta ni las prórrogas automáticas que preveían
+            los decretos.
+          </li>
+          <li>
+            <strong>Para caseros:</strong> no se aplican las reglas de renovación automática
+            ni las indemnizaciones previstas en el segundo decreto.
+          </li>
+          <li>
+            <strong>Qué pasa ahora:</strong> vuelve el marco anterior (la LAU y las normas
+            vigentes antes de los decretos), salvo que se aprueben nuevas medidas por otra vía.
+          </li>
+          <li>
+            <strong>Futuro incierto:</strong> el Gobierno podría intentar tramitar algunas
+            medidas como proyecto de ley, pero no hay nada cerrado.
+          </li>
+        </ul>
+      </div>
+
+      <nav className="indice-pagina" aria-label="En esta página">
+        <ul>
+          <li><a href="#contenido">Resumen</a></li>
+          <li><a href="#en-1-minuto">En 1 minuto</a></li>
+          <li><a href="#resultado-de-la-votacion">Resultado de la votación</a></li>
+          <li><a href="#cronologia">Cronología</a></li>
+          <li><a href="#lo-que-afecta-al-tercer-sector">Tercer sector</a></li>
+          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+          <li><a href="#como-leer-las-citas">Cómo leer las citas</a></li>
+        </ul>
+      </nav>
+
       <div className="figs">
         {FIGURAS.map((fig) => (
           <div className="fig" key={fig.label}>
@@ -142,6 +183,57 @@ export default function HomePage() {
           </div>
         ))}
       </div>
+
+      <h2 id={slugify('Resultado de la votación')}>Resultado de la votación en el Congreso (2 de octubre de 2026)</h2>
+
+      <p>
+        Los dos decretos se votaron por separado y ambos fueron rechazados. Al no
+        obtener la convalidación, quedan derogados y dejan de producir efectos.
+      </p>
+
+      <h3>RDL 26/2026 (el decreto «grande»)</h3>
+
+      <ul>
+        <li>
+          <strong>Resultado:</strong> 172 votos a favor, 178 en contra, 0 abstenciones.
+          Votaron en contra PP, Vox, Junts y UPN; a favor, PSOE, Sumar, ERC,
+          EH Bildu, PNV, Podemos, BNG, Compromís y Coalición Canaria.
+        </li>
+        <li>
+          <strong>Consecuencia:</strong> derogado. No entra en vigor.
+        </li>
+        <li>
+          <strong>Medidas que contenía y que no se aplican:</strong> moratoria de
+          desahucios hasta 2030, enervación extraordinaria, tope extraordinario a la
+          actualización de rentas, prórroga extraordinaria de contratos, reforma de la
+          LAU sobre temporada y habitaciones, medidas fiscales (IRPF, IVA, IBI, SOCIMI)
+          y financiación (avales, TU CASA y Cuenta Financia Europa).
+        </li>
+      </ul>
+
+      <h3>RDL 27/2026 (alquileres)</h3>
+
+      <ul>
+        <li>
+          <strong>Resultado:</strong> 166–167 votos a favor (según fuente), 184 en
+          contra, 0 abstenciones.
+        </li>
+        <li>
+          <strong>Consecuencia:</strong> derogado. No entra en vigor.
+        </li>
+        <li>
+          <strong>Medidas que contenía y que no se aplican:</strong> prórroga
+          indefinida de cinco y siete años e indemnización de doce mensualidades por
+          no renovación.
+        </li>
+      </ul>
+
+      <p>
+        Al no obtener la convalidación, los reales decretos-ley quedan derogados y
+        dejan de producir efectos. La situación jurídica vuelve al marco anterior a
+        su aprobación. Si alguna medida se tramita como proyecto de ley, este sitio
+        se actualizará desde ese texto.
+      </p>
 
       <h2 id={slugify('Cronología')}>Cronología</h2>
 
@@ -158,8 +250,8 @@ export default function HomePage() {
             </tr>
           </thead>
           <tbody>
-            {CRONOLOGIA.map((row) => (
-              <tr key={row.fecha}>
+            {CRONOLOGIA.map((row, i) => (
+              <tr key={`${row.fecha}-${i}`}>
                 <td className="col-fecha">{row.fecha}</td>
                 <td>
                   {row.que}{' '}
@@ -213,36 +305,13 @@ export default function HomePage() {
         </li>
       </ul>
 
-      <div className="box warn">
-        <strong>Convalidación pendiente (situación a 30-9-2026).</strong>
-        <p>
-          El artículo 86.2 de la CE exige el pronunciamiento expreso del Congreso dentro de los
-          treinta días siguientes a la promulgación: no hay convalidación tácita. Según
-          información de prensa del 29 de septiembre de 2026 (
-          <a href="https://www.moncloa.com/2026/09/29/convalidacion-decretos-vivienda-pleno-congreso-3439659/" rel="noreferrer">
-            moncloa.com
-          </a>
-          ), la Junta de Portavoces habría convocado un pleno extraordinario para el viernes 2
-          de octubre de 2026, a las 11:00, que votaría por separado los dos decretos de
-          vivienda; no es un horario oficial publicado por el Congreso. Hasta la votación la
-          norma rige con plena eficacia; si el Congreso deroga alguno, cesa de inmediato sin
-          anular los efectos ya producidos. El Congreso puede además convalidar y acordar su
-          tramitación como proyecto de ley, lo que abre la puerta a modificar el contenido
-          después.
-        </p>
-        <p>
-          <b>
-            Actualizar esta página con el resultado de la votación antes de volver a publicarla:
-          </b>{' '}
-          el resultado cambia el estado de todo lo que sigue.
-        </p>
-      </div>
+      <AvisoEstado />
 
       <h2 id={slugify('Preguntas frecuentes')}>Preguntas frecuentes</h2>
 
       <p>
-        Las catorce preguntas que más se repiten, respondidas con la referencia al precepto en el
-        que se apoya cada respuesta. Debajo, la explicación de cómo leer las citas de todo el
+        Las catorce preguntas que más se repiten, ahora en escenario post-votación:
+        qué sigue vigente y qué no llegó a aplicarse. Debajo, la explicación de cómo leer las citas de todo el
         sitio.
       </p>
 
@@ -283,7 +352,7 @@ export default function HomePage() {
       </ul>
 
       <p className="page-meta">
-        Última revisión: 1 de octubre de 2026, 12:00. Articulado contrastado con{' '}
+        Última revisión: 2 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

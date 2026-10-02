@@ -5,32 +5,32 @@
   "site": {
     "name": "Vivienda 2026: RDL 26/2026 y RDL 27/2026",
     "url": "https://real-decreto-vivienda-2026.vercel.app",
-    "description": "Ayuda de lectura sobre dos reales decretos-ley españoles de vivienda de 2026. Sin pagos ni autenticación de agentes."
+    "description": "Reading guide on two Spanish 2026 housing decree-laws, both repealed. No agent payments or authentication."
   },
   "webmcp": [
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/",
-      "description": "Resumen, cifras, cronología, preguntas frecuentes y las dos herramientas de solo lectura."
+      "description": "Vote result, key figures, timeline, FAQs and the eight read-only tools."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/",
-      "description": "Desahucios, reforma de la LAU y prórroga indefinida con indemnización."
+      "description": "Evictions, LAU reform and the indefinite extension with compensation."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/fiscal/",
-      "description": "IRPF, IVA, IBI, SOCIMI e IIVTNU de vivienda."
+      "description": "Income tax, VAT, property tax, SOCIMIs and land value tax."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/financiacion/",
-      "description": "Parque público, avales, TU CASA y Cuenta Financia Europa."
+      "description": "Public housing stock, guarantees, TU CASA loans and the Financia Europa account."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/estado/",
-      "description": "Estado de aplicación y advertencias."
+      "description": "Application status and caveats."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/normas/",
-      "description": "Normas citadas con identificador BOE."
+      "description": "Cited norms with BOE identifier."
     }
   ]
 }

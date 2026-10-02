@@ -194,8 +194,7 @@ These have already caused real bugs here. Re-introducing them will cause them ag
   typechecking. The only legitimate non-ASCII characters in the source are `€`,
   `⌘` and `⌕`.
 - Mermaid-style diagrams are npm imports if you add any. Do not introduce CDN
-  `<script>` tags — the single exception is the owner-approved AgentLane
-  snippet in `app/layout.tsx`.
+  `<script>` tags.
 
 ## Styling
 

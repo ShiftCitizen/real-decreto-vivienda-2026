@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
@@ -19,6 +20,8 @@ export default function DesahuciosPage() {
         extraordinaria, prórroga indefinida de cinco y siete años y reforma de la LAU, incluido
         un régimen sancionador nuevo para las plataformas de alquiler de corta duración.
       </p>
+
+      <AvisoEstado />
 
       <div className="box">
         <strong>Cómo está organizado esta página.</strong>

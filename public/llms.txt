@@ -1,12 +1,12 @@
-# Vivienda 2026: RDL 26/2026 y RDL 27/2026
+# Vivienda 2026: RDL 26/2026 y RDL 27/2026, derogados
 
-> Ayuda de lectura, en español, sobre dos reales decretos-ley españoles de vivienda de 2026: el RDL 26/2026 (función social de la vivienda y oferta de vivienda asequible; en vigor desde el 1-10-2026) y el RDL 27/2026 (estabilidad de los contratos de arrendamiento de vivienda habitual; en vigor desde el 2-10-2026). Es material divulgativo, sin valor de asesoramiento jurídico; prevalece el texto oficial del BOE.
+> Ayuda de lectura, en español, sobre dos reales decretos-ley españoles de vivienda de 2026, ambos derogados el 2-10-2026 al rechazar el Congreso su convalidación. Es material divulgativo, sin valor de asesoramiento jurídico; prevalece el texto oficial del BOE.
 
-El sitio tiene seis páginas estáticas, sin JavaScript necesario para leerlas: todo el contenido está en el HTML. Cada referencia a un artículo nombra su norma (RDL 26/2026, RDL 27/2026, LAU, LEC, Ley 12/2023, LIRPF, LIVA, LRHL, LMV, CE y otras). El estado de la convalidación parlamentaria cambia con el tiempo: comprobarlo en la página de estado antes de afirmar vigencia. En navegadores compatibles con WebMCP, cada página expone además dos herramientas de solo lectura (buscar_en_el_sitio y leer_pagina) que responden sobre este mismo contenido.
+El sitio tiene seis páginas estáticas, sin JavaScript necesario para leerlas: todo el contenido está en el HTML. Sus medidas se describen en pasado: quedaron derogadas el 2-10-2026 y no se aplican. Cada referencia a un artículo nombra su norma (RDL 26/2026, RDL 27/2026, LAU, LEC, Ley 12/2023, LIRPF, LIVA, LRHL, LMV, CE y otras). La portada trae el resultado de la votación y sus consecuencias; el estado de cualquier tramitación futura se comprueba en la página de estado. En navegadores compatibles con WebMCP, cada página expone además ocho herramientas de solo lectura en inglés (search_site, read_page, list_pages, get_faqs, list_norms, get_norm, get_timeline y get_site_status) que responden sobre este mismo contenido.
 
 ## Páginas
 
-- [Resumen](https://real-decreto-vivienda-2026.vercel.app/): qué cambian los dos decretos, cifras destacadas, cronología, tercer sector, preguntas frecuentes y cómo leer las citas.
+- [Resumen](https://real-decreto-vivienda-2026.vercel.app/): resultado de la votación del 2-10-2026 y consecuencias, qué cambian los dos decretos, cifras, cronología, tercer sector, preguntas frecuentes y cómo leer las citas.
 - [Desahucios y alquiler](https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/): freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga indefinida de cinco y siete años con indemnización, y régimen sancionador de plataformas de corta duración.
 - [Fiscalidad](https://real-decreto-vivienda-2026.vercel.app/fiscal/): IRPF por alquiler, deducción por alquiler habitual, IVA de estancias cortas y obras, recargos de IBI, gravamen especial de las SOCIMI e IIVTNU.
 - [Financiación y cuenta](https://real-decreto-vivienda-2026.vercel.app/financiacion/): parque público y CASA 47, avales, préstamo TU CASA y Cuenta de Ahorro e Inversión Financia Europa.

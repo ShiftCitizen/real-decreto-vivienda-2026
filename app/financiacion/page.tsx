@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
@@ -42,6 +43,8 @@ export default function FinanciacionPage() {
         Movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo
         TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI).
       </p>
+
+      <AvisoEstado />
 
       <div className="box warn">
         <strong>Dos líneas de avales, no una.</strong>

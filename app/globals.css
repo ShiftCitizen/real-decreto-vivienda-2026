@@ -542,6 +542,28 @@ li {
 }
 
 /* --------------------------------------------------------------------------
+   Índice anclado de la portada
+   -------------------------------------------------------------------------- */
+
+.indice-pagina {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--card);
+  padding: 12px 18px;
+  margin: 1.5em 0;
+}
+
+.indice-pagina ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font: 15px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.indice-pagina li {
+  margin: 0.25em 0;
+}
+
+/* --------------------------------------------------------------------------
    Citas: art. N + etiqueta de norma con color
    -------------------------------------------------------------------------- */
 
