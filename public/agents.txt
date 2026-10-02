@@ -1,0 +1,16 @@
+# agents.txt: qué protocolos de agentes habla este sitio.
+# Standard: https://agents-txt.com
+# JSON: https://real-decreto-vivienda-2026.vercel.app/agents.json
+#
+# Este sitio no acepta pagos de agentes, no exige autenticación, no expone
+# servidor MCP, skills, AgentCards ni perfiles UCP: esos bloques se omiten
+# (su ausencia significa que no existen). Solo declara sus herramientas
+# WebMCP en el navegador: las seis páginas registran las mismas dos
+# herramientas de solo lectura (buscar_en_el_sitio, leer_pagina).
+
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/fiscal/
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/financiacion/
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/estado/
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/normas/

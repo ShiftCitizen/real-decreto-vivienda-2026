@@ -1,0 +1,36 @@
+{
+  "$schema": "https://agents-txt.com/schema/agents-json/v1.0.json",
+  "version": "1.0",
+  "standard": "https://agents-txt.com",
+  "site": {
+    "name": "Vivienda 2026: RDL 26/2026 y RDL 27/2026",
+    "url": "https://real-decreto-vivienda-2026.vercel.app",
+    "description": "Ayuda de lectura sobre dos reales decretos-ley españoles de vivienda de 2026. Sin pagos ni autenticación de agentes."
+  },
+  "webmcp": [
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/",
+      "description": "Resumen, cifras, cronología, preguntas frecuentes y las dos herramientas de solo lectura."
+    },
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/",
+      "description": "Desahucios, reforma de la LAU y prórroga indefinida con indemnización."
+    },
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/fiscal/",
+      "description": "IRPF, IVA, IBI, SOCIMI e IIVTNU de vivienda."
+    },
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/financiacion/",
+      "description": "Parque público, avales, TU CASA y Cuenta Financia Europa."
+    },
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/estado/",
+      "description": "Estado de aplicación y advertencias."
+    },
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/normas/",
+      "description": "Normas citadas con identificador BOE."
+    }
+  ]
+}

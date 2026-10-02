@@ -146,4 +146,65 @@ export const FAQ: FaqEntry[] = [
       { norma: 'rdl26', art: '8.Cuatro' },
     ],
   },
+  {
+    id: 'deduccion-alquiler-requisitos',
+    pregunta: '¿Qué exige la deducción por alquiler en el IRPF?',
+    respuesta: [
+      'La deducción es del 10 % de lo pagado por alquiler de vivienda habitual, para bases imponibles inferiores a 33.007,20 €, con base máxima de 11.630 € anuales (art. 68.6 de la LIRPF, añadido por el art. 6.Segundo.Cuatro del RDL 26/2026).',
+      'Pide que, durante al menos la mitad del período impositivo, ni el contribuyente ni nadie de su unidad familiar sean titulares, de manera individual o conjuntamente, de la totalidad del pleno dominio o de un derecho real de uso o disfrute constituido sobre otra vivienda distante a menos de 50 km de la arrendada, salvo que exista una resolución administrativa o judicial que les impida su uso como residencia.',
+    ],
+    citas: [
+      { norma: 'rdl26', art: '6.Segundo.Cuatro' },
+      { norma: 'lirpf', art: '68.6' },
+    ],
+  },
+  {
+    id: 'reinversion-financia-europa',
+    pregunta: '¿Cómo funciona la reinversión en la Cuenta Financia Europa Reinversión?',
+    respuesta: [
+      'Solo vale para transmisiones realizadas una vez transcurridos treinta días hábiles desde la entrada en vigor del decreto. Hay que reinvertir, en seis meses desde la transmisión (o desde la orden ministerial de información si es posterior), el valor de transmisión que proporcionalmente se corresponda con la ganancia patrimonial no exenta (disposición adicional 65.1 de la LIRPF, introducida por el art. 6.Segundo.Once del RDL 26/2026).',
+      'El importe total acumulado aportado a esa cuenta no puede exceder de 800.000 € (disposición adicional 66.5 de la LIRPF y art. 6.Segundo.Doce del RDL 26/2026).',
+    ],
+    citas: [
+      { norma: 'rdl26', art: '6.Segundo.Once' },
+      { norma: 'lirpf', art: 'disposición adicional sexagésima quinta.1' },
+      { norma: 'rdl26', art: '6.Segundo.Doce' },
+      { norma: 'lirpf', art: 'disposición adicional sexagésima sexta.5' },
+    ],
+  },
+  {
+    id: 'vivienda-habitual-mayores-65',
+    pregunta: '¿Sigue siendo vivienda habitual si me mudo por edad o dependencia?',
+    respuesta: [
+      'Para las exenciones por transmisión cuenta como habitual la vivienda de las personas mayores de 65 años o en situación de dependencia severa o gran dependencia que trasladan su residencia a un centro especializado o al domicilio de un familiar hasta el tercer grado por consanguinidad o afinidad.',
+      'Y en separación, divorcio o nulidad, la del cónyuge que debe abandonar el domicilio, siempre que el requisito de ocupación efectiva concurra en el cónyuge que permaneció en la misma (DF 3.ª del RDL 26/2026).',
+    ],
+    citas: [{ norma: 'rdl26', art: 'disposición final tercera.Uno' }],
+  },
+  {
+    id: 'iva-superreducido-protegida',
+    pregunta: '¿Qué viviendas llevan IVA superreducido?',
+    respuesta: [
+      'Con efectos desde el 1-12-2026, las calificadas como protección oficial de régimen especial o de promoción pública y las protegidas con calificación permanente o indefinida, cuando las entregas se efectúen por sus promotores, incluidos los garajes y anexos situados en el mismo edificio que se transmitan conjuntamente, con un máximo de dos plazas de garaje (art. 7.Cuatro del RDL 26/2026 y art. 91.Dos.1.6 de la LIVA).',
+      'Y las que adquieran las entidades del régimen especial de arrendamiento de vivienda si a sus rentas se aplica la bonificación del artículo 49.1 de la Ley del Impuesto sobre Sociedades.',
+    ],
+    citas: [
+      { norma: 'rdl26', art: '7.Cuatro' },
+      { norma: 'liva', art: '91.Dos.1.6' },
+    ],
+  },
+  {
+    id: 'cuenta-tributacion-10-000',
+    pregunta: '¿Cómo tributa la Cuenta Financia Europa a los cinco años?',
+    respuesta: [
+      'Las ganancias no se integran hasta disponer total o parcialmente. En la cuenta de la modalidad general, la parte atribuible a aportaciones que hayan permanecido más de cinco años queda excluida en un 100 % hasta 10.000 € por contribuyente y en un 20 % sobre el resto (art. 95 ter, apartado 4, de la LIRPF, introducido por el art. 6.Segundo.Cinco del RDL 26/2026).',
+      'En la cuenta de reinversión, esa misma parte queda excluida en un 20 %, sin la exclusión del 100 % de los primeros 10.000 € (disposición adicional 66.2 de la LIRPF y art. 6.Segundo.Doce del RDL 26/2026).',
+    ],
+    citas: [
+      { norma: 'lirpf', art: '95 ter.4' },
+      { norma: 'rdl26', art: '6.Segundo.Cinco' },
+      { norma: 'lirpf', art: 'disposición adicional sexagésima sexta.2' },
+      { norma: 'rdl26', art: '6.Segundo.Doce' },
+    ],
+  },
 ];

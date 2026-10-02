@@ -241,7 +241,7 @@ export default function HomePage() {
       <h2 id={slugify('Preguntas frecuentes')}>Preguntas frecuentes</h2>
 
       <p>
-        Las nueve preguntas que más se repiten, respondidas con la referencia al precepto en el
+        Las catorce preguntas que más se repiten, respondidas con la referencia al precepto en el
         que se apoya cada respuesta. Debajo, la explicación de cómo leer las citas de todo el
         sitio.
       </p>

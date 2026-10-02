@@ -13,8 +13,8 @@ declare global {
       consequentialHint?: boolean;
     }
     type ToolExecute = (
-      input: Record<string, unknown>,
-      options: { signal: AbortSignal },
+      input?: Record<string, unknown>,
+      options?: { signal?: AbortSignal },
     ) => Promise<unknown>;
     interface ModelContextTool {
       name: string;
@@ -89,7 +89,7 @@ const esquemaLectura = {
 
 let indiceCache: EntradaIndice[] | null = null;
 
-async function cargarIndice(signal: AbortSignal): Promise<EntradaIndice[]> {
+async function cargarIndice(signal?: AbortSignal): Promise<EntradaIndice[]> {
   if (indiceCache) return indiceCache;
   const respuesta = await fetch('/search-index.json', { signal });
   if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
@@ -111,7 +111,10 @@ export default function WebMcpTools() {
               'Busca en el análisis de los reales decretos-ley 26/2026 y 27/2026 de vivienda. Devuelve título, enlace, sección y extracto de las coincidencias.',
             inputSchema: esquemaBusqueda,
             annotations: { readOnlyHint: true },
-            execute: async ({ consulta }, { signal }) => {
+            execute: async (
+              { consulta }: Record<string, unknown> = {},
+              { signal }: { signal?: AbortSignal } = {},
+            ) => {
               const texto = typeof consulta === 'string' ? consulta : '';
               const resultados = buscar(await cargarIndice(signal), texto);
               const origen = window.location.origin;
@@ -127,7 +130,10 @@ export default function WebMcpTools() {
               'Devuelve el texto principal de una página del análisis, sin navegación ni menús. Solo acepta las seis rutas del sitio.',
             inputSchema: esquemaLectura,
             annotations: { readOnlyHint: true },
-            execute: async ({ ruta }, { signal }) => {
+            execute: async (
+              { ruta }: Record<string, unknown> = {},
+              { signal }: { signal?: AbortSignal } = {},
+            ) => {
               const limpia = `/${String(ruta).split('#')[0].split('?')[0].replace(/^\/+/, '')}`;
               const normalizada = limpia === '/' ? '/' : `${limpia.replace(/\/+$/, '')}/`;
               if (!RUTAS_PERMITIDAS.includes(normalizada)) {

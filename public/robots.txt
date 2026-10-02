@@ -8,6 +8,8 @@
 
 User-agent: *
 Allow: /
+Allow: /agents.txt
+Allow: /agents.json
 
 # OpenAI: search index, live user fetch, training
 User-agent: OAI-SearchBot

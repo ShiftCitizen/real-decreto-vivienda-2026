@@ -35,6 +35,11 @@ export function normalizar(texto: string): string {
 /**
  * Devuelve hasta `max` coincidencias ordenadas por relevancia. No lanza si
  * la consulta viene vacía: devuelve las páginas, como la paleta.
+ *
+ * Una frase completa solo coincide si aparece tal cual; si no, se exige que
+ * *todas* las palabras (de dos o más letras) aparezcan entre título y
+ * palabras clave, con bonus por las que estén en el título. Así una pregunta
+ * larga en lenguaje natural devuelve algo útil en vez de vacío.
  */
 export function buscar(
   entradas: EntradaIndice[],
@@ -42,6 +47,7 @@ export function buscar(
   max = 8,
 ): ResultadoBusqueda[] {
   const aguja = normalizar(consulta.trim());
+  const palabras = aguja.split(/\s+/).filter((w) => w.length >= 2);
   const candidatas: { entrada: EntradaIndice; puntos: number }[] = [];
   for (const entrada of entradas) {
     if (!aguja) {
@@ -53,8 +59,12 @@ export function buscar(
     if (titulo === aguja) puntos = 7;
     else if (titulo.startsWith(aguja)) puntos = 6;
     else if (titulo.includes(aguja)) puntos = 5;
-    else if (normalizar(entrada.keywords).includes(aguja)) puntos = 2;
-    else continue;
+    else {
+      const texto = `${titulo} ${normalizar(entrada.keywords)}`;
+      if (palabras.length === 0 || !palabras.every((w) => texto.includes(w))) continue;
+      const enTitulo = palabras.filter((w) => titulo.includes(w)).length;
+      puntos = 2 + Math.min(enTitulo, 2);
+    }
     candidatas.push({ entrada, puntos });
   }
   candidatas.sort((a, b) => b.puntos - a.puntos);
