@@ -122,13 +122,11 @@ Textos clave y cómo actualizarlos si hay novedades:
 
 ## Despliegue
 
-El remoto de git es un host de Cursor, que la integración de Vercel no admite
-(sólo GitHub, GitLab y Bitbucket). **No hay webhook: `git push` no despliega
-nada.** El despliegue es manual:
-
-```bash
-npx vercel --prod
-```
+El repo está en GitHub, conectado a Vercel: **cada push a `main` despliega
+a producción automáticamente**. `vercel.json` fija `buildCommand: npm run build`
+para que el índice de búsqueda y la auditoría de citas se generen siempre;
+no dependas del comando por defecto del dashboard (`next` solo se saltaría
+el `postbuild`).
 
 `vercel ls` debe mostrar entonces un despliegue nuevo para el commit actual. No
 borres `.vercel/project.json`.

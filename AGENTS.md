@@ -54,10 +54,11 @@ build would reject it. Therefore:
   production while the build log still reports the full entry count. If you add
   another generated file to `public/`, add it there too. (The stale `out` line
   in that file is vestigial and harmless; leave it.)
-- **Deploys are manual.** The git remote is a Cursor host, which Vercel's Git
-  integration does not support (GitHub/GitLab/Bitbucket only), so there is no
-  webhook and `git push` deploys nothing. Run `npx vercel --prod` yourself.
-  Do not delete `.vercel/project.json`.
+- **Deploys are automatic.** The repo lives on GitHub (connected to Vercel),
+  so every push to `main` deploys to production — `git push` is the deploy.
+  `vercel.json` pins `buildCommand: npm run build` so the search index and
+  citation audit always run there; never rely on the dashboard default (bare
+  `next build` skips `postbuild`). Do not delete `.vercel/project.json`.
 - Old `*.html` URLs from the pre-Next site are **not** redirected. That was a
   deliberate decision, not an oversight.
 
@@ -83,6 +84,9 @@ build would reject it. Therefore:
   tag strip does not, because script *content* is not markup. Do not
   "simplify" that away.
 - The index script throws on a duplicate anchor, so it cannot regress quietly.
+- Outside `--dev`, the script throws if no built HTML exists instead of writing
+  a section-less index: a degraded file would ship silently and starve both
+  section search and the chatbot's retrieval.
 
 ### 3. Anchor ids are generated in TSX, not by a post-processing script
 

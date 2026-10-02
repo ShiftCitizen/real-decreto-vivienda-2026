@@ -1,11 +1,14 @@
 /**
- * Shared search logic used by the WebMCP tools (search_site) and /api/chat.
+ * Lógica de búsqueda compartida por /api/chat y la herramienta WebMCP
+ * search_site.
  *
  * Intencionadamente sin dependencias del DOM para poder probarse en Node.
- * La puntuación replica la de la paleta de búsqueda (SearchPalette): el
- * título manda y las palabras clave deciden el resto, todo sin tildes ni
- * mayúsculas. SearchPalette conserva su propia copia para no tocar un
- * componente ya verificado; si cambia el algoritmo, hay que cambiar ambos.
+ *
+ * Difiere a propósito de la paleta (SearchPalette), que pide la frase literal:
+ * el chat es de un solo disparo — ante una paráfrasis no hay reformulación
+ * posible, solo la negativa fija — así que aquí hay una reserva tolerante
+ * (ver `buscar`). La paleta es interactiva y conserva su copia exacta para no
+ * tocar un componente ya verificado.
  */
 
 export type EntradaIndice = {
@@ -81,6 +84,15 @@ function contiene(haystack: string, palabra: string): boolean {
  * *todas* las palabras (de dos o más letras) aparezcan entre título y
  * palabras clave, con bonus por las que estén en el título. Así una pregunta
  * larga en lenguaje natural devuelve algo útil en vez de vacío.
+ *
+ * Reserva tolerante: si la regla estricta no devuelve nada (una paráfrasis
+ * con palabras que el texto no trae tal cual), se puntúa por solape parcial
+ * y se devuelven las mejores, siempre que compartan al menos una palabra
+ * sustancial (4+ letras) con la entrada. Las cortas (de, la, en…) coinciden
+ * por subcadena en casi todo el índice, así que no cuentan para el listón:
+ * sin eso, cualquier pregunta fuera de tema recuperaría contexto aleatorio
+ * y la negativa fija de /api/chat —el cerrojo de ámbito— dejaría de
+ * funcionar. Con cero solape sustancial se devuelve vacío, como antes.
  */
 export function buscar(
   entradas: EntradaIndice[],
@@ -110,6 +122,17 @@ export function buscar(
       puntos = 2 + Math.min(enTitulo, 2);
     }
     candidatas.push({ entrada, puntos });
+  }
+  if (candidatas.length === 0 && palabras.length > 0) {
+    const sustanciales = palabras.filter((w) => w.length >= 4);
+    for (const entrada of entradas) {
+      const titulo = normalizar(entrada.title);
+      const texto = `${titulo} ${normalizar(entrada.keywords)}`;
+      const aciertos = sustanciales.filter((w) => contiene(texto, w)).length;
+      if (aciertos === 0) continue;
+      const enTitulo = sustanciales.filter((w) => contiene(titulo, w)).length;
+      candidatas.push({ entrada, puntos: 1 + Math.min(enTitulo, 1) });
+    }
   }
   candidatas.sort((a, b) => b.puntos - a.puntos);
   return candidatas.slice(0, max).map(({ entrada }) => ({

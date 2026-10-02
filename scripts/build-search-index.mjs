@@ -117,7 +117,15 @@ for (const section of NAV_SECTIONS) {
 // anchors would point at ids the dev server no longer renders.
 const built = !isDev && existsSync(SRC_DIR);
 if (!isDev && !built) {
-  console.warn(`warning: ${SRC_DIR}/ not found, skipping sections.`);
+  // Fail, never ship a degraded index: a section-less file in production
+  // silently kills section search (and starves the chatbot's retrieval)
+  // while the deploy still reports success. If this throws on Vercel, the
+  // build ran somewhere without the prerender output — check the Build
+  // Command (must be `npm run build`, see vercel.json) and the working dir.
+  throw new Error(
+    `no built HTML in ${SRC_DIR}/ (cwd: ${process.cwd()}): ` +
+      'run after `next build` in the project root, or pass --dev for the reduced index.',
+  );
 }
 
 // --- Citation audit ---------------------------------------------------------
