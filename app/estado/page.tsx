@@ -69,7 +69,8 @@ const FILAS: Fila[] = [
   {
     medida: 'Prohibición de los seguros de impago de renta en la LAU',
     estado: 'activa',
-    condicion: 'Aplica a los contratos vigentes desde el 1-10-2026',
+    condicion:
+      'Nueva regla del art. 36.5 de la LAU para la garantía adicional, con prohibición de seguros de impago; el régimen anterior se conserva en los casos que especifica la DT cuarta.1 de la Ley 12/2023',
   },
   {
     medida: 'Prórroga extraordinaria de dos años (DF 5.ª)',

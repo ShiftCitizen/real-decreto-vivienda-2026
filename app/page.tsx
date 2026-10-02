@@ -120,7 +120,9 @@ export default function HomePage() {
         del inquilino: los contratos de vivienda habitual pasan a prorrogarse obligatoriamente
         por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, salvo
         que este notifique su voluntad de no renovar con seis meses de antelación, y esa no
-        renovación obliga a pagar doce mensualidades de renta. No deroga al primero, pero
+        renovación obliga a pagar, como mínimo, el importe de doce mensualidades de renta de
+        una vivienda de análogas características a la arrendada, salvo que proceda alguna de las
+        excepciones de los apartados 10.1 y 10.2 de la LAU. No deroga al primero, pero
         su disposición adicional primera fija la relación entre ambos: la prórroga indefinida
         prevalece sobre la prórroga extraordinaria de la DF 5.ª cuando procede el{' '}
         <Cite norma="lau" art="10.1" />, y si el primer decreto se aplicó a un contrato que el

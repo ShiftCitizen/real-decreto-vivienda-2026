@@ -16,8 +16,8 @@ export default function NormasPage() {
     <>
       <h1>Normas citadas</h1>
       <p className="lead">
-        Cada referencia a un artículo de este sitio nombra su norma. Esta es la lista completa, con
-        el título oficial y el enlace permanente en el «BOE».
+        Cada referencia a un artículo de este sitio nombra su norma. Estas son las normas citadas,
+        con el título oficial y el enlace permanente en el «BOE».
       </p>
 
       <p>

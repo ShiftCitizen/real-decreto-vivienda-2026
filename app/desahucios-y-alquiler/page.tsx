@@ -294,8 +294,10 @@ export default function DesahuciosPage() {
         <li>
           <b>Prohibición de los seguros de impago de renta.</b> Aunque las partes pacten una
           garantía adicional a la fianza, «en ningún caso podrá exigirse al arrendatario la
-          contratación de seguros de impago de renta u otras coberturas análogas»; su valor no
-          podrá exceder de dos mensualidades (una, en arrendamientos temporales).{' '}
+          contratación de seguros de impago de renta u otras coberturas análogas»; en los
+          contratos de vivienda de hasta cinco años de duración, o de hasta siete años si el
+          arrendador fuese persona jurídica, su valor no podrá exceder de dos mensualidades de
+          renta, y en los arrendamientos temporales no podrá exceder de una mensualidad.{' '}
           <Cite norma="lau" art="36.5" />
         </li>
         <li>
@@ -498,7 +500,7 @@ export default function DesahuciosPage() {
               <td>Necesidad de la vivienda (a)</td>
               <td>
                 Que el arrendador, siendo persona física, la necesite para vivienda permanente
-                para sí o para familiares en primer grado de consanguinidad o por adopción, o
+                para sí o para familiares en segundo grado de consanguinidad o por adopción, o
                 para su cónyuge en caso de sentencia firme de separación, divorcio o nulidad. Si
                 transcurridos tres meses desde la entrega no la han ocupado (salvo causa de fuerza mayor),
                 el arrendatario tiene derecho a la indemnización, exigible desde ese momento.

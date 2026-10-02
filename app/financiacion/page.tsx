@@ -75,12 +75,15 @@ export default function FinanciacionPage() {
         <li>
           <b>Art. 12 (RDL 26/2026):</b> se aportan a CASA 47, por orden ministerial y con pleno carácter
           traslativo, todos los inmuebles del Patrimonio del Estado susceptibles de destinarse a la
-          política de vivienda, así como las viviendas del patrimonio de la Seguridad Social,{' '}
-          <b>debidamente valoradas</b>. En estos supuestos la contraprestación puede consistir en{' '}
+          política de vivienda, así como las viviendas del patrimonio de la Seguridad Social.
+          La aportación se exceptúa de la necesidad de valorar con carácter previo los inmuebles
+          que van a ser aportados. En el caso de las viviendas de la Seguridad Social, tras su
+          valoración, la contraprestación puede consistir en{' '}
           <b>condonación de deuda</b> por el Ministerio de Hacienda por importe igual al valor de
           los inmuebles. Quedan excluidos de compensación los inmuebles puestos a disposición por el
-          INVIED, ADIF y Giese, y los del Fondo Especial de MUFACE y los Reales Patronatos, que
-          pueden ser gestionados por CASA 47 mediante negocios patrimoniales que otorguen su uso
+          INVIED, ADIF y Giese. Los inmuebles del Fondo Especial de MUFACE y los Reales Patronatos
+          no se aportan con transmisión de la titularidad: CASA 47 puede gestionarlos mediante
+          negocios patrimoniales que otorguen su uso
           manteniendo esos organismos su titularidad.
         </li>
         <li>
@@ -181,13 +184,20 @@ export default function FinanciacionPage() {
           <b>Estructura y titularidad.</b> Es una relación contractual de servicios de inversión
           entre una persona física y una entidad proveedora, articulada mediante una cuenta
           operativa de efectivo, una cuenta de valores y una cuenta bancaria de contrapartida. Las
-          aportaciones y disposiciones se hacen <b>en efectivo y exclusivamente desde la cuenta de
-          contrapartida</b>. La titularidad es individual e intransmisible y un mismo contribuyente
+          aportaciones se hacen <b>en efectivo con cargo a la cuenta de contrapartida</b> y las
+          disposiciones se abonan en la cuenta de contrapartida. La titularidad es individual e
+          intransmisible y un mismo contribuyente
           solo puede ser titular simultáneamente de una cuenta de la modalidad general, sin
           perjuicio de la compatibilidad con una cuenta de la modalidad de reinversión.{' '}
-          <Cite norma="lmv" art="341 y 344" /> El límite de efectivo es de 1.500 € en la modalidad
-          ordinaria y 8.000 € en la de reinversión.{' '}
-          <Cite norma="lmv" art="344" /> La cuenta operativa no puede presentar saldo deudor.
+          <Cite norma="lmv" art="341 y 344" /> El saldo de la cuenta operativa no puede ser superior
+          a 1.500 € en la modalidad ordinaria.{' '}
+          <Cite norma="lmv" art="344.4" /> En la modalidad de reinversión el saldo máximo se amplía
+          hasta 8.000 €.{' '}
+          <Cite norma="lmv" art="disposición adicional décima.2" /> Cuando se produzcan los abonos
+          previstos, el titular dispone de tres meses para invertir el importe que exceda del umbral
+          o para disponer del mismo; transcurrido ese plazo sin que el saldo descienda del umbral, se
+          entiende producida una disposición parcial por el exceso y la entidad lo transfiere a la
+          cuenta de contrapartida. La cuenta operativa no puede presentar saldo deudor.
         </li>
         <li>
           <b>Aportaciones.</b> El límite es de <b>150.000 € pendientes de recuperar</b> en la cuenta
@@ -204,11 +214,15 @@ export default function FinanciacionPage() {
           <b>Tributación.</b> Las ganancias o pérdidas patrimoniales por transmisión o reembolso
           <b> no se integran</b> en la base imponible hasta que se efectúe una disposición total o
           parcial; las ganancias tributan al disponer.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Cinco.3" /> Pasados cinco años, sobre la
-          parte que corresponda a aportaciones que hayan permanecido en la cuenta más de cinco años
-          queda excluida de gravamen en un 20 %, pero <b>no</b> la del 100 % de los primeros 10.000 €,
-          que es propia de la modalidad general.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Doce.2" />
+          <Cite norma="rdl26" art="6.Segundo.Cinco.3" /> En la cuenta de la modalidad general, la parte
+          de la ganancia atribuible a aportaciones que hayan permanecido en la cuenta más de cinco
+          años queda excluida en un 100 % hasta 10.000 € por contribuyente y en un 20 % sobre el
+          resto.{' '}
+          <Cite norma="lirpf" art="95 ter.4" />{' '}
+          <Cite norma="rdl26" art="6.Segundo.Cinco" /> En la cuenta de reinversión, esa misma parte
+          queda excluida en un 20 %, sin la exclusión del 100 % de los primeros 10.000 €.{' '}
+          <Cite norma="lirpf" art="disposición adicional sexagésima sexta.2" />{' '}
+          <Cite norma="rdl26" art="6.Segundo.Doce" />
         </li>
         <li>
           <b>IIC elegibles.</b> Solo pueden integrarse acciones y participaciones de IIC{' '}

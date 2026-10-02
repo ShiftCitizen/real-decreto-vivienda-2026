@@ -18,11 +18,11 @@ const REDUCCIONES = [
       '100, 95, 90, 85 o 70 %, según continuidad del inquilino, renta por debajo del índice, zona tensionada y edad del arrendatario (entre 18 y 35 años)',
   },
   {
-    supuesto: 'Nuevo contrato sin subir la renta anterior (o que no la exceda)',
+    supuesto: 'Nuevo contrato del mismo arrendador no gran tenedor sin subir la renta anterior (o que no la exceda)',
     reduccion: '50 %',
   },
   {
-    supuesto: 'Nuevo contrato con subida de renta',
+    supuesto: 'Nuevo contrato del mismo arrendador no gran tenedor con subida de renta',
     reduccion:
       '40, 30, 25, 20 o 15 %, según el incremento (hasta 5 %, hasta 10 %, hasta 15 %, hasta 20 %, o más)',
   },
@@ -86,7 +86,10 @@ export default function FiscalPage() {
         comprobación limitada o de inspección que incluya la comprobación de esos rendimientos, y
         nunca sobre la parte de los ingresos no incluidos o de los gastos indebidamente deducidos
         que se regularicen después. Tampoco son aplicables a contratos que{' '}
-        <b>incumplan el artículo 17.6 de la LAU</b>. Las zonas de mercado residencial tensionado a
+        <b>incumplan el artículo 17.6 de la LAU</b>. En los supuestos del mismo arrendador no
+        gran tenedor, la renta inicial se compara con la última renta del anterior contrato de
+        la misma vivienda, una vez aplicada, en su caso, la cláusula de actualización anual del
+        contrato anterior. Las zonas de mercado residencial tensionado a
         las que puede aplicarse son las de la resolución que apruebe el Ministerio de Vivienda y
         Agenda Urbana.{' '}
         <Cite norma="rdl26" art="6.Segundo.Dos" />
@@ -119,10 +122,11 @@ export default function FiscalPage() {
         <p>
           <b>Requisito de titularidad:</b> se exige que durante al menos la mitad del período
           impositivo, ni el contribuyente ni ninguno de los miembros de su unidad familiar sean
-          titulares de la totalidad del pleno dominio o de un derecho real de uso o disfrute sobre
-          otra vivienda apta para habitar a una distancia inferior a 50 km, salvo que una resolución
-          administrativa o judicial les impida su uso como residencia.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Trece" />
+          titulares, de manera individual o conjuntamente, de la totalidad del pleno dominio o de
+          un derecho real de uso o disfrute constituido sobre otra vivienda distante a menos de
+          50 km de la vivienda arrendada, salvo que exista una resolución
+          administrativa o judicial que les impida su uso como residencia.{' '}
+          <Cite norma="rdl26" art="6.Segundo.Cuatro" /> <Cite norma="lirpf" art="68.6" />
         </p>
       </div>
 
@@ -140,14 +144,16 @@ export default function FiscalPage() {
         </li>
         <li>
           <b>Reinversión en la Cuenta de Ahorro e Inversión Financia Europa Reinversión:</b> la
-          exención por reinversión exige que la transmisión se realice una vez transcurridos{' '}
-          <b>treinta días hábiles</b> desde la entrada en vigor del decreto. La parte no exenta
-          puede reinvertirse en el plazo de <b>seis meses</b> desde la transmisión (o desde la entrada
-          en vigor de la orden ministerial de información si esta fuera posterior), con un máximo
-          acumulado de <b>800.000 €</b>.{' '}
+          exención por reinversión solo se aplica a transmisiones realizadas una vez transcurridos{' '}
+          <b>treinta días hábiles</b> desde la entrada en vigor del decreto. Debe reinvertirse,
+          en el plazo de <b>seis meses</b> desde la transmisión (o desde la entrada
+          en vigor de la orden ministerial de información si esta fuera posterior), el valor de
+          transmisión que proporcionalmente se corresponda con la ganancia patrimonial no exenta.{' '}
+          <Cite norma="rdl26" art="6.Segundo.Once" />{' '}
+          <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1" /> El importe total
+          acumulado de las aportaciones a esa cuenta no puede exceder de <b>800.000 €</b>.{' '}
           <Cite norma="rdl26" art="6.Segundo.Doce" />{' '}
-          <Cite norma="lirpf" art="disposición adicional sexagésima sexta.5" />{' '}
-          <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1" />
+          <Cite norma="lirpf" art="disposición adicional sexagésima sexta.5" />
         </li>
         <li>
           <b>Imputación de rentas inmobiliarias</b> (desde el 1-1-2027): escala sobre la suma de
@@ -168,10 +174,12 @@ export default function FiscalPage() {
         </li>
         <li>
           <b>Vivienda habitual a efectos del Reglamento del IRPF</b> (DF 3.ª): para las exenciones
-          por transmisión cuenta como habitual la vivienda de quienes tienen 65 años o más o
-          están en situación de dependencia severa o gran dependencia y trasladan su residencia a
-          un centro especializado o al domicilio de un familiar hasta tercer grado; y la del
-          cónyuge que debe abandonar el domicilio por separación, divorcio o nulidad.{' '}
+          por transmisión cuenta como habitual la vivienda de las personas mayores de 65 años o
+          en situación de dependencia severa o gran dependencia que trasladan su residencia a
+          un centro especializado o al domicilio de un familiar hasta el tercer grado por
+          consanguinidad o afinidad; y la del
+          cónyuge que debe abandonar el domicilio por separación, divorcio o nulidad, siempre que
+          el requisito de ocupación efectiva concurra en el cónyuge que permaneció en la misma.{' '}
           <Cite norma="rdl26" art="disposición final tercera.Uno" />
         </li>
       </ul>
@@ -203,10 +211,15 @@ export default function FiscalPage() {
           <Cite norma="rdl26" art="7.Tres" /> <Cite norma="liva" art="91.Uno.2.10" />
         </li>
         <li>
-          <b>Tipo superreducido</b> para viviendas protegidas de calificación permanente o
-          indefinida, con hasta dos plazas de garaje, y para las viviendas que adquieran las
+          <b>Tipo superreducido</b> (con efectos desde el 1-12-2026) para las viviendas calificadas
+          administrativamente como de protección oficial de régimen especial o de promoción pública,
+          así como las viviendas protegidas sujetas a calificación permanente o indefinida, cuando
+          las entregas se efectúen por sus promotores, incluidos los garajes y anexos situados en
+          el mismo edificio que se transmitan conjuntamente, con un máximo de dos plazas de garaje;
+          y para las viviendas que adquieran las
           entidades del régimen especial de arrendamiento de vivienda si a sus rentas se aplica la
-          bonificación del artículo 49.1 de la Ley del Impuesto sobre Sociedades.
+          bonificación del artículo 49.1 de la Ley del Impuesto sobre Sociedades.{' '}
+          <Cite norma="rdl26" art="7.Cuatro" /> <Cite norma="liva" art="91.Dos.1.6" />
         </li>
       </ul>
 
@@ -339,7 +352,7 @@ export default function FiscalPage() {
         tipo general y que no se encuentren dentro del plazo de reinversión del artículo 6.1.b de la
         Ley 11/2009. Se devenga el día del acuerdo de aplicación del resultado por la junta general, y
         se autoliquida e ingresa en dos meses.{' '}
-        <Cite norma="rdl26" art="9.Uno.1" />
+        <Cite norma="rdl26" art="9.Uno" /> <Cite norma="lic" art="9.4" />
       </p>
 
       <p>

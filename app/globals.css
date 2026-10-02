@@ -893,6 +893,15 @@ th:last-child {
     padding: 26px 20px 20px;
   }
 
+  /* La barra móvil es sticky y mide 51 px: sin este margen, un ancla como
+     #prorroga-indefinida-e-indemnizacion deja su encabezado (y=27 px) debajo de
+     la barra. Solo móvil: el escritorio mantiene su 1.5em sin cambios. */
+  h2[id],
+  h3[id],
+  .faq-item[id] {
+    scroll-margin-top: 72px;
+  }
+
   .site-footer {
     padding: 20px 20px 40px;
   }
