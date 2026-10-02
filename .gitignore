@@ -8,5 +8,3 @@ next-env.d.ts
 # Build artefact, not authored content. `postbuild` regenerates it and
 # `predev` overwrites it with a section-less dev copy — see .vercelignore.
 public/search-index.json
-# Temporary remote-builder diagnostic. Never commit, never ship long-term.
-public/build-debug.json

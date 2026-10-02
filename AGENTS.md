@@ -67,10 +67,29 @@ build would reject it. Therefore:
 `public/search-index.json` is a build artefact, gitignored. Never hand-edit it.
 
 - **Prod:** `postbuild` (`scripts/build-search-index.mjs`) reads section anchors
-  back out of the freshly prerendered `.next/server/app/*.html` — never out of
-  a reused `out/` directory, which no longer exists and would be stale if it
-  did. If you add or rename an anchored heading, rebuild — the index follows
-  automatically.
+  back out of the freshly prerendered HTML — never out of a reused `out/`
+  directory, which no longer exists and would be stale if it did. If you add or
+  rename an anchored heading, rebuild — the index follows automatically.
+- **Where that HTML is depends on the builder, and this cost a debugging
+  session.** A plain `next build` leaves it in `.next/server/app/*.html`. Vercel's
+  cloud builder applies `modifyConfig` and then runs `onBuildComplete`, and by
+  the time `postbuild` runs those pages are **gone** — `.next/server/app`
+  exists but holds zero `.html`, while the build still prints every route as
+  `○ (Static)` and the pages serve fine. That is how a section-less index
+  (35 entries) shipped to production repeatedly without any visible error.
+  A local `vercel build` does **not** reproduce it, because the CLI does not
+  apply those adapter hooks — so `CANDIDATE_SRCS` in the script tries each
+  known layout and takes the first holding HTML for a real route.
+  Two consequences worth keeping:
+  - **Existence is not proof.** A candidate qualifies only if it has HTML for at
+    least one real route. The build-output tree also contains `404.html` /
+    `500.html`, so a "has any `.html`" test picks a directory with no pages.
+  - **Build logs are readable from the CLI after all**, via
+    `GET /v3/deployments/<id>/events?builds=1` on `api.vercel.com` with the
+    token in `~/.local/share/com.vercel.cli/auth.json` (`vercel logs` is
+    runtime-only and will mislead you). A previous session concluded from a
+    file fetched over HTTP that the cloud builder was broken; the file had in
+    fact been generated locally and uploaded. Read the log.
 - **Dev:** `predev` writes a reduced index (no section entries) because there is
   no built HTML to read. This is expected, not a bug.
 - Section entries carry their **body text** (first `MAX_BODY` chars) in

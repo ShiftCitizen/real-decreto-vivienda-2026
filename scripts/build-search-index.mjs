@@ -2,7 +2,7 @@
  * Generates search-index.json for the ⌘K palette.
  *
  * Pages come from lib/nav.ts, FAQ and norma entries from lib/faq.ts and
- * lib/normas.ts. Sections are read back out of the *built* HTML in out/, so the
+ * lib/normas.ts. Sections are read back out of the *built* HTML, so the
  * index can never drift from the anchors that actually ship — and the prose is
  * never duplicated into a data file that could fall out of date.
  *
@@ -25,29 +25,94 @@ import { NORMA_IDS, NORMAS } from '../lib/normas.ts';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const EXPORT_DIR = join(ROOT, 'out');
-const PRENDER_DIR = join(ROOT, '.next', 'server', 'app');
 
-// Source of built HTML for sections and the citation audit. Hybrid builds
-// prerender pages into .next/server/app/<route>.html (fresh, from the build
-// that just ran); the old static export used out/<route>/index.html. Prefer
-// the fresh prerender output whenever it exists — a stale out/ left over
-// from an earlier export build must never feed the index silently.
-const SRC_DIR = !process.argv.includes('--dev') && existsSync(PRENDER_DIR) ? PRENDER_DIR : EXPORT_DIR;
+// Next writes required-server-files.json *inside* its own distDir. '.next' is
+// the default and the only value we can probe for without already knowing
+// distDir, so look there and honour whatever it reports.
+const DEFAULT_DIST_DIR = '.next';
+
+function resolveDistDir() {
+  const file = join(ROOT, DEFAULT_DIST_DIR, 'required-server-files.json');
+  if (!existsSync(file)) return DEFAULT_DIST_DIR;
+  try {
+    const reported = JSON.parse(readFileSync(file, 'utf8'))?.config?.distDir;
+    return typeof reported === 'string' && reported ? reported : DEFAULT_DIST_DIR;
+  } catch {
+    return DEFAULT_DIST_DIR;
+  }
+}
+
+const DIST_DIR = resolveDistDir();
+
+// Where the prerendered HTML lives is NOT the same on Vercel's cloud builder as
+// on a plain `next build`.
+//
+// Plain build: Next writes <distDir>/server/app/<route>.html and leaves it
+// there, so the script reads it straight out of `.next/server/app`.
+//
+// Vercel cloud build: the adapter applies `modifyConfig` and then runs
+// `onBuildComplete`, and by the time `postbuild` runs the pages are gone from
+// `.next/server/app` — the directory exists but holds no `.html` at all. The
+// build still reports every route as `○ (Static)` and the pages serve fine, so
+// this failed silently and shipped a section-less index. A local `vercel build`
+// does NOT reproduce it (the CLI does not apply those adapter hooks), so the
+// cloud build log is the only evidence.
+//
+// So: try each known layout in order and take the first that actually holds
+// HTML. If none does, fail loudly and dump the build-output tree into the error
+// — build logs are readable via the Vercel API, so the next attempt is
+// informed rather than blind.
+const CANDIDATE_SRCS = [
+  [`${DIST_DIR}/server/app`, join(ROOT, DIST_DIR, 'server', 'app')],
+  ['.vercel/output/static', join(ROOT, '.vercel', 'output', 'static')],
+  // The cloud builder writes its Build Output API tree outside the project.
+  ['/vercel/output/static', join('/vercel', 'output', 'static')],
+];
+
+/** Recursive list of names, for an error message: enough to locate the HTML
+ *  without dumping megabytes of markup into the build log. */
+function* tree(dir, depth = 3, prefix = '') {
+  if (depth < 0) return;
+  let entries;
+  try {
+    entries = readdirSync(dir, { withFileTypes: true });
+  } catch {
+    yield `${prefix}${dir} (unreadable)`;
+    return;
+  }
+  for (const entry of entries.slice(0, 40)) {
+    yield `${prefix}${entry.name}${entry.isDirectory() ? '/' : ''}`;
+    if (entry.isDirectory()) {
+      yield* tree(join(dir, entry.name), depth - 1, `${prefix}  `);
+    }
+  }
+}
 
 // Two modes:
 //   default (postbuild) -> section entries included, read from built HTML.
 //   --dev (predev)      -> no sections: there is no built HTML to read.
-//
+const isDev = process.argv.includes('--dev');
+
+// Source of built HTML for sections and the citation audit. A candidate
+// qualifies only if it holds HTML for at least one real route: the build-output
+// tree also contains 404.html / 500.html, so "has any .html" would happily pick
+// a directory with no pages in it — which is exactly the trap this script
+// already fell into once, where existsSync() was the only test.
+const SRC_DIR = isDev
+  ? EXPORT_DIR
+  : (CANDIDATE_SRCS.find(([, dir]) => {
+      try {
+        return [...htmlFiles(dir)].some((file) => routeFor(file, dir) !== null);
+      } catch {
+        return false;
+      }
+    })?.[1] ?? null);
+
 // The production build writes the full index to public/search-index.json,
 // which Vercel serves as a static asset alongside the prerendered routes.
-// (When the export build existed, it also went straight into out/ because
-// postbuild ran after Next copied public/ there.) Writing the dev copy to
-// public/ would silently serve a section-less index instead, which is why
-// .vercelignore keeps public/search-index.json out of CLI uploads.
-const isDev = process.argv.includes('--dev');
-const TARGETS = isDev || SRC_DIR !== EXPORT_DIR
-  ? [join(ROOT, 'public', 'search-index.json')]
-  : [join(ROOT, 'out', 'search-index.json'), join(ROOT, 'public', 'search-index.json')];
+// There is no out/ any more (the build is hybrid, not an export), so that is
+// the only target.
+const TARGETS = [join(ROOT, 'public', 'search-index.json')];
 
 // Script and style *content* is not markup, so a plain tag strip does not
 // remove it. Next ships the RSC flight payload as a series of
@@ -82,14 +147,17 @@ function* htmlFiles(dir) {
 
 /** Route for a built file, e.g. out/estado/index.html or
  *  .next/server/app/estado.html -> /estado, and index.html -> / */
-function routeFor(file) {
+function routeFor(file, srcDir = SRC_DIR) {
   const rel = file
-    .slice(SRC_DIR.length + 1)
+    .slice(srcDir.length + 1)
     .replace(/\/index\.html$/, '')
     .replace(/\.html$/, '');
   // Internal files (_not-found, route groups) are not site routes.
   if (rel === 'index' || rel === '') return '/';
   if (rel.startsWith('_') || rel.includes('/_')) return null;
+  // Status pages are real files in the build-output tree (404.html, 500.html)
+  // but are not routes a reader can search for.
+  if (/^\d{3}$/.test(rel)) return null;
   return `/${rel}`;
 }
 
@@ -122,16 +190,24 @@ for (const section of NAV_SECTIONS) {
 // --- Sections (h2/h3 anchors from the built HTML) ---------------------------
 // Never read sections in dev: there is no built HTML there, and stale
 // anchors would point at ids the dev server no longer renders.
-const built = !isDev && existsSync(SRC_DIR);
+const built = !isDev && SRC_DIR !== null;
 if (!isDev && !built) {
   // Fail, never ship a degraded index: a section-less file in production
   // silently kills section search (and starves the chatbot's retrieval)
-  // while the deploy still reports success. If this throws on Vercel, the
-  // build ran somewhere without the prerender output — check the Build
-  // Command (must be `npm run build`, see vercel.json) and the working dir.
+  // while the deploy still reports success. See CANDIDATE_SRCS for why the
+  // obvious location can be empty on Vercel.
+  const tried = CANDIDATE_SRCS.map(([label, dir]) => `  ${label} -> ${dir}`).join('\n');
+  const dumps = [
+    ...tree(join(ROOT, DIST_DIR), 2),
+    ...tree(join(ROOT, '.vercel', 'output'), 2),
+    ...tree('/vercel/output', 2),
+  ].slice(0, 120);
   throw new Error(
-    `no built HTML in ${SRC_DIR}/ (script root: ${ROOT}, cwd: ${process.cwd()}): ` +
-      'run after `next build` in the project root, or pass --dev for the reduced index.',
+    `no built HTML in any known location (script root: ${ROOT}, cwd: ${process.cwd()}):\n` +
+      `${tried}\n` +
+      'Build output tree:\n' +
+      dumps.map((line) => `  ${line}`).join('\n') +
+      '\nRun after `next build` in the project root, or pass --dev for the reduced index.',
   );
 }
 
@@ -340,43 +416,14 @@ entries.push({
 });
 
 const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0) + 1 }), {});
-// TEMPORARY DIAGNOSTIC (do not ship): the remote builder yields zero sections
-// while local yields 36, and build logs are not readable from the CLI. Soften
-// the throw to a warning for one deploy and dump the inventory where it can
-// be fetched over HTTP; the file is gitignored and removed in the fix commit.
-const DIAGNOSTIC_FILE = join(ROOT, 'public', 'build-debug.json');
-{
-  const inventory = [];
-  let files = 0;
-  try {
-    for (const file of htmlFiles(SRC_DIR)) {
-      files += 1;
-      const html = readFileSync(file, 'utf8');
-      const heads = (html.match(/<h[1-6][\s>]/g) ?? []).length;
-      const ids = (html.match(/ id="/g) ?? []).length;
-      inventory.push(`${file.slice(SRC_DIR.length + 1)} ${html.length}B h=${heads} id=${ids}`);
-    }
-  } catch (e) {
-    inventory.push(`inventory failed: ${e instanceof Error ? e.message : e}`);
-  }
-  const info = {
-    node: process.version,
-    flags: { VERCEL: process.env.VERCEL ?? null, CI: process.env.CI ?? null, VERCEL_ENV: process.env.VERCEL_ENV ?? null },
-    srcDir: SRC_DIR,
-    root: ROOT,
-    cwd: process.cwd(),
-    htmlFilesSeen: files,
-    sectionEntries: counts.section ?? 0,
-    inventory,
-  };
-  writeFileSync(DIAGNOSTIC_FILE, JSON.stringify(info, null, 2));
-  console.log(`diagnostic inventory -> public/build-debug.json (${files} html files, ${counts.section ?? 0} sections)`);
-}
 if (!isDev && (counts.section ?? 0) === 0) {
-  // TEMPORARY (do not ship): warn instead of throwing for one deploy, so the
-  // diagnostic file above reaches production and can be fetched over HTTP.
-  // Restore the throw in the fix commit.
-  console.warn('warning: zero section entries — shipping degraded index for diagnosis only.');
+  // The directory held HTML (it was chosen because it did) but yielded no
+  // anchored section. That is the exact shape of the silent production
+  // failure this file is guarded against, so refuse to write it.
+  throw new Error(
+    `read ${counts.section ?? 0} section entries from ${SRC_DIR}: the HTML parsed but no ` +
+      'anchored headings were found. Refusing to ship a section-less index.',
+  );
 }
 const json = JSON.stringify(entries);
 for (const target of TARGETS) {
