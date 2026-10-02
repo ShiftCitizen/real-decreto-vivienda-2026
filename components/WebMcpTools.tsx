@@ -81,7 +81,7 @@ const esquemaLectura = {
     ruta: {
       type: 'string',
       description:
-        'Ruta de la página a leer, una de: /, /desahucios-y-alquiler/, /fiscal/, /financiacion/, /estado/, /normas/.',
+        'Página a leer: ruta relativa o URL del propio sitio, una de: /, /desahucios-y-alquiler/, /fiscal/, /financiacion/, /estado/, /normas/.',
     },
   },
   required: ['ruta'],
@@ -134,10 +134,25 @@ export default function WebMcpTools() {
               { ruta }: Record<string, unknown> = {},
               { signal }: { signal?: AbortSignal } = {},
             ) => {
-              const limpia = `/${String(ruta).split('#')[0].split('?')[0].replace(/^\/+/, '')}`;
-              const normalizada = limpia === '/' ? '/' : `${limpia.replace(/\/+$/, '')}/`;
+              // Acepta rutas relativas y URLs absolutas del propio sitio, de
+              // modo que el href que devuelve buscar_en_el_sitio sirve tal
+              // cual. Todo lo demás (otro origen, ruta desconocida) se
+              // rechaza: la herramienta solo lee las seis páginas del sitio.
+              const bruta = typeof ruta === 'string' ? ruta : '';
+              let pathname: string;
+              try {
+                const url = new URL(bruta, window.location.origin);
+                if (url.origin !== window.location.origin) {
+                  throw new Error(`Origen no permitido: ${bruta}`);
+                }
+                pathname = url.pathname;
+              } catch (error) {
+                if (error instanceof Error && error.message.startsWith('Origen')) throw error;
+                throw new Error(`Ruta no permitida: ${bruta}`);
+              }
+              const normalizada = pathname === '/' ? '/' : `${pathname.replace(/\/+$/, '')}/`;
               if (!RUTAS_PERMITIDAS.includes(normalizada)) {
-                throw new Error(`Ruta no permitida: ${String(ruta)}`);
+                throw new Error(`Ruta no permitida: ${bruta}`);
               }
               const respuesta = await fetch(normalizada, { signal });
               if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
