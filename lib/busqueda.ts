@@ -27,6 +27,10 @@ export type ResultadoBusqueda = {
   extracto: string;
   /** Texto completo indexado (respuesta FAQ íntegra o cuerpo de sección hasta MAX_BODY). */
   contexto: string;
+  /** Puntuación interna (7 exacta … 1 solape parcial): sirve para desempatar. */
+  puntos: number;
+  /** Tipo de la entrada de índice de la que viene (page, section, faq, norma, autor). */
+  tipo: string;
 };
 
 /** Minúsculas sin tildes, igual que en la paleta de búsqueda. */
@@ -135,11 +139,13 @@ export function buscar(
     }
   }
   candidatas.sort((a, b) => b.puntos - a.puntos);
-  return candidatas.slice(0, max).map(({ entrada }) => ({
+  return candidatas.slice(0, max).map(({ entrada, puntos }) => ({
     titulo: entrada.title,
     href: entrada.href,
     seccion: entrada.section,
     extracto: (entrada.excerpt ?? '').slice(0, 160),
     contexto: entrada.keywords,
+    puntos,
+    tipo: entrada.type,
   }));
 }

@@ -333,6 +333,14 @@ entries.push({
 });
 
 const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0) + 1 }), {});
+if (!isDev && (counts.section ?? 0) === 0) {
+  // Same reason as above: the site always has anchored sections, so zero
+  // means the HTML was found but yielded nothing (or the glob silently
+  // matched elsewhere). Ship nothing rather than a starved index.
+  throw new Error(
+    `zero section entries from ${SRC_DIR}/ (cwd: ${process.cwd()}): refusing to write a section-less index.`,
+  );
+}
 const json = JSON.stringify(entries);
 for (const target of TARGETS) {
   writeFileSync(target, json);

@@ -41,7 +41,9 @@ const NEGATIVA =
 const SISTEMA = [
   'Respondes preguntas sobre un análisis divulgativo de los reales decretos-ley 26/2026 y 27/2026 de vivienda en España.',
   'Ambos decretos quedaron derogados al rechazarse su convalidación el 2-10-2026: sus medidas no se aplican.',
-  'Responde ÚNICAMENTE a partir del CONTEXTO que se te da. Si la pregunta no se puede responder con ese contexto, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
+  'Responde ÚNICAMENTE a partir del CONTEXTO que se te da.',
+  'Si el contexto incluye una pregunta frecuente igual o muy parecida a la pregunta, responde a partir de ella: ese caso sí tiene respuesta y no debes rechazarlo.',
+  'Solo cuando ninguna entrada del contexto guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
   'No inventes cifras, fechas ni artículos. No des asesoramiento jurídico: el análisis es divulgativo y prevalece el texto oficial del BOE.',
   'Responde en español, en un máximo de dos párrafos cortos.',
 ].join(' ');
@@ -104,6 +106,20 @@ export async function POST(request: Request) {
   }
   const indice = (await indiceRes.json()) as EntradaIndice[];
   const utiles = buscar(indice, pregunta).slice(0, 3);
+  // La respuesta concreta (FAQ o sección) debe llegar la primera al modelo:
+  // ante un bloque genérico de página seguido de la respuesta exacta, el
+  // modelo a veces se ancla al primero y rechaza. A igualdad de puntos,
+  // FAQ y sección van antes que página, norma y autor.
+  const RANGO_TIPO: Record<string, number> = {
+    faq: 0,
+    section: 1,
+    page: 2,
+    norma: 3,
+    autor: 4,
+  };
+  utiles.sort(
+    (a, b) => b.puntos - a.puntos || (RANGO_TIPO[a.tipo] ?? 9) - (RANGO_TIPO[b.tipo] ?? 9),
+  );
   // Contexto con el texto indexado completo (no el extracto de 160): las
   // respuestas FAQ van íntegras y las secciones hasta el tope del índice.
   // Con extractos recortados a mitad de frase el modelo se negaba con razón.
