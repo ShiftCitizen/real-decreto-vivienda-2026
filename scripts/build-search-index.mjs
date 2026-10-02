@@ -102,20 +102,127 @@ function* tree(dir, depth = 4, prefix = '') {
 //   --dev (predev)      -> no sections: there is no built HTML to read.
 const isDev = process.argv.includes('--dev');
 
-// Source of built HTML for sections and the citation audit. A candidate
+/**
+ * Locate the prerendered pages, in order of decreasing trust.
+ *
+ * A known build-output directory is preferred, because there the layout is
+ * predictable. If the builder has rewritten the layout — which is what Vercel's
+ * adapter does, turning every route into `output/functions/<route>.func/` plus
+ * a `<route>.prerender-fallback.html` sibling — then no fixed path can be
+ * right, so fall back to finding the pages by what they contain and deriving
+ * each route from a slug in its path.
+ *
+ * Returns [{ route, file }], one entry per route.
+ */
+function locatePages() {
+  for (const [, dir] of CANDIDATE_SRCS) {
+    const found = [];
+    try {
+      for (const file of htmlFiles(dir)) {
+        const route = routeFor(file, dir);
+        if (route !== null) found.push({ route, file });
+      }
+    } catch {
+      continue;
+    }
+    if (found.length > 0) return found;
+  }
+  return locateLoose();
+}
+
+// Slug -> route for the loose scan. Built from lib/nav.ts, so it cannot drift:
+// every route the site publishes is already listed there.
+const ROUTE_SLUGS = [...new Set(
+  NAV_SECTIONS.flatMap((section) => section.links).map((link) =>
+    link.href === '/' ? 'index' : link.href.replace(/^\/+|\/+$/g, ''),
+  ),
+)].sort((a, b) => b.length - a.length);
+
+/** Route for a file whose layout we do not recognise. Only the slug is
+ *  reliable — the adapter rewrites paths into `estado.func/`,
+ *  `estado.prerender-fallback.html` and so on. Longest slug wins so
+ *  `/desahucios-y-alquiler` is not matched as `/desahucios`. */
+function looseRouteFor(file) {
+  for (const segment of file.split('/')) {
+    for (const slug of ROUTE_SLUGS) {
+      if (segment === slug || segment.startsWith(`${slug}.`)) {
+        return slug === 'index' ? '/' : `/${slug}`;
+      }
+    }
+  }
+  return null;
+}
+
+/** Every .html under a root, skipping caches that cannot hold pages. */
+function* looseHtmlFiles(dir, depth = 8) {
+  if (depth < 0) return;
+  let entries;
+  try {
+    entries = readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    if (entry.name === 'cache' || entry.name === 'diagnostics' || entry.name === 'types') continue;
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      yield* looseHtmlFiles(full, depth - 1);
+    } else if (entry.name.endsWith('.html')) {
+      yield full;
+    }
+  }
+}
+
+/** Number of anchored headings in a file: the cheapest way to tell a real page
+ *  from a shell, a redirect stub or an error page. */
+function anchorCount(file) {
+  try {
+    return (readFileSync(file, 'utf8').match(/<h[1-6][^>]*\sid="/g) ?? []).length;
+  } catch {
+    return -1;
+  }
+}
+
+/** Last resort: search the whole build output and keep, per route, the file
+ *  with the most anchored headings. */
+function locateLoose() {
+  const roots = [
+    join(ROOT, DIST_DIR, 'output'),
+    join(ROOT, DIST_DIR),
+    join(ROOT, '.vercel', 'output'),
+    join('/vercel', 'output'),
+  ];
+  const byRoute = new Map();
+  for (const root of roots) {
+    for (const file of looseHtmlFiles(root)) {
+      const route = looseRouteFor(file);
+      if (route === null) continue;
+      if (!byRoute.has(route)) byRoute.set(route, []);
+      byRoute.get(route).push(file);
+    }
+  }
+  const found = [];
+  for (const [route, files] of byRoute) {
+    let best = null;
+    let bestScore = 0;
+    for (const file of files) {
+      const score = anchorCount(file);
+      if (score > bestScore) {
+        bestScore = score;
+        best = file;
+      }
+    }
+    if (best !== null) found.push({ route, file: best });
+  }
+  return found;
+}
+
+// Source of built HTML for sections and the citation audit. A known candidate
 // qualifies only if it holds HTML for at least one real route: the build-output
 // tree also contains 404.html / 500.html, so "has any .html" would happily pick
-// a directory with no pages in it — which is exactly the trap this script
-// already fell into once, where existsSync() was the only test.
-const SRC_DIR = isDev
-  ? EXPORT_DIR
-  : (CANDIDATE_SRCS.find(([, dir]) => {
-      try {
-        return [...htmlFiles(dir)].some((file) => routeFor(file, dir) !== null);
-      } catch {
-        return false;
-      }
-    })?.[1] ?? null);
+// a directory with no pages in it — exactly the trap this script already fell
+// into once, where existsSync() was the only test.
+const PAGES = isDev ? [] : locatePages();
 
 // The production build writes the full index to public/search-index.json,
 // which Vercel serves as a static asset alongside the prerendered routes.
@@ -156,7 +263,7 @@ function* htmlFiles(dir) {
 
 /** Route for a built file, e.g. out/estado/index.html or
  *  .next/server/app/estado.html -> /estado, and index.html -> / */
-function routeFor(file, srcDir = SRC_DIR) {
+function routeFor(file, srcDir) {
   const rel = file
     .slice(srcDir.length + 1)
     .replace(/\/index\.html$/, '')
@@ -199,12 +306,12 @@ for (const section of NAV_SECTIONS) {
 // --- Sections (h2/h3 anchors from the built HTML) ---------------------------
 // Never read sections in dev: there is no built HTML there, and stale
 // anchors would point at ids the dev server no longer renders.
-const built = !isDev && SRC_DIR !== null;
+const built = !isDev && PAGES.length > 0;
 if (!isDev && !built) {
   // Fail, never ship a degraded index: a section-less file in production
   // silently kills section search (and starves the chatbot's retrieval)
-  // while the deploy still reports success. See CANDIDATE_SRCS for why the
-  // obvious location can be empty on Vercel.
+  // while the deploy still reports success. See locatePages() for why no
+  // fixed path can be relied on.
   const tried = CANDIDATE_SRCS.map(([label, dir]) => `  ${label} -> ${dir}`).join('\n');
   // Target the two trees that actually decide this: where Next wrote the
   // pages, and where the adapter put them.
@@ -213,8 +320,8 @@ if (!isDev && !built) {
     ...tree(join(ROOT, DIST_DIR, 'server', 'app'), 3),
     '',
     'build output:',
-    ...tree('/vercel/output', 3),
-    ...tree(join(ROOT, '.vercel', 'output'), 3),
+    ...tree(join('/vercel', 'output'), 4),
+    ...tree(join(ROOT, '.vercel', 'output'), 4),
   ].slice(0, 400);
   throw new Error(
     `no built HTML in any known location (script root: ${ROOT}, cwd: ${process.cwd()}):\n` +
@@ -310,9 +417,7 @@ function clauseAround(text, start, end) {
 const citationFailures = [];
 const seenAnchors = new Map();
 
-for (const file of built ? htmlFiles(SRC_DIR) : []) {
-  const route = routeFor(file);
-  if (route === null) continue;
+for (const { route, file } of PAGES) {
   const html = readFileSync(file, 'utf8');
 
   if (!isDev) {
@@ -430,11 +535,13 @@ entries.push({
 
 const counts = entries.reduce((acc, e) => ({ ...acc, [e.type]: (acc[e.type] ?? 0) + 1 }), {});
 if (!isDev && (counts.section ?? 0) === 0) {
-  // The directory held HTML (it was chosen because it did) but yielded no
-  // anchored section. That is the exact shape of the silent production
-  // failure this file is guarded against, so refuse to write it.
+  // The pages were located (they were chosen because they had anchored
+  // headings) but yielded no section entry. That is the exact shape of the
+  // silent production failure this file is guarded against, so refuse to
+  // write it.
   throw new Error(
-    `read ${counts.section ?? 0} section entries from ${SRC_DIR}: the HTML parsed but no ` +
+    `read 0 section entries from ${PAGES.length} located page(s) ` +
+      `(${PAGES.map((p) => `${p.route} <- ${p.file}`).join(', ')}): the HTML parsed but no ` +
       'anchored headings were found. Refusing to ship a section-less index.',
   );
 }
