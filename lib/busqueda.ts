@@ -81,6 +81,18 @@ const VACIAS = new Set([
   'tienen',
   'tengo',
   'tenemos',
+  // Copulas: no distinguen nada y en los titulos de las FAQ son casi la
+  // mitad de la pregunta. En "¿Soy gran tenedor?" el indice veia una
+  // coincidencia de titulo por "soy", un termino rarissimo en el sitio, y eso
+  // solo bastaba para ganar: el titulo pesa mas que todo el cuerpo reunido.
+  'soy',
+  'eres',
+  'somos',
+  'sois',
+  'sea',
+  'ser',
+  'sido',
+  'fui',
   'haber',
   'hace',
   'hacer',
@@ -442,19 +454,30 @@ export function buscar(
   // El criterio completo se codifica en `puntos` para que sobreviva al
   // reordenamiento por tipo que hace /api/chat. Sin redondear: redondear
   // creaba empates falsos y el desempate por tipo terminaba decidiendo.
+  //
+  // El termino raro del titulo suma, pero **suma**: antes era `mejorTitulo *
+  // 1e6`, de modo que cualquier coincidencia de titulo -aunque el resto de la
+  // pregunta no encajara nada- ganaba a una entrada que encajaba muchisimo
+  // mejor. "Soy propietario y alquilo a una asociacion sin animo de lucro"
+  // llegaba al cuerpo de "Lo que afecta al tercer sector" por tres palabras
+  // (peso 44) y perdia frente a la norma del IRPF, que solo encajaba "renta"
+  // en el titulo (peso 32). Y al revés: "el limite de subida de la renta es
+  // del 5 %" debe ganar la FAQ de la renta y no "En 1 minuto".
+  //
+  // El peso del titulo se mide en la MISMA escala que el cuerpo, y el cuerpo
+  // manda cuando claramente tiene mas. 1.3 sale de medir los dos casos
+  // Ribera: por debajo de 1.17 la seccion "Art. 8. IBI" pierde contra la FAQ
+  // de los alquileres turisticos; por encima de 1.46 el IRPF vuelve a ganarle
+  // al tercer sector.
+  const PESO_TITULO_EN_PUNTOS = 1.3;
   for (const c of candidatas) {
-    if (c.puntos === 0) c.puntos = c.mejorTitulo * 1e6 + c.peso;
+    if (c.puntos === 0) c.puntos = c.peso + c.mejorTitulo * PESO_TITULO_EN_PUNTOS;
   }
 
-  // Un termino raro en el titulo es la senal mas fuerte que hay, y manda por
-  // delante del peso acumulado. La FAQ de los alquileres turisticos encaja tres
-  // palabras de una pregunta de IBI -"alquiler", "vivienda" y el propio "IBI",
-  // ese ultimo en el cuerpo- frente a las dos de la seccion que se titula
-  // "Art. 8. IBI"; con el peso primero, ganaba la FAQ. Las frases literales
-  // llevan mejorTitulo infinito y siguen por encima de todo.
-  candidatas.sort(
-    (a, b) => b.mejorTitulo - a.mejorTitulo || b.puntos - a.puntos || b.peso - a.peso,
-  );
+  // Las frases literales llevan `mejorTitulo` infinito y un `puntos` de 1e9,
+  // muy por encima de cualquier suma, asi que siguen mandando sobre todo lo
+  // demas sin necesitar un desempate aparte.
+  candidatas.sort((a, b) => b.puntos - a.puntos || b.peso - a.peso);
 
   return candidatas.slice(0, max).map(({ entrada, puntos }) => ({
     titulo: entrada.title,

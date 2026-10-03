@@ -78,6 +78,22 @@ const ESPERADO_PRIMERO = [
   ['multa por alquiler a turistas', '¿Qué multa me pueden poner por alquilar el piso a turistas sin permiso?', 'turístic'],
   ['sanción de alquiler vacacional', '¿Puede el ayuntamiento sancionarme por un alquiler vacacional?', 'turístic'],
   ['tope de subida de la renta', '¿El límite de subida de la renta es del 5 %?', 'subir la renta'],
+  // Estas dos reescriben bugs reales. «asociación sin ánimo de lucro» no es el
+  // vocabulario del sitio, que dice «entidad sin fines lucrativos»: la entrada
+  // correcta encaja por «propietario», «alquila» y «vulnerable», y perdía
+  // contra la norma del IRPF, que solo encajaba «renta» en el título. Y la
+  // prórroga la ganaba «¿Cómo tributa la Cuenta Financia Europa a los cinco
+  // años?» por el mismo motivo, con «cinco años» como único Solape.
+  [
+    'tercer sector, sin el vocabulario del sitio',
+    'Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?',
+    'tercer sector',
+  ],
+  [
+    'prórroga de cinco años',
+    'Mi contrato de alquiler acaba en diciembre. ¿Se me prorroga automáticamente cinco años?',
+    'prórroga',
+  ],
 ];
 for (const [nombre, pregunta, fragmento] of ESPERADO_PRIMERO) {
   const r = comoRoute(pregunta);
