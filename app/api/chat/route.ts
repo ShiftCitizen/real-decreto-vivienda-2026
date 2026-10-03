@@ -34,17 +34,23 @@ const MAX_PREGUNTA = 500;
 const MAX_TOKENS_SALIDA = 350;
 const CUOTA_MAX = 10;
 const CUOTA_VENTANA_MS = 60 * 60 * 1000;
+/** Cada cuántas peticiones se barren las IP caducadas. */
+const CUOTA_LIMPIEZA_CADA = 50;
 
 const NEGATIVA =
   'Eso queda fuera del ámbito de este análisis: solo respondo preguntas sobre los reales decretos-ley 26/2026 y 27/2026 de vivienda. Prueba con el buscador del sitio.';
 
 const SISTEMA = [
   'Respondes preguntas sobre un análisis divulgativo de los reales decretos-ley 26/2026 y 27/2026 de vivienda en España.',
-  'Ambos decretos quedaron derogados al rechazarse su convalidación el 2-10-2026: sus medidas no se aplican.',
+  'AMBOS DECRETOS QUEDARON DEROGADOS al rechazarse su convalidación el 2-10-2026. Sus medidas no se aplican a nadie.',
+  'Regla de primer orden: si la pregunta da por supuesto que una medida está en vigor, empieza diciendo que fue derogada el 2-10-2026 y solo después explica qué decía la medida. Nunca la describas como aplicable.',
   'Responde ÚNICAMENTE a partir del CONTEXTO que se te da.',
   'Si el contexto incluye una pregunta frecuente igual o muy parecida a la pregunta, responde a partir de ella: ese caso sí tiene respuesta y no debes rechazarlo.',
+  'Cifras, plazos, porcentajes y artículos: tómalos SIEMPRE del CONTEXTO, nunca de la pregunta. Si la pregunta trae un número que el CONTEXTO no confirma, corrígelo con el del CONTEXTO y no lo repitas.',
+  'No inventes nada que no esté en el CONTEXTO. En particular, si el CONTEXTO no describe un régimen sancionador, una multa o una sanción, no deduzcas ninguno: di que el análisis no lo recoge.',
+  'Sobre la posición jurídica de una persona concreta, nunca respondas con un sí o un seco. Explica qué dice el análisis y añade que no es asesoramiento jurídico.',
+  'Cita las entradas del CONTEXTO con su número entre corchetes, por ejemplo [1]. Cita solo las que uses.',
   'Solo cuando ninguna entrada del contexto guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
-  'No inventes cifras, fechas ni artículos. No des asesoramiento jurídico: el análisis es divulgativo y prevalece el texto oficial del BOE.',
   'Responde en español, en un máximo de dos párrafos cortos.',
 ].join(' ');
 
@@ -52,8 +58,32 @@ const SISTEMA = [
 // instancia lleva su propio conteo, así que es un freno al abuso casual,
 // no un límite distribuido exacto.
 const ventanas = new Map<string, number[]>();
+let peticionesDesdeLimpieza = 0;
+
+/**
+ * Barre las ventanas caducadas.
+ *
+ * Sin esto, `ventanas` conserva una entrada por cada IP vista *para siempre*:
+ * las llamadas anónimas no cesan, y el Map crece sin límite hasta que la
+ * instancia se queda sin memoria. Consultar una IP solo limpia esa IP, porque
+ * el filtro de `cuotaAgotada` no toca las demás.
+ */
+function barrerCaducadas(): void {
+  const ahora = Date.now();
+  for (const [ip, marcas] of ventanas) {
+    const vivas = marcas.filter((t) => ahora - t < CUOTA_VENTANA_MS);
+    if (vivas.length === 0) ventanas.delete(ip);
+    else if (vivas.length !== marcas.length) ventanas.set(ip, vivas);
+  }
+}
 
 function cuotaAgotada(ip: string): boolean {
+  peticionesDesdeLimpieza += 1;
+  if (peticionesDesdeLimpieza >= CUOTA_LIMPIEZA_CADA) {
+    peticionesDesdeLimpieza = 0;
+    barrerCaducadas();
+  }
+
   const ahora = Date.now();
   const marcas = (ventanas.get(ip) ?? []).filter((t) => ahora - t < CUOTA_VENTANA_MS);
   if (marcas.length >= CUOTA_MAX) {
@@ -66,8 +96,21 @@ function cuotaAgotada(ip: string): boolean {
 }
 
 function ipDe(request: Request): string {
-  const cabecera = request.headers.get('x-forwarded-for');
-  return cabecera?.split(',')[0]?.trim() || 'desconocida';
+  // `x-vercel-forwarded-for` primero: Vercel lo fija él y no lo reescribe un
+  // proxy intermedio, así que es el único que no depende del cliente. Solo si
+  // no está (servidor local, otro hosting) se cae a `x-forwarded-for`.
+  //
+  // Y de ese se toma el ÚLTIMO valor, no el primero: la cadena crece de fuera
+  // hacia dentro, así que el último es el que añadió el servidor más cercano al
+  // origen. El primero lo pone cualquiera que mande la cabecera, y usarlo hace
+  // la cuota falsificable con un `curl`.
+  const cabecera =
+    request.headers.get('x-vercel-forwarded-for') ?? request.headers.get('x-forwarded-for');
+  const ip = cabecera?.split(',').pop()?.trim() || 'desconocida';
+  // Una IP no puede ser arbitrariamente larga ni llevar espacios: se usa como
+  // clave de un Map que crece sin límite, y una cabecera manipulada convertiría
+  // eso en agotamiento de memoria.
+  return /^[0-9a-f:.]{1,45}$/i.test(ip) ? ip : 'desconocida';
 }
 
 export async function POST(request: Request) {
@@ -120,13 +163,28 @@ export async function POST(request: Request) {
   utiles.sort(
     (a, b) => b.puntos - a.puntos || (RANGO_TIPO[a.tipo] ?? 9) - (RANGO_TIPO[b.tipo] ?? 9),
   );
-  // Contexto con el texto indexado completo (no el extracto de 160): las
-  // respuestas FAQ van íntegras y las secciones hasta el tope del índice.
+  // Contexto numerado, con el texto indexado completo (no el extracto de 160):
+  // las respuestas FAQ van íntegras y las secciones hasta el tope del índice.
   // Con extractos recortados a mitad de frase el modelo se negaba con razón.
-  const contexto = utiles
-    .map((r) => `### ${r.titulo}\n${r.contexto}`)
-    .join('\n\n')
-    .slice(0, 3000);
+  //
+  // Numerado porque el modelo cita con [n] y `citas` sale de ahí. Antes se
+  // mandaba todo lo recuperado y se listaba entero: la respuesta hablaba del
+  // tope de la renta y debajo aparecían tres títulos sin relación con ella.
+  //
+  // El recorte es por entrada, no sobre el bloque joined: con 3000 caracteres
+  // sobre la concatenación, la primera entrada larga se comía el hueco y las
+  // demás llegaban cortadas o no llegaban.
+  const PRESUPUESTO = 3000;
+  const bloque: string[] = [];
+  let gastado = 0;
+  utiles.forEach((r, i) => {
+    if (gastado >= PRESUPUESTO) return;
+    const pie = `### [${i + 1}] ${r.titulo}\n`;
+    const texto = `${pie}${r.contexto}`.slice(0, PRESUPUESTO - gastado);
+    bloque.push(texto);
+    gastado += texto.length;
+  });
+  const contexto = bloque.join('\n\n');
 
   // Sin contexto con peso suficiente: negativa fija, sin llamar al modelo.
   if (utiles.length === 0 || contexto.trim().length < 40) {
@@ -172,8 +230,22 @@ export async function POST(request: Request) {
   if (!respuesta) {
     return NextResponse.json({ error: 'Respuesta vacía del modelo.' }, { status: 502 });
   }
+  // Solo se listan las entradas hasta la última citada, no las tres siempre:
+  // el widget pinta las citas como enlaces en el mismo orden que las marcas
+  // [n] del texto, así que un hueco intermedio haría que [3] apuntara a la
+  // fuente equivocada. Cortando por la última citada la numeración sigue
+  // cuadrando y solo se cae lo que el modelo no llega a usar. Si no cita
+  // ninguna, se queda con la primera, que es la que encabeza el bloque.
+  const ultima = Math.max(
+    0,
+    ...[...respuesta.matchAll(/\[(\d{1,2})\]/g)]
+      .map((m) => Number(m[1]))
+      .filter((n) => n >= 1 && n <= utiles.length),
+  );
+  const fuentes = utiles.slice(0, ultima > 0 ? ultima : 1);
+
   return NextResponse.json({
     respuesta,
-    citas: utiles.map((r) => ({ titulo: r.titulo, href: r.href })),
+    citas: fuentes.map((r) => ({ titulo: r.titulo, href: r.href })),
   });
 }

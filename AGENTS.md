@@ -170,9 +170,61 @@ single-shot form. Keep every limit on the server and never trust the client:
 - The NIM key lives **only** in Vercel env vars. Grep for it before every
   commit; it must appear nowhere in the repo, the bundle, logs, or error
   messages returned to the browser.
-- Retrieval first: if nothing in the generated index clears the bar, return
-  the fixed refusal **without calling the model**. No history, 500-char input
-  cap, low temperature, ~350 output tokens, best-effort per-IP quota.
+- **Retrieval first: if nothing in the generated index clears the bar, return
+  the fixed refusal *without calling the model*.** `npm run check:chat` is the
+  gate: it runs `buscar()` against the built index exactly as `POST /api/chat`
+  does, and it exists because the bar used to leak in both directions.
+  - **`buscar()` matches whole words, never substrings.** It used to test
+    `text.includes(token)`, so «hace» matched inside «hacer» and
+    «¿Qué tiempo hace mañana en Madrid?» recuperaba tres entradas de vivienda.
+    That is a scope failure, not a ranking nit: the refusal is the only thing
+    keeping this endpoint from answering about anything.
+  - **Stopwords are a function-word list, and it is load-bearing.** «me», «por»,
+    «con», «en», «es» appear in nearly every entry; leaving them in satisfied
+    the all-words rule by itself and the ranking collapsed to noise.
+  - **Bare numbers in the question are dropped.** They are usually a claim the
+    visitor wants checked («¿el límite es del 5 %?», and the site says 2 %),
+    not a search term. Counting them lowered the coverage of the entry that
+    actually has the answer.
+  - **A light suffix stemmer and a rarity factor do the paraphrase work.**
+    `raiz()` plus `mismaRaiz()` links «subida»/«subir»; the rarity factor
+    (`log(n/df)`) is what stops a page that merely mentions «vivienda» from
+    outranking the section titled «Art. 8. IBI». Both strip suffixes with a
+    **minimum length of 3**, not 4 — at 4 «subido» and «subir» stay different
+    roots, which is the exact pair the question and the FAQ title use.
+  - **`puntos` carries the whole ordering, because `/api/chat` re-sorts on it.**
+    Any key that only exists inside `buscar()` is discarded by that re-sort.
+    The literal-match band is `1e9`-ish for the same reason: it must still win.
+- **The system prompt has to do work the retrieval cannot.** The decrees were
+  repealed on 2-10-2026, so the prompt states that as a first-order rule and
+  orders the model to say so *before* explaining a measure, rather than letting
+  it describe a repealed measure as applicable. It also forbids taking figures
+  from the question, forbids inventing a sanction regime that the context does
+  not describe, and forbids a bare yes/no about a person's legal position.
+- **Citations are sliced to the last `[n]`, not filtered to the used ones.**
+  The widget renders sources as links in the same order as the `[n]` markers in
+  the text, so dropping a middle entry would make `[3]` point at the wrong
+  source. `slice(0, ultima)` keeps the numbering honest.
+- No history, 500-char input cap, low temperature, ~350 output
+  tokens, best-effort per-IP quota.
+- **The quota is keyed on `x-vercel-forwarded-for`, not `x-forwarded-for`,**
+  and on the **last** value of it, never the first. The first entry of
+  `x-forwarded-for` is the one a client controls, so keying on it makes the
+  quota bypassable by anyone who sets the header; Vercel only happens to
+  overwrite that header today, and would stop doing so behind a proxy. The IP
+  is also shape-checked before it becomes a Map key.
+- **`ventanas` is swept.** A quota map that only ever filters the calling IP
+  retains every IP ever seen, which is an unbounded-memory vector on a
+  publicly reachable endpoint. `barrerCaducadas()` runs every
+  `CUOTA_LIMPIEZA_CADA` requests. Do not remove it as redundant: filtering a
+  single key is not eviction.
+- **Known trap: `/api/chat` fetches its own index over HTTP** (`new
+  URL(request.url).origin`). If this project ever turns on **Deployment
+  Protection** (Vercel Authentication), that self-fetch receives the auth
+  challenge instead of the JSON and the assistant starts returning 502 with
+  nothing in the log — the 401 is not an exception, it is a successful response.
+  `curso-digitalizacion-2026` hit exactly this and now reads the index from disk
+  via `includeFiles`; port that approach here before enabling protection.
 - The system prompt answers **solely** from the injected excerpts, demands
   page citations, and refuses everything else. The widget repeats the
   no-legal-advice note under every answer.
