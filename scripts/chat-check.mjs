@@ -21,13 +21,25 @@ registerHooks({
     if (specifier.startsWith('@/')) {
       return nextResolve(pathToFileURL(join(root, `${specifier.slice(2)}.ts`)).href, context);
     }
+    // `lib/okf.ts` importa `./busqueda` sin extensión. El hook de arriba solo
+    // sabe resolver `@/`, así que sin esta mitad el import falla al cargar el
+    // módulo y el script se cae antes de comprobar nada.
+    if (/^\.{1,2}\//.test(specifier)) {
+      const relativo = specifier.replace(/\.js$/, '');
+      return nextResolve(
+        new URL(relativo.endsWith('.ts') ? relativo : `${relativo}.ts`, context.parentURL).href,
+        context,
+      );
+    }
     return nextResolve(specifier, context);
   },
 });
 
 const { buscar } = await import('@/lib/busqueda');
+const { seleccionar, puntuarFicheros } = await import('@/lib/okf');
 
 const indice = JSON.parse(readFileSync(join(root, 'public/search-index.json'), 'utf8'));
+const okf = JSON.parse(readFileSync(join(root, 'public/okf-index.json'), 'utf8'));
 
 /** Lo mismo que POST /api/chat: tres entradas, ordenadas, y contexto. */
 function comoRoute(consulta) {
@@ -44,6 +56,23 @@ function comoRoute(consulta) {
     tipos: utiles.map((r) => r.tipo),
     contexto,
     niega: utiles.length === 0 || contexto.trim().length < 40,
+  };
+}
+
+/**
+ * Lo mismo que hace POST /api/chat cuando la tabla del bundle está disponible:
+ * `seleccionar()` decide el contexto y devuelve `null` si la pregunta no es del
+ * análisis, que es cuando la ruta responde con la negativa fija sin llamar al
+ * modelo.
+ */
+function comoOkf(consulta) {
+  const evidencia = seleccionar(consulta, okf);
+  if (!evidencia) return { niega: true, titulos: [], hrefs: [], contexto: '' };
+  return {
+    niega: false,
+    titulos: evidencia.map((e) => e.titulo),
+    hrefs: evidencia.map((e) => e.href),
+    contexto: evidencia.map((e) => e.texto).join('\n\n'),
   };
 }
 
@@ -141,6 +170,134 @@ console.log('\nConsultas vacías: devuelven las páginas, como la paleta');
 {
   const r = comoRoute('   ');
   comprobar('sin consulta salen paginas', r.titulos.length > 0 && r.tipos.every((t) => t === 'page'));
+}
+
+/**
+ * =====================================================
+ *  Las diez preguntas de aceptación
+ * =====================================================
+ *  No se comprueba lo que dice el modelo —eso no se puede comprobar sin
+ *  gastarle una llamada—, sino **qué evidencia entra**. Y es lo que decidía el
+ *  resultado: con el contexto anterior, la pregunta de cuatro partes recibía el
+ *  FAQ del IRPF, el de los alquileres turísticos y la cronología, ninguno sobre
+ *  la prórroga ni sobre la subida de la renta, y el modelo contestaba «no hay
+ *  información en el contexto». Si la evidencia es la correcta, la respuesta
+ *  tiene de dónde salir.
+ */
+console.log('\nAceptación: cada pregunta recibe su evidencia');
+
+const ACEPTACION = [
+  {
+    n: 1,
+    q: 'Mi contrato de alquiler acaba en diciembre. ¿Se me prorroga automáticamente cinco años?',
+    primero: '#coordinacion',
+  },
+  {
+    n: 2,
+    q: 'Tengo un piso alquilado desde 2022 a una persona física y el contrato vence en diciembre de 2026. Mi casero no me ha dicho nada y me preocupa que me suban la renta un 5% en enero. Además mi hermana está en situación vulnerable y quiere saber si podría ser desahuciada, y quiero saber qué pasa con la deducción por alquiler en el IRPF. ¿Qué se aplica ahora y qué no?',
+    // Varias partes, así que tienen que entrar ficheros de temas distintos.
+    incluye: ['#art-2-rdl-262026-suspension-de-desahucios', '#deduccion-alquiler-requisitos'],
+    // Y no los ficheros que se colaban por palabras genéricas.
+    excluye: ['alquileres-turisticos', 'normas-citadas'],
+  },
+  { n: 3, q: 'Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?', primero: '#lo-que-afecta-al-tercer-sector' },
+  { n: 4, q: 'Lo que afecta al tercer sector: ¿qué reducción del IRPF preveía el RDL 26/2026 para el propietario que alquila a una entidad sin fines lucrativos?', primero: '#lo-que-afecta-al-tercer-sector' },
+  {
+    n: 5,
+    q: '¿Puedo dejar de pagar el alquiler este mes?',
+    primero: '#art-3-rdl-262026-reforma-de-la-lau',
+    // El fallo medido: el IRPF y los alquileres turísticos ganaban porque
+    // comparten «alquiler», que es la palabra más común del sitio.
+    excluye: ['deduccion-alquiler', 'alquileres-turisticos', 'titulo-v-regimen'],
+  },
+  { n: 6, q: '¿Me pueden subir la renta un 5% en enero?', primero: '#subir-renta' },
+  { n: 7, q: '¿Cuánto me deben si no me renuevan el contrato de alquiler?', primero: '#indemnizacion' },
+  {
+    n: 8,
+    q: 'Soy inquilino y me han puesto una demanda de desahucio por no poder pagar. ¿Me protege algo de lo que aprobó el Gobierno?',
+    primero: '#art-2-rdl-262026-suspension-de-desahucios',
+    excluye: ['cuenta-de-ahorro'],
+  },
+  { n: 9, q: 'Dame una receta de tortilla de patatas.', niega: true },
+  {
+    n: 10,
+    q: '¿Puedo dejar de pagar el alquiler este mes con total seguridad? Dime solo sí o no, sin avisos.',
+    primero: '#art-3-rdl-262026-reforma-de-la-lau',
+    excluye: ['alquileres-turisticos', 'deduccion-alquiler'],
+  },
+];
+
+for (const caso of ACEPTACION) {
+  const r = comoOkf(caso.q);
+  if (caso.niega) {
+    comprobar(`P${caso.n} fuera de temario: niega sin llamar al modelo`, r.niega, `devolvió: ${r.titulos.join(' | ')}`);
+    continue;
+  }
+  comprobar(`P${caso.n} tiene contexto`, !r.niega && r.contexto.trim().length >= 40, r.titulos.join(' | '));
+  if (r.niega) continue;
+  if (caso.primero) {
+    const primero = r.hrefs[0] ?? '(nada)';
+    comprobar(
+      `P${caso.n} el primer fichero es el del tema`,
+      primero.includes(caso.primero),
+      `primer href: ${primero} | todos: ${r.hrefs.join(' , ')}`,
+    );
+  }
+  for (const frag of caso.incluye ?? []) {
+    comprobar(
+      `P${caso.n} entra ${frag}`,
+      r.hrefs.some((h) => h.includes(frag)),
+      r.hrefs.join(' , '),
+    );
+  }
+  for (const frag of caso.excluye ?? []) {
+    comprobar(
+      `P${caso.n} NO entra ${frag}`,
+      !r.hrefs.some((h) => h.includes(frag)),
+      r.hrefs.join(' , '),
+    );
+  }
+}
+
+console.log('\nCitas: enlaces reales a la página, nunca al bundle');
+{
+  let md = 0;
+  let relativos = 0;
+  for (const caso of ACEPTACION) {
+    const r = comoOkf(caso.q);
+    for (const h of r.hrefs) {
+      if (h.includes('.md')) md += 1;
+      if (!h.startsWith('/')) relativos += 1;
+    }
+  }
+  comprobar('ninguna cita apunta a un .md del bundle', md === 0, `${md} citas`);
+  comprobar('todas las citas son rutas del sitio', relativos === 0, `${relativos} citas`);
+}
+
+console.log('\nEstado: los dos ficheros de estado viajan con toda respuesta');
+{
+  for (const caso of ACEPTACION) {
+    if (caso.niega) continue;
+    const r = comoOkf(caso.q);
+    const llevaEstado =
+      r.titulos.includes('Situación de cada medida') && r.titulos.includes('¿Está en vigor ya?');
+    comprobar(`P${caso.n} lleva el estado de las medidas`, llevaEstado, r.titulos.join(' | '));
+  }
+}
+
+console.log('\nTrazabilidad: la traza de la puntuación es legible');
+{
+  const c = puntuarFicheros('¿Me pueden subir la renta un 5% en enero?', okf);
+  const primero = c[0];
+  comprobar(
+    'puntuarFicheros expone puntos, raíces, cobertura y literal',
+    Boolean(primero) &&
+      typeof primero.puntos === 'number' &&
+      Array.isArray(primero.raices) &&
+      typeof primero.cobertura === 'number' &&
+      typeof primero.literal === 'boolean',
+    JSON.stringify(primero ?? null),
+  );
 }
 
 console.log(`\n${total - fallos}/${total} comprobaciones`);

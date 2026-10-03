@@ -183,7 +183,7 @@ const VACIAS = new Set([
  * con "medio"; por eso el prefijo solo cuenta para ordenar y la puerta se abre
  * con coincidencia fuerte.
  */
-function raiz(palabra: string): string {
+export function raiz(palabra: string): string {
   let p = palabra;
   const quitar = (sufijos: string[], minimo: number): void => {
     for (const s of sufijos) {
@@ -236,7 +236,7 @@ function formas(palabra: string): string[] {
  * mas importa -la pregunta dice "subida" y el FAQ dice "subir"-, asi que se
  * acepta que una raiz sea prefijo de la otra a partir de tres letras.
  */
-function mismaRaiz(a: string, b: string): boolean {
+export function mismaRaiz(a: string, b: string): boolean {
   if (a === b) return true;
   if (a.length < 3 || b.length < 3) return false;
   return a.startsWith(b) || b.startsWith(a);
@@ -266,7 +266,7 @@ function frecuencia(entradas: EntradaIndice[], raizBuscada: string): number {
  * cobertura de la entrada correcta -el FAQ de la renta, que dice 2 %- y la
  * dejaba fuera justo en el caso en que mas falta hacia.
  */
-function palabrasDeConsulta(consulta: string): string[] {
+export function palabrasDeConsulta(consulta: string): string[] {
   return tokenizar(consulta).filter((w) => w.length >= 3 && !VACIAS.has(w) && !/^\d+$/.test(w));
 }
 

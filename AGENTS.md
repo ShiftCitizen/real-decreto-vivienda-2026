@@ -173,7 +173,11 @@ single-shot form. Keep every limit on the server and never trust the client:
 - **Retrieval first: if nothing in the generated index clears the bar, return
   the fixed refusal *without calling the model*.** `npm run check:chat` is the
   gate: it runs `buscar()` against the built index exactly as `POST /api/chat`
-  does, and it exists because the bar used to leak in both directions.
+  does, and it exists because the bar used to leak in both directions. The
+  route now tries `seleccionar()` (§7) first and falls back to `buscar()` when
+  the OKF table is missing or returns `null`; **both return nothing for an
+  out-of-scope question**, so the scope guarantee does not depend on either one
+  being well tuned.
   - **`buscar()` matches whole words, never substrings.** It used to test
     `text.includes(token)`, so «hace» matched inside «hacer» and
     «¿Qué tiempo hace mañana en Madrid?» recuperaba tres entradas de vivienda.
@@ -201,10 +205,14 @@ single-shot form. Keep every limit on the server and never trust the client:
   it describe a repealed measure as applicable. It also forbids taking figures
   from the question, forbids inventing a sanction regime that the context does
   not describe, and forbids a bare yes/no about a person's legal position.
-- **Citations are sliced to the last `[n]`, not filtered to the used ones.**
-  The widget renders sources as links in the same order as the `[n]` markers in
-  the text, so dropping a middle entry would make `[3]` point at the wrong
-  source. `slice(0, ultima)` keeps the numbering honest.
+- **Citations are renumbered, not sliced.** The widget renders sources as links
+  in the same order as the `[n]` markers in the text, so dropping a middle entry
+  would make `[3]` point at the wrong source. The old `slice(0, ultima)` kept
+  the numbering honest but still listed everything below the last citation,
+  which is how a reply about the rent cap came with three unrelated titles
+  underneath it. `ajustarCitas()` now keeps *only* the cited numbers, renumbers
+  them to `1..n`, and rewrites the markers with the same map — so a source that
+  the model did not use is never shown.
 - No history, 500-char input cap, low temperature, ~350 output
   tokens, best-effort per-IP quota.
 - **The quota is keyed on `x-vercel-forwarded-for`, not `x-forwarded-for`,**
@@ -225,9 +233,94 @@ single-shot form. Keep every limit on the server and never trust the client:
   nothing in the log — the 401 is not an exception, it is a successful response.
   `curso-digitalizacion-2026` hit exactly this and now reads the index from disk
   via `includeFiles`; port that approach here before enabling protection.
+  The OKF table is read the same way, but only once per instance
+  (`okfCache` in the route): it is 124 kB and cannot change between requests.
 - The system prompt answers **solely** from the injected excerpts, demands
   page citations, and refuses everything else. The widget repeats the
   no-legal-advice note under every answer.
+
+### 7. `lib/okf.ts` — evidence selection from the OKF bundle
+
+`buscar()` decides *whether* a question is about the decrees. `lib/okf.ts`
+decides *which text* the model is shown, by whole topic instead of by isolated
+index entry. Both are kept: `buscar()` is still the scope gate, and
+`seleccionar()` returns `null` for anything outside the analysis, which is what
+lets the route return the fixed refusal without calling the model.
+
+**Why it exists, measured.** The route used to take
+`buscar(indice, q).slice(0, 3)` and concatenate to 3 000 chars. A three-part
+question could therefore receive at most three entries, and one long FAQ ate the
+budget: the measured context for the four-part question contained no extension,
+no rent update and no eviction entry, so the model truthfully answered "no hay
+información en el contexto". That was a retrieval-cap failure, not a
+missing-content one — the bundle was complete the whole time.
+
+**Why the bundle bodies can be fed to the model here** (unlike the course
+bundle): of 606 paragraphs, list items and table cells in `okf/`, 605 appear
+unchanged in the site. That is why `okf/` is a build input rather than a
+summary to route on.
+
+Three findings, each measured, that will look like arbitrary constants:
+
+- **Rarity must be counted with the same fuzzy matcher that is used to compare.**
+  Looking up `pesoDe(t)` by the question's *exact* root while matching with
+  `coincide()` (a prefix rule) made `alquil` — a root that barely exists
+  written, because the site says "alquiler"/"alquilo" — score as if it were the
+  rarest word in the bundle. That put the tourist-rental and IRPF FAQs above the
+  LAU reform for "¿Puedo dejar de pagar el alquiler?". `peso()` sums the
+  document frequency of every root the question's root matches, which is what
+  `frecuencia()` already did in `busqueda.ts`.
+- **Title and description are different weights.** Grouping them as one "strong"
+  set gave the art. 2 eviction-suspension file 13.5 points against 10.8 for
+  "Lo que afecta al tercer sector", because the word "vulnerable" appears in
+  art. 2's *description*. Title 3, description 2, body 1.
+- **Title coverage must not multiply.** This is the same bug `busqueda.ts`
+  already documents for `mejorTitulo`: a file matching one of three title words
+  was doubled, which alone put the tourist-rental FAQ ahead of the rent FAQ.
+  `cobertura` is still returned by `puntuarFicheros()` for debugging, but it
+  does not score.
+
+Other values, all from `scripts/chat-check.mjs`'s acceptance block:
+`coincide()` requires a shared prefix of ≥4 characters and a length difference
+≤4 (5 lost the "lucro"/"lucrativos" pair; 3 would reintroduce "enero" →
+"enervación", so 4 is the measured value); `PUNTUACION_MINIMA = 4`;
+`MIN_RAICES = 2`; `MAX_FICHERS = 4`; the `Estado:` block of every file always
+travels with the measure; and `estado/situacion-de-cada-medida.md` +
+`faq/esta-en-vigor.md` are appended to every substantive answer, because they
+are the only two places that say precisely that the decrees *entered into force
+on 1 and 2 October* and were repealed on 2 October.
+
+**Selection is per part, and parts come first.** `partesDe()` splits a
+multi-part question on punctuation and connectives; each part picks its own
+file. Scoring the question as one block let the file with the most *generic*
+overlap win and starved the other parts. Ordering the part winners ahead of the
+whole-question winner is what makes P3 correct: the whole-question ranking puts
+art. 2 first on "vulnerable", while the part that actually asks the question —
+"soy propietario y alquilo a una asociación sin ánimo de lucro" — is the one
+that identifies the third-sector file.
+
+**Two known limitations, do not try to "fix" them with a synonym list:**
+
+- In the four-part question, the clause "me preocupa que me suban la renta un 5 %
+  en enero" is won by "En 1 minuto", which literally contains "casero" and
+  "nada". `raiz("suban")` is "suban" and `raiz("subida")` is "subid" — they
+  share three characters, so no prefix rule connects them.
+- The clause "¿Me protege algo de lo que aprobó el Gobierno?" picks
+  `financiacion/cuenta-de-ahorro.md`, because "aprobó" and "Gobierno" are the
+  only content words in it and that file contains both.
+
+Both are genuine lexical near-misses, not a broken rule; closing them needs a
+hand-written synonym list of the site's vocabulary, which this work explicitly
+does not want. Everything else in the acceptance set passes.
+
+**Files.** `okf/` holds the 39 content files; `index.md` and `log.md` are
+converter navigation and are deliberately excluded — `index.md` contains a usage
+note addressed to whoever reads the bundle, and feeding that to the model is
+exactly the "bundle metadata is not an instruction" case. `scripts/build-okf-index.mjs`
+flattens markdown tables per row (so "Alquiler social … | 70 %" stays one unit
+and the condition stays attached to the figure), resolves each file to a live
+anchor by exact-then-containment title match, and **throws rather than writing
+a degraded table**. 37 of 39 resolve to an anchor; 2 fall back to the page.
 
 ## React gotchas in this codebase
 

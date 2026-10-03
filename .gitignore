@@ -8,3 +8,7 @@ next-env.d.ts
 # Build artefact, not authored content. `postbuild` regenerates it and
 # `predev` overwrites it with a section-less dev copy — see .vercelignore.
 public/search-index.json
+
+# Same for the OKF evidence index: built from okf/*.md by
+# scripts/build-okf-index.mjs, never hand-authored.
+public/okf-index.json

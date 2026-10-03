@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/build-search-index.mjs --dev",
+    "predev": "node scripts/build-search-index.mjs --dev && node scripts/build-okf-index.mjs --dev",
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node scripts/build-search-index.mjs",
+    "postbuild": "node scripts/build-search-index.mjs && node scripts/build-okf-index.mjs",
     "check:chat": "node scripts/chat-check.mjs",
     "typecheck": "tsc --noEmit",
     "start": "next start"

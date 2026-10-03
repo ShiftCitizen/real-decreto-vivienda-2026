@@ -10,6 +10,11 @@
 # placed in public/ here too.
 public/search-index.json
 
+# Mismo caso para el índice de evidencia del bundle OKF: lo genera
+# postbuild desde okf/*.md y nunca se escribe a mano. Sin esta línea, una copia
+# vieja subiría por `public/` y /api/chat leería la tabla equivocada.
+public/okf-index.json
+
 # Never deploy a local build: Vercel runs its own `npm run build`, and shipping
 # out/ risks serving stale HTML that predates the build.
 out

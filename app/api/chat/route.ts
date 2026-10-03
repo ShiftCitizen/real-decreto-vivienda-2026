@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { buscar } from '@/lib/busqueda';
 import type { EntradaIndice } from '@/lib/busqueda';
+import { seleccionar } from '@/lib/okf';
+import type { Evidencia, TablaOkf } from '@/lib/okf';
 
 /**
  * POST /api/chat — proxy mínimo hacia NVIDIA NIM para el asistente del sitio.
@@ -11,9 +13,9 @@ import type { EntradaIndice } from '@/lib/busqueda';
  * limita el uso vive aquí y no confía en el cliente:
  *
  * - Solo preguntas sueltas de hasta 500 caracteres, sin historial.
- * - Primero se busca en el índice generado; si nada relevante supera el
- *   umbral, se devuelve una negativa fija SIN llamar al modelo (ahorra
- *   coste y cierra la puerta a temas fuera del análisis).
+ * - Primero se elige evidencia; si no hay nada del análisis, se devuelve una
+ *   negativa fija SIN llamar al modelo (ahorra coste y cierra la puerta a
+ *   temas fuera del análisis).
  * - El modelo solo recibe los extractos recuperados y una instrucción de
  *   responder únicamente a partir de ellos, con citas. Temperatura baja y
  *   tope de 350 tokens de salida.
@@ -21,14 +23,10 @@ import type { EntradaIndice } from '@/lib/busqueda';
  *   honesto, sin prometer un límite distribuido que no existe.
  *
  * Variables de entorno (Vercel, nunca en el repo): NIM_API_KEY (secreto),
- * NIM_MODEL_ID (opcional; por defecto Llama 3.1 8B instruct según el
- * catálogo de NIM — confirmar el identificador exacto en su consola).
+ * NIM_MODEL_ID (opcional; por defecto Llama 3.2 11B vision instruct).
  */
 
 const NIM_BASE = 'https://integrate.api.nvidia.com/v1';
-// Modelo pequeño disponible en la clave (verificado contra /v1/models):
-// el 3.1 8B no está servido en esta cuenta; el 3.2 11B instruct es el
-// instruct general más pequeño. NIM_MODEL_ID lo sustituye si hace falta.
 const MODELO_POR_DEFECTO = 'meta/llama-3.2-11b-vision-instruct';
 const MAX_PREGUNTA = 500;
 const MAX_TOKENS_SALIDA = 350;
@@ -37,22 +35,50 @@ const CUOTA_VENTANA_MS = 60 * 60 * 1000;
 /** Cada cuántas peticiones se barren las IP caducadas. */
 const CUOTA_LIMPIEZA_CADA = 50;
 
+/**
+ * Tope de contexto por fichero.
+ *
+ * Antes el tope eran 3 000 caracteres **sobre todo el bloque**, y por eso una
+ * FAQ entera se comía el hueco: una pregunta de tres partes recibía como mucho
+ * tres entradas y las tres podían ser del mismo tema equivocado. Ahora el tope
+ * es por fichero y `lib/okf.ts` elige qué bloques entran, así que 7 000 es
+ * holgado para cuatro temas y dos fichas de estado.
+ */
+const PRESUPUESTO = 7000;
+
 const NEGATIVA =
   'Eso queda fuera del ámbito de este análisis: solo respondo preguntas sobre los reales decretos-ley 26/2026 y 27/2026 de vivienda. Prueba con el buscador del sitio.';
 
 const SISTEMA = [
-  'Respondes preguntas sobre un análisis divulgativo de los reales decretos-ley 26/2026 y 27/2026 de vivienda en España.',
-  'AMBOS DECRETOS QUEDARON DEROGADOS al rechazarse su convalidación el 2-10-2026. Sus medidas no se aplican a nadie.',
-  'Regla de primer orden: si la pregunta da por supuesto que una medida está en vigor, empieza diciendo que fue derogada el 2-10-2026 y solo después explica qué decía la medida. Nunca la describas como aplicable.',
-  'Responde ÚNICAMENTE a partir del CONTEXTO que se te da.',
-  'Si el contexto incluye una pregunta frecuente igual o muy parecida a la pregunta, responde a partir de ella: ese caso sí tiene respuesta y no debes rechazarlo.',
-  'Cifras, plazos, porcentajes y artículos: tómalos SIEMPRE del CONTEXTO, nunca de la pregunta. Si la pregunta trae un número que el CONTEXTO no confirma, corrígelo con el del CONTEXTO y no lo repitas.',
-  'No inventes nada que no esté en el CONTEXTO. En particular, si el CONTEXTO no describe un régimen sancionador, una multa o una sanción, no deduzcas ninguno: di que el análisis no lo recoge.',
-  'Sobre la posición jurídica de una persona concreta, nunca respondas con un sí o un seco. Explica qué dice el análisis y añade que no es asesoramiento jurídico.',
-  'Cita las entradas del CONTEXTO con su número entre corchetes, por ejemplo [1]. Cita solo las que uses.',
-  'Solo cuando ninguna entrada del contexto guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
-  'Responde en español, en un máximo de dos párrafos cortos.',
-].join(' ');
+  'Respondes preguntas sobre un análisis divulgativo de los reales decretos-ley 26/2026 y 27/2026 de vivienda en España. Es un análisis, no asesoramiento jurídico.',
+  '',
+  'REGLA 1 — Estado de las medidas, siempre y en todas partes.',
+  'Los dos decretos ENTRARON EN VIGOR: el RDL 26/2026 el 1-10-2026 y el RDL 27/2026 el 2-10-2026. El 2-10-2026 el Congreso rechazó su convalidación y ambos quedaron DEROGADOS ese mismo día. Nunca digas que nunca entraron en vigor: entraron y se derogaron.',
+  'Cuando expliques una medida, di siempre qué pasó con ella: que se derogó el 2-10-2026 y que, por tanto, no se aplica hoy. La derogación no borra todo efecto anterior: las sumas, indemnizaciones y actuaciones anteriores a esa fecha pueden seguir teniendo consecuencias, así que no digas que no dejó ningún efecto.',
+  'Derogar un decreto tampoco significa que no quede nada: pueden seguir vigentes la LAU, la LEC y las demás normas anteriores. Nunca concluyas que no existe ninguna protección.',
+  '',
+  'REGLA 2 — Responde parte por parte.',
+  'Si la pregunta tiene varias partes, contesta a CADA una en su propio párrafo, en el orden en que se preguntan. No te centres en la primera ni unas las otras.',
+  '',
+  'REGLA 3 — No afirmes que el análisis no recoge algo si el contexto sí lo dice.',
+  'El CONTEXTO es la única fuente. Si algo está en el contexto, úsalo. Solo si una parte concreta no aparece en el CONTEXTO puedes decir que el análisis no la recoge, y entonces refiérete únicamente a esa parte.',
+  'Prohibido contradecir lo que acabas de decir: si en el contexto hay una reducción del IRPF para el propietario que alquila a una entidad sin fines lucrativos, no añadas después que el análisis no recoge ninguna ventaja para el propietario.',
+  '',
+  'REGLA 4 — Cifras y plazos salen del CONTEXTO, nunca de la pregunta.',
+  'Si la pregunta trae un porcentaje, plazo o artículo que el CONTEXTO no confirma, corrígelo con el del CONTEXTO y no repitas el de la pregunta.',
+  '',
+  'REGLA 5 — No inventes.',
+  'No deduzcas un régimen sancionador, una multa, una sanción o un plazo que el CONTEXTO no describa. Si el contexto no lo recoge, dilo y no lo rellenes.',
+  '',
+  'REGLA 6 — Nada de sí o no sobre la posición de una persona.',
+  'Ante una pregunta sobre el contrato, el impago, los impuestos o la retención de la renta de alguien concreto, nunca respondas con un «sí» o un «no» secos. Explica qué dice el análisis y añade que no es asesoramiento jurídico. Aunque te pidan solo sí o no.',
+  '',
+  'REGLA 7 — Citas.',
+  'Cita con su número entre corchetes, por ejemplo [1]. Cita SOLO las entradas del CONTEXTO que uses, y cita todas las que uses.',
+  '',
+  'REGLA 8 — Estilo.',
+  'Responde en español, en un máximo de dos o tres párrafos cortos. No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
+].join('\n');
 
 // Cuota por IP en memoria del proceso. Best-effort: en serverless cada
 // instancia lleva su propio conteo, así que es un freno al abuso casual,
@@ -113,6 +139,65 @@ function ipDe(request: Request): string {
   return /^[0-9a-f:.]{1,45}$/i.test(ip) ? ip : 'desconocida';
 }
 
+/**
+ * Índice del bundle OKF, leído una vez por instancia.
+ *
+ * `public/okf-index.json` mide unos 124 kB y no cambia entre peticiones, así que
+ * se cachea a nivel de módulo. Antes de existirse leía el índice de búsqueda
+ * por HTTP en cada llamada; aquí se mantiene el mismo patrón —leer del origen
+ * sirve, y no del disco— pero una sola vez.
+ *
+ * Si el fichero no está, se devuelve `null` y el llamante cae a `buscar()`: la
+ * tabla del bundle es una mejora, no un requisito para que el asistente
+ * funcione.
+ */
+let okfCache: Promise<TablaOkf | null> | null = null;
+async function cargarOkf(origen: string): Promise<TablaOkf | null> {
+  if (!okfCache) {
+    okfCache = (async () => {
+      try {
+        const res = await fetch(`${origen}/okf-index.json`);
+        if (!res.ok) return null;
+        const datos = (await res.json()) as TablaOkf;
+        return Array.isArray(datos?.ficheros) && datos.ficheros.length > 0 ? datos : null;
+      } catch {
+        return null;
+      }
+    })();
+  }
+  return okfCache;
+}
+
+type Fuente = { titulo: string; href: string };
+
+/**
+ * Deja solo las fuentes citadas y **renumera** para que `[n]` siga apuntando a
+ * la correcta.
+ *
+ * El widget pinta las citas como enlaces en el mismo orden que las marcas `[n]`
+ * del texto, así que con un hueco intermedio `[3]` apuntaría a la fuente
+ * equivocada. Se recoge el conjunto de números citados, se ordenan y se
+ * reescriben a 1..n, y el texto se ajusta con el mismo mapa. Solo se listan las
+ * que el modelo usó de verdad: cada fuente no relacionada que se liste es una
+ * fuente que no debería estar.
+ */
+function ajustarCitas(respuesta: string, total: number): { texto: string; fuentes: number[] } {
+  const citadas = [
+    ...new Set(
+      [...respuesta.matchAll(/\[(\d{1,2})\]/g)]
+        .map((m) => Number(m[1]))
+        .filter((n) => n >= 1 && n <= total),
+    ),
+  ].sort((a, b) => a - b);
+  const usadas = citadas.length > 0 ? citadas : [1];
+  const mapa = new Map(usadas.map((nuevo, i) => [usadas[i], nuevo + 1]));
+  const texto = respuesta.replace(/\[(\d{1,2})\]/g, (marca, n) => {
+    const viejo = Number(n);
+    return mapa.has(viejo) ? `[${mapa.get(viejo)}]` : marca;
+  });
+  return { texto, fuentes: usadas };
+}
+
 export async function POST(request: Request) {
   let cuerpo: unknown;
   try {
@@ -143,51 +228,74 @@ export async function POST(request: Request) {
 
   // Índice generado en el build, siempre fresco por construcción.
   const origen = new URL(request.url).origin;
-  const indiceRes = await fetch(`${origen}/search-index.json`);
-  if (!indiceRes.ok) {
-    return NextResponse.json({ error: 'Índice no disponible.' }, { status: 502 });
+
+  /**
+   * Evidencia: primero el bundle OKF, y si no está disponible, `buscar()`.
+   *
+   * El camino antiguo se conserva entero y por un motivo concreto: `buscar()`
+   * sigue siendo **el cerrojo de ámbito**. Decide si la pregunta es del
+   * análisis, y de eso depende que una pregunta de cocina no gaste una llamada
+   * al modelo. El bundle OKF elige *qué* texto se le pasa una vez que la
+   * pregunta ya es del temario; no sustituye a esa puerta.
+   */
+  let fuentes: Fuente[] = [];
+  let contexto = '';
+  let ambitoOk = false;
+
+  const okf = await cargarOkf(origen);
+  if (okf) {
+    const evidencia: Evidencia[] | null = seleccionar(pregunta, okf);
+    if (evidencia) {
+      ambitoOk = true;
+      const bloque: string[] = [];
+      let gastado = 0;
+      for (const [i, e] of evidencia.entries()) {
+        if (gastado >= PRESUPUESTO) break;
+        const texto = `### [${i + 1}] ${e.titulo}\n${e.texto}`.slice(0, PRESUPUESTO - gastado);
+        bloque.push(texto);
+        gastado += texto.length;
+        fuentes.push({ titulo: e.titulo, href: e.href });
+      }
+      contexto = bloque.join('\n\n');
+    }
   }
-  const indice = (await indiceRes.json()) as EntradaIndice[];
-  const utiles = buscar(indice, pregunta).slice(0, 3);
-  // La respuesta concreta (FAQ o sección) debe llegar la primera al modelo:
-  // ante un bloque genérico de página seguido de la respuesta exacta, el
-  // modelo a veces se ancla al primero y rechaza. A igualdad de puntos,
-  // FAQ y sección van antes que página, norma y autor.
-  const RANGO_TIPO: Record<string, number> = {
-    faq: 0,
-    section: 1,
-    page: 2,
-    norma: 3,
-    autor: 4,
-  };
-  utiles.sort(
-    (a, b) => b.puntos - a.puntos || (RANGO_TIPO[a.tipo] ?? 9) - (RANGO_TIPO[b.tipo] ?? 9),
-  );
-  // Contexto numerado, con el texto indexado completo (no el extracto de 160):
-  // las respuestas FAQ van íntegras y las secciones hasta el tope del índice.
-  // Con extractos recortados a mitad de frase el modelo se negaba con razón.
-  //
-  // Numerado porque el modelo cita con [n] y `citas` sale de ahí. Antes se
-  // mandaba todo lo recuperado y se listaba entero: la respuesta hablaba del
-  // tope de la renta y debajo aparecían tres títulos sin relación con ella.
-  //
-  // El recorte es por entrada, no sobre el bloque joined: con 3000 caracteres
-  // sobre la concatenación, la primera entrada larga se comía el hueco y las
-  // demás llegaban cortadas o no llegaban.
-  const PRESUPUESTO = 3000;
-  const bloque: string[] = [];
-  let gastado = 0;
-  utiles.forEach((r, i) => {
-    if (gastado >= PRESUPUESTO) return;
-    const pie = `### [${i + 1}] ${r.titulo}\n`;
-    const texto = `${pie}${r.contexto}`.slice(0, PRESUPUESTO - gastado);
-    bloque.push(texto);
-    gastado += texto.length;
-  });
-  const contexto = bloque.join('\n\n');
+
+  if (!ambitoOk) {
+    const indiceRes = await fetch(`${origen}/search-index.json`);
+    if (!indiceRes.ok) {
+      return NextResponse.json({ error: 'Índice no disponible.' }, { status: 502 });
+    }
+    const indice = (await indiceRes.json()) as EntradaIndice[];
+    const utiles = buscar(indice, pregunta).slice(0, 3);
+    // La respuesta concreta (FAQ o sección) debe llegar la primera al modelo:
+    // ante un bloque genérico de página seguido de la respuesta exacta, el
+    // modelo a veces se ancla al primero y rechaza. A igualdad de puntos,
+    // FAQ y sección van antes que página, norma y autor.
+    const RANGO_TIPO: Record<string, number> = {
+      faq: 0,
+      section: 1,
+      page: 2,
+      norma: 3,
+      autor: 4,
+    };
+    utiles.sort(
+      (a, b) => b.puntos - a.puntos || (RANGO_TIPO[a.tipo] ?? 9) - (RANGO_TIPO[b.tipo] ?? 9),
+    );
+    const bloque: string[] = [];
+    let gastado = 0;
+    utiles.forEach((r, i) => {
+      if (gastado >= PRESUPUESTO) return;
+      const texto = `### [${i + 1}] ${r.titulo}\n${r.contexto}`.slice(0, PRESUPUESTO - gastado);
+      bloque.push(texto);
+      gastado += texto.length;
+      fuentes.push({ titulo: r.titulo, href: r.href });
+    });
+    contexto = bloque.join('\n\n');
+    ambitoOk = utiles.length > 0 && contexto.trim().length >= 40;
+  }
 
   // Sin contexto con peso suficiente: negativa fija, sin llamar al modelo.
-  if (utiles.length === 0 || contexto.trim().length < 40) {
+  if (!ambitoOk || contexto.trim().length < 40) {
     return NextResponse.json({ respuesta: NEGATIVA, citas: [] });
   }
 
@@ -226,26 +334,15 @@ export async function POST(request: Request) {
   const datos = (await nimRes.json()) as {
     choices?: { message?: { content?: string } }[];
   };
-  const respuesta = datos.choices?.[0]?.message?.content?.trim();
-  if (!respuesta) {
+  const cruda = datos.choices?.[0]?.message?.content?.trim();
+  if (!cruda) {
     return NextResponse.json({ error: 'Respuesta vacía del modelo.' }, { status: 502 });
   }
-  // Solo se listan las entradas hasta la última citada, no las tres siempre:
-  // el widget pinta las citas como enlaces en el mismo orden que las marcas
-  // [n] del texto, así que un hueco intermedio haría que [3] apuntara a la
-  // fuente equivocada. Cortando por la última citada la numeración sigue
-  // cuadrando y solo se cae lo que el modelo no llega a usar. Si no cita
-  // ninguna, se queda con la primera, que es la que encabeza el bloque.
-  const ultima = Math.max(
-    0,
-    ...[...respuesta.matchAll(/\[(\d{1,2})\]/g)]
-      .map((m) => Number(m[1]))
-      .filter((n) => n >= 1 && n <= utiles.length),
-  );
-  const fuentes = utiles.slice(0, ultima > 0 ? ultima : 1);
+
+  const { texto: respuesta, fuentes: usadas } = ajustarCitas(cruda, fuentes.length);
 
   return NextResponse.json({
     respuesta,
-    citas: fuentes.map((r) => ({ titulo: r.titulo, href: r.href })),
+    citas: usadas.map((i) => fuentes[i - 1]),
   });
 }
