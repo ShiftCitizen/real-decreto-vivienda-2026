@@ -366,7 +366,7 @@ function ampliaDe(pregunta) {
     );
     comprobar('F no entra en fiscal', !r.citas.some((c) => c.href.includes('/fiscal')));
     comprobar('F lleva la frase de estado', r.respuesta.includes(FRASE_ESTADO));
-    comprobar('F cierra la frase', /[.!?]\s*$/.test(r.respuesta));
+    comprobar('F cierra la frase', /[.!?]\s*(\[\d{1,2}\]\s*)*$/.test(r.respuesta));
   }
 }
 
