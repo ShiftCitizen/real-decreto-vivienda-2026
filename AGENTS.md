@@ -59,6 +59,26 @@ build would reject it. Therefore:
   `vercel.json` pins `buildCommand: npm run build` so the search index and
   citation audit always run there; never rely on the dashboard default (bare
   `next build` skips `postbuild`). Do not delete `.vercel/project.json`.
+- **"Built green" is not "deployed". Check `readySubstate`, not `readyState`.**
+  This bit on 2026-10-03: four deployments built successfully and were left
+  `STAGED`, never `PROMOTED`, so the alias kept serving an older commit while
+  the build log reported a clean deploy. `vercel ls` prints `Ready` for both —
+  it shows `readyState`, so it cannot tell you. A staged production deployment
+  means the domain was never auto-assigned and **nothing goes live silently**:
+  - Check with the REST API, not the CLI:
+    `GET /v6/deployments?projectId=prj_3SkPYbowj08LYrMvy52f3Lo8bjhk&teamId=team_lHgxDkPcjsK71EhnRzS2DBoA`
+    and read `readySubstate` (`PROMOTED` = live) plus `source` (`git` or `cli`).
+  - Promote with `vercel promote <deployment-id>`; it re-points the alias
+    without rebuilding.
+  - `GET /v9/projects/<id>` has no field that explains a missing promotion.
+    `autoAssignCustomDomains: true` and `live: false` both read normally —
+    **`live` is `false` on every project in this team, including ones that
+    deploy correctly, so it is not a signal.** The control that proves a cause
+    is always a same-team project that is working.
+  - Staging is enabled per the Production environment's Branch Tracking
+    ("Auto-assign Custom Production Domains"), which is toggled in the
+    dashboard and has **no REST endpoint**. Treat it as unverifiable from the
+    CLI and confirm by promoting.
 - Old `*.html` URLs from the pre-Next site are **not** redirected. That was a
   deliberate decision, not an oversight.
 
