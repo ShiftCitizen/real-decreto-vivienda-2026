@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { responderAmplia } from '@/lib/amplia';
 import { buscar } from '@/lib/busqueda';
 import type { EntradaIndice } from '@/lib/busqueda';
 import { seleccionar } from '@/lib/okf';
@@ -16,9 +17,14 @@ import type { Evidencia, TablaOkf } from '@/lib/okf';
  * - Primero se elige evidencia; si no hay nada del análisis, se devuelve una
  *   negativa fija SIN llamar al modelo (ahorra coste y cierra la puerta a
  *   temas fuera del análisis).
+ * - Un pedido amplio (resumen del sitio o de una página, puntos clave, lienzo)
+ *   no pasa por esa búsqueda: se contesta con frases ya publicadas en las
+ *   páginas, cada una con su enlace, y con la frase de estado junto a cada
+ *   medida. Cabe entera, así que no usa el tope de 350 tokens. Una pregunta
+ *   estrecha no entra por ahí.
  * - El modelo solo recibe los extractos recuperados y una instrucción de
  *   responder únicamente a partir de ellos, con citas. Temperatura baja y
- *   tope de 350 tokens de salida.
+ *   tope de 350 tokens de salida. La clave, la cuota y el proveedor no cambian.
  * - Cuota best-effort por IP en memoria (10/hora): suficiente para un uso
  *   honesto, sin prometer un límite distribuido que no existe.
  *
@@ -224,6 +230,16 @@ export async function POST(request: Request) {
       { error: 'Cuota agotada: inténtalo de nuevo más tarde.' },
       { status: 429 },
     );
+  }
+
+  // Pedido amplio: resumen del sitio o de un tema, en frases de las páginas.
+  // La cuota y el tope de 500 caracteres ya se aplicaron arriba. No llama al
+  // modelo, así que no usa el tope de 350 tokens ni la clave. Una pregunta que
+  // no lo es —incluida la que cae fuera del análisis— sigue abajo y, si no hay
+  // evidencia, recibe la negativa fija.
+  const amplia = responderAmplia(pregunta);
+  if (amplia) {
+    return NextResponse.json({ respuesta: amplia.respuesta, citas: amplia.citas });
   }
 
   // Índice generado en el build, siempre fresco por construcción.

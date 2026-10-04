@@ -9,7 +9,7 @@
 * son de vivienda, que es el fallo mas caro de este endpoint porque llega
  * mezclado con la respuesta en vez de con la negativa.
  */
-import { readFileSync } from 'node:fs';
+import { globSync, readFileSync } from 'node:fs';
 import { registerHooks } from 'node:module';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join } from 'node:path';
@@ -37,6 +37,9 @@ registerHooks({
 
 const { buscar } = await import('@/lib/busqueda');
 const { seleccionar, puntuarFicheros } = await import('@/lib/okf');
+const { responderAmplia, fragmentosPublicados, FRASE_ESTADO, PAGINAS_PRINCIPALES } = await import(
+  '@/lib/amplia'
+);
 
 const indice = JSON.parse(readFileSync(join(root, 'public/search-index.json'), 'utf8'));
 const okf = JSON.parse(readFileSync(join(root, 'public/okf-index.json'), 'utf8'));
@@ -297,6 +300,128 @@ console.log('\nTrazabilidad: la traza de la puntuación es legible');
       typeof primero.cobertura === 'number' &&
       typeof primero.literal === 'boolean',
     JSON.stringify(primero ?? null),
+  );
+}
+
+console.log('\nPedido amplio: resumen del sitio o de un tema, sin tocar la pregunta estrecha');
+
+function plano(texto) {
+  return texto
+    .replace(/\{'\s*'\}/g, ' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+for (const fragmento of fragmentosPublicados()) {
+  const src = plano(readFileSync(join(root, fragmento.archivo), 'utf8'));
+  comprobar(
+    `publicado: ${fragmento.texto.slice(0, 48)}`,
+    src.includes(fragmento.texto.replace(/\s+/g, ' ').trim()),
+    fragmento.archivo,
+  );
+}
+
+function veces(texto, aguja) {
+  return texto.split(aguja).length - 1;
+}
+
+const NIEGA_ENTRADA = /no entr(?:a|an|ó|aron) en vigor|no lleg(?:ó|aron) a entrar en vigor/i;
+const sospechosos = ['app', 'lib', 'okf', 'components'].flatMap((dir) =>
+  globSync(`${dir}/**/*.{tsx,ts,md}`, { cwd: root }).filter((archivo) =>
+    NIEGA_ENTRADA.test(readFileSync(join(root, archivo), 'utf8')),
+  ),
+);
+comprobar(
+  'ninguna página publicada niega la entrada en vigor',
+  sospechosos.length === 0,
+  sospechosos.join(', '),
+);
+
+const SEIS = PAGINAS_PRINCIPALES.map((href) => (href === '/' ? '/' : `${href}/`));
+
+function ampliaDe(pregunta) {
+  return responderAmplia(pregunta);
+}
+
+{
+  const r = ampliaDe('Resume la web en puntos clave.');
+  comprobar('E responde', Boolean(r));
+  if (r) {
+    const hrefs = r.citas.map((c) => c.href);
+    comprobar(
+      'E cubre las seis páginas',
+      SEIS.every((h) => hrefs.includes(h)),
+      hrefs.join(' | '),
+    );
+    comprobar('E dice la frase de estado una sola vez', veces(r.respuesta, FRASE_ESTADO) === 1);
+    comprobar('E enlaza la página de estado', r.citas.some((c) => c.href === '/estado/'));
+    comprobar(
+      'E no dice que los decretos no llegaran a entrar en vigor',
+      !/no entr(a|an) en vigor|nunca entr/i.test(r.respuesta),
+    );
+    comprobar('E no dice extracto', !/extracto|contexto proporcionado/i.test(r.respuesta));
+    comprobar('E cierra la frase', /[.!?]\s*$/.test(r.respuesta));
+    const marcas = [...r.respuesta.matchAll(/\[(\d{1,2})\]/g)].map((m) => Number(m[1]));
+    comprobar(
+      'E las marcas apuntan a una cita',
+      marcas.every((n) => n >= 1 && n <= r.citas.length),
+    );
+  }
+}
+
+{
+  const r = ampliaDe('¿Cuáles son los puntos esenciales sobre alquiler?');
+  comprobar('F responde', Boolean(r));
+  if (r) {
+    const lineas = r.respuesta.split(/\n\n/).filter(Boolean);
+    comprobar('F es una lista corta', lineas.length >= 2 && lineas.length <= 6, `${lineas.length} puntos`);
+    comprobar(
+      'F solo alquiler y el estado',
+      r.citas.every((c) => c.href.startsWith('/desahucios-y-alquiler') || c.href === '/estado/'),
+      r.citas.map((c) => c.href).join(' | '),
+    );
+    comprobar('F no entra en fiscal', !r.citas.some((c) => c.href.includes('/fiscal')));
+    comprobar('F dice la frase de estado una sola vez', veces(r.respuesta, FRASE_ESTADO) === 1);
+    comprobar('F enlaza la página de estado', r.citas.some((c) => c.href === '/estado/'));
+    comprobar('F cierra la frase', /[.!?]\s*(\[\d{1,2}\]\s*)*$/.test(r.respuesta));
+  }
+}
+
+{
+  const r = ampliaDe('Resume la parte fiscal.');
+  comprobar('G responde', Boolean(r));
+  if (r) {
+    const lineas = r.respuesta.split(/\n\n/).filter(Boolean);
+    comprobar('G es una lista corta', lineas.length >= 2 && lineas.length <= 6, `${lineas.length} puntos`);
+    comprobar(
+      'G solo fiscal y el estado',
+      r.citas.every((c) => c.href.startsWith('/fiscal') || c.href === '/estado/'),
+      r.citas.map((c) => c.href).join(' | '),
+    );
+    comprobar('G no entra en desahucios', !r.citas.some((c) => c.href.includes('desahucios')));
+    comprobar('G dice la frase de estado una sola vez', veces(r.respuesta, FRASE_ESTADO) === 1);
+    comprobar('G enlaza la página de estado', r.citas.some((c) => c.href === '/estado/'));
+  }
+}
+
+comprobar('H la receta no es un resumen', responderAmplia('Dame una receta de tortilla.') === null);
+comprobar('H la receta sin punto tampoco', responderAmplia('Dame una receta de tortilla') === null);
+
+for (const caso of ACEPTACION) {
+  comprobar(
+    `P${caso.n} sigue siendo pregunta estrecha`,
+    responderAmplia(caso.q) === null,
+    caso.q,
+  );
+}
+
+{
+  const r = ampliaDe('pon en un lienzo los temas imprescindibles');
+  comprobar(
+    'lienzo sin tema cubre las seis páginas',
+    Boolean(r) && SEIS.every((h) => r.citas.some((c) => c.href === h)),
+    (r?.citas ?? []).map((c) => c.href).join(' | '),
   );
 }
 

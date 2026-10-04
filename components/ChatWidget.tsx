@@ -109,11 +109,16 @@ export default function ChatWidget() {
           {estado.tipo === 'error' && <p className="chat-error">{estado.mensaje}</p>}
           {estado.tipo === 'ok' && (
             <div className="chat-respuesta">
-              <p>{estado.respuesta}</p>
+              {estado.respuesta
+                .split(/\n+/)
+                .filter((linea) => linea.trim().length > 0)
+                .map((linea, i) => (
+                  <p key={i}>{linea}</p>
+                ))}
               {estado.citas.length > 0 && (
                 <ul className="chat-citas">
-                  {estado.citas.map((cita) => (
-                    <li key={cita.href}>
+                  {estado.citas.map((cita, i) => (
+                    <li key={`${cita.href}-${i}`}>
                       <a href={cita.href}>{cita.titulo}</a>
                     </li>
                   ))}

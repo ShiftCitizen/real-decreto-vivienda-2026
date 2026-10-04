@@ -176,9 +176,10 @@ export default function HomePage() {
             vivienda; ambos quedan derogados.
           </li>
           <li>
-            <strong>Para inquilinos:</strong> no entran en vigor la moratoria de desahucios,
-            los límites extra a subidas de renta ni las prórrogas automáticas que preveían
-            los decretos.
+            <strong>Para inquilinos:</strong> la moratoria de desahucios, los límites
+            extra a subidas de renta y las prórrogas automáticas que preveían los
+            decretos entraron en vigor con ellos; al quedar derogados los decretos el
+            2 de octubre de 2026, ya no se aplican.
           </li>
           <li>
             <strong>Para caseros:</strong> no se aplican las reglas de renovación automática
@@ -243,7 +244,8 @@ export default function HomePage() {
           EH Bildu, PNV, Podemos, BNG, Compromís y Coalición Canaria.
         </li>
         <li>
-          <strong>Consecuencia:</strong> derogado. No entra en vigor.
+          <strong>Consecuencia:</strong> derogado. Entró en vigor el 1 de octubre de
+          2026 y el Congreso lo derogó el 2 de octubre de 2026: no está ahora en vigor.
         </li>
         <li>
           <strong>Medidas que contenía y que no se aplican:</strong> moratoria de
@@ -262,7 +264,8 @@ export default function HomePage() {
           contra, 0 abstenciones.
         </li>
         <li>
-          <strong>Consecuencia:</strong> derogado. No entra en vigor.
+          <strong>Consecuencia:</strong> derogado. Entró en vigor el 2 de octubre de
+          2026 y el Congreso lo derogó ese mismo día: no está ahora en vigor.
         </li>
         <li>
           <strong>Medidas que contenía y que no se aplican:</strong> prórroga

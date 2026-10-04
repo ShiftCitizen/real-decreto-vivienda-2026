@@ -43,13 +43,13 @@ Los dos decretos se votaron por separado y ambos fueron rechazados. Al no obtene
 ### RDL 26/2026 (el decreto «grande»)
 
 - Resultado: 172 votos a favor, 178 en contra, 0 abstenciones. Votaron en contra PP, Vox, Junts y UPN; a favor, PSOE, Sumar, ERC, EH Bildu, PNV, Podemos, BNG, Compromís y Coalición Canaria.
-- Consecuencia: derogado. No entra en vigor.
+- Consecuencia: derogado. Entró en vigor el 1 de octubre de 2026 y el Congreso lo derogó el 2 de octubre de 2026: no está ahora en vigor.
 - Medidas que contenía y que no se aplican: moratoria de desahucios hasta 2030, enervación extraordinaria, tope extraordinario a la actualización de rentas, prórroga extraordinaria de contratos, reforma de la LAU sobre temporada y habitaciones, medidas fiscales (IRPF, IVA, IBI, SOCIMI) y financiación (avales, TU CASA y Cuenta Financia Europa).
 
 ### RDL 27/2026 (alquileres)
 
 - Resultado: 166–167 votos a favor (según fuente), 184 en contra, 0 abstenciones.
-- Consecuencia: derogado. No entra en vigor.
+- Consecuencia: derogado. Entró en vigor el 2 de octubre de 2026 y el Congreso lo derogó ese mismo día: no está ahora en vigor.
 - Medidas que contenía y que no se aplican: prórroga indefinida de cinco y siete años e indemnización de doce mensualidades por no renovación.
 
 Al no obtener la convalidación, los reales decretos-ley quedan derogados y dejan de producir efectos. La situación jurídica vuelve al marco anterior a su aprobación. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
