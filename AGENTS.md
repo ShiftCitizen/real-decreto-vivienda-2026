@@ -74,11 +74,16 @@ build would reject it. Therefore:
     `autoAssignCustomDomains: true` and `live: false` both read normally —
     **`live` is `false` on every project in this team, including ones that
     deploy correctly, so it is not a signal.** The control that proves a cause
-    is always a same-team project that is working.
-  - Staging is enabled per the Production environment's Branch Tracking
-    ("Auto-assign Custom Production Domains"), which is toggled in the
-    dashboard and has **no REST endpoint**. Treat it as unverifiable from the
-    CLI and confirm by promoting.
+    is always a same-team project that is working. Do not chase it.
+  - The remedy that worked: `POST /v1/projects/<id>/unpause?teamId=<team>`.
+    It answers `200` with an **empty body and does not flip `live`**, so it
+    looks like a no-op — but auto-assignment came back immediately and the
+    next `git push` promoted on its own (verified 2026-10-04, commit
+    `3a01b01`). Do not read the empty response as failure.
+  - Staging is otherwise driven by the Production environment's Branch
+    Tracking ("Auto-assign Custom Production Domains"), a dashboard toggle
+    with no environment REST endpoint. So the recovery path is `unpause`,
+    and `vercel promote <id>` when you need the site live *right now*.
 - Old `*.html` URLs from the pre-Next site are **not** redirected. That was a
   deliberate decision, not an oversight.
 
