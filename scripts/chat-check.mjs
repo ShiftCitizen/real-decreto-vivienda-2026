@@ -9,7 +9,7 @@
 * son de vivienda, que es el fallo mas caro de este endpoint porque llega
  * mezclado con la respuesta en vez de con la negativa.
  */
-import { readFileSync } from 'node:fs';
+import { globSync, readFileSync } from 'node:fs';
 import { registerHooks } from 'node:module';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join } from 'node:path';
@@ -322,6 +322,22 @@ for (const fragmento of fragmentosPublicados()) {
   );
 }
 
+function veces(texto, aguja) {
+  return texto.split(aguja).length - 1;
+}
+
+const NIEGA_ENTRADA = /no entr(?:a|an|ó|aron) en vigor|no lleg(?:ó|aron) a entrar en vigor/i;
+const sospechosos = ['app', 'lib', 'okf', 'components'].flatMap((dir) =>
+  globSync(`${dir}/**/*.{tsx,ts,md}`, { cwd: root }).filter((archivo) =>
+    NIEGA_ENTRADA.test(readFileSync(join(root, archivo), 'utf8')),
+  ),
+);
+comprobar(
+  'ninguna página publicada niega la entrada en vigor',
+  sospechosos.length === 0,
+  sospechosos.join(', '),
+);
+
 const SEIS = PAGINAS_PRINCIPALES.map((href) => (href === '/' ? '/' : `${href}/`));
 
 function ampliaDe(pregunta) {
@@ -338,7 +354,8 @@ function ampliaDe(pregunta) {
       SEIS.every((h) => hrefs.includes(h)),
       hrefs.join(' | '),
     );
-    comprobar('E lleva la frase de estado', r.respuesta.includes(FRASE_ESTADO));
+    comprobar('E dice la frase de estado una sola vez', veces(r.respuesta, FRASE_ESTADO) === 1);
+    comprobar('E enlaza la página de estado', r.citas.some((c) => c.href === '/estado/'));
     comprobar(
       'E no dice que los decretos no llegaran a entrar en vigor',
       !/no entr(a|an) en vigor|nunca entr/i.test(r.respuesta),
@@ -365,7 +382,8 @@ function ampliaDe(pregunta) {
       r.citas.map((c) => c.href).join(' | '),
     );
     comprobar('F no entra en fiscal', !r.citas.some((c) => c.href.includes('/fiscal')));
-    comprobar('F lleva la frase de estado', r.respuesta.includes(FRASE_ESTADO));
+    comprobar('F dice la frase de estado una sola vez', veces(r.respuesta, FRASE_ESTADO) === 1);
+    comprobar('F enlaza la página de estado', r.citas.some((c) => c.href === '/estado/'));
     comprobar('F cierra la frase', /[.!?]\s*(\[\d{1,2}\]\s*)*$/.test(r.respuesta));
   }
 }
@@ -382,7 +400,8 @@ function ampliaDe(pregunta) {
       r.citas.map((c) => c.href).join(' | '),
     );
     comprobar('G no entra en desahucios', !r.citas.some((c) => c.href.includes('desahucios')));
-    comprobar('G lleva la frase de estado', r.respuesta.includes(FRASE_ESTADO));
+    comprobar('G dice la frase de estado una sola vez', veces(r.respuesta, FRASE_ESTADO) === 1);
+    comprobar('G enlaza la página de estado', r.citas.some((c) => c.href === '/estado/'));
   }
 }
 

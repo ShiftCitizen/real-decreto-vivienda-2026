@@ -13,10 +13,9 @@
  * su tope de 350 tokens.
  *
  * La frase de estado no está copiada de un párrafo: es la formulación que hay
- * que poner junto a cada medida. Las fechas que dice (entrada en vigor el 1 y
- * el 2 de octubre, derogación el 2) son las de la entradilla de `/estado`. No
- * se usa la redacción de la portada que dice «no entran en vigor», porque esa
- * frase se lee como si los decretos no hubieran llegado a regir.
+ * que decir una vez por respuesta, con enlace a `/estado`. Las fechas que dice
+ * (entrada en vigor el 1 y el 2 de octubre, derogación el 2) son las de la
+ * entradilla de esa página. No se dice que los decretos nunca entraran en vigor.
  */
 import { ALL_LINKS } from './nav';
 import { normalizar } from './busqueda';
@@ -531,16 +530,13 @@ function redactar(items: Item[]): { respuesta: string; citas: CitaAmplia[] } {
     citas.push({ titulo: 'Estado y advertencias', href: HREF_ESTADO });
     nEstado = citas.length;
   }
-  const lineas = items.map((item, i) => {
-    const n = i + 1;
-    const estado =
-      item.medida && nEstado > 0
-        ? nEstado === n
-          ? ` ${FRASE_ESTADO}`
-          : ` ${FRASE_ESTADO} [${nEstado}]`
-        : '';
-    return `${item.titulo} [${n}]. ${cierra(item.texto)}${estado}`;
-  });
+  const lineas = items.map((item, i) => `${item.titulo} [${i + 1}]. ${cierra(item.texto)}`);
+  // Una sola vez por respuesta, no una por punto. Si `/estado` ya es un punto,
+  // la frase va en ese punto; si no, cierra la lista y cita esa página.
+  if (hayMedida && nEstado > 0) {
+    if (nEstado <= items.length) lineas[nEstado - 1] += ` ${FRASE_ESTADO}`;
+    else lineas.push(`${FRASE_ESTADO} [${nEstado}]`);
+  }
   return { respuesta: lineas.join('\n\n'), citas };
 }
 

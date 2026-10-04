@@ -1,7 +1,7 @@
 ---
 type: Concept
 title: En 1 minuto
-description: "Qué ha pasado según la portada: el Congreso ha rechazado los dos decretos, no entran en vigor las medidas que preveían y vuelve el marco anterior."
+description: "Qué ha pasado según la portada: el Congreso ha rechazado los dos decretos; las medidas que preveían entraron en vigor con ellos y, al quedar derogados el 2 de octubre de 2026, ya no se aplican. Vuelve el marco anterior."
 tags:
   - rdl-vivienda-2026
   - resumen
@@ -18,7 +18,7 @@ sources:
 # En 1 minuto
 
 - Qué ha pasado: el Congreso ha rechazado los dos decretos de vivienda; ambos quedan derogados.
-- Para inquilinos: no entran en vigor la moratoria de desahucios, los límites extra a subidas de renta ni las prórrogas automáticas que preveían los decretos.
+- Para inquilinos: la moratoria de desahucios, los límites extra a subidas de renta y las prórrogas automáticas que preveían los decretos entraron en vigor con ellos; al quedar derogados los decretos el 2 de octubre de 2026, ya no se aplican.
 - Para caseros: no se aplican las reglas de renovación automática ni las indemnizaciones previstas en el segundo decreto.
 - Qué pasa ahora: vuelve el marco anterior (la LAU y las normas vigentes antes de los decretos), salvo que se aprueben nuevas medidas por otra vía.
 - Futuro incierto: el Gobierno podría intentar tramitar algunas medidas como proyecto de ley, pero no hay nada cerrado.

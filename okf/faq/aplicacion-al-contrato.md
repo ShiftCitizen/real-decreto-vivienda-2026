@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: ¿Cuándo se aplica a mi contrato?
-description: "Ninguna de las reglas transitorias se aplica: el régimen nuevo de cinco o siete años no llegó a entrar en vigor al derogarse el RDL 27/2026 el 2-10-2026."
+description: "Ninguna de las reglas transitorias se aplica: el régimen nuevo de cinco o siete años entró en vigor con el RDL 27/2026 el 2-10-2026 y quedó derogado ese mismo día, así que no está en vigor."
 tags:
   - rdl-vivienda-2026
   - faq
@@ -17,7 +17,7 @@ sources:
 
 # ¿Cuándo se aplica a mi contrato?
 
-¿Cuándo se aplica a mi contrato? Ninguna de las reglas transitorias se aplica: el régimen nuevo de cinco o siete años no llegó a entrar en vigor al derogarse el RDL 27/2026 el 2-10-2026. Los contratos se rigen por la LAU anterior a los decretos.
+¿Cuándo se aplica a mi contrato? Ninguna de las reglas transitorias se aplica: el régimen nuevo de cinco o siete años entró en vigor con el RDL 27/2026 el 2-10-2026 y quedó derogado ese mismo día, así que no está en vigor. Los contratos se rigen por la LAU anterior a los decretos.
 
 Tampoco cuentan los preavisos reducidos de cuatro meses ni las reglas de tácita reconducción del texto derogado.
 
