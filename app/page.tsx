@@ -132,6 +132,100 @@ export default function HomePage() {
 
       <h1>Vivienda: los reales decretos-ley 26/2026 y 27/2026</h1>
 
+      {/* <!-- TODO: indicar nº de los nuevos RDL y enlace BOE cuando se publiquen --> */}
+      <div className="box" role="note" aria-label="Actualización de 5 de octubre de 2026">
+        <h2 id={slugify('Nuevos decretos de vivienda y Diputación Permanente')} className="sr-only">
+          Nuevos decretos de vivienda y Diputación Permanente
+        </h2>
+        <p>
+          <strong>Actualización (5 de octubre de 2026).</strong> Tras la disolución de las Cortes y
+          la convocatoria de elecciones generales para el 29 de noviembre, la Diputación Permanente
+          sustituye al Pleno y es la vía para convalidar los decretos-ley (arts. 78.2 y 86.2 CE{' '}
+          <Cite norma="ce" art="78.2" /> <Cite norma="ce" art="86.2" />, con un plazo de treinta
+          días). El Consejo de Ministros aprobará el 6 de octubre unos nuevos decretos de
+          vivienda, similares a los derogados pero no idénticos —la redacción final aún está en
+          estudio—, para someterlos a ese órgano. La Diputación tiene 69 miembros y la mayoría
+          absoluta son 35 votos: con los 25 del PSOE y los 6 de Sumar, bastarían EH Bildu, ERC,
+          Podemos y el PNV —que ya apoyaron el primer decreto— para convalidar, y el voto de
+          Junts sería irrelevante. Si el PNV mantiene su voto, se estima probable la
+          convalidación del decreto que impide los desahucios de personas vulnerables, aunque el
+          margen sigue siendo estrecho; el segundo, el de los contratos de alquiler permanentes,
+          decaería por la oposición del PNV.
+        </p>
+        <p>
+          El Gobierno cesa solo tras la celebración de las elecciones generales{' '}
+          <Cite norma="ce" art="101.1" />.
+        </p>
+        <p>
+          <strong>Fuentes:</strong>
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://www.eldebate.com/espana/20261005/diputacion-permanente-puede-clave-salvar-decreto-vivienda-cns_466011.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              El Debate
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://noticiasciudadanas.com/la-vivienda-puede-volver-a-votarse-con-las-cortes-disueltas-que-permite-la-diputacion-permanente/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Noticias Ciudadanas
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://bilbaohiria.com/actualidad/sanchez-decreto-vivienda-diputacion-permanente-disolucion-cortes"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Bilbao Hiria
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.moncloa.com/2026/10/05/sanchez-reales-decretos-ley-vivienda-3442577/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Moncloa.com
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.democrata.es/en/general-elections-spain/elections-on-november-29-and-housing-decree-sanchez-way-to-do-it-all-at-once/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Demócrata
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://elpais.com/espana/2026-10-05/el-consejo-de-ministros-aprobara-manana-los-decretos-de-vivienda-para-que-los-vote-la-diputacion-permanente.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              El País
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://elpais.com/espana/2026-10-05/reacciones-a-los-decretos-de-vivienda-y-las-acampadas-en-directo.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              El País, en directo
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <p className="lead">
         Medidas urgentes para la protección de la función social de la vivienda y la ampliación
         de la oferta de vivienda asequible.
@@ -188,10 +282,14 @@ export default function HomePage() {
           <li>
             <strong>Qué pasa ahora:</strong> vuelve el marco anterior (la LAU y las normas
             vigentes antes de los decretos), salvo que se aprueben nuevas medidas por otra vía.
+            El Gobierno prevé reaprobar los nuevos decretos de vivienda y someterlos a la
+            Diputación Permanente (ver la actualización al inicio de esta página).
           </li>
           <li>
             <strong>Futuro incierto:</strong> el Gobierno podría intentar tramitar algunas
-            medidas como proyecto de ley, pero no hay nada cerrado.
+            medidas como proyecto de ley, pero no hay nada cerrado. Además, prevé someter los
+            nuevos decretos de vivienda a la Diputación Permanente (ver la actualización al
+            inicio de esta página).
           </li>
         </ul>
       </div>
@@ -353,6 +451,14 @@ export default function HomePage() {
 
       <AvisoEstado />
 
+      <p>
+        Contexto (octubre de 2026): el Gobierno prevé someter los nuevos decretos de vivienda a
+        la Diputación Permanente; ver la{' '}
+        <a href="#nuevos-decretos-de-vivienda-y-diputacion-permanente">
+          actualización al inicio de esta página
+        </a>.
+      </p>
+
       <h2 id={slugify('Preguntas frecuentes')}>Preguntas frecuentes</h2>
 
       <p>
@@ -398,7 +504,7 @@ export default function HomePage() {
       </ul>
 
       <p className="page-meta">
-        Última revisión: 2 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: 5 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

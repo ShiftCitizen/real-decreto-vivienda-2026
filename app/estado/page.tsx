@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import ScrollTable from '@/components/ScrollTable';
@@ -162,6 +163,12 @@ export default function EstadoPage() {
 
       <AvisoEstado />
 
+      <p>
+        Contexto (octubre de 2026): el Gobierno prevé someter los nuevos decretos de vivienda a
+        la Diputación Permanente; ver la{' '}
+        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">actualización al inicio de la portada</Link>.
+      </p>
+
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
@@ -279,7 +286,7 @@ export default function EstadoPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 2 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: 5 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>
