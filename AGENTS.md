@@ -59,6 +59,12 @@ build would reject it. Therefore:
   `vercel.json` pins `buildCommand: npm run build` so the search index and
   citation audit always run there; never rely on the dashboard default (bare
   `next build` skips `postbuild`). Do not delete `.vercel/project.json`.
+- **Changes go in via pull request, never by pushing to `main`.** Work on a
+  short-lived branch (`flash/<tema>-<dia>` for news flashes), commit only the
+  files the task allows, push the branch and open a PR against `main` for
+  review. Merging the PR is the deploy (see above), so a green PR is not live
+  yet: verify promotion with `readySubstate` as usual. Standing user preference
+  since 2026-10-05: no direct commits to `main`, no `vercel deploy`.
 - **"Built green" is not "deployed". Check `readySubstate`, not `readyState`.**
   This bit on 2026-10-03: four deployments built successfully and were left
   `STAGED`, never `PROMOTED`, so the alias kept serving an older commit while
