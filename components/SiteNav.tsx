@@ -37,7 +37,10 @@ export default function SiteNav() {
   }, [open]);
 
   const onShortcut = useCallback((event: KeyboardEvent) => {
-    if (event.key === 'k' || event.key === 'K') setSearchOpen(true);
+    if ((event.metaKey || event.ctrlKey) && (event.key === 'k' || event.key === 'K')) {
+      event.preventDefault();
+      setSearchOpen(true);
+    }
   }, []);
 
   useEffect(() => {

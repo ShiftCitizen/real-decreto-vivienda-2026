@@ -196,7 +196,9 @@ function ajustarCitas(respuesta: string, total: number): { texto: string; fuente
     ),
   ].sort((a, b) => a - b);
   const usadas = citadas.length > 0 ? citadas : [1];
-  const mapa = new Map(usadas.map((nuevo, i) => [usadas[i], nuevo + 1]));
+  // mapa: número original → número nuevo (1-based). El iterador da (valor, índice),
+  // así que `viejo` es el número original y `i + 1` el nuevo correlativo.
+  const mapa = new Map(usadas.map((viejo, i) => [viejo, i + 1]));
   const texto = respuesta.replace(/\[(\d{1,2})\]/g, (marca, n) => {
     const viejo = Number(n);
     return mapa.has(viejo) ? `[${mapa.get(viejo)}]` : marca;
