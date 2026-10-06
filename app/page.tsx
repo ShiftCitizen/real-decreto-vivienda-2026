@@ -43,49 +43,42 @@ const FIGURAS = [
   {
     label: 'Suspensión de desahucios',
     valor: '31-12-2030',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '2' },
   },
   {
     label: 'Umbral de tasación',
     valor: '70 %',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '1' },
   },
   {
     label: 'Tope vivienda asequible',
     valor: '30 %',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '14' },
   },
   {
     label: 'Línea de avales',
     valor: '2.000 M€',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '16' },
   },
   {
     label: 'Línea de avales industrialización',
     valor: '280 M€',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '17.2' },
   },
   {
     label: 'TU CASA',
     valor: '0 %',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '19' },
   },
   {
     label: 'Recargo IBI turístico máximo',
     valor: '150 %',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'rdl26' as const, art: '8.Cuatro' },
   },
@@ -94,14 +87,12 @@ const FIGURAS = [
     // `norma` says which decree introduces it, `cita` names the norm to cite.
     label: 'Multa por plataforma turística',
     valor: '1 M€',
-    nota: 'derogado — no se aplica',
     norma: 'rdl26' as const,
     cita: { norma: 'lau' as const, art: '43.2' },
   },
   {
     label: 'Indemnización por no renovación',
     valor: '12 rentas',
-    nota: 'derogado — no se aplica',
     norma: 'rdl27' as const,
     cita: { norma: 'lau' as const, art: '10.1' },
   },
@@ -132,98 +123,10 @@ export default function HomePage() {
 
       <h1>Vivienda: los reales decretos-ley 26/2026 y 27/2026</h1>
 
-      {/* <!-- TODO: indicar nº de los nuevos RDL y enlace BOE cuando se publiquen --> */}
-      <div className="box" role="note" aria-label="Actualización de 5 de octubre de 2026">
-        <h2 id={slugify('Nuevos decretos de vivienda y Diputación Permanente')} className="sr-only">
-          Nuevos decretos de vivienda y Diputación Permanente
-        </h2>
-        <p>
-          <strong>Actualización (5 de octubre de 2026).</strong> Tras la disolución de las Cortes y
-          la convocatoria de elecciones generales para el 29 de noviembre, la Diputación Permanente
-          sustituye al Pleno y es la vía para convalidar los decretos-ley (arts. 78.2 y 86.2 CE{' '}
-          <Cite norma="ce" art="78.2" /> <Cite norma="ce" art="86.2" />, con un plazo de treinta
-          días). El Consejo de Ministros aprobará el 6 de octubre unos nuevos decretos de
-          vivienda, similares a los derogados pero no idénticos —la redacción final aún está en
-          estudio—, para someterlos a ese órgano. La Diputación tiene 69 miembros y la mayoría
-          absoluta son 35 votos: con los 25 del PSOE y los 6 de Sumar, bastarían EH Bildu, ERC,
-          Podemos y el PNV —que ya apoyaron el primer decreto— para convalidar, y el voto de
-          Junts sería irrelevante. Si el PNV mantiene su voto, se estima probable la
-          convalidación del decreto que impide los desahucios de personas vulnerables, aunque el
-          margen sigue siendo estrecho; el segundo, el de los contratos de alquiler permanentes,
-          decaería por la oposición del PNV.
-        </p>
-        <p>
-          El Gobierno cesa solo tras la celebración de las elecciones generales{' '}
-          <Cite norma="ce" art="101.1" />.
-        </p>
-        <p>
-          <strong>Fuentes:</strong>
-        </p>
-        <ul>
-          <li>
-            <a
-              href="https://www.eldebate.com/espana/20261005/diputacion-permanente-puede-clave-salvar-decreto-vivienda-cns_466011.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              El Debate
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://noticiasciudadanas.com/la-vivienda-puede-volver-a-votarse-con-las-cortes-disueltas-que-permite-la-diputacion-permanente/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Noticias Ciudadanas
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://bilbaohiria.com/actualidad/sanchez-decreto-vivienda-diputacion-permanente-disolucion-cortes"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Bilbao Hiria
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.moncloa.com/2026/10/05/sanchez-reales-decretos-ley-vivienda-3442577/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Moncloa.com
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.democrata.es/en/general-elections-spain/elections-on-november-29-and-housing-decree-sanchez-way-to-do-it-all-at-once/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Demócrata
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://elpais.com/espana/2026-10-05/el-consejo-de-ministros-aprobara-manana-los-decretos-de-vivienda-para-que-los-vote-la-diputacion-permanente.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              El País
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://elpais.com/espana/2026-10-05/reacciones-a-los-decretos-de-vivienda-y-las-acampadas-en-directo.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              El País, en directo
-            </a>
-          </li>
-        </ul>
+      <div className="box warn" role="note" aria-label="Estado: derogados">
+        <strong>Derogados el 2 de octubre de 2026.</strong> El Congreso rechazó la
+        convalidación de ambos decretos y quedaron derogados ese día. Lo que sigue
+        describe lo que contenían, no lo que se aplica hoy.
       </div>
 
       <p className="lead">
@@ -267,29 +170,29 @@ export default function HomePage() {
         <ul>
           <li>
             <strong>Qué ha pasado:</strong> el Congreso ha rechazado los dos decretos de
-            vivienda; ambos quedan derogados.
+            vivienda; ambos quedaron derogados el 2 de octubre de 2026.
           </li>
           <li>
             <strong>Para inquilinos:</strong> la moratoria de desahucios, los límites
             extra a subidas de renta y las prórrogas automáticas que preveían los
             decretos entraron en vigor con ellos; al quedar derogados los decretos el
-            2 de octubre de 2026, ya no se aplican.
+            2 de octubre de 2026, ya no están en vigor. Si recibiste una notificación
+            fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de
+            inquilinos.
           </li>
           <li>
-            <strong>Para caseros:</strong> no se aplican las reglas de renovación automática
-            ni las indemnizaciones previstas en el segundo decreto.
+            <strong>Para caseros:</strong> ni las reglas de renovación automática
+            ni las indemnizaciones previstas en el segundo decreto están en vigor:
+            quedó derogado el 2 de octubre de 2026.
           </li>
           <li>
             <strong>Qué pasa ahora:</strong> vuelve el marco anterior (la LAU y las normas
-            vigentes antes de los decretos), salvo que se aprueben nuevas medidas por otra vía.
-            El Gobierno prevé reaprobar los nuevos decretos de vivienda y someterlos a la
-            Diputación Permanente (ver la actualización al inicio de esta página).
+            vigentes antes de los decretos), salvo que se aprueben nuevas medidas por otra vía
+            (ver la previsión bajo este resumen).
           </li>
           <li>
             <strong>Futuro incierto:</strong> el Gobierno podría intentar tramitar algunas
-            medidas como proyecto de ley, pero no hay nada cerrado. Además, prevé someter los
-            nuevos decretos de vivienda a la Diputación Permanente (ver la actualización al
-            inicio de esta página).
+            medidas como proyecto de ley, pero no hay nada cerrado.
           </li>
         </ul>
       </div>
@@ -297,9 +200,9 @@ export default function HomePage() {
       <div className="box warn">
         <strong>Votación del 2 de octubre de 2026.</strong> El Congreso rechazó la
         convalidación de ambos decretos: RDL 26/2026, 172 a favor / 178 en contra /
-        0 abstenciones; RDL 27/2026, 166–167 a favor / 184 en contra / 0
-        abstenciones (<Cite norma="ce" art="86.2" />). Al no convalidarse,
-        quedaron derogados y dejan de estar en vigor desde ese día.
+        0 abstenciones; RDL 27/2026, rechazado sin cifra a favor confirmada en fuente
+        oficial / 184 en contra / 0 abstenciones (<Cite norma="ce" art="86.2" />). Al
+        no convalidarse, quedaron derogados y dejan de estar en vigor desde ese día.
       </div>
 
       <nav className="indice-pagina" aria-label="En esta página">
@@ -314,16 +217,41 @@ export default function HomePage() {
         </ul>
       </nav>
 
+      <p>
+        Cifras de medidas derogadas el 2 de octubre de 2026: ninguna se aplica hoy.
+      </p>
       <div className="figs">
         {FIGURAS.map((fig) => (
           <div className="fig" key={fig.label}>
             <span className="fig-label">{fig.label}</span>
             <b>{fig.valor}</b>
             <span className="fig-ref">
-              <Cite norma={fig.cita.norma} art={fig.cita.art} /> {fig.nota}
+              <Cite norma={fig.cita.norma} art={fig.cita.art} />
             </span>
           </div>
         ))}
+      </div>
+
+      <div className="box" role="note" aria-label="Previsión de octubre de 2026, no confirmada">
+        <h2 id={slugify('Nuevos decretos de vivienda y Diputación Permanente')} className="sr-only">
+          Nuevos decretos de vivienda y Diputación Permanente
+        </h2>
+        <p>
+          <strong>Previsión, no confirmado (5 de octubre de 2026).</strong> La prensa
+          anuncia nuevos decretos de vivienda para la Diputación Permanente. Los
+          derogados incluían medidas de alquiler; sin texto publicado en el BOE,
+          este sitio no confirma los nuevos.
+        </p>
+        <p>
+          Fuente:{' '}
+          <a
+            href="https://elpais.com/espana/2026-10-05/el-consejo-de-ministros-aprobara-manana-los-decretos-de-vivienda-para-que-los-vote-la-diputacion-permanente.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            El País
+          </a>.
+        </p>
       </div>
 
       <h2 id={slugify('Resultado de la votación')}>Resultado de la votación en el Congreso (2 de octubre de 2026)</h2>
@@ -342,11 +270,11 @@ export default function HomePage() {
           EH Bildu, PNV, Podemos, BNG, Compromís y Coalición Canaria.
         </li>
         <li>
-          <strong>Consecuencia:</strong> derogado. Entró en vigor el 1 de octubre de
+          <strong>Consecuencia:</strong> derogado el 2 de octubre de 2026. Entró en vigor el 1 de octubre de
           2026 y el Congreso lo derogó el 2 de octubre de 2026: no está ahora en vigor.
         </li>
         <li>
-          <strong>Medidas que contenía y que no se aplican:</strong> moratoria de
+          <strong>Medidas que contenía, derogadas el 2-10-2026:</strong> moratoria de
           desahucios hasta 2030, enervación extraordinaria, tope extraordinario a la
           actualización de rentas, prórroga extraordinaria de contratos, reforma de la
           LAU sobre temporada y habitaciones, medidas fiscales (IRPF, IVA, IBI, SOCIMI)
@@ -358,15 +286,15 @@ export default function HomePage() {
 
       <ul>
         <li>
-          <strong>Resultado:</strong> 166–167 votos a favor (según fuente), 184 en
-          contra, 0 abstenciones.
+          <strong>Resultado:</strong> rechazado (votos a favor no confirmados en
+          fuente oficial), 184 en contra, 0 abstenciones.
         </li>
         <li>
-          <strong>Consecuencia:</strong> derogado. Entró en vigor el 2 de octubre de
-          2026 y el Congreso lo derogó ese mismo día: no está ahora en vigor.
+          <strong>Consecuencia:</strong> derogado el 2 de octubre de 2026. Entró en
+          vigor ese mismo día y el Congreso lo derogó ese día: no está ahora en vigor.
         </li>
         <li>
-          <strong>Medidas que contenía y que no se aplican:</strong> prórroga
+          <strong>Medidas que contenía, derogadas el 2-10-2026:</strong> prórroga
           indefinida de cinco y siete años e indemnización de doce mensualidades por
           no renovación.
         </li>
@@ -452,10 +380,9 @@ export default function HomePage() {
       <AvisoEstado />
 
       <p>
-        Contexto (octubre de 2026): el Gobierno prevé someter los nuevos decretos de vivienda a
-        la Diputación Permanente; ver la{' '}
+        Contexto (octubre de 2026, previsión no confirmada): ver la{' '}
         <a href="#nuevos-decretos-de-vivienda-y-diputacion-permanente">
-          actualización al inicio de esta página
+          previsión bajo el resumen «En 1 minuto»
         </a>.
       </p>
 
@@ -463,7 +390,7 @@ export default function HomePage() {
 
       <p>
         Las catorce preguntas que más se repiten, ahora en escenario post-votación:
-        qué sigue vigente y qué no llegó a aplicarse. Debajo, la explicación de cómo leer las citas de todo el
+        qué sigue vigente y qué contenían los decretos derogados el 2-10-2026. Debajo, la explicación de cómo leer las citas de todo el
         sitio.
       </p>
 
@@ -504,7 +431,7 @@ export default function HomePage() {
       </ul>
 
       <p className="page-meta">
-        Última revisión: 5 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: 6 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

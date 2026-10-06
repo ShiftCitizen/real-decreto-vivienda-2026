@@ -159,21 +159,22 @@ export default function EstadoPage() {
         quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación.
         Qué medidas contenían, cuáles dependían todavía de un acuerdo ministerial u
         ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.
+        Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un
+        abogado o a un sindicato de inquilinos.
       </p>
 
       <AvisoEstado />
 
       <p>
-        Contexto (octubre de 2026): el Gobierno prevé someter los nuevos decretos de vivienda a
-        la Diputación Permanente; ver la{' '}
-        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">actualización al inicio de la portada</Link>.
+        Contexto (octubre de 2026, previsión no confirmada): ver la{' '}
+        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">previsión bajo el resumen «En 1 minuto» de la portada</Link>.
       </p>
 
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
         La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de
-        la convalidación, <b>ninguna medida se aplica</b>: todas figuran como <b>Derogada</b>.
+        la convalidación, <b>quedaron derogados</b>: todas figuran como <b>Derogada</b>.
         La columna «Condición» indica en qué decreto estaba cada medida y que fue derogada
         ese día. Las etiquetas <b>Potestativa</b>, <b>Pendiente</b> y <b>Bloqueada</b> se
         conservan solo para referencia histórica (indicaban el estado que habrían tenido de
@@ -227,8 +228,9 @@ export default function EstadoPage() {
 
       <p>
         El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026:
-        172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el
-        RDL 27/2026. Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
+        172 a favor y 178 en contra el RDL 26/2026; RDL 27/2026 rechazado sin cifra a
+        favor confirmada en fuente oficial y con 184 en contra.
+        Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
         <Cite norma="ce" art="86.2" /> Si alguna medida se tramita como proyecto de ley,
         este sitio se actualizará desde ese texto.
       </p>
@@ -286,7 +288,7 @@ export default function EstadoPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 5 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: 6 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

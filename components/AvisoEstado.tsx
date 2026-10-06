@@ -21,18 +21,19 @@ export default function AvisoEstado() {
   }
   const r26 = estado.resultados.rdl26;
   const r27 = estado.resultados.rdl27;
+  const favor26 = r26.aFavor === null ? 'votos a favor no confirmados' : `${r26.aFavor} a favor`;
+  const favor27 = r27.aFavor === null ? 'votos a favor no confirmados' : `${r27.aFavor} a favor`;
   return (
     <div className="box warn">
       <strong>Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda.</strong>
       <p>
-        RDL 26/2026: {r26.aFavor} a favor, {r26.enContra} en contra → derogado.
-        RDL 27/2026: {r27.aFavor} a favor, {r27.enContra} en contra → derogado.
+        RDL 26/2026: {favor26}, {r26.enContra} en contra → derogado el 2-10-2026.
+        RDL 27/2026: {favor27}, {r27.enContra} en contra → derogado el 2-10-2026.
       </p>
       <p>
-        Al no ser convalidados, ambos decretos dejan de estar en vigor. Las
-        medidas que incluían (moratoria de desahucios, límites a subidas de
-        renta, prórrogas automáticas, indemnizaciones y el resto de este
-        análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
+        Al no ser convalidados, ambos decretos quedaron derogados el 2-10-2026 y no
+        están en vigor. Si recibiste una notificación fechada el 1 o el 2 de octubre,
+        llévala a un abogado o a un sindicato de inquilinos.
       </p>
     </div>
   );

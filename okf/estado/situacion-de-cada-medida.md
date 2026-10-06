@@ -19,12 +19,12 @@ sources:
 
 RDL 26/2026 entró en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026, pero ambos quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación. Qué medidas contenían, cuáles dependían todavía de un acuerdo ministerial u ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado. RDL 27/2026: 166–167 a favor, 184 en contra → derogado.
+Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
 
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
+Al no ser convalidados, ambos decretos quedaron derogados el 2-10-2026 y no están en vigor. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.
 
 
-La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de la convalidación, ninguna medida se aplica : todas figuran como Derogada . La columna «Condición» indica en qué decreto estaba cada medida y que fue derogada ese día. Las etiquetas Potestativa , Pendiente y Bloqueada se conservan solo para referencia histórica (indicaban el estado que habrían tenido de seguir en vigor los decretos), pero no tienen efecto práctico tras la derogación.
+La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de la convalidación, quedaron derogados el 2-10-2026 : todas figuran como Derogada . La columna «Condición» indica en qué decreto estaba cada medida y que fue derogada ese día. Las etiquetas Potestativa , Pendiente y Bloqueada se conservan solo para referencia histórica (indicaban el estado que habrían tenido de seguir en vigor los decretos), pero no tienen efecto práctico tras la derogación.
 
 
 | Medida | Estado | Condición |

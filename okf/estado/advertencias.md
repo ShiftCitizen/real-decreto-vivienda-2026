@@ -20,7 +20,7 @@ sources:
 
 ### Convalidación
 
-El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026: 172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el RDL 27/2026. Ambos quedaron derogados y dejaron de estar en vigor ese día. art. 86.2 CE Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
+El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026: 172 a favor y 178 en contra el RDL 26/2026; el RDL 27/2026 fue rechazado sin cifra a favor confirmada en fuente oficial, con 184 en contra. Ambos quedaron derogados y dejaron de estar en vigor ese día. art. 86.2 CE Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
 
 ### Preámbulo y articulado
 

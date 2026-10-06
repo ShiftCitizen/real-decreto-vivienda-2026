@@ -10,14 +10,16 @@
  * 2. Si hubo otra votación, actualiza `fechaVotacion` y `resultados`.
  * 3. `npm run build` y despliega. Nada más hay que tocar.
  *
- * Los votos son el resultado facilitado el 2-10-2026 (el segundo decreto
- * figura como horquilla 166–167 según fuente); no salen del BOE.
+ * Los votos del RDL 26/2026 son el resultado facilitado el 2-10-2026; del RDL
+ * 27/2026 no hay cifra a favor confirmada en fuente oficial y por eso no se
+ * publica ninguna horquilla. Ninguna cifra sale del BOE.
  */
 
 export type EstadoNormativa = 'derogados' | 'convalidados_parcialmente' | 'en_tramite_proyecto_ley';
 
 export type ResultadoVotacion = {
-  aFavor: number | string;
+  /** Votos a favor, o `null` cuando no hay cifra confirmada en fuente oficial. */
+  aFavor: number | null;
   enContra: number;
   abstenciones: number;
 };
@@ -34,7 +36,7 @@ export const ESTADO_VOTACION: {
   lastUpdated: '2026-10-02',
   resultados: {
     rdl26: { aFavor: 172, enContra: 178, abstenciones: 0 },
-    rdl27: { aFavor: '166–167', enContra: 184, abstenciones: 0 },
+    rdl27: { aFavor: null, enContra: 184, abstenciones: 0 },
   },
   notaFutura:
     'El Gobierno podría intentar tramitar algunas medidas como proyecto de ley, pero no hay nada cerrado.',

@@ -24,7 +24,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
   },
   {
     fecha: '2-10-2026',
-    que: 'Entrada en vigor del RDL 27/2026: los contratos de arrendamiento de vivienda habitual se prorrogan obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, y la indemnización por no renovación pasa a ser de doce mensualidades de renta (aplica a los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha). Quedó derogado el mismo día al rechazarse la convalidación: no se aplica.',
+    que: 'Entrada en vigor del RDL 27/2026: los contratos de arrendamiento de vivienda habitual se prorrogan obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, y la indemnización por no renovación pasa a ser de doce mensualidades de renta (aplica a los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha). Quedó derogado el mismo día al rechazarse la convalidación. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.',
     citas: [
       { norma: 'rdl27', art: 'único.1' },
       { norma: 'lau', art: '10.1' },
@@ -33,7 +33,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
   },
   {
     fecha: '1-10-2026',
-    que: 'Entrada en vigor del RDL 26/2026: freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga extraordinaria de dos años y límite del 2 % a la actualización de la renta. Quedó derogado el 2-10-2026 al rechazarse la convalidación: no se aplica.',
+    que: 'Entrada en vigor del RDL 26/2026: freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga extraordinaria de dos años y límite del 2 % a la actualización de la renta. Quedó derogado el 2-10-2026 al rechazarse la convalidación. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.',
     citas: [
       { norma: 'rdl26', art: '1 a 5' },
       { norma: 'rdl26', art: 'disposiciones finales quinta y sexta' },

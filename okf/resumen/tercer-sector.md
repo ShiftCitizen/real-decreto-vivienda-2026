@@ -23,7 +23,7 @@ sources:
 - IRPF: reducción del 70 % para el propietario que alquila a una entidad sin fines lucrativos del título II de la Ley 49/2002 y que destine la vivienda al alquiler social con renta inferior a la del programa estatal de alquiler, al alojamiento de personas en situación de vulnerabilidad económica de la Ley 19/2021, o a un programa público o calificación que imponga limitación de la renta. art. 6.Segundo.Dos.c RDL 26/2026
 - DA 1.ª: el Gobierno regulará en seis meses la figura de proveedor social de vivienda asequible y las cooperativas de vivienda asequible, con el referente de las Housing Associations, y la certificación será exclusivamente a los efectos de la participación de estas entidades en programas o en el acceso a financiación, ventajas o especialidades en relación con tributos o procedimientos estatales. disposición adicional primera RDL 26/2026
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado. RDL 27/2026: 166–167 a favor, 184 en contra → derogado.
+Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
 
 Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
 
