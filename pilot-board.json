@@ -10,8 +10,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -22,8 +30,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -34,8 +50,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -46,8 +70,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -58,8 +90,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -70,8 +110,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -82,8 +130,16 @@
       "milestone": "flash",
       "column": "done",
       "history": [
-        { "from": "todo", "to": "doing", "at": 1791277200000 },
-        { "from": "doing", "to": "done", "at": 1791288000000 }
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791277200000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791288000000
+        }
       ]
     },
     {
@@ -92,8 +148,19 @@
       "title": "Detailed article-by-article analysis of RDL 29/2026 (99 pages, BOE-A-2026-20823)",
       "est": 8,
       "milestone": "analysis",
-      "column": "todo",
-      "history": []
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791296000000
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791299000000
+        }
+      ]
     },
     {
       "id": "RDL-9",
@@ -101,8 +168,14 @@
       "title": "Detailed article-by-article analysis of RDL 28/2026 (10 pages, BOE-A-2026-20822)",
       "est": 4,
       "milestone": "analysis",
-      "column": "todo",
-      "history": []
+      "column": "done",
+      "history": [
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791299000000
+        }
+      ]
     },
     {
       "id": "RDL-10",
@@ -110,8 +183,14 @@
       "title": "Measure-by-measure comparison: RDL 26/27 (derogados) vs RDL 29/28 (nuevos)",
       "est": 4,
       "milestone": "analysis",
-      "column": "todo",
-      "history": []
+      "column": "done",
+      "history": [
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791299000000
+        }
+      ]
     }
   ]
 }
