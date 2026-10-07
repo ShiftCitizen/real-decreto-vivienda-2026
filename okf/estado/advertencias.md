@@ -20,7 +20,7 @@ sources:
 
 ### Convalidación
 
-El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026: 172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el RDL 27/2026. Ambos quedaron derogados y dejaron de estar en vigor ese día. art. 86.2 CE Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
+El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026: 172 a favor y 178 en contra el RDL 26/2026; el RDL 27/2026 fue rechazado sin cifra a favor confirmada en fuente oficial, con 184 en contra. Ambos quedaron derogados y dejaron de estar en vigor ese día. art. 86.2 CE Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
 
 ### Preámbulo y articulado
 
@@ -36,7 +36,9 @@ La disposición final décima.8 respeta los regímenes civiles forales o especia
 
 Lo que este sitio no afirma. No se publica aquí ninguna previsión sobre futuras votaciones o sobre qué apoyos tendría una tramitación como proyecto de ley. El resultado conocido (rechazo de ambos decretos el 2-10-2026) está en la portada; lo demás pertenece a la sesión futura, no a esta página.
 
-Última revisión: 2 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266 y BOE-A-2026-20385 .
+Nuevos decretos (6 de octubre de 2026). El Consejo de Ministros aprobó el 6 de octubre de 2026 dos nuevos reales decretos-ley, publicados en el BOE el 7 de octubre: RDL 29/2026 (BOE-A-2026-20823) y RDL 28/2026 (BOE-A-2026-20822). El RDL 29/2026 entró en vigor el 8 de octubre de 2026 y está pendiente de convalidación por la Diputación Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está prevista para el 15 de noviembre de 2026 y depende de convalidación. La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar en el plazo de treinta días (hacia el 6 de noviembre de 2026). No hay fecha de sesión fijada.
+
+Última revisión: 7 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266, BOE-A-2026-20385, BOE-A-2026-20823 y BOE-A-2026-20822.
 
 ## Véase
 

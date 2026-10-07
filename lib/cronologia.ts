@@ -18,13 +18,47 @@ export type CronologiaEntry = {
  */
 export const CRONOLOGIA: CronologiaEntry[] = [
   {
+    fecha: '15-11-2026',
+    que: 'Entrada en vigor prevista del RDL 28/2026 (estabilidad de los contratos de arrendamiento de vivienda habitual), solo si la Diputación Permanente lo convalida antes. No está en vigor mientras no se convalide.',
+    citas: [{ norma: 'rdl28', art: 'disposición final segunda' }],
+  },
+  {
+    fecha: '6-11-2026',
+    que: 'Plazo aproximado de treinta días para que la Diputación Permanente convalide o rechace los RDL 29/2026 y 28/2026 (arts. 78.2 y 86.2 CE). No hay fecha de sesión fijada.',
+    citas: [
+      { norma: 'ce', art: '78.2' },
+      { norma: 'ce', art: '86.2' },
+    ],
+  },
+  {
+    fecha: '8-10-2026',
+    que: 'Entrada en vigor del RDL 29/2026 (día siguiente a su publicación en el BOE), salvo disposición en contrario. Pendiente de convalidación por la Diputación Permanente.',
+    citas: [{ norma: 'rdl29', art: 'disposición final decimoprimera.1' }],
+  },
+  {
+    fecha: '7-10-2026',
+    que: 'Publicación en el «BOE» núm. 249 de los RDL 29/2026 (BOE-A-2026-20823) y 28/2026 (BOE-A-2026-20822), aprobados por el Consejo de Ministros el 6 de octubre de 2026.',
+    citas: [
+      { norma: 'rdl29', art: 'disposición final decimoprimera.1' },
+      { norma: 'rdl28', art: 'disposición final segunda' },
+    ],
+  },
+  {
+    fecha: '6-10-2026',
+    que: 'El Consejo de Ministros aprueba dos nuevos reales decretos-ley de vivienda: el RDL 29/2026 (paquete principal: desahucios, alquiler, fiscal, financiación) y el RDL 28/2026 (estabilidad de los contratos de arrendamiento). Ambos se publican en el BOE el 7 de octubre.',
+    citas: [
+      { norma: 'rdl29', art: 'disposición final decimoprimera.1' },
+      { norma: 'rdl28', art: 'disposición final segunda' },
+    ],
+  },
+  {
     fecha: '2-10-2026',
     que: 'El Congreso rechaza la convalidación de los RDL 26/2026 y 27/2026: ambos quedan derogados y dejan de producir efectos desde ese día.',
     citas: [{ norma: 'ce', art: '86.2' }],
   },
   {
     fecha: '2-10-2026',
-    que: 'Entrada en vigor del RDL 27/2026: los contratos de arrendamiento de vivienda habitual se prorrogan obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, y la indemnización por no renovación pasa a ser de doce mensualidades de renta (aplica a los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha). Quedó derogado el mismo día al rechazarse la convalidación: no se aplica.',
+    que: 'Entrada en vigor del RDL 27/2026: los contratos de arrendamiento de vivienda habitual se prorrogan obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador es persona jurídica, y la indemnización por no renovación pasa a ser de doce mensualidades de renta (aplica a los vencimientos que se produzcan con posterioridad al día siguiente a dicha fecha). Quedó derogado el mismo día al rechazarse la convalidación. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.',
     citas: [
       { norma: 'rdl27', art: 'único.1' },
       { norma: 'lau', art: '10.1' },
@@ -33,7 +67,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
   },
   {
     fecha: '1-10-2026',
-    que: 'Entrada en vigor del RDL 26/2026: freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga extraordinaria de dos años y límite del 2 % a la actualización de la renta. Quedó derogado el 2-10-2026 al rechazarse la convalidación: no se aplica.',
+    que: 'Entrada en vigor del RDL 26/2026: freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga extraordinaria de dos años y límite del 2 % a la actualización de la renta. Quedó derogado el 2-10-2026 al rechazarse la convalidación. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.',
     citas: [
       { norma: 'rdl26', art: '1 a 5' },
       { norma: 'rdl26', art: 'disposiciones finales quinta y sexta' },

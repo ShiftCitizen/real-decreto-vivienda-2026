@@ -14,6 +14,8 @@
 export type NormaId =
   | 'rdl26'
   | 'rdl27'
+  | 'rdl29'
+  | 'rdl28'
   | 'lau'
   | 'lec'
   | 'l123'
@@ -27,7 +29,7 @@ export type NormaId =
   | 'rdl83'
   | 'reglamentoUe';
 
-export type Tono = 'rdl26' | 'rdl27' | 'neutro';
+export type Tono = 'rdl26' | 'rdl27' | 'rdl29' | 'rdl28' | 'neutro';
 
 export type Norma = {
   id: NormaId;
@@ -60,6 +62,24 @@ export const NORMAS: Record<NormaId, Norma> = {
     boe: 'BOE-A-2026-20385',
     eli: 'https://www.boe.es/eli/es/rdl/2026/09/29/27',
     tono: 'rdl27',
+  },
+  rdl29: {
+    id: 'rdl29',
+    etiqueta: 'RDL 29/2026',
+    titulo:
+      'Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible',
+    boe: 'BOE-A-2026-20823',
+    eli: 'https://www.boe.es/eli/es/rdl/2026/10/06/29',
+    tono: 'rdl29',
+  },
+  rdl28: {
+    id: 'rdl28',
+    etiqueta: 'RDL 28/2026',
+    titulo:
+      'Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual',
+    boe: 'BOE-A-2026-20822',
+    eli: 'https://www.boe.es/eli/es/rdl/2026/10/06/28',
+    tono: 'rdl28',
   },
   lau: {
     id: 'lau',

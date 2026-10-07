@@ -26,11 +26,11 @@ export type CitaAmplia = { titulo: string; href: string };
 /**
  * Comprobado el 3 de octubre de 2026. Misma frase, en español, que
  * «As checked on 3 October 2026, RDL 26/2026 entered into force on 1 October
- * and RDL 27/2026 on 2 October. Congress agreed to repeal both on 2 October.
+ * and RDL 27/2026 on 2 October. Congress repealed both on 2 October.
  * Neither decree is now in force.»
  */
 export const FRASE_ESTADO =
-  'Comprobado el 3 de octubre de 2026, el RDL 26/2026 entró en vigor el 1 de octubre y el RDL 27/2026 el 2 de octubre. El Congreso acordó derogar ambos el 2 de octubre. Ninguno de los dos decretos está ahora en vigor.';
+  'Comprobado el 3 de octubre de 2026, el RDL 26/2026 entró en vigor el 1 de octubre y el RDL 27/2026 el 2 de octubre. El Congreso los derogó el 2 de octubre. Ninguno de los dos decretos está ahora en vigor.';
 
 const HREF_ESTADO = '/estado/';
 
@@ -91,7 +91,7 @@ const PAGINAS: PaginaAmplia[] = [
         ancla: ancla('En 1 minuto'),
         medida: true,
         texto:
-          'Qué ha pasado: el Congreso ha rechazado los dos decretos de vivienda; ambos quedan derogados.',
+          'Qué ha pasado: el Congreso ha rechazado los dos decretos de vivienda; ambos quedaron derogados el 2 de octubre de 2026.',
       },
     ],
   },
@@ -249,7 +249,7 @@ const PAGINAS: PaginaAmplia[] = [
         ancla: ancla('Situación de cada medida'),
         medida: true,
         texto:
-          'La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de la convalidación, ninguna medida se aplica: todas figuran como Derogada.',
+          'La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de la convalidación, quedaron derogados: todas figuran como Derogada.',
       },
     ],
   },

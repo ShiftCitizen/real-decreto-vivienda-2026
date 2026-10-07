@@ -23,8 +23,8 @@ export const FAQ: FaqEntry[] = [
     id: 'en-vigor',
     pregunta: '¿Está en vigor ya?',
     respuesta: [
-      'No. El 2 de octubre de 2026 el Congreso rechazó la convalidación de los dos decretos (172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el RDL 27/2026) y ambos quedaron derogados: dejan de estar en vigor desde ese día.',
-      'Rigen la LAU y las demás normas anteriores a los decretos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.',
+      'No. El 2 de octubre de 2026 el Congreso rechazó la convalidación de los dos decretos (172 a favor y 178 en contra el RDL 26/2026; el RDL 27/2026 fue rechazado sin cifra a favor confirmada en fuente oficial, con 184 en contra) y ambos quedaron derogados el 2-10-2026: no están en vigor desde ese día.',
+      'Rigen la LAU y las demás normas anteriores a los decretos. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.',
     ],
     citas: [
       { norma: 'rdl26', art: 'disposición final undécima.1' },
@@ -48,8 +48,8 @@ export const FAQ: FaqEntry[] = [
     id: 'desahucio',
     pregunta: '¿Me pueden hacer un desahucio?',
     respuesta: [
-      'La suspensión de desahucios y la enervación extraordinaria eran medidas del RDL 26/2026, derogado el 2-10-2026: no se aplican. Los procesos siguen las reglas anteriores de la LAU y la LEC.',
-      'El plazo de dos meses para la administración y la subrogación automática en la deuda tampoco llegaron a aplicarse.',
+      'La suspensión de desahucios y la enervación extraordinaria eran medidas del RDL 26/2026, derogado el 2-10-2026: no están en vigor. Los procesos siguen las reglas anteriores de la LAU y la LEC.',
+      'El plazo de dos meses para la administración y la subrogación automática en la deuda quedaron derogados el 2-10-2026 con el resto del decreto. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.',
     ],
     citas: [
       { norma: 'lec', art: '22.6' },

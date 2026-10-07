@@ -602,11 +602,31 @@ li {
   border-color: transparent;
 }
 
+.tono-rdl29 {
+  color: var(--ac);
+  background: var(--ac-soft);
+  border-color: transparent;
+}
+
+.tono-rdl28 {
+  color: var(--ac2);
+  background: var(--ac2-soft);
+  border-color: transparent;
+}
+
 .cite[data-norma='rdl26'] .cite-art {
   color: var(--ac);
 }
 
 .cite[data-norma='rdl27'] .cite-art {
+  color: var(--ac2);
+}
+
+.cite[data-norma='rdl29'] .cite-art {
+  color: var(--ac);
+}
+
+.cite[data-norma='rdl28'] .cite-art {
   color: var(--ac2);
 }
 

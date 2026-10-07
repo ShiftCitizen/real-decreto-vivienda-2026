@@ -159,21 +159,85 @@ export default function EstadoPage() {
         quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación.
         Qué medidas contenían, cuáles dependían todavía de un acuerdo ministerial u
         ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.
+        Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un
+        abogado o a un sindicato de inquilinos.
       </p>
 
       <AvisoEstado />
 
       <p>
-        Contexto (octubre de 2026): el Gobierno prevé someter los nuevos decretos de vivienda a
-        la Diputación Permanente; ver la{' '}
-        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">actualización al inicio de la portada</Link>.
+        Contexto (octubre de 2026): ver la{' '}
+        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">actualización bajo el resumen «En 1 minuto» de la portada</Link>.
+      </p>
+
+      <h2 id={slugify('Nuevos decretos de 6 de octubre de 2026')}>
+        Nuevos decretos de 6 de octubre de 2026
+      </h2>
+
+      <p>
+        El Consejo de Ministros aprobó el 6 de octubre de 2026 dos nuevos reales
+        decretos-ley de vivienda, publicados en el «BOE» núm. 249 de 7 de octubre.
+        Son un paquete nuevo y distinto, no una re-convalidación de los decretos
+        derogados.
+      </p>
+
+      <ScrollTable label="Estado de los nuevos reales decretos-ley de vivienda">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Decreto</th>
+              <th scope="col">BOE</th>
+              <th scope="col">Entrada en vigor</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <b className="tono-rdl29">RDL 29/2026</b> — paquete principal: desahucios,
+                alquiler, fiscal, financiación
+              </td>
+              <td>
+                <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">
+                  BOE-A-2026-20823
+                </a>
+              </td>
+              <td>8 de octubre de 2026</td>
+              <td>
+                <span className="pill pill-pendiente">En vigor, pendiente de convalidación</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b className="tono-rdl28">RDL 28/2026</b> — estabilidad de los contratos de
+                arrendamiento
+              </td>
+              <td>
+                <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">
+                  BOE-A-2026-20822
+                </a>
+              </td>
+              <td>15 de noviembre de 2026 (prevista)</td>
+              <td>
+                <span className="pill pill-pendiente">No en vigor, pendiente de convalidación</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ScrollTable>
+
+      <p>
+        La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar la
+        convalidación de ambos decretos en el plazo de treinta días (hacia el 6 de
+        noviembre de 2026). No hay fecha de sesión fijada.{' '}
+        <Cite norma="ce" art="78.2" /> <Cite norma="ce" art="86.2" />
       </p>
 
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
         La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de
-        la convalidación, <b>ninguna medida se aplica</b>: todas figuran como <b>Derogada</b>.
+        la convalidación, <b>quedaron derogados</b>: todas figuran como <b>Derogada</b>.
         La columna «Condición» indica en qué decreto estaba cada medida y que fue derogada
         ese día. Las etiquetas <b>Potestativa</b>, <b>Pendiente</b> y <b>Bloqueada</b> se
         conservan solo para referencia histórica (indicaban el estado que habrían tenido de
@@ -227,8 +291,9 @@ export default function EstadoPage() {
 
       <p>
         El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026:
-        172 a favor y 178 en contra el RDL 26/2026; 166–167 a favor y 184 en contra el
-        RDL 27/2026. Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
+        172 a favor y 178 en contra el RDL 26/2026; RDL 27/2026 rechazado sin cifra a
+        favor confirmada en fuente oficial y con 184 en contra.
+        Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
         <Cite norma="ce" art="86.2" /> Si alguna medida se tramita como proyecto de ley,
         este sitio se actualizará desde ese texto.
       </p>
@@ -286,9 +351,11 @@ export default function EstadoPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 5 de octubre de 2026. Articulado contrastado con{' '}
-        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
-        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
+        Última revisión: 7 de octubre de 2026. Articulado contrastado con{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">BOE-A-2026-20822</a>.
       </p>
     </>
   );

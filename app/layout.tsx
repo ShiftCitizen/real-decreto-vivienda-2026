@@ -7,16 +7,16 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://real-decreto-vivienda-2026.vercel.app'),
   title: {
-    default: 'Vivienda: los RDL 26/2026 y 27/2026, derogados | Vivienda 2026',
+    default: 'Vivienda: RDL 26/2026 y 27/2026 derogados; RDL 29/2026 y 28/2026 publicados | Vivienda 2026',
     template: '%s | Vivienda 2026',
   },
   description:
-    'El Congreso rechazó el 2-10-2026 los dos decretos de vivienda: quedan derogados. Resultado de la votación, consecuencias y preguntas.',
+    'Los RDL 26/2026 y 27/2026 fueron derogados el 2-10-2026. Nuevos RDL 29/2026 (en vigor desde el 8-10-2026) y RDL 28/2026 (pendiente de convalidación), publicados en el BOE el 7-10-2026.',
   authors: [{ name: 'Carlos Marchena', url: 'https://www.linkedin.com/in/cmarchena/' }],
   openGraph: {
-    title: 'Vivienda: los RDL 26/2026 y 27/2026, derogados',
+    title: 'Vivienda: RDL 26/2026 y 27/2026 derogados; RDL 29/2026 y 28/2026 publicados',
     description:
-      'El Congreso rechazó el 2-10-2026 los dos decretos de vivienda: quedan derogados. Resultado, consecuencias y preguntas.',
+      'Los RDL 26/2026 y 27/2026 fueron derogados el 2-10-2026. Nuevos RDL 29/2026 (en vigor desde el 8-10-2026) y RDL 28/2026 (pendiente de convalidación), publicados en el BOE el 7-10-2026.',
     url: '/',
     siteName: 'Vivienda 2026',
     locale: 'es_ES',
@@ -42,9 +42,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Análisis divulgativo, sin valor de asesoramiento jurídico; prevalece el texto
           oficial (
           <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,
-          30-09-2026) y (
+          30-09-2026), (
           <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,
-          01-10-2026), con los que se ha contrastado el articulado.
+          01-10-2026), (
+          <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a>,
+          07-10-2026) y (
+          <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">BOE-A-2026-20822</a>,
+          07-10-2026), con los que se ha contrastado el articulado.
           <br />
           ©{' '}
           <a href="https://www.linkedin.com/in/cmarchena/" target="_blank" rel="noreferrer">

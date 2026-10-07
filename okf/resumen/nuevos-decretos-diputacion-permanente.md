@@ -1,7 +1,7 @@
 ---
 type: Concept
 title: "Nuevos decretos de vivienda y Diputación Permanente"
-description: "El Consejo de Ministros aprobará el 6 de octubre unos nuevos decretos de vivienda, similares a los derogados, para que los vote la Diputación Permanente: si el PNV mantiene su voto, el decreto que impide los desahucios de personas vulnerables podría convalidarse; el de los contratos de alquiler permanentes, no."
+description: "RDL 29/2026 y RDL 28/2026, aprobados por el Consejo de Ministros el 6 de octubre de 2026 y publicados en el BOE el 7 de octubre. RDL 29/2026 en vigor desde el 8-10-2026, pendiente de convalidación. RDL 28/2026 no en vigor, prevista 15-11-2026, pendiente de convalidación."
 tags:
   - rdl-vivienda-2026
   - resumen
@@ -9,14 +9,16 @@ tags:
 sources:
   - id: rdl-vivienda-2026
     resource: https://real-decreto-vivienda-2026.vercel.app/
-    title: "Vivienda: los RDL 26/2026 y 27/2026, derogados"
+    title: "Vivienda: RDL 26/2026 y 27/2026 derogados; RDL 29/2026 y 28/2026 publicados"
     author: human:carlos-marchena
 ---
 
 # Nuevos decretos de vivienda y Diputación Permanente
 
-Actualización (5 de octubre de 2026). Tras la disolución de las Cortes y la convocatoria de elecciones generales para el 29 de noviembre, la Diputación Permanente sustituye al Pleno y es la vía para convalidar los decretos-ley (arts. 78.2 y 86.2 CE, con un plazo de treinta días). El Consejo de Ministros aprobará el 6 de octubre unos nuevos decretos de vivienda, similares a los derogados pero no idénticos —la redacción final aún está en estudio—, para someterlos a ese órgano. La Diputación tiene 69 miembros y la mayoría absoluta son 35 votos: con los 25 del PSOE y los 6 de Sumar, bastarían EH Bildu, ERC, Podemos y el PNV —que ya apoyaron el primer decreto— para convalidar, y el voto de Junts sería irrelevante. Si el PNV mantiene su voto, se estima probable la convalidación del decreto que impide los desahucios de personas vulnerables, aunque el margen sigue siendo estrecho; el segundo, el de los contratos de alquiler permanentes, decaería por la oposición del PNV.
+Actualización (7 de octubre de 2026). El Consejo de Ministros aprobó el 6 de octubre de 2026 dos nuevos reales decretos-ley de vivienda, publicados en el «BOE» núm. 249 de 7 de octubre: [RDL 29/2026](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823) (BOE-A-2026-20823, paquete principal) y [RDL 28/2026](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822) (BOE-A-2026-20822, estabilidad de los contratos de arrendamiento).
 
-El Gobierno cesa solo tras la celebración de las elecciones generales (art. 101.1 CE).
+El RDL 29/2026 entró en vigor el 8 de octubre de 2026 (día siguiente a su publicación) y está pendiente de convalidación por la Diputación Permanente. El RDL 28/2026 no está en vigor: su disposición final segunda retrasa su entrada en vigor al 15 de noviembre de 2026, de modo que solo produce efectos si la Diputación Permanente lo convalida antes.
 
-Fuentes enlazadas en la portada: El Debate, Noticias Ciudadanas, Bilbao Hiria, Moncloa.com, Demócrata, [El País](https://elpais.com/espana/2026-10-05/el-consejo-de-ministros-aprobara-manana-los-decretos-de-vivienda-para-que-los-vote-la-diputacion-permanente.html) y [El País en directo](https://elpais.com/espana/2026-10-05/reacciones-a-los-decretos-de-vivienda-y-las-acampadas-en-directo.html).
+La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar la convalidación de ambos decretos en el plazo de treinta días (hacia el 6 de noviembre de 2026). No hay fecha de sesión fijada. Las estimaciones de prensa del 6 de octubre no son resultados oficiales.
+
+Fuentes: [Moncloa — rueda de prensa](https://www.lamoncloa.gob.es/consejodeministros/resumenes/paginas/2026/061026-rueda-prensa-ministros.aspx), [Moncloa — comparecencia de Sánchez](https://www.lamoncloa.gob.es/presidente/actividades/paginas/2026/061026-sanchez-comparecencia-consejo-ministros.aspx).
