@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klaruk Pilot Board — Sep 2026</title>
+<style>
+  :root { --bg:#0f1417; --panel:#182024; --card:#202b31; --line:#2c3a42;
+          --txt:#e8eef0; --dim:#93a3ab; --acc:#e8c15a; --green:#5ecf7f; --blue:#5aa9e8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt);
+         font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  header { display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+           padding:12px 16px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:17px; margin:0 12px 0 0; }
+  #stats { color:var(--dim); font-size:13px; }
+  #stats b { color:var(--txt); }
+  .spacer { flex:1; }
+  button { background:var(--panel); color:var(--txt); border:1px solid var(--line);
+           border-radius:6px; padding:6px 12px; cursor:pointer; font-size:13px; }
+  button:hover { border-color:var(--acc); }
+  #board { display:flex; gap:10px; padding:14px 16px; overflow-x:auto; min-height:46vh; }
+  .col { flex:1 0 210px; background:var(--panel); border:1px solid var(--line);
+         border-radius:10px; padding:8px; }
+  .col h2 { font-size:13px; margin:2px 4px 8px; color:var(--dim);
+            text-transform:uppercase; letter-spacing:.06em; }
+  .col h2 .n { color:var(--txt); }
+  .col.dragover { outline:2px dashed var(--acc); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px;
+          padding:8px 10px; margin:0 0 8px; cursor:grab; }
+  .card:active { cursor:grabbing; }
+  .card.sel { border-color:var(--acc); }
+  .card .id { font-size:11px; color:var(--acc); font-weight:700; }
+  .card .t { margin:2px 0 6px; }
+  .card .meta { font-size:11px; color:var(--dim); }
+  .card .meta .done-ok { color:var(--green); }
+  .card.dropbefore { box-shadow:0 -3px 0 var(--acc); }
+  #bottom { display:flex; flex-wrap:wrap; gap:14px; padding:6px 16px 22px; }
+  #burnwrap, #detail { background:var(--panel); border:1px solid var(--line);
+                       border-radius:10px; padding:12px 14px; }
+  #burnwrap { flex:2 1 420px; }
+  #detail { flex:1 1 260px; }
+  h3 { margin:0 0 8px; font-size:14px; }
+  #detail table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  #detail td { border-top:1px solid var(--line); padding:4px 2px; vertical-align:top; }
+  #detail td:first-child { color:var(--dim); white-space:nowrap; padding-right:8px; }
+  #timesheet { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:8px; }
+  #timesheet td, #timesheet th { border-top:1px solid var(--line); padding:4px 6px; text-align:left; }
+  #timesheet th { color:var(--dim); font-weight:600; }
+  canvas { width:100%; height:220px; }
+  .hint { color:var(--dim); font-size:12px; padding:0 16px 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Klaruk Pilot Board</h1>
+  <span id="stats"></span>
+  <span class="spacer"></span>
+  <button id="btnExport">Export JSON</button>
+  <button id="btnImport">Import JSON</button>
+  <input type="file" id="fileImp" accept=".json,application/json" hidden>
+</header>
+<div id="board"></div>
+<div id="bottom">
+  <div id="burnwrap">
+    <h3>Burndown — cards left to finish (6 → 31 Oct)</h3>
+    <canvas id="burn" width="640" height="220"></canvas>
+  </div>
+  <div id="detail">
+    <h3>Card detail</h3>
+    <div id="detailBody"><span style="color:var(--dim)">Click any card.</span></div>
+    <h3 style="margin-top:12px">Timesheet — finished cards</h3>
+    <table id="timesheet"><tr><th>Card</th><th>Started</th><th>Finished</th><th>Took</th></tr></table>
+  </div>
+</div>
+<p class="hint">Drag cards between columns. Every move is stamped with date + time. Doing = you started it, Done = you finished it. Export before git commit to carry the board to your other machine.</p>
+
+<script>
+"use strict";
+var COLS = [
+  ["triage","Triage"],["todo","Todo"],["doing","Doing"],
+  ["blocked","Blocked"],["done","Done"]
+];
+var START = "2026-10-06", END = "2026-10-31";
+var LSKEY = "klarukPilotBoard";
+var state = null, selected = null;
+
+function todayStr(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function fmtT(ts){ var d=new Date(ts); function p(n){return String(n).padStart(2,"0");}
+  return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes()); }
+function fmtDur(ms){ if(ms==null||ms<0) return "—";
+  var m=Math.round(ms/60000); if(m<60) return m+" min";
+  var h=Math.floor(m/60); return h+"h "+(m%60)+"m"; }
+
+function seed(){ return null; } // filled below from embedded data
+var SEED = null;
+
+function load(){
+  try { var raw = localStorage.getItem(LSKEY);
+    if(raw){ state = JSON.parse(raw); return; } } catch(e){}
+  state = JSON.parse(JSON.stringify(SEED));
+  state.cards.forEach(function(c){ c.column = c.column || "todo"; c.history = c.history || []; });
+}
+function save(){ try{ localStorage.setItem(LSKEY, JSON.stringify(state)); }catch(e){} }
+
+function firstIn(c,col){ for(var i=0;i<c.history.length;i++) if(c.history[i].to===col) return c.history[i].at; return null; }
+function cardStart(c){ return firstIn(c,"doing"); }
+function cardDone(c){ return firstIn(c,"done"); }
+
+function move(id,to){
+  var c = state.cards.find(function(x){return x.id===id;});
+  if(!c || c.column===to) return;
+  var from = c.column; c.column = to;
+  c.history.push({from:from,to:to,at:Date.now()});
+  save(); render();
+}
+
+function render(){
+  var board = document.getElementById("board"); board.innerHTML = "";
+  var counts = {}, doneHrs = 0, estTotal = 0, loggedMs = 0;
+  COLS.forEach(function(col){ counts[col[0]] = 0; });
+  state.cards.forEach(function(c){
+    counts[c.column]++;
+    estTotal += (c.est||0);
+    if(c.column==="done"){ doneHrs += (c.est||0);
+      var s=cardStart(c), d=cardDone(c); if(s&&d) loggedMs += (d-s); }
+  });
+  document.getElementById("stats").innerHTML =
+    "Done <b>"+counts.done+"/"+state.cards.length+"</b> · Doing <b>"+counts.doing+"</b> · Blocked <b>"+counts.blocked+"</b> · " +
+    "plan " + doneHrs + "/" + estTotal + "h · actual logged <b>"+fmtDur(loggedMs)+"</b>";
+
+  COLS.forEach(function(col){
+    var key=col[0], label=col[1];
+    var div = document.createElement("div");
+    div.className = "col"; div.dataset.col = key;
+    div.innerHTML = "<h2>"+label+" <span class='n'>"+counts[key]+"</span>"+(key==="triage"?" <button data-add style='float:right' title='New card'>+</button>":"")+"</h2>";
+    var add = div.querySelector("[data-add]");
+    if(add) add.onclick = function(){
+      var t = prompt("New card title:");
+      if(!t) return;
+      var id = "X"+Date.now().toString(36);
+      state.cards.push({id:id,epic:"inbox",title:t,est:0,milestone:"—",column:"triage",history:[{from:"—",to:"triage",at:Date.now()}]});
+      save(); render();
+    };
+    div.addEventListener("dragover", function(e){
+      e.preventDefault(); div.classList.add("dragover");
+      div.querySelectorAll(".card").forEach(function(el){ el.classList.remove("dropbefore"); });
+      var after = null, y = e.clientY;
+      div.querySelectorAll(".card").forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if(y < r.top + r.height/2 && !after) after = el;
+      });
+      if(after) after.classList.add("dropbefore");
+      div._after = after ? after.dataset.id : null;
+    });
+    div.addEventListener("dragleave", function(){ div.classList.remove("dragover"); });
+    div.addEventListener("drop", function(e){
+      e.preventDefault(); div.classList.remove("dragover");
+      var id = e.dataTransfer.getData("text/plain"); if(!id) return;
+      var c = state.cards.find(function(x){return x.id===id;}); if(!c) return;
+      var from = c.column;
+      if(from !== key) c.history.push({from:from,to:key,at:Date.now()});
+      state.cards = state.cards.filter(function(x){return x.id!==id;});
+      var idx = state.cards.length;
+      if(div._after){ idx = state.cards.findIndex(function(x){return x.id===div._after && x.column===key;}); if(idx<0) idx=state.cards.length; }
+      else { var last=-1; state.cards.forEach(function(x,i){ if(x.column===key) last=i; }); idx = last+1; }
+      c.column = key;
+      state.cards.splice(idx,0,c);
+      save(); render();
+    });
+    board.appendChild(div);
+  });
+
+  state.cards.forEach(function(c){
+    var col = board.querySelector('.col[data-col="'+c.column+'"]'); if(!col) return;
+    var el = document.createElement("div");
+    el.className = "card"+(selected===c.id?" sel":""); el.draggable = true; el.dataset.id = c.id;
+    var s = cardStart(c), d = cardDone(c);
+    var time = (c.column==="done" && s && d) ? '<div class="meta"><span class="done-ok">took '+fmtDur(d-s)+'</span></div>'
+      : (s ? '<div class="meta">started '+fmtT(s)+'</div>' : "");
+    el.innerHTML = '<div class="id">'+c.id+' · '+c.epic+' · '+c.milestone+'</div><div class="t">'+escapeHtml(c.title)+'</div><div class="meta">plan '+(c.est||0)+'h</div>'+time;
+    el.addEventListener("dragstart", function(e){ e.dataTransfer.setData("text/plain", c.id); });
+    el.addEventListener("click", function(){ selected = c.id; render(); });
+    col.appendChild(el);
+  });
+  renderDetail(); renderBurn();
+}
+
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]; }); }
+
+function renderDetail(){
+  var b = document.getElementById("detailBody");
+  var c = state.cards.find(function(x){return x.id===selected;});
+  if(!c){ b.innerHTML = '<span style="color:var(--dim)">Click any card.</span>'; }
+  else {
+    var rows = c.history.map(function(h){
+      return "<tr><td>"+h.from+" → "+h.to+"</td><td>"+fmtT(h.at)+"</td></tr>";
+    }).join("") || '<tr><td colspan="2">No moves yet.</td></tr>';
+    var s=cardStart(c), d=cardDone(c);
+    b.innerHTML = "<table><tr><td>Card</td><td><b>"+c.id+"</b> — "+escapeHtml(c.title)+"</td></tr>"+
+      "<tr><td>Plan</td><td>"+(c.est||0)+"h · "+c.milestone+"</td></tr>"+
+      "<tr><td>Started</td><td>"+(s?fmtT(s):"—")+"</td></tr>"+
+      "<tr><td>Finished</td><td>"+(d?fmtT(d):"—")+"</td></tr>"+
+      "<tr><td>Took</td><td>"+((s&&d)?fmtDur(d-s):"—")+"</td></tr>"+rows+"</table>";
+  }
+  var done = state.cards.filter(function(x){return x.column==="done";});
+  var html = "<tr><th>Card</th><th>Started</th><th>Finished</th><th>Took</th></tr>";
+  done.forEach(function(x){
+    var s=cardStart(x), d=cardDone(x);
+    html += "<tr><td>"+x.id+"</td><td>"+(s?fmtT(s):"—")+"</td><td>"+(d?fmtT(d):"—")+"</td><td>"+((s&&d)?fmtDur(d-s):"—")+"</td></tr>";
+  });
+  document.getElementById("timesheet").innerHTML = html;
+}
+
+function renderBurn(){
+  var cv = document.getElementById("burn"), ctx = cv.getContext("2d");
+  var W = cv.width, H = cv.height, P = 34;
+  ctx.clearRect(0,0,W,H);
+  function day(s){ return new Date(s+"T00:00:00"); }
+  var d0 = day(START), d1 = day(END);
+  var days = Math.round((d1-d0)/86400000);
+  var N = state.cards.length;
+  function X(i){ return P + (W-2*P)*i/days; }
+  function Y(n){ return 8 + (H-8-P)*(1 - n/N); }
+  ctx.strokeStyle = "#2c3a42"; ctx.fillStyle = "#93a3ab"; ctx.font = "10px sans-serif";
+  for(var i=0;i<=days;i+=3){ ctx.fillText(START.slice(5)+"+"+i+"d", X(i)-14, H-10);
+    ctx.beginPath(); ctx.moveTo(X(i),8); ctx.lineTo(X(i),H-P); ctx.stroke(); }
+  for(var n=0;n<=N;n+=6){ ctx.fillText(n, 8, Y(n)+3);
+    ctx.beginPath(); ctx.moveTo(P,Y(n)); ctx.lineTo(W-P,Y(n)); ctx.stroke(); }
+  // ideal
+  ctx.strokeStyle = "#93a3ab"; ctx.setLineDash([5,4]); ctx.beginPath();
+  ctx.moveTo(X(0),Y(N)); ctx.lineTo(X(days),Y(0)); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = "#93a3ab"; ctx.fillText("ideal", X(days)-30, Y(0)+12);
+  // actual: remaining per day up to today
+  var today = todayStr(), tIdx = Math.max(0, Math.min(days, Math.round((day(today)-d0)/86400000)));
+  ctx.strokeStyle = "#e8c15a"; ctx.lineWidth = 2; ctx.beginPath();
+  var first = true;
+  for(var k=0;k<=tIdx;k++){
+    var endOfDay = day(START).getTime() + (k+1)*86400000;
+    var rem = state.cards.filter(function(c){ var d=cardDone(c); return !(d && d<endOfDay); }).length;
+    if(first){ ctx.moveTo(X(k),Y(rem)); first=false; } else ctx.lineTo(X(k),Y(rem));
+  }
+  ctx.stroke(); ctx.lineWidth = 1;
+  ctx.fillStyle = "#e8c15a"; ctx.fillText("actual", X(tIdx)+4, Y(state.cards.filter(function(c){return c.column!=="done";}).length));
+}
+
+document.getElementById("btnExport").onclick = function(){
+  var blob = new Blob([JSON.stringify(state,null,1)],{type:"application/json"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "pilot-board.json"; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+};
+document.getElementById("btnImport").onclick = function(){ document.getElementById("fileImp").click(); };
+document.getElementById("fileImp").onchange = function(e){
+  var f = e.target.files[0]; if(!f) return;
+  var r = new FileReader();
+  r.onload = function(){ try{ var d = JSON.parse(r.result);
+      if(!d.cards || !d.cards.length) throw 0;
+      state = d; save(); render();
+    }catch(err){ alert("That file is not a board JSON."); } };
+  r.readAsText(f); e.target.value = "";
+};
+
+SEED = {"pilot":"RDL 28/29 flash — housing site update (7 Oct 2026)","total":7,"cards":[
+  {"id":"RDL-1","epic":"RDL","title":"Home page: replace 5-Oct box with 7-Oct update (BOE links, entry into force, Diputación Permanente)","est":2,"milestone":"flash","column":"todo","history":[]},
+  {"id":"RDL-2","epic":"RDL","title":"Fix 'En 1 minuto' / 'Qué pasa ahora' / 'Contexto' lines (no 'aprobará', no unknown numbers)","est":1,"milestone":"flash","column":"todo","history":[]},
+  {"id":"RDL-3","epic":"RDL","title":"lib/cronologia.ts: add 6-10-2026, 7-10-2026, and future dates (8-10, ~6-11, 15-11)","est":1,"milestone":"flash","column":"todo","history":[]},
+  {"id":"RDL-4","epic":"RDL","title":"/estado + lib/estado-votacion.ts: keep 26/27 derogados, add 29/28 status","est":2,"milestone":"flash","column":"todo","history":[]},
+  {"id":"RDL-5","epic":"RDL","title":"Chatbot / OKF: add factual lines about new decrees (numbers, dates, convalidation)","est":2,"milestone":"flash","column":"todo","history":[]},
+  {"id":"RDL-6","epic":"RDL","title":"Bump 'Última revisión' to 7 de octubre de 2026","est":0.5,"milestone":"flash","column":"todo","history":[]},
+  {"id":"RDL-7","epic":"RDL","title":"Verify: typecheck, build (citation audit 0), grep for forbidden strings, open PR","est":1,"milestone":"flash","column":"todo","history":[]}
+]};
+load(); render();
+</script>
+</body>
+</html>

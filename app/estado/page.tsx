@@ -166,8 +166,71 @@ export default function EstadoPage() {
       <AvisoEstado />
 
       <p>
-        Contexto (octubre de 2026, previsión no confirmada): ver la{' '}
-        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">previsión bajo el resumen «En 1 minuto» de la portada</Link>.
+        Contexto (octubre de 2026): ver la{' '}
+        <Link href="/#nuevos-decretos-de-vivienda-y-diputacion-permanente">actualización bajo el resumen «En 1 minuto» de la portada</Link>.
+      </p>
+
+      <h2 id={slugify('Nuevos decretos de 6 de octubre de 2026')}>
+        Nuevos decretos de 6 de octubre de 2026
+      </h2>
+
+      <p>
+        El Consejo de Ministros aprobó el 6 de octubre de 2026 dos nuevos reales
+        decretos-ley de vivienda, publicados en el «BOE» núm. 249 de 7 de octubre.
+        Son un paquete nuevo y distinto, no una re-convalidación de los decretos
+        derogados.
+      </p>
+
+      <ScrollTable label="Estado de los nuevos reales decretos-ley de vivienda">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Decreto</th>
+              <th scope="col">BOE</th>
+              <th scope="col">Entrada en vigor</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <b className="tono-rdl29">RDL 29/2026</b> — paquete principal: desahucios,
+                alquiler, fiscal, financiación
+              </td>
+              <td>
+                <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">
+                  BOE-A-2026-20823
+                </a>
+              </td>
+              <td>8 de octubre de 2026</td>
+              <td>
+                <span className="pill pill-pendiente">En vigor, pendiente de convalidación</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b className="tono-rdl28">RDL 28/2026</b> — estabilidad de los contratos de
+                arrendamiento
+              </td>
+              <td>
+                <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">
+                  BOE-A-2026-20822
+                </a>
+              </td>
+              <td>15 de noviembre de 2026 (prevista)</td>
+              <td>
+                <span className="pill pill-pendiente">No en vigor, pendiente de convalidación</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ScrollTable>
+
+      <p>
+        La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar la
+        convalidación de ambos decretos en el plazo de treinta días (hacia el 6 de
+        noviembre de 2026). No hay fecha de sesión fijada.{' '}
+        <Cite norma="ce" art="78.2" /> <Cite norma="ce" art="86.2" />
       </p>
 
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
@@ -288,9 +351,11 @@ export default function EstadoPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 6 de octubre de 2026. Articulado contrastado con{' '}
-        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
-        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
+        Última revisión: 7 de octubre de 2026. Articulado contrastado con{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">BOE-A-2026-20822</a>.
       </p>
     </>
   );

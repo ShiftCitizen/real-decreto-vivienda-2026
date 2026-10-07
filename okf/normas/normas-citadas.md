@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: Normas citadas
-description: Normas que el sitio cita, con el título oficial y el identificador del BOE tal como están escritos, y la diferencia entre el RDL 26/2026 y el RDL 27/2026.
+description: Normas que el sitio cita, con el título oficial y el identificador del BOE tal como están escritos, y la diferencia entre los cuatro reales decretos-ley (26/2026, 27/2026, 29/2026, 28/2026).
 tags:
   - rdl-vivienda-2026
   - normas
@@ -19,13 +19,17 @@ sources:
 
 Cada referencia a un artículo de este sitio nombra su norma. Estas son las normas citadas, con el título oficial y el enlace permanente en el «BOE».
 
-Las dos primeras tienen color propio porque son los dos reales decretos-ley del sitio: el RDL 26/2026 y el RDL 27/2026 . El resto se identifica por la abreviatura que usa el propio BOE.
+Las cuatro primeras tienen color propio porque son los cuatro reales decretos-ley del sitio: RDL 26/2026 (derogado), RDL 27/2026 (derogado), RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) y RDL 28/2026 (no en vigor, prevista 15-11-2026, pendiente de convalidación). El resto se identifica por la abreviatura que usa el propio BOE.
 
 Etiqueta Título oficial Identificador
 
 RDL 26/2026 Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible BOE-A-2026-20266
 
 RDL 27/2026 Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual BOE-A-2026-20385
+
+RDL 29/2026 Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible BOE-A-2026-20823
+
+RDL 28/2026 Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual BOE-A-2026-20822
 
 LAU Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos BOE-A-1994-26003
 
@@ -51,12 +55,14 @@ RDL 8/2023 Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan me
 
 Reglamento (UE) 2024/1028 Reglamento (UE) 2024/1028 del Parlamento Europeo y del Consejo, de 11 de abril de 2024, sobre la recogida y el intercambio de datos relativos a los servicios de alquiler de alojamientos de corta duración y por el que se modifica el Reglamento (UE) 2018/1724 ELI
 
-## Los dos reales decretos-ley
+## Los cuatro reales decretos-ley
 
-Ambos fueron aprobados en el Consejo de Ministros de 29 de septiembre de 2026 y suscritos por el Rey el mismo día; se publicaron con un día de diferencia. El color de la etiqueta es la manera rápida de saber cuál se está citando en cada referencia.
+Los dos primeros fueron aprobados en el Consejo de Ministros de 29 de septiembre de 2026 y derogados el 2 de octubre. Los dos últimos fueron aprobados el 6 de octubre de 2026 y publicados el 7 de octubre. El color de la etiqueta es la manera rápida de saber cuál se está citando en cada referencia.
 
-- RDL 26/2026 — «BOE» núm. 241, de 30 de septiembre de 2026, páginas 127818 a 127913 ( 96 páginas ). Veinte artículos en seis títulos y una disposición adicional primera, una segunda, dos transitorias, derogatoria única y once disposiciones finales. Entra en vigor el 1 de octubre de 2026 . disposición final undécima.1 RDL 26/2026
-- RDL 27/2026 — «BOE» núm. 243, de 1 de octubre de 2026 ( 8 páginas ). Un artículo único que modifica el artículo 10 de la LAU, más dos disposiciones adicionales, una transitoria y dos finales. Entra en vigor el 2 de octubre de 2026 . disposición final segunda RDL 27/2026
+- RDL 26/2026 — «BOE» núm. 241, de 30 de septiembre de 2026, páginas 127818 a 127913 ( 96 páginas ). Veinte artículos en seis títulos. Entra en vigor el 1 de octubre de 2026, derogado el 2 de octubre. disposición final undécima.1 RDL 26/2026
+- RDL 27/2026 — «BOE» núm. 243, de 1 de octubre de 2026 ( 8 páginas ). Un artículo único que modifica el artículo 10 de la LAU. Entra en vigor el 2 de octubre de 2026, derogado el mismo día. disposición final segunda RDL 27/2026
+- RDL 29/2026 — «BOE» núm. 249, de 7 de octubre de 2026, páginas 131850 a 131948 ( 99 páginas ). Paquete principal: desahucios, alquiler, fiscal, financiación. Entra en vigor el 8 de octubre de 2026, pendiente de convalidación. disposición final decimoprimera.1 RDL 29/2026
+- RDL 28/2026 — «BOE» núm. 249, de 7 de octubre de 2026, páginas 131840 a 131849 ( 10 páginas ). Estabilidad de los contratos de arrendamiento. No en vigor: prevista 15 de noviembre de 2026, pendiente de convalidación. disposición final segunda RDL 28/2026
 
 ## Por qué importa distinguirlos
 

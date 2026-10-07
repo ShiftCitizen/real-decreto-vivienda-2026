@@ -118,7 +118,8 @@ export default function HomePage() {
       <p className="meta">
         Jefatura del Estado · «BOE» núm. 241, de 30 de septiembre de 2026 (BOE-A-2026-20266) y
         núm. 243, de 1 de octubre de 2026 (BOE-A-2026-20385) · derogados por el Congreso el
-        2 de octubre de 2026 (rechazo de la convalidación)
+        2 de octubre de 2026 (rechazo de la convalidación) · nuevos RDL 29/2026 y 28/2026,
+        publicados en el «BOE» núm. 249, de 7 de octubre de 2026
       </p>
 
       <h1>Vivienda: los reales decretos-ley 26/2026 y 27/2026</h1>
@@ -169,30 +170,37 @@ export default function HomePage() {
       <div className="box">
         <ul>
           <li>
-            <strong>Qué ha pasado:</strong> el Congreso ha rechazado los dos decretos de
-            vivienda; ambos quedaron derogados el 2 de octubre de 2026.
+            <strong>Qué ha pasado:</strong> el Congreso rechazó los decretos de
+            vivienda 26/2026 y 27/2026; ambos quedaron derogados el 2 de octubre de
+            2026. El 6 de octubre el Consejo de Ministros aprobó dos nuevos
+            decretos-ley (RDL 29/2026 y RDL 28/2026), publicados en el BOE el 7 de
+            octubre.
           </li>
           <li>
             <strong>Para inquilinos:</strong> la moratoria de desahucios, los límites
-            extra a subidas de renta y las prórrogas automáticas que preveían los
-            decretos entraron en vigor con ellos; al quedar derogados los decretos el
-            2 de octubre de 2026, ya no están en vigor. Si recibiste una notificación
+            extra a subidas de renta y las prórrogas automáticas de los decretos
+            derogados ya no están en vigor. El RDL 29/2026 (en vigor desde el 8 de
+            octubre) reintroduce medidas de protección. Si recibiste una notificación
             fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de
             inquilinos.
           </li>
           <li>
-            <strong>Para caseros:</strong> ni las reglas de renovación automática
-            ni las indemnizaciones previstas en el segundo decreto están en vigor:
-            quedó derogado el 2 de octubre de 2026.
+            <strong>Para caseros:</strong> las reglas de renovación automática e
+            indemnizaciones del RDL 27/2026 derogado no están en vigor. El RDL
+            28/2026 (pendiente de convalidación) prevé un nuevo régimen de prórroga
+            automática.
           </li>
           <li>
-            <strong>Qué pasa ahora:</strong> vuelve el marco anterior (la LAU y las normas
-            vigentes antes de los decretos), salvo que se aprueben nuevas medidas por otra vía
-            (ver la previsión bajo este resumen).
+            <strong>Qué pasa ahora:</strong> el RDL 29/2026 entró en vigor el 8 de
+            octubre de 2026 y está pendiente de convalidación por la Diputación
+            Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está
+            prevista para el 15 de noviembre y depende de convalidación.
           </li>
           <li>
-            <strong>Futuro incierto:</strong> el Gobierno podría intentar tramitar algunas
-            medidas como proyecto de ley, pero no hay nada cerrado.
+            <strong>Próximo paso:</strong> la Diputación Permanente (69 miembros,
+            mayoría absoluta de 35) debe votar la convalidación de ambos decretos
+            en el plazo de treinta días (hacia el 6 de noviembre). No hay fecha de
+            sesión fijada.
           </li>
         </ul>
       </div>
@@ -232,25 +240,54 @@ export default function HomePage() {
         ))}
       </div>
 
-      <div className="box" role="note" aria-label="Previsión de octubre de 2026, no confirmada">
+      <div className="box" role="note" aria-label="Actualización de 7 de octubre de 2026">
         <h2 id={slugify('Nuevos decretos de vivienda y Diputación Permanente')} className="sr-only">
           Nuevos decretos de vivienda y Diputación Permanente
         </h2>
         <p>
-          <strong>Previsión, no confirmado (5 de octubre de 2026).</strong> La prensa
-          anuncia nuevos decretos de vivienda para la Diputación Permanente. Los
-          derogados incluían medidas de alquiler; sin texto publicado en el BOE,
-          este sitio no confirma los nuevos.
+          <strong>Actualización (7 de octubre de 2026).</strong> El Consejo de
+          Ministros aprobó el 6 de octubre dos nuevos reales decretos-ley de
+          vivienda, publicados en el «BOE» núm. 249 de 7 de octubre:{' '}
+          <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">
+            RDL 29/2026
+          </a>{' '}
+          (BOE-A-2026-20823, paquete principal) y{' '}
+          <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">
+            RDL 28/2026
+          </a>{' '}
+          (BOE-A-2026-20822, estabilidad de los contratos de arrendamiento).
         </p>
         <p>
-          Fuente:{' '}
+          El RDL 29/2026 entró en vigor el 8 de octubre de 2026 (día siguiente a su
+          publicación) y está pendiente de convalidación por la Diputación
+          Permanente. El RDL 28/2026 no está en vigor: su disposición final segunda
+          retrasa su entrada en vigor al 15 de noviembre de 2026, de modo que solo
+          produce efectos si la Diputación Permanente lo convalida antes.
+        </p>
+        <p>
+          La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar
+          la convalidación de ambos decretos en el plazo de treinta días (hacia el
+          6 de noviembre de 2026). No hay fecha de sesión fijada. Las estimaciones
+          de prensa del 6 de octubre no son resultados oficiales.
+        </p>
+        <p>
+          Fuentes:{' '}
           <a
-            href="https://elpais.com/espana/2026-10-05/el-consejo-de-ministros-aprobara-manana-los-decretos-de-vivienda-para-que-los-vote-la-diputacion-permanente.html"
+            href="https://www.lamoncloa.gob.es/consejodeministros/resumenes/paginas/2026/061026-rueda-prensa-ministros.aspx"
             target="_blank"
             rel="noopener noreferrer"
           >
-            El País
-          </a>.
+            Moncloa — rueda de prensa
+          </a>
+          ,{' '}
+          <a
+            href="https://www.lamoncloa.gob.es/presidente/actividades/paginas/2026/061026-sanchez-comparecencia-consejo-ministros.aspx"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Moncloa — comparecencia de Sánchez
+          </a>
+          .
         </p>
       </div>
 
@@ -380,9 +417,9 @@ export default function HomePage() {
       <AvisoEstado />
 
       <p>
-        Contexto (octubre de 2026, previsión no confirmada): ver la{' '}
+        Contexto (octubre de 2026): ver la{' '}
         <a href="#nuevos-decretos-de-vivienda-y-diputacion-permanente">
-          previsión bajo el resumen «En 1 minuto»
+          actualización bajo el resumen «En 1 minuto»
         </a>.
       </p>
 
@@ -431,9 +468,11 @@ export default function HomePage() {
       </ul>
 
       <p className="page-meta">
-        Última revisión: 6 de octubre de 2026. Articulado contrastado con{' '}
-        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
-        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
+        Última revisión: 7 de octubre de 2026. Articulado contrastado con{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}
+        <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822">BOE-A-2026-20822</a>.
       </p>
     </>
   );

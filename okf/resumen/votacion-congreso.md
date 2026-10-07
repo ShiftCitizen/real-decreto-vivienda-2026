@@ -54,6 +54,8 @@ Los dos decretos se votaron por separado y ambos fueron rechazados. Al no obtene
 
 Al no obtener la convalidación, los reales decretos-ley quedan derogados y dejan de producir efectos. La situación jurídica vuelve al marco anterior a su aprobación. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
 
+Nuevos decretos (6 de octubre de 2026). El Consejo de Ministros aprobó el 6 de octubre de 2026 dos nuevos reales decretos-ley, publicados en el BOE el 7 de octubre: RDL 29/2026 (BOE-A-2026-20823) y RDL 28/2026 (BOE-A-2026-20822). El RDL 29/2026 entró en vigor el 8 de octubre de 2026 y está pendiente de convalidación por la Diputación Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está prevista para el 15 de noviembre de 2026 y depende de convalidación. La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar en el plazo de treinta días (hacia el 6 de noviembre de 2026). No hay fecha de sesión fijada.
+
 ## Véase
 
 - [En 1 minuto](../resumen/en-1-minuto.md)

@@ -17,6 +17,7 @@ sources:
 
 # Historial de actualizaciones
 
+- 7 de octubre de 2026: tercera versión. Se añaden los RDL 29/2026 (BOE-A-2026-20823, en vigor desde el 8-10-2026, pendiente de convalidación) y RDL 28/2026 (BOE-A-2026-20822, no en vigor, prevista 15-11-2026, pendiente de convalidación), publicados en el BOE el 7 de octubre. Se actualizan la portada, la cronología, la página de estado y el asistente.
 - 1 de octubre de 2026, 12:00: segunda versión. Se contrastó el articulado completo con el BOE-A-2026-20266 y el BOE-A-2026-20385 y se corrigieron cinco errores de fondo, se añadieron las disposiciones que faltaban y se separaron los dos reales decretos-ley en secciones propias.
 - 30 de septiembre de 2026, 13:14: versión inicial, contrastada con el articulado del BOE-A-2026-20266.
 
