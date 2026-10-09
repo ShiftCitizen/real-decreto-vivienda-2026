@@ -261,14 +261,17 @@ document.getElementById("fileImp").onchange = function(e){
   r.readAsText(f); e.target.value = "";
 };
 
-SEED = {"pilot":"RDL 28/29 flash — housing site update (7 Oct 2026)","total":7,"cards":[
-  {"id":"RDL-1","epic":"RDL","title":"Home page: replace 5-Oct box with 7-Oct update (BOE links, entry into force, Diputación Permanente)","est":2,"milestone":"flash","column":"todo","history":[]},
-  {"id":"RDL-2","epic":"RDL","title":"Fix 'En 1 minuto' / 'Qué pasa ahora' / 'Contexto' lines (no 'aprobará', no unknown numbers)","est":1,"milestone":"flash","column":"todo","history":[]},
-  {"id":"RDL-3","epic":"RDL","title":"lib/cronologia.ts: add 6-10-2026, 7-10-2026, and future dates (8-10, ~6-11, 15-11)","est":1,"milestone":"flash","column":"todo","history":[]},
-  {"id":"RDL-4","epic":"RDL","title":"/estado + lib/estado-votacion.ts: keep 26/27 derogados, add 29/28 status","est":2,"milestone":"flash","column":"todo","history":[]},
-  {"id":"RDL-5","epic":"RDL","title":"Chatbot / OKF: add factual lines about new decrees (numbers, dates, convalidation)","est":2,"milestone":"flash","column":"todo","history":[]},
-  {"id":"RDL-6","epic":"RDL","title":"Bump 'Última revisión' to 7 de octubre de 2026","est":0.5,"milestone":"flash","column":"todo","history":[]},
-  {"id":"RDL-7","epic":"RDL","title":"Verify: typecheck, build (citation audit 0), grep for forbidden strings, open PR","est":1,"milestone":"flash","column":"todo","history":[]}
+SEED = {"pilot":"RDL 28/29 flash — housing site update (7 Oct 2026)","total":10,"cards":[
+  {"id":"RDL-1","epic":"RDL","title":"Home page: replace 5-Oct box with 7-Oct update (BOE links, entry into force, Diputación Permanente)","est":2,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-2","epic":"RDL","title":"Fix 'En 1 minuto' / 'Qué pasa ahora' / 'Contexto' lines (no 'aprobará', no unknown numbers)","est":1,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-3","epic":"RDL","title":"lib/cronologia.ts: add 6-10-2026, 7-10-2026, and future dates (8-10, ~6-11, 15-11)","est":1,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-4","epic":"RDL","title":"/estado + lib/estado-votacion.ts: keep 26/27 derogados, add 29/28 status","est":2,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-5","epic":"RDL","title":"Chatbot / OKF: add factual lines about new decrees (numbers, dates, convalidation)","est":2,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-6","epic":"RDL","title":"Bump 'Última revisión' to 7 de octubre de 2026","est":0.5,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-7","epic":"RDL","title":"Verify: typecheck, build (citation audit 0), grep for forbidden strings, open PR","est":1,"milestone":"flash","column":"done","history":[{"from":"todo","to":"doing","at":1791277200000},{"from":"doing","to":"done","at":1791288000000}]},
+  {"id":"RDL-8","epic":"RDL","title":"Detailed article-by-article analysis of RDL 29/2026 (99 pages, BOE-A-2026-20823)","est":8,"milestone":"analysis","column":"done","history":[{"from":"todo","to":"doing","at":1791296000000},{"from":"doing","to":"done","at":1791299000000}]},
+  {"id":"RDL-9","epic":"RDL","title":"Detailed article-by-article analysis of RDL 28/2026 (10 pages, BOE-A-2026-20822)","est":4,"milestone":"analysis","column":"done","history":[{"from":"todo","to":"doing","at":1791296000000},{"from":"doing","to":"done","at":1791299000000}]},
+  {"id":"RDL-10","epic":"RDL","title":"Measure-by-measure comparison: RDL 26/27 (derogados) vs RDL 29/28 (nuevos)","est":4,"milestone":"analysis","column":"done","history":[{"from":"todo","to":"doing","at":1791296000000},{"from":"doing","to":"done","at":1791299000000}]}
 ]};
 load(); render();
 </script>

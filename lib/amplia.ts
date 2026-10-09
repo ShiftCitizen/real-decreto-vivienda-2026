@@ -91,7 +91,7 @@ const PAGINAS: PaginaAmplia[] = [
         ancla: ancla('En 1 minuto'),
         medida: true,
         texto:
-          'Qué ha pasado: el Congreso ha rechazado los dos decretos de vivienda; ambos quedaron derogados el 2 de octubre de 2026.',
+          'el Congreso rechazó los decretos de vivienda 26/2026 y 27/2026; ambos quedaron derogados el 2 de octubre de 2026.',
       },
     ],
   },
