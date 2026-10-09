@@ -14,4 +14,4 @@
 ## 3. Verificación y entrega
 
 - [x] 3.1 Pasar el gate completo (`typecheck`, `build`, `check:chat`) sin empeorar P3/P5/P10 y verificar greps (`en funciones` vacío, `Última revisión` donde toque).
-- [ ] 3.2 Commitear en rama corta, pushear y abrir PR contra `main` con el estado de gates en el cuerpo.
+- [x] 3.2 Commitear en rama corta, pushear y abrir PR contra `main` con el estado de gates en el cuerpo.
