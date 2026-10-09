@@ -24,13 +24,14 @@ import { slugify } from './slug';
 export type CitaAmplia = { titulo: string; href: string };
 
 /**
- * Comprobado el 3 de octubre de 2026. Misma frase, en español, que
- * «As checked on 3 October 2026, RDL 26/2026 entered into force on 1 October
- * and RDL 27/2026 on 2 October. Congress repealed both on 2 October.
- * Neither decree is now in force.»
+ * Comprobado el 8 de octubre de 2026. Misma frase, en español, que
+ * «As checked on 8 October 2026, RDL 29/2026 entered into force on 8 October
+ * and is awaiting convalidation; RDL 28/2026 will enter into force on
+ * 15 November if convalidated. RDL 26/2026 and RDL 27/2026 were repealed
+ * on 2 October.»
  */
 export const FRASE_ESTADO =
-  'Comprobado el 3 de octubre de 2026, el RDL 26/2026 entró en vigor el 1 de octubre y el RDL 27/2026 el 2 de octubre. El Congreso los derogó el 2 de octubre. Ninguno de los dos decretos está ahora en vigor.';
+  'Comprobado el 8 de octubre de 2026, el RDL 29/2026 está en vigor desde ese día pendiente de convalidación; el RDL 28/2026 entraría en vigor el 15 de noviembre si se convalida. Los RDL 26/2026 y 27/2026 quedaron derogados el 2 de octubre.';
 
 const HREF_ESTADO = '/estado/';
 

@@ -846,6 +846,51 @@ th:last-child {
 }
 
 /* --------------------------------------------------------------------------
+   Línea de tiempo (gráfico generado desde lib/cronologia.ts)
+   -------------------------------------------------------------------------- */
+
+.timeline {
+  list-style: none;
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+.timeline-hito {
+  position: relative;
+  margin: 0;
+  padding: 0 0 1.1em 1.5em;
+  border-left: 2px solid var(--lead-rule);
+}
+
+.timeline-hito:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-hito::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0.35em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ac);
+}
+
+.timeline-hito time {
+  display: block;
+  font: 600 13px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ac);
+}
+
+.timeline-hito p {
+  margin: 0.25em 0 0;
+  font-size: 16.5px;
+}
+
+/* --------------------------------------------------------------------------
    FAQ
    -------------------------------------------------------------------------- */
 

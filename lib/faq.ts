@@ -23,12 +23,12 @@ export const FAQ: FaqEntry[] = [
     id: 'en-vigor',
     pregunta: '¿Está en vigor ya?',
     respuesta: [
-      'No. El 2 de octubre de 2026 el Congreso rechazó la convalidación de los dos decretos (172 a favor y 178 en contra el RDL 26/2026; el RDL 27/2026 fue rechazado sin cifra a favor confirmada en fuente oficial, con 184 en contra) y ambos quedaron derogados el 2-10-2026: no están en vigor desde ese día.',
-      'Rigen la LAU y las demás normas anteriores a los decretos. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.',
+      'Sí, en parte. El RDL 29/2026 está en vigor desde el 8 de octubre de 2026, pendiente de convalidación por la Diputación Permanente; el RDL 28/2026 está publicado pero aún no está en vigor (prevista el 15-11-2026 si se convalida).',
+      'Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026 (172 a favor y 178 en contra el RDL 26/2026; el RDL 27/2026 fue rechazado sin cifra a favor confirmada en fuente oficial, con 184 en contra). Rigen la LAU y las demás normas anteriores a los decretos. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.',
     ],
     citas: [
-      { norma: 'rdl26', art: 'disposición final undécima.1' },
-      { norma: 'rdl27', art: 'disposición final segunda' },
+      { norma: 'rdl29', art: 'disposición final decimoprimera.1' },
+      { norma: 'rdl28', art: 'disposición final segunda' },
       { norma: 'ce', art: '86.2' },
     ],
   },

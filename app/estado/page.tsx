@@ -3,6 +3,7 @@ import Link from 'next/link';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
 import ScrollTable from '@/components/ScrollTable';
+import Timeline from '@/components/Timeline';
 import { slugify } from '@/lib/slug';
 
 export const metadata: Metadata = {
@@ -269,6 +270,15 @@ export default function EstadoPage() {
           </tbody>
         </table>
       </ScrollTable>
+
+      <h2 id={slugify('Línea de tiempo')}>Línea de tiempo</h2>
+
+      <p>
+        Cómo hemos llegado hasta aquí, del BOE a la Diputación Permanente, en
+        orden de relevancia (el mismo que la tabla de la portada).
+      </p>
+
+      <Timeline />
 
       <h2 id={slugify('Historial de actualizaciones')}>Historial de actualizaciones</h2>
 
