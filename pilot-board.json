@@ -258,12 +258,17 @@
       "title": "Verificación gate completo + PR",
       "est": 1,
       "milestone": "flash",
-      "column": "doing",
+      "column": "done",
       "history": [
         {
           "from": "todo",
           "to": "doing",
           "at": 1791583546948
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791585018959
         }
       ]
     }
