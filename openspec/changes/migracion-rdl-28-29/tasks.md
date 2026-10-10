@@ -8,7 +8,7 @@
 
 ## 2. Análisis (Fase 2, siguiente)
 
-- [ ] 2.1 Migrar `desahucios-y-alquiler` (lead + secciones) a 28/2026 y 29/2026 vigentes con 26/2026 como histórico, y verificar auditoría a 0.
-- [ ] 2.2 Migrar `fiscal` y `financiacion` con el mismo criterio, y verificar auditoría a 0.
-- [ ] 2.3 Migrar FAQ (`lib/faq.ts` + espejos OKF) al régimen vigente con historial fechado, y verificar `check:chat` en verde.
+- [x] 2.1 Migrar `desahucios-y-alquiler` (lead + secciones) a 28/2026 y 29/2026 vigentes con 26/2026 como histórico, y verificar auditoría a 0.
+- [x] 2.2 Migrar `fiscal` y `financiacion` con el mismo criterio, y verificar auditoría a 0.
+- [x] 2.3 Migrar FAQ (`lib/faq.ts` + espejos OKF) al régimen vigente con historial fechado, y verificar `check:chat` en verde.
 - [ ] 2.4 Pasar el gate completo y abrir PR con el estado de gates en el cuerpo.

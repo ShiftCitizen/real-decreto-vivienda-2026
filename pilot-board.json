@@ -318,8 +318,19 @@
       "title": "Fase 2 análisis: desahucios, fiscal, financiación, FAQ a 28/29 vigentes",
       "est": 8,
       "milestone": "flash",
-      "column": "todo",
-      "history": []
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791639014411
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791641211991
+        }
+      ]
     },
     {
       "id": "MIG-4",
@@ -327,7 +338,7 @@
       "title": "Verificación gate + PR migración",
       "est": 1,
       "milestone": "flash",
-      "column": "done",
+      "column": "doing",
       "history": [
         {
           "from": "todo",
@@ -338,6 +349,11 @@
           "from": "doing",
           "to": "done",
           "at": 1791637866721
+        },
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791641211991
         }
       ]
     }

@@ -106,7 +106,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: DESAHUCIOS,
       medida: true,
       texto:
-        'El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026: ninguna de estas medidas se aplica.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera el freno a la compra especulativa, la suspensión de lanzamientos hasta 2030, la enervación extraordinaria y la reforma de la LAU; el RDL 28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la indemnización (pendiente de convalidación). Esta página describe esas medidas con las citas de los RDL 26/2026 y 27/2026, derogados el 2-10-2026, cuyo contenido reproducen en lo sustancial.',
     },
     puntos: [
       {
@@ -114,7 +114,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: DESAHUCIOS,
         ancla: ancla('Art. 1 (RDL 26/2026). Freno a la compra especulativa'),
         medida: true,
-        texto: 'El RDL 26/2026 preveía freno a la compra especulativa',
+        texto: 'recupera el freno a la compra especulativa',
       },
       {
         titulo: 'Suspensión de lanzamientos',
@@ -139,11 +139,11 @@ const PAGINAS: PaginaAmplia[] = [
         texto: 'El artículo 3 modifica veintidós apartados de la Ley de Arrendamientos Urbanos.',
       },
       {
-        titulo: 'Prórroga indefinida',
+        titulo: 'Prórroga por plazos sucesivos',
         archivo: DESAHUCIOS,
         ancla: { id: 'coordinacion' },
         medida: true,
-        texto: 'El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años.',
+        texto: 'el RDL 28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la indemnización',
       },
     ],
   },
@@ -156,7 +156,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: FISCAL,
       medida: true,
       texto:
-        'El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera las reducciones en el IRPF por alquiler, el IVA sobre estancias cortas, los recargos de IBI y el gravamen especial de las SOCIMI. Esta página los describe con las citas del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
     },
     puntos: [
       {
@@ -164,7 +164,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: FISCAL,
         ancla: ancla('Art. 6 (RDL 26/2026). IRPF'),
         medida: true,
-        texto: 'nuevas reducciones en el IRPF por alquiler',
+        texto: 'las reducciones en el IRPF por alquiler',
       },
       {
         titulo: 'IVA',
@@ -178,14 +178,14 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: FISCAL,
         ancla: ancla('Art. 8 (RDL 26/2026). IBI'),
         medida: true,
-        texto: 'recargos de IBI por vivienda desocupada y alojamientos turísticos',
+        texto: 'los recargos de IBI',
       },
       {
         titulo: 'SOCIMI',
         archivo: FISCAL,
         ancla: ancla('Arts. 9 y 10'),
         medida: true,
-        texto: 'el gravamen especial de las SOCIMI (Título II)',
+        texto: 'el gravamen especial de las SOCIMI',
       },
     ],
   },
@@ -199,7 +199,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: FINANCIACION,
       medida: true,
       texto:
-        'El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera la movilización de parque público, las líneas de avales, el préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa. Esta página los describe con las citas del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
     },
     puntos: [
       {
@@ -207,21 +207,21 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: FINANCIACION,
         ancla: ancla('Parque público (arts. 11 a 14)'),
         medida: true,
-        texto: 'movilización de parque público',
+        texto: 'la movilización de parque público',
       },
       {
         titulo: 'Avales y TU CASA',
         archivo: FINANCIACION,
         ancla: ancla('Avales y TU CASA (arts. 15 a 19)'),
         medida: true,
-        texto: 'dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 %',
+        texto: 'las líneas de avales, el préstamo TU CASA al 0 %',
       },
       {
         titulo: 'Cuenta Financia Europa',
         archivo: FINANCIACION,
         ancla: ancla('Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)'),
         medida: true,
-        texto: 'la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI)',
+        texto: 'la Cuenta de Ahorro e Inversión Financia Europa',
       },
     ],
   },

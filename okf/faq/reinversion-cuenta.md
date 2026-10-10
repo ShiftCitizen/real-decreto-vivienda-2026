@@ -17,13 +17,13 @@ sources:
 
 # ¿Cómo funciona la reinversión en la Cuenta Financia Europa Reinversión?
 
-¿Cómo funciona la reinversión en la Cuenta Financia Europa Reinversión? Medida del RDL 26/2026, derogado el 2 de octubre de 2026: no se aplica.
+¿Cómo funciona la reinversión en la Cuenta Financia Europa Reinversión? Rige de nuevo por el art. 6 del RDL 29/2026 (en vigor desde el 8-10, pendiente de convalidación). Esa reinversión era del RDL 26/2026, derogado el 2 de octubre de 2026.
 
 Solo vale para transmisiones realizadas una vez transcurridos treinta días hábiles desde la entrada en vigor del decreto. Hay que reinvertir, en seis meses desde la transmisión (o desde la orden ministerial de información si es posterior), el valor de transmisión que proporcionalmente se corresponda con la ganancia patrimonial no exenta (disposición adicional 65.1 de la LIRPF, introducida por el art. 6.Segundo.Once del RDL 26/2026).
 
 El importe total acumulado aportado a esa cuenta no puede exceder de 800.000 € (disposición adicional 66.5 de la LIRPF y art. 6.Segundo.Doce del RDL 26/2026).
 
-art. 6.Segundo.Once RDL 26/2026 disposición adicional sexagésima quinta.1 LIRPF art. 6.Segundo.Doce RDL 26/2026 disposición adicional sexagésima sexta.5 LIRPF
+art. 6.Segundo.Once RDL 29/2026 art. 6.Segundo.Once RDL 26/2026 disposición adicional sexagésima quinta.1 LIRPF art. 6.Segundo.Doce RDL 26/2026 disposición adicional sexagésima sexta.5 LIRPF
 
 ## Véase
 

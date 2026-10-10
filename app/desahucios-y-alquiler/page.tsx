@@ -8,7 +8,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Desahucios y alquiler',
   description:
-    'El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía prórroga indefinida. Ambos fueron derogados el 2-10-2026: no se aplican.',
+    'El RDL 29/2026 (en vigor desde el 8-10-2026) recupera freno a la compra especulativa, suspensión de lanzamientos, enervación y reforma de la LAU; el RDL 28/2026 trae la prórroga por plazos sucesivos. Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026.',
 };
 
 export default function DesahuciosPage() {
@@ -16,10 +16,13 @@ export default function DesahuciosPage() {
     <>
       <h1>Desahucios y alquiler</h1>
       <p className="lead">
-        El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta
-        2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una
-        prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026:
-        ninguna de estas medidas se aplica.
+        El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación)
+        recupera el freno a la compra especulativa, la suspensión de lanzamientos
+        hasta 2030, la enervación extraordinaria y la reforma de la LAU; el RDL
+        28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la
+        indemnización (pendiente de convalidación). Esta página describe esas
+        medidas con las citas de los RDL 26/2026 y 27/2026, derogados el 2-10-2026,
+        cuyo contenido reproducen en lo sustancial.
       </p>
 
       <AvisoEstado />
