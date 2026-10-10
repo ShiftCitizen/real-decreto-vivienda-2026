@@ -17,11 +17,11 @@ sources:
 
 # ¿Cuánto me deben si no me renuevan?
 
-¿Cuánto me deben si no me renuevan? No hay indemnización de doce mensualidades: era del art. 10.1 de la LAU en la redacción del RDL 27/2026, derogado el 2-10-2026. Tampoco hay prórroga indefinida de cinco y siete años.
+¿Cuánto me deben si no me renuevan? Vuelve a estar en vigor por el artículo único del RDL 28/2026 (pendiente de convalidación): prórroga por plazos sucesivos de cinco y siete años e indemnización por no renovación.
 
-Las seis excepciones del apartado 10.2 (necesidad del arrendador, no ocupación, otra vivienda, contrato nuevo, rechazo de oferta y vulnerabilidad del arrendador) tampoco se aplican: eran del mismo texto derogado.
+Las seis excepciones del apartado 10.2 (necesidad del arrendador, no ocupación, otra vivienda, contrato nuevo, rechazo de oferta y vulnerabilidad del arrendador) eran del texto del RDL 27/2026, derogado el 2-10-2026; el RDL 28/2026 las reproduce.
 
-art. 10.1 LAU art. 10.2 LAU único.1 RDL 27/2026
+único.1 RDL 28/2026 art. 10.1 LAU art. 10.2 LAU único.1 RDL 27/2026
 
 ## Véase
 

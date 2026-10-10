@@ -8,7 +8,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Fiscalidad',
   description:
-    'El RDL 26/2026 preveía reducciones IRPF, IVA estancias cortas, recargos IBI y gravamen SOCIMI. Derogado el 2-10-2026: no se aplica.',
+    'El RDL 29/2026 (en vigor desde el 8-10-2026) recupera reducciones IRPF, IVA estancias cortas, recargos IBI y gravamen SOCIMI. El RDL 26/2026 quedó derogado el 2-10-2026.',
 };
 
 const REDUCCIONES = [
@@ -50,10 +50,11 @@ export default function FiscalPage() {
     <>
       <h1>Fiscalidad</h1>
       <p className="lead">
-        El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias
-        cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen
-        especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026: ninguna de
-        estas medidas se aplica.
+        El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación)
+        recupera las reducciones en el IRPF por alquiler, el IVA sobre estancias
+        cortas, los recargos de IBI y el gravamen especial de las SOCIMI. Esta
+        página los describe con las citas del RDL 26/2026, derogado el 2-10-2026,
+        cuyo contenido reproduce en lo sustancial.
       </p>
 
       <AvisoEstado />

@@ -24,13 +24,14 @@ import { slugify } from './slug';
 export type CitaAmplia = { titulo: string; href: string };
 
 /**
- * Comprobado el 3 de octubre de 2026. Misma frase, en español, que
- * «As checked on 3 October 2026, RDL 26/2026 entered into force on 1 October
- * and RDL 27/2026 on 2 October. Congress repealed both on 2 October.
- * Neither decree is now in force.»
+ * Comprobado el 8 de octubre de 2026. Misma frase, en español, que
+ * «As checked on 8 October 2026, RDL 29/2026 entered into force on 8 October
+ * and is awaiting convalidation; RDL 28/2026 will enter into force on
+ * 15 November if convalidated. RDL 26/2026 and RDL 27/2026 were repealed
+ * on 2 October.»
  */
 export const FRASE_ESTADO =
-  'Comprobado el 3 de octubre de 2026, el RDL 26/2026 entró en vigor el 1 de octubre y el RDL 27/2026 el 2 de octubre. El Congreso los derogó el 2 de octubre. Ninguno de los dos decretos está ahora en vigor.';
+  'Comprobado el 8 de octubre de 2026, el RDL 29/2026 está en vigor desde ese día pendiente de convalidación; el RDL 28/2026 entraría en vigor el 15 de noviembre si se convalida. Los RDL 26/2026 y 27/2026 quedaron derogados el 2 de octubre.';
 
 const HREF_ESTADO = '/estado/';
 
@@ -75,7 +76,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: PORTADA,
       medida: true,
       texto:
-        'Dos reales decretos-ley publicados con un día de diferencia y aprobados en el mismo Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos, actuaba en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación de vivienda asequible, y cerraba con la Cuenta de Ahorro e Inversión Financia Europa. El segundo era un texto breve de ocho páginas con un único artículo, y se ocupaba de una sola cosa: el futuro de los contratos de arrendamiento de vivienda habitual.',
+        'Dos reales decretos-ley aprobados en el Consejo de Ministros del 6 de octubre y publicados en el «BOE» núm. 249, de 7 de octubre de 2026.',
     },
     puntos: [
       {
@@ -83,7 +84,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: PORTADA,
         medida: true,
         texto:
-          'Dos reales decretos-ley publicados con un día de diferencia y aprobados en el mismo Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos, actuaba en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación de vivienda asequible, y cerraba con la Cuenta de Ahorro e Inversión Financia Europa. El segundo era un texto breve de ocho páginas con un único artículo, y se ocupaba de una sola cosa: el futuro de los contratos de arrendamiento de vivienda habitual.',
+          'Dos reales decretos-ley aprobados en el Consejo de Ministros del 6 de octubre y publicados en el «BOE» núm. 249, de 7 de octubre de 2026.',
       },
       {
         titulo: 'Qué ha pasado',
@@ -105,7 +106,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: DESAHUCIOS,
       medida: true,
       texto:
-        'El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026: ninguna de estas medidas se aplica.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera el freno a la compra especulativa, la suspensión de lanzamientos hasta 2030, la enervación extraordinaria y la reforma de la LAU; el RDL 28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la indemnización (pendiente de convalidación). Esta página describe esas medidas con las citas de los RDL 26/2026 y 27/2026, derogados el 2-10-2026, cuyo contenido reproducen en lo sustancial.',
     },
     puntos: [
       {
@@ -113,7 +114,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: DESAHUCIOS,
         ancla: ancla('Art. 1 (RDL 26/2026). Freno a la compra especulativa'),
         medida: true,
-        texto: 'El RDL 26/2026 preveía freno a la compra especulativa',
+        texto: 'recupera el freno a la compra especulativa',
       },
       {
         titulo: 'Suspensión de lanzamientos',
@@ -138,11 +139,11 @@ const PAGINAS: PaginaAmplia[] = [
         texto: 'El artículo 3 modifica veintidós apartados de la Ley de Arrendamientos Urbanos.',
       },
       {
-        titulo: 'Prórroga indefinida',
+        titulo: 'Prórroga por plazos sucesivos',
         archivo: DESAHUCIOS,
         ancla: { id: 'coordinacion' },
         medida: true,
-        texto: 'El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años.',
+        texto: 'el RDL 28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la indemnización',
       },
     ],
   },
@@ -155,7 +156,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: FISCAL,
       medida: true,
       texto:
-        'El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera las reducciones en el IRPF por alquiler, el IVA sobre estancias cortas, los recargos de IBI y el gravamen especial de las SOCIMI. Esta página los describe con las citas del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
     },
     puntos: [
       {
@@ -163,7 +164,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: FISCAL,
         ancla: ancla('Art. 6 (RDL 26/2026). IRPF'),
         medida: true,
-        texto: 'nuevas reducciones en el IRPF por alquiler',
+        texto: 'las reducciones en el IRPF por alquiler',
       },
       {
         titulo: 'IVA',
@@ -177,14 +178,14 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: FISCAL,
         ancla: ancla('Art. 8 (RDL 26/2026). IBI'),
         medida: true,
-        texto: 'recargos de IBI por vivienda desocupada y alojamientos turísticos',
+        texto: 'los recargos de IBI',
       },
       {
         titulo: 'SOCIMI',
         archivo: FISCAL,
         ancla: ancla('Arts. 9 y 10'),
         medida: true,
-        texto: 'el gravamen especial de las SOCIMI (Título II)',
+        texto: 'el gravamen especial de las SOCIMI',
       },
     ],
   },
@@ -198,7 +199,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: FINANCIACION,
       medida: true,
       texto:
-        'El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera la movilización de parque público, las líneas de avales, el préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa. Esta página los describe con las citas del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
     },
     puntos: [
       {
@@ -206,21 +207,21 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: FINANCIACION,
         ancla: ancla('Parque público (arts. 11 a 14)'),
         medida: true,
-        texto: 'movilización de parque público',
+        texto: 'la movilización de parque público',
       },
       {
         titulo: 'Avales y TU CASA',
         archivo: FINANCIACION,
         ancla: ancla('Avales y TU CASA (arts. 15 a 19)'),
         medida: true,
-        texto: 'dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 %',
+        texto: 'las líneas de avales, el préstamo TU CASA al 0 %',
       },
       {
         titulo: 'Cuenta Financia Europa',
         archivo: FINANCIACION,
         ancla: ancla('Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)'),
         medida: true,
-        texto: 'la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI)',
+        texto: 'la Cuenta de Ahorro e Inversión Financia Europa',
       },
     ],
   },

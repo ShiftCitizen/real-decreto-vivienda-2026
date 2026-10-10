@@ -43,57 +43,57 @@ const FIGURAS = [
   {
     label: 'Suspensión de desahucios',
     valor: '31-12-2030',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '2' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '2' },
   },
   {
     label: 'Umbral de tasación',
     valor: '70 %',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '1' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '1' },
   },
   {
     label: 'Tope vivienda asequible',
     valor: '30 %',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '14' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '14' },
   },
   {
     label: 'Línea de avales',
     valor: '2.000 M€',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '16' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '16' },
   },
   {
     label: 'Línea de avales industrialización',
     valor: '280 M€',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '17.2' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '17.2' },
   },
   {
     label: 'TU CASA',
     valor: '0 %',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '19' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '19' },
   },
   {
     label: 'Recargo IBI turístico máximo',
     valor: '150 %',
-    norma: 'rdl26' as const,
-    cita: { norma: 'rdl26' as const, art: '8.Cuatro' },
+    norma: 'rdl29' as const,
+    cita: { norma: 'rdl29' as const, art: '8.Cuatro' },
   },
   {
     // The fine lives in the new Título V of the LAU, not in the decree itself:
     // `norma` says which decree introduces it, `cita` names the norm to cite.
     label: 'Multa por plataforma turística',
     valor: '1 M€',
-    norma: 'rdl26' as const,
+    norma: 'rdl29' as const,
     cita: { norma: 'lau' as const, art: '43.2' },
   },
   {
     label: 'Indemnización por no renovación',
     valor: '12 rentas',
-    norma: 'rdl27' as const,
+    norma: 'rdl28' as const,
     cita: { norma: 'lau' as const, art: '10.1' },
   },
 ];
@@ -122,123 +122,7 @@ export default function HomePage() {
         publicados en el «BOE» núm. 249, de 7 de octubre de 2026
       </p>
 
-      <h1>Vivienda: los reales decretos-ley 26/2026 y 27/2026</h1>
-
-      <div className="box warn" role="note" aria-label="Estado: derogados">
-        <strong>Derogados el 2 de octubre de 2026.</strong> El Congreso rechazó la
-        convalidación de ambos decretos y quedaron derogados ese día. Lo que sigue
-        describe lo que contenían, no lo que se aplica hoy.
-      </div>
-
-      <p className="lead">
-        Medidas urgentes para la protección de la función social de la vivienda y la ampliación
-        de la oferta de vivienda asequible.
-      </p>
-
-      <p>
-        Dos reales decretos-ley publicados con un día de diferencia y aprobados en el mismo
-        Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos,
-        actuaba en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación
-        de vivienda asequible, y cerraba con la Cuenta de Ahorro e Inversión Financia Europa. El
-        segundo era un texto breve de ocho páginas con un único artículo, y se ocupaba de una sola
-        cosa: el futuro de los contratos de arrendamiento de vivienda habitual.
-      </p>
-
-      <p>
-        Lo más urgente del primero era el régimen de desahucios. Si la administración competente
-        no ofrecía alternativa habitacional a un arrendatario vulnerable, disponía de dos meses
-        improrrogables para pagar o consignar la deuda; si no lo hacía, quedaba subrogada y no
-        había lanzamiento (<Cite norma="rdl26" art="5.Dos" />). El segundo cambiaba el cálculo
-        del inquilino: los contratos de vivienda habitual habrían pasado a prorrogarse
-        obligatoriamente por plazos sucesivos de cinco años, o de siete si el arrendador era
-        persona jurídica, salvo que este notificase su voluntad de no renovar con seis meses de
-        antelación, y esa no renovación obligaría a pagar, como mínimo, el importe de doce
-        mensualidades de renta de una vivienda de análogas características a la arrendada, salvo
-        que procediese alguna de las excepciones de los apartados 10.1 y 10.2 de la LAU. No
-        derogaba al primero, pero su disposición adicional primera fijaba la relación entre
-        ambos: la prórroga indefinida prevalecía sobre la prórroga extraordinaria de la DF 5.ª
-        cuando procedía el <Cite norma="lau" art="10.1" />, y si el primer decreto se hubiese
-        aplicado a un contrato que el arrendador ya había negado, el contrato se extinguía
-        igualmente con derecho a indemnización solo cuando la extinción por voluntad del
-        arrendador se produjese sin que mediase ninguna de las causas previstas en el artículo
-        10.2 de la LAU (<Cite norma="rdl27" art="disposición adicional primera.2" />,{' '}
-        <Link href="/desahucios-y-alquiler#coordinacion">ver la coordinación</Link>).
-      </p>
-
-      <h2 id={slugify('En 1 minuto')}>En 1 minuto</h2>
-
-      <div className="box">
-        <ul>
-          <li>
-            <strong>Qué ha pasado:</strong> el Congreso rechazó los decretos de
-            vivienda 26/2026 y 27/2026; ambos quedaron derogados el 2 de octubre de
-            2026. El 6 de octubre el Consejo de Ministros aprobó dos nuevos
-            decretos-ley (RDL 29/2026 y RDL 28/2026), publicados en el BOE el 7 de
-            octubre.
-          </li>
-          <li>
-            <strong>Para inquilinos:</strong> la moratoria de desahucios, los límites
-            extra a subidas de renta y las prórrogas automáticas de los decretos
-            derogados ya no están en vigor. El RDL 29/2026 (en vigor desde el 8 de
-            octubre) reintroduce medidas de protección. Si recibiste una notificación
-            fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de
-            inquilinos.
-          </li>
-          <li>
-            <strong>Para caseros:</strong> las reglas de renovación automática e
-            indemnizaciones del RDL 27/2026 derogado no están en vigor. El RDL
-            28/2026 (pendiente de convalidación) prevé un nuevo régimen de prórroga
-            automática.
-          </li>
-          <li>
-            <strong>Qué pasa ahora:</strong> el RDL 29/2026 entró en vigor el 8 de
-            octubre de 2026 y está pendiente de convalidación por la Diputación
-            Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está
-            prevista para el 15 de noviembre y depende de convalidación.
-          </li>
-          <li>
-            <strong>Próximo paso:</strong> la Diputación Permanente (69 miembros,
-            mayoría absoluta de 35) debe votar la convalidación de ambos decretos
-            en el plazo de treinta días (hacia el 6 de noviembre). No hay fecha de
-            sesión fijada.
-          </li>
-        </ul>
-      </div>
-
-      <div className="box warn">
-        <strong>Votación del 2 de octubre de 2026.</strong> El Congreso rechazó la
-        convalidación de ambos decretos: RDL 26/2026, 172 a favor / 178 en contra /
-        0 abstenciones; RDL 27/2026, rechazado sin cifra a favor confirmada en fuente
-        oficial / 184 en contra / 0 abstenciones (<Cite norma="ce" art="86.2" />). Al
-        no convalidarse, quedaron derogados y dejan de estar en vigor desde ese día.
-      </div>
-
-      <nav className="indice-pagina" aria-label="En esta página">
-        <ul>
-          <li><a href="#contenido">Resumen</a></li>
-          <li><a href="#en-1-minuto">En 1 minuto</a></li>
-          <li><a href="#resultado-de-la-votacion">Resultado de la votación</a></li>
-          <li><a href="#cronologia">Cronología</a></li>
-          <li><a href="#lo-que-afecta-al-tercer-sector">Tercer sector</a></li>
-          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
-          <li><a href="#como-leer-las-citas">Cómo leer las citas</a></li>
-        </ul>
-      </nav>
-
-      <p>
-        Cifras de medidas derogadas el 2 de octubre de 2026: ninguna se aplica hoy.
-      </p>
-      <div className="figs">
-        {FIGURAS.map((fig) => (
-          <div className="fig" key={fig.label}>
-            <span className="fig-label">{fig.label}</span>
-            <b>{fig.valor}</b>
-            <span className="fig-ref">
-              <Cite norma={fig.cita.norma} art={fig.cita.art} />
-            </span>
-          </div>
-        ))}
-      </div>
+      <h1>Vivienda: los reales decretos-ley 29/2026 y 28/2026</h1>
 
       <div className="box" role="note" aria-label="Actualización de 7 de octubre de 2026">
         <h2 id={slugify('Nuevos decretos de vivienda y Diputación Permanente')} className="sr-only">
@@ -289,6 +173,122 @@ export default function HomePage() {
           </a>
           .
         </p>
+      </div>
+
+      <p className="lead">
+        El RDL 29/2026 está en vigor desde el 8 de octubre de 2026 y el RDL 28/2026
+        publicado, pendientes de convalidación; los RDL 26/2026 y 27/2026 quedaron
+        derogados el 2 de octubre.
+      </p>
+
+      <p>
+        Dos reales decretos-ley aprobados en el Consejo de Ministros del 6 de octubre
+        y publicados en el «BOE» núm. 249, de 7 de octubre de 2026. El primero, de
+        99 páginas y veintiún artículos en seis títulos, actúa en cuatro frentes:
+        alquiler y desahucios, fiscalidad, parque público y financiación de vivienda
+        asequible, y cierra con la Cuenta de Ahorro e Inversión Financia Europa. El
+        segundo es un texto breve de diez páginas con un único artículo, y se ocupa
+        de una sola cosa: el futuro de los contratos de arrendamiento de vivienda
+        habitual (<Cite norma="rdl28" art="único" />).
+      </p>
+
+      <p>
+        Lo más urgente del primero es el régimen de desahucios: suspensión hasta el
+        31 de diciembre de 2030 para arrendatarios vulnerables sin alternativa
+        habitacional (<Cite norma="rdl29" art="2" />) y enervación extraordinaria,
+        con dos meses improrrogables para que la administración pague o consigne la
+        deuda, quedando subrogada si no lo hace (<Cite norma="rdl29" art="5.Dos" />).
+        El segundo prorroga los contratos de vivienda habitual por plazos sucesivos
+        de cinco años, o de siete si el arrendador es persona jurídica, salvo
+        preaviso de no renovación con seis meses de antelación; esa no renovación
+        obliga a indemnizar con el mayor de doce mensualidades o una por año
+        residido, salvo las excepciones del apartado 10.2 de la LAU
+        (<Cite norma="rdl28" art="único.1" />, <Cite norma="lau" art="10.2" />).
+        No deroga al primero: su disposición adicional primera coordina ambos
+        regímenes (<Cite norma="rdl28" art="disposición adicional primera" />,{' '}
+        <Link href="/desahucios-y-alquiler#coordinacion">ver la coordinación</Link>).
+      </p>
+
+      <h2 id={slugify('En 1 minuto')}>En 1 minuto</h2>
+
+      <div className="box">
+        <ul>
+          <li>
+            <strong>Qué ha pasado:</strong> el Congreso rechazó los decretos de
+            vivienda 26/2026 y 27/2026; ambos quedaron derogados el 2 de octubre de
+            2026. El 6 de octubre el Consejo de Ministros aprobó dos nuevos
+            decretos-ley (RDL 29/2026 y RDL 28/2026), publicados en el BOE el 7 de
+            octubre.
+          </li>
+          <li>
+            <strong>Para inquilinos:</strong> la moratoria de desahucios, los límites
+            extra a subidas de renta y las prórrogas automáticas de los decretos
+            derogados ya no están en vigor. El RDL 29/2026 (en vigor desde el 8 de
+            octubre) reintroduce medidas de protección. Si recibiste una notificación
+            fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de
+            inquilinos.
+          </li>
+          <li>
+            <strong>Para caseros:</strong> las reglas de renovación automática e
+            indemnizaciones del RDL 27/2026 derogado no están en vigor. El RDL
+            28/2026 (pendiente de convalidación) prevé un nuevo régimen de prórroga
+            automática.
+          </li>
+          <li>
+            <strong>Qué pasa ahora:</strong> el RDL 29/2026 entró en vigor el 8 de
+            octubre de 2026 y está pendiente de convalidación por la Diputación
+            Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está
+            prevista para el 15 de noviembre y depende de convalidación.
+          </li>
+          <li>
+            <strong>Próximo paso:</strong> la Diputación Permanente (69 miembros,
+            mayoría absoluta de 35) debe votar la convalidación de ambos decretos
+            en el plazo de treinta días (hacia el 6 de noviembre). No hay fecha de
+            sesión fijada.
+          </li>
+        </ul>
+      </div>
+
+      <nav className="indice-pagina" aria-label="En esta página">
+        <ul>
+          <li><a href="#contenido">Resumen</a></li>
+          <li><a href="#en-1-minuto">En 1 minuto</a></li>
+          <li><a href="#resultado-de-la-votacion">Resultado de la votación</a></li>
+          <li><a href="#cronologia">Cronología</a></li>
+          <li><a href="#lo-que-afecta-al-tercer-sector">Tercer sector</a></li>
+          <li><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+          <li><a href="#como-leer-las-citas">Cómo leer las citas</a></li>
+        </ul>
+      </nav>
+
+      <p>
+        Cifras vigentes de los RDL 29/2026 (en vigor desde el 8-10-2026) y 28/2026
+        (pendiente de convalidación).
+      </p>
+      <div className="figs">
+        {FIGURAS.map((fig) => (
+          <div className="fig" key={fig.label}>
+            <span className="fig-label">{fig.label}</span>
+            <b>{fig.valor}</b>
+            <span className="fig-ref">
+              <Cite norma={fig.cita.norma} art={fig.cita.art} />
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="box warn">
+        <strong>Votación del 2 de octubre de 2026.</strong> El Congreso rechazó la
+        convalidación de ambos decretos: RDL 26/2026, 172 a favor / 178 en contra /
+        0 abstenciones; RDL 27/2026, rechazado sin cifra a favor confirmada en fuente
+        oficial / 184 en contra / 0 abstenciones (<Cite norma="ce" art="86.2" />). Al
+        no convalidarse, quedaron derogados y dejan de estar en vigor desde ese día.
+      </div>
+
+      <div className="box warn" role="note" aria-label="Estado: derogados">
+        <strong>Derogados el 2 de octubre de 2026.</strong> El Congreso rechazó la
+        convalidación de ambos decretos y quedaron derogados ese día. Lo que sigue
+        describe lo que contenían, no lo que se aplica hoy.
       </div>
 
       <h2 id={slugify('Resultado de la votación')}>Resultado de la votación en el Congreso (2 de octubre de 2026)</h2>
@@ -419,7 +419,7 @@ export default function HomePage() {
       <p>
         Contexto (octubre de 2026): ver la{' '}
         <a href="#nuevos-decretos-de-vivienda-y-diputacion-permanente">
-          actualización bajo el resumen «En 1 minuto»
+          actualización al inicio de esta página
         </a>.
       </p>
 

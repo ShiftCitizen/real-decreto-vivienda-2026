@@ -7,16 +7,16 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://real-decreto-vivienda-2026.vercel.app'),
   title: {
-    default: 'Vivienda: RDL 26/2026 y 27/2026 derogados; RDL 29/2026 y 28/2026 publicados | Vivienda 2026',
+    default: 'Vivienda: los RDL 29/2026 y 28/2026 | Vivienda 2026',
     template: '%s | Vivienda 2026',
   },
   description:
-    'Los RDL 26/2026 y 27/2026 fueron derogados el 2-10-2026. Nuevos RDL 29/2026 (en vigor desde el 8-10-2026) y RDL 28/2026 (pendiente de convalidación), publicados en el BOE el 7-10-2026.',
+    'El RDL 29/2026 está en vigor desde el 8-10-2026 y el RDL 28/2026 publicado en el BOE el 7-10-2026, pendientes de convalidación. Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026.',
   authors: [{ name: 'Carlos Marchena', url: 'https://www.linkedin.com/in/cmarchena/' }],
   openGraph: {
-    title: 'Vivienda: RDL 26/2026 y 27/2026 derogados; RDL 29/2026 y 28/2026 publicados',
+    title: 'Vivienda: los RDL 29/2026 y 28/2026',
     description:
-      'Los RDL 26/2026 y 27/2026 fueron derogados el 2-10-2026. Nuevos RDL 29/2026 (en vigor desde el 8-10-2026) y RDL 28/2026 (pendiente de convalidación), publicados en el BOE el 7-10-2026.',
+      'El RDL 29/2026 está en vigor desde el 8-10-2026 y el RDL 28/2026 publicado en el BOE el 7-10-2026, pendientes de convalidación. Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026.',
     url: '/',
     siteName: 'Vivienda 2026',
     locale: 'es_ES',

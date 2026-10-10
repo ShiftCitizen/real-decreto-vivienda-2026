@@ -1,6 +1,6 @@
 {
   "pilot": "RDL 28/29 flash — housing site update (7 Oct 2026)",
-  "total": 10,
+  "total": 18,
   "cards": [
     {
       "id": "RDL-1",
@@ -189,6 +189,176 @@
           "from": "doing",
           "to": "done",
           "at": 1791299000000
+        }
+      ]
+    },
+    {
+      "id": "EST-1",
+      "epic": "EST",
+      "title": "Propuesta openspec estado-actual-y-timeline (proposal, specs, design, tasks)",
+      "est": 1,
+      "milestone": "propuesta",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791561268988
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791561340428
+        }
+      ]
+    },
+    {
+      "id": "EST-2",
+      "epic": "EST",
+      "title": "Estado vigente primero: banner, /estado, FAQ, SIEMPRE, FRASE_ESTADO, prompt",
+      "est": 3,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791561735794
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791562753334
+        }
+      ]
+    },
+    {
+      "id": "EST-3",
+      "epic": "EST",
+      "title": "Gráfico timeline en /estado desde CRONOLOGIA (componente + CSS)",
+      "est": 2,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791562753334
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791583546948
+        }
+      ]
+    },
+    {
+      "id": "EST-4",
+      "epic": "EST",
+      "title": "Verificación gate completo + PR",
+      "est": 1,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791583546948
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791585018959
+        }
+      ]
+    },
+    {
+      "id": "MIG-1",
+      "epic": "MIG",
+      "title": "Propuesta openspec migracion-rdl-28-29",
+      "est": 1,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791636543255
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791636543255
+        }
+      ]
+    },
+    {
+      "id": "MIG-2",
+      "epic": "MIG",
+      "title": "Fase 1 portada: título, lead, intro, FIGURAS, orden (narrativa-portada)",
+      "est": 3,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791636543255
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791637721240
+        }
+      ]
+    },
+    {
+      "id": "MIG-3",
+      "epic": "MIG",
+      "title": "Fase 2 análisis: desahucios, fiscal, financiación, FAQ a 28/29 vigentes",
+      "est": 8,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791639014411
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791641211991
+        }
+      ]
+    },
+    {
+      "id": "MIG-4",
+      "epic": "MIG",
+      "title": "Verificación gate + PR migración",
+      "est": 1,
+      "milestone": "flash",
+      "column": "done",
+      "history": [
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791637721240
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791637866721
+        },
+        {
+          "from": "todo",
+          "to": "doing",
+          "at": 1791641211991
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791641316470
         }
       ]
     }

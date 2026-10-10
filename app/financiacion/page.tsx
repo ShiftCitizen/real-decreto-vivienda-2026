@@ -7,7 +7,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Financiación y cuenta',
   description:
-    'El RDL 26/2026 preveía movilización de parque público, líneas de avales, TU CASA y Cuenta Financia Europa. Derogado el 2-10-2026: no se aplica.',
+    'El RDL 29/2026 (en vigor desde el 8-10-2026) recupera parque público, avales, TU CASA y Cuenta Financia Europa. El RDL 26/2026 quedó derogado el 2-10-2026.',
 };
 
 const TUCASA = [
@@ -40,10 +40,11 @@ export default function FinanciacionPage() {
     <>
       <h1>Financiación, parque público y cuenta de ahorro</h1>
       <p className="lead">
-        El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y
-        280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa
-        (Títulos III a VI). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se
-        aplica.
+        El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación)
+        recupera la movilización de parque público, las líneas de avales, el
+        préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa.
+        Esta página los describe con las citas del RDL 26/2026, derogado el
+        2-10-2026, cuyo contenido reproduce en lo sustancial.
       </p>
 
       <AvisoEstado />
