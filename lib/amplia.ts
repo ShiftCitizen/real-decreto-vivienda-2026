@@ -76,7 +76,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: PORTADA,
       medida: true,
       texto:
-        'Dos reales decretos-ley publicados con un día de diferencia y aprobados en el mismo Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos, actuaba en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación de vivienda asequible, y cerraba con la Cuenta de Ahorro e Inversión Financia Europa. El segundo era un texto breve de ocho páginas con un único artículo, y se ocupaba de una sola cosa: el futuro de los contratos de arrendamiento de vivienda habitual.',
+        'Dos reales decretos-ley aprobados en el Consejo de Ministros del 6 de octubre y publicados en el «BOE» núm. 249, de 7 de octubre de 2026.',
     },
     puntos: [
       {
@@ -84,7 +84,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: PORTADA,
         medida: true,
         texto:
-          'Dos reales decretos-ley publicados con un día de diferencia y aprobados en el mismo Consejo de Ministros. El primero, de 96 páginas y veinte artículos en seis títulos, actuaba en cuatro frentes: alquiler y desahucios, fiscalidad, parque público y financiación de vivienda asequible, y cerraba con la Cuenta de Ahorro e Inversión Financia Europa. El segundo era un texto breve de ocho páginas con un único artículo, y se ocupaba de una sola cosa: el futuro de los contratos de arrendamiento de vivienda habitual.',
+          'Dos reales decretos-ley aprobados en el Consejo de Ministros del 6 de octubre y publicados en el «BOE» núm. 249, de 7 de octubre de 2026.',
       },
       {
         titulo: 'Qué ha pasado',
