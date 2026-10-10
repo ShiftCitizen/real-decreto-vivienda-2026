@@ -338,7 +338,7 @@
       "title": "Verificación gate + PR migración",
       "est": 1,
       "milestone": "flash",
-      "column": "doing",
+      "column": "done",
       "history": [
         {
           "from": "todo",
@@ -354,6 +354,11 @@
           "from": "todo",
           "to": "doing",
           "at": 1791641211991
+        },
+        {
+          "from": "doing",
+          "to": "done",
+          "at": 1791641316470
         }
       ]
     }
