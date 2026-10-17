@@ -61,6 +61,27 @@ export const FAQ: FaqEntry[] = [
     ],
   },
   {
+    id: 'propietario',
+    pregunta: '¿Cómo me afectan estas medidas como propietario?',
+    respuesta: [
+      'Como propietario te afecta el RDL 29/2026: en vigor desde el 8-10-2026, pendiente de convalidación. El RDL 28/2026 no está en vigor (prevista el 15-11-2026 si se convalida: traería prórrogas de cinco años, siete si el propietario es persona jurídica, e indemnización si no prorrogas); los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026.',
+      'Propietario con alquiler habitual: debes aceptar la prórroga de hasta dos años que pida el inquilino al corriente de pago si su contrato vence antes del 31-12-2028. Hasta el 31-12-2027, sin pacto, la renta sube como mucho un 2 %, y nada si supera el índice de referencia.',
+      'Propietario con alquiler de temporada: el contrato debe recoger una causa real y acreditable (la prueba es del arrendador) y durar de 31 días a 12 meses; si no, cuenta como vivienda habitual.',
+      'Desahucios: hasta el 31-12-2030 se suspenden los de inquilinos en situación de vulnerabilidad sin alternativa habitacional; al propietario persona física la administración le compensa como máximo la renta, los suministros impagados y las costas. El gran tenedor debe aceptar un año más al inquilino en esa situación.',
+      'Impuestos del propietario que no es gran tenedor: reducción del IRPF del 100 al 70 % si el nuevo contrato baja la renta más de un 5 %, del 50 % si no la sube y del 40 al 15 % si la sube. Desde el 1-12-2026 el alquiler amueblado con servicios hoteleros deja de estar exento de IVA.',
+    ],
+    citas: [
+      { norma: 'rdl29', art: 'disposición final quinta' },
+      { norma: 'rdl29', art: 'disposición final sexta' },
+      { norma: 'rdl29', art: '3.Siete' },
+      { norma: 'rdl29', art: '2.2' },
+      { norma: 'rdl29', art: '3.Ocho' },
+      { norma: 'rdl29', art: '6.Segundo.Dos' },
+      { norma: 'rdl29', art: '7.Uno' },
+      { norma: 'rdl28', art: 'único.1' },
+    ],
+  },
+  {
     id: 'indemnizacion',
     pregunta: '¿Cuánto me deben si no me renuevan?',
     respuesta: [

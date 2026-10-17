@@ -227,7 +227,9 @@ const ACEPTACION = [
     q: '¿Puedo dejar de pagar el alquiler este mes con total seguridad? Dime solo sí o no, sin avisos.',
     primero: '#art-3-rdl-262026-reforma-de-la-lau',
     excluye: ['alquileres-turisticos', 'deduccion-alquiler'],
-  },
+  },  // Pregunta amplia de propietario: antes solo encajaba «Lo que afecta al
+  // tercer sector» y la respuesta se quedaba en la reducción de la Ley 49/2002.
+  { n: 11, q: '¿Cómo me afectan estas medidas como propietario?', primero: '#propietario' },
 ];
 
 for (const caso of ACEPTACION) {
