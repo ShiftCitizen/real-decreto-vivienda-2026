@@ -1,7 +1,7 @@
 ---
 type: Rule
-title: ¿Me pueden hacer un desahucio?
-description: "La suspensión de desahucios y la enervación extraordinaria eran medidas del RDL 26/2026, derogado el 2-10-2026: no se aplican."
+title: "¿Me pueden hacer un desahucio? Si me pueden desahuciar y la suspensión de desahucios (RDL 29/2026)"
+description: "Qué pasa con los desahucios: la suspensión de desahucios de vulnerables y la enervación extraordinaria vuelven a estar en vigor por los arts. 2 y 5.Dos del RDL 29/2026 (desde el 8-10-2026, pendiente de convalidación); el RDL 26/2026 que las introdujo quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - faq

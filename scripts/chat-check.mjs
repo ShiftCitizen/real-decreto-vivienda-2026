@@ -119,7 +119,9 @@ const ESPERADO_PRIMERO = [
   [
     'tercer sector, sin el vocabulario del sitio',
     'Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?',
-    'tercer sector',
+    // Desde la FAQ de propietario (631248c) la gana esa, que también trae la
+    // reducción del tercer sector; aceptado.
+    ['tercer sector', 'como propietario'],
   ],
   [
     'prórroga de cinco años',
@@ -132,7 +134,7 @@ for (const [nombre, pregunta, fragmento] of ESPERADO_PRIMERO) {
   const primero = r.titulos[0] ?? '(nada)';
   comprobar(
     `paráfrasis ${nombre}`,
-    !r.niega && primero.includes(fragmento),
+    !r.niega && [fragmento].flat().some((f) => primero.includes(f)),
     `primera entrada: ${primero}`,
   );
 }
@@ -230,6 +232,12 @@ const ACEPTACION = [
   },  // Pregunta amplia de propietario: antes solo encajaba «Lo que afecta al
   // tercer sector» y la respuesta se quedaba en la reducción de la Ley 49/2002.
   { n: 11, q: '¿Cómo me afectan estas medidas como propietario?', primero: '#propietario' },
+  // Desahucios: antes «¿Qué pasa con los desahucios?» recibía «En 1 minuto»,
+  // «¿Me pueden desahuciar?» se negaba y «suspensión de desahucios» recibía el
+  // art. 2 del RDL 26/2026 con su estado «derogados».
+  { n: 12, q: '¿Qué pasa con los desahucios?', primero: '/#desahucio', excluye: ['en-1-minuto'] },
+  { n: 13, q: '¿Me pueden desahuciar?', primero: '/#desahucio' },
+  { n: 14, q: 'suspensión de desahucios', primero: '/#desahucio' },
 ];
 
 for (const caso of ACEPTACION) {

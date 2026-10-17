@@ -522,8 +522,18 @@ export function puntuarFicheros(pregunta: string, tabla: TablaOkf): Candidato[] 
 
       return { i, puntos, raices, esClave, literal, cobertura, acertadas };
     })
-    .filter((c) => c.puntos >= PUNTUACION_MINIMA && (c.raices >= MIN_RAICES || c.esClave || c.literal))
-    .sort((a, b) => Number(b.literal) - Number(a.literal) || b.puntos - a.puntos)
+    // El título literal no necesita el suelo de puntos: «¿Me pueden desahuciar?»
+    // solo deja una raíz, y es tan común en el sitio que nunca llega a 4.
+    .filter((c) => c.literal || (c.puntos >= PUNTUACION_MINIMA && (c.raices >= MIN_RAICES || c.esClave)))
+    // A igual puntuación gana la FAQ, como el RANGO_TIPO de `/api/chat`: en
+    // «suspensión de desahucios» empataba con el art. 2 del RDL 26/2026, cuyo
+    // estado dice «derogados», y la FAQ es la que cuenta el RDL 29/2026.
+    .sort(
+      (a, b) =>
+        Number(b.literal) - Number(a.literal) ||
+        b.puntos - a.puntos ||
+        Number(b.i.fichero.ruta.startsWith('faq/')) - Number(a.i.fichero.ruta.startsWith('faq/')),
+    )
     .map((c) => ({
       ruta: c.i.fichero.ruta,
       titulo: c.i.fichero.titulo,
