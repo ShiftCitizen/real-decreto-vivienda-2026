@@ -89,6 +89,24 @@ const PUNTUACION_MINIMA = 4;
 const MIN_RAICES = 2;
 
 /**
+ * Bonus por cada raíz de la pregunta que el fichero acierta.
+ *
+ * Un fichero que cubre más partes de la pregunta es más específico del tema
+ * que uno que obtiene una puntuación alta por una sola palabra rara en su
+ * título. Sin este bonus, las FAQ de tipo resumen ganan a las secciones
+ * específicas cuando comparten una palabra rara con la pregunta.
+ *
+ * El bonus solo se aplica cuando el fichero cubre una proporción alta de
+ * las raíces de la pregunta. Sin el umbral, los ficheros que encajan más
+ * raíces pero menos relevantes ganan a los que encajan menos pero más
+ * céntricas (la suspensión de desahucios frente a la reforma de la LAU).
+ */
+const BONUS_POR_RAIZ = 0.5;
+const PROPORCION_MINIMA_BONUS = 0.6;
+
+
+
+/**
  * Peso de una raíz que aparece en el título del fichero.
  *
  * Es el peso más alto porque el título es lo que el fichero **es**. Y no vale
@@ -496,6 +514,18 @@ export function puntuarFicheros(pregunta: string, tabla: TablaOkf): Candidato[] 
         if (i.tituloRaices.some((r) => coincide(t, r))) acertadasTitulo += 1;
         if (claves.has(t)) esClave = true;
       }
+      // Bonus for files that cover a high proportion of the question's roots:
+      // a file matching more of the question's content is more specifically on
+      // topic than one that scores high from a single rare word in its title.
+      // Only applied above a threshold so files matching more but less
+      // relevant roots (e.g. LAU reform matching "inquilino" in an eviction
+      // question) don't outrank the actually relevant file.
+      if (raices / unicas.length >= PROPORCION_MINIMA_BONUS) {
+        puntos += raices * BONUS_POR_RAIZ;
+      }
+      // Apply penalty for non-Rule files to prevent summary/overview content from outranking specific topic files
+      const tipoPenalty = i.fichero.tipo === 'Rule' ? 1 : 0.5;
+      puntos *= tipoPenalty;
 
       /**
        * La cobertura de título **no multiplica**. Se midió y estorba.
