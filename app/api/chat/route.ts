@@ -340,15 +340,38 @@ function ipDe(request: Request): string {
  * funcione.
  */
 let okfCache: Promise<TablaOkf | null> | null = null;
-async function cargarOkf(origen: string): Promise<TablaOkf | null> {
+/**
+ * Cabeceras para leer los índices del propio despliegue.
+ *
+ * En un preview con Deployment Protection, `fetch(origen/…json)` sin más
+ * recibe la página de login (302 → HTML) y el `json()` revienta: el chat
+ * contestaba 502 sin llegar al modelo. Se reenvía el bypass que trajo la
+ * petición (cabecera o cookie). En producción no hay protección y no cambia nada.
+ */
+function cabecerasInternas(request: Request): HeadersInit {
+  const h: Record<string, string> = {};
+  const bypass = request.headers.get('x-vercel-protection-bypass');
+  if (bypass) h['x-vercel-protection-bypass'] = bypass;
+  const cookie = request.headers.get('cookie');
+  if (cookie) h.cookie = cookie;
+  return h;
+}
+
+async function cargarOkf(origen: string, cabeceras: HeadersInit = {}): Promise<TablaOkf | null> {
   if (!okfCache) {
     okfCache = (async () => {
       try {
-        const res = await fetch(`${origen}/okf-index.json`);
-        if (!res.ok) return null;
+        const res = await fetch(`${origen}/okf-index.json`, { headers: cabeceras });
+        if (!res.ok) {
+          console.error(`[chat] okf-index.json status ${res.status}`);
+          okfCache = null;
+          return null;
+        }
         const datos = (await res.json()) as TablaOkf;
         return Array.isArray(datos?.ficheros) && datos.ficheros.length > 0 ? datos : null;
-      } catch {
+      } catch (e) {
+        console.error(`[chat] okf-index.json ilegible: ${(e instanceof Error ? e.message : String(e)).slice(0, 300)}`);
+        okfCache = null;
         return null;
       }
     })();
@@ -597,7 +620,8 @@ export async function POST(request: Request) {
 
   try {
     return await responder(request, pregunta, ip);
-  } catch {
+  } catch (e) {
+    console.error(`[chat] excepción en responder: ${(e instanceof Error ? e.message : String(e)).slice(0, 300)}`);
     // Ninguna excepción sale de aquí. Un 500 vacío era lo que el widget
     // traducía como «No hay conexión con el asistente».
     devolverCuota(ip);
@@ -659,7 +683,7 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
    */
   const evidencia: EvidenciaRuta[] = [];
 
-  const okf = await cargarOkf(origen);
+  const okf = await cargarOkf(origen, cabecerasInternas(request));
   if (okf) {
     const seleccionada: Evidencia[] | null = seleccionar(pregunta, okf);
     if (seleccionada) {
@@ -670,7 +694,7 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
   }
 
   if (evidencia.length === 0) {
-    const indiceRes = await fetch(`${origen}/search-index.json`);
+    const indiceRes = await fetch(`${origen}/search-index.json`, { headers: cabecerasInternas(request) });
     if (!indiceRes.ok) {
       devolverCuota(ip);
       return NextResponse.json({ error: 'Índice no disponible.' }, { status: 502 });
