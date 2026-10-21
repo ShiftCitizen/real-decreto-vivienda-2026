@@ -35,7 +35,7 @@ registerHooks({
   },
 });
 
-const { buscar } = await import('@/lib/busqueda');
+const { buscar, esSaludo } = await import('@/lib/busqueda');
 const { seleccionar, puntuarFicheros } = await import('@/lib/okf');
 const { responderAmplia, fragmentosPublicados, FRASE_ESTADO, PAGINAS_PRINCIPALES } = await import(
   '@/lib/amplia'
@@ -100,6 +100,24 @@ for (const [nombre, pregunta] of [
 ]) {
   const r = comoRoute(pregunta);
   comprobar(`OFF ${nombre}`, r.niega, `devolvio: ${r.titulos.join(' | ')}`);
+}
+
+console.log('\nSaludos: un saludo no es una pregunta del análisis');
+{
+  // Medido: «hola, buenos días» llegaba al modelo con las raíces «buen» y
+  // «dias» y contestaba con la cita equivocada. Subir el suelo de puntos no
+  // lo arreglaba: dos casos de aceptación puntúan 4,9 y el saludo 4,8.
+  for (const saludo of ['hola, buenos días', 'gracias', 'qué tal', 'buenas tardes', 'adiós']) {
+    comprobar(`OFF saludo «${saludo}»: es un saludo`, esSaludo(saludo));
+  }
+  comprobar(
+    'OFF saludo: no es un saludo si hay una pregunta',
+    !esSaludo('hola, ¿qué pasa con el alquiler?'),
+  );
+  const r = comoOkf('hola, buenos días');
+  comprobar('OFF saludo: el bundle no devuelve nada', r.niega, r.titulos.join(' | '));
+  const b = comoRoute('hola, buenos días');
+  comprobar('OFF saludo: el índice no devuelve nada', b.niega, b.titulos.join(' | '));
 }
 
 console.log('\nParáfrasis: deben encontrar la entrada correcta');
@@ -248,8 +266,21 @@ const ACEPTACION = [
     q: 'Qué pasa en el caso del impago de persona vulnerable?',
     primero: '#art-2-rdl-262026-suspension-de-desahucios',
     incluye: ['#art-2-rdl-262026-suspension-de-desahucios', '#situacion-de-cada-medida', '#en-vigor'],
-    // El contexto tiene que decir qué decreto rige la medida ahora.
-    contexto: ['RDL 29/2026', 'en vigor desde el 8-10-2026', 'Rigen la LAU'],
+    // El contexto tiene que decir qué decreto rige la medida ahora, y tiene
+    // que traer el Apartado 2 del art. 2, no solo el Apartado 1. Es el fallo
+    // medido: el bloque del Apartado 2 pedía 1 607 caracteres de un tope de
+    // 1 500 y se descartaba entero, así que el modelo recibía al demandante
+    // especulativo y contestaba sobre compradores de carteras de morosidad
+    // en vez de sobre el inquilino vulnerable.
+    contexto: [
+      'RDL 29/2026',
+      'en vigor desde el 8-10-2026',
+      'Rigen la LAU',
+      '### Apartado 1: demandante especulativo',
+      '### Apartado 2: resto de demandantes',
+      'Solo si no opera la enervación extraordinaria',
+      'vulnerable y no tiene alternativa habitacional',
+    ],
     // Y no puede traer el estado viejo, el de los decretos derogados.
     sin: ['Estado: derogados', 'no se aplica', 'ninguna de estas medidas'],
   },

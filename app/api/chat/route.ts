@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { responderAmplia } from '@/lib/amplia';
-import { buscar } from '@/lib/busqueda';
+import { buscar, esSaludo, palabrasDeConsulta } from '@/lib/busqueda';
 import type { EntradaIndice } from '@/lib/busqueda';
 import { seleccionar } from '@/lib/okf';
 import type { Evidencia, TablaOkf } from '@/lib/okf';
@@ -28,12 +28,78 @@ import type { Evidencia, TablaOkf } from '@/lib/okf';
  * - Cuota best-effort por IP en memoria (10/hora): suficiente para un uso
  *   honesto, sin prometer un límite distribuido que no existe.
  *
+ * =====================================================
+ *  POR QUÉ NUNCA HAY UN 500 VACÍO
+ * =====================================================
+ *  Medido el 21-10-2026 contra producción: dos de seis llamadas devolvieron
+ *  un 500 con `content-length: 0`, y el widget —que hacía `await res.json()`
+ *  sobre un cuerpo vacío— lo traducía como «No hay conexión con el
+ *  asistente». El diagnóstico del cliente era falso: la red estaba bien y
+ *  lo que se caía era la llamada al proveedor.
+ *
+ *  Ahora hay tres redes de seguridad, y ninguna depende de que el proveedor
+ *  esté sano:
+ *
+ *  1. **Cadena de modelos.** Se prueba `nvidia/nemotron-3.5-lightning-30b-a3b`
+ *     y, si ese identificador no es servible, `google/gemma-3-12b-it`. El
+ *     catálogo de NIM se retira rápido —ya hay seis identificadores
+ *     obsoletos— así que un único identificador fijo es una apuesta.
+ *  2. **Plan B.** Si el modelo no contesta, la respuesta son los pasajes
+ *     recuperados, con `origen: 'texto'`. Un análisis a medias es mejor que
+ *     un error: lo que el visitante pierde es la síntesis, no la información.
+ *  3. **`try/catch` alrededor de todo.** Ninguna excepción sale de aquí: un
+ *     fallo inesperado es un 502 con `{ error }` en JSON, que el widget
+ *     muestra como lo que es.
+ *
+ *  El failover **solo** salta ante 400/404/410 (identificador no servible con
+ *  esa configuración). Ante un timeout, un 5xx o un error de red se va al plan
+ *  B: encadenar un segundo modelo tras un timeout duplicaría la espera, y
+ *  35 s + 35 s no caben en los 60 s de la función.
+ *
  * Variables de entorno (Vercel, nunca en el repo): NIM_API_KEY (secreto),
- * NIM_MODEL_ID (opcional; por defecto Llama 3.2 11B vision instruct).
+ * NIM_MODEL_ID (opcional; si está, manda sobre la cadena y se usa solo, con
+ * `temperature` 0,2).
  */
 
 const NIM_BASE = 'https://integrate.api.nvidia.com/v1';
-const MODELO_POR_DEFECTO = 'meta/llama-3.2-11b-vision-instruct';
+
+/**
+ * Tiempo máximo de una función en Vercel.
+ *
+ * El timeout del modelo son 35 s, así que 60 s dejan margen para el resto de
+ * la función y para un failover —que solo ocurre ante errores rápidos— sin
+ * depender de que el plan de Vercel lo permita por defecto.
+ */
+export const maxDuration = 60;
+
+/**
+ * Los modelos que se prueban, en orden.
+ *
+ * `nemotron-3.5-lightning-30b-a3b` son 30 000 millones de parámetros con 3 000
+ * activos: es más rápido que el Llama 3.2 11B que se usaba antes, y solo
+ * texto. La temperatura 1,0 con `topP` 0,95 es lo que recomienda su ficha;
+ * `gemma-3-12b-it` es el segundo, con temperatura 0,6 por ser un modelo de
+ * instrucciones.
+ *
+ * El orden importa: el failover solo se usa cuando el anterior no es
+ * servible, así que la primera entrada es la que responde en el caso normal.
+ */
+const CADENA_MODELOS: Modelo[] = [
+  { id: 'nvidia/nemotron-3.5-lightning-30b-a3b', temperature: 1.0, topP: 0.95 },
+  { id: 'google/gemma-3-12b-it', temperature: 0.6, topP: 0.95 },
+];
+
+type Modelo = { id: string; temperature: number; topP: number };
+
+/**
+ * Timeout de la llamada al modelo.
+ *
+ * Con 25 s se agotaba: dos de las seis llamadas medidas en producción lo
+ * agotaron. Las que contestaron tardaron entre 8,6 y 16,1 s, así que 35 s
+ * deja pasar todas y cabe en los 60 s de la función.
+ */
+const TIMEOUT_NIM_MS = 35_000;
+
 const MAX_PREGUNTA = 500;
 const MAX_TOKENS_SALIDA = 350;
 const CUOTA_MAX = 10;
@@ -51,6 +117,17 @@ const CUOTA_LIMPIEZA_CADA = 50;
  * holgado para cuatro temas y dos fichas de estado.
  */
 const PRESUPUESTO = 7000;
+
+/**
+ * Tope del texto que devuelve el plan B.
+ *
+ * Son 3 000 caracteres para los ficheros de tema y 1 500 reservados para las
+ * dos fichas de estado: el estado no es decoración, es lo que hace que la
+ * respuesta diga qué decreto rige la medida.
+ */
+const TOPE_TEXTO_PLAN_B = 4500;
+const TOPE_TEXTO_PLAN_B_TEMA = 3000;
+const TOPE_TEXTO_PLAN_B_ESTADO = 1500;
 
 const NEGATIVA =
   'Eso queda fuera del ámbito de este análisis: solo respondo preguntas sobre los reales decretos-ley de vivienda 26/2026, 27/2026, 28/2026 y 29/2026. Prueba con el buscador del sitio.';
@@ -111,7 +188,7 @@ let peticionesDesdeLimpieza = 0;
  * Sin esto, `ventanas` conserva una entrada por cada IP vista *para siempre*:
  * las llamadas anónimas no cesan, y el Map crece sin límite hasta que la
  * instancia se queda sin memoria. Consultar una IP solo limpia esa IP, porque
- * el filtro de `cuotaAgotada` no toca las demás.
+ * el filtro de la cuota no toca las demás.
  */
 function barrerCaducadas(): void {
   const ahora = Date.now();
@@ -122,7 +199,10 @@ function barrerCaducadas(): void {
   }
 }
 
-function cuotaAgotada(ip: string): boolean {
+/**
+ * Consume una unidad de cuota. `false` significa que la cuota estaba agotada.
+ */
+function consumirCuota(ip: string): boolean {
   peticionesDesdeLimpieza += 1;
   if (peticionesDesdeLimpieza >= CUOTA_LIMPIEZA_CADA) {
     peticionesDesdeLimpieza = 0;
@@ -133,11 +213,26 @@ function cuotaAgotada(ip: string): boolean {
   const marcas = (ventanas.get(ip) ?? []).filter((t) => ahora - t < CUOTA_VENTANA_MS);
   if (marcas.length >= CUOTA_MAX) {
     ventanas.set(ip, marcas);
-    return true;
+    return false;
   }
   marcas.push(ahora);
   ventanas.set(ip, marcas);
-  return false;
+  return true;
+}
+
+/**
+ * Devuelve la última unidad consumida.
+ *
+ * Se llama cuando la respuesta final es un error: el visitante no ha recibido
+ * nada, así que gastar una de las diez preguntas por hora sin contestarle es
+ * injusto. Medido: un timeout agotaba una de las diez sin devolver nada.
+ */
+function devolverCuota(ip: string): void {
+  const ahora = Date.now();
+  const marcas = (ventanas.get(ip) ?? []).filter((t) => ahora - t < CUOTA_VENTANA_MS);
+  if (marcas.length > 0) marcas.pop();
+  if (marcas.length === 0) ventanas.delete(ip);
+  else ventanas.set(ip, marcas);
 }
 
 function ipDe(request: Request): string {
@@ -188,6 +283,8 @@ async function cargarOkf(origen: string): Promise<TablaOkf | null> {
 }
 
 type Fuente = { titulo: string; href: string };
+/** Una evidencia con su texto: lo que ve el modelo, o lo que ve el plan B. */
+type EvidenciaRuta = Fuente & { texto: string; estado?: boolean };
 
 /**
  * Deja solo las fuentes citadas y **renumera** para que `[n]` siga apuntando a
@@ -219,6 +316,166 @@ function ajustarCitas(respuesta: string, total: number): { texto: string; fuente
   return { texto, fuentes: usadas };
 }
 
+/**
+ * Monta el contexto que ve el modelo, y las fuentes que lo sostienen.
+ *
+ * El número del bloque (`### [n]`) es el mismo que el de la fuente, y ambos
+ * cuentan desde 1: es lo que permite que `ajustarCitas()` renumere a la vez
+ * el texto y la lista.
+ */
+function montarContexto(
+  evidencia: EvidenciaRuta[],
+  presupuesto: number,
+): { contexto: string; fuentes: Fuente[] } {
+  const bloque: string[] = [];
+  const fuentes: Fuente[] = [];
+  let gastado = 0;
+  for (const [i, e] of evidencia.entries()) {
+    if (gastado >= presupuesto) break;
+    const texto = `### [${i + 1}] ${e.titulo}\n${e.texto}`.slice(0, presupuesto - gastado);
+    bloque.push(texto);
+    gastado += texto.length;
+    fuentes.push({ titulo: e.titulo, href: e.href });
+  }
+  return { contexto: bloque.join('\n\n'), fuentes };
+}
+
+/**
+ * Recorta por el último final de frase, o `null` si no hay ninguno.
+ *
+ * Un texto cortado a media palabra es peor que no mostrarlo: el modelo
+ * recibiría una afirmación sin sujeto.
+ */
+function porFrase(texto: string, tope: number): string | null {
+  if (texto.length <= tope) return texto;
+  const corte = texto.lastIndexOf('. ', tope - 1);
+  if (corte <= 0) return null;
+  return texto.slice(0, corte + 1);
+}
+
+/**
+ * Plan B: la respuesta es el texto recuperado, sin modelo.
+ *
+ * Es lo que se devuelve cuando el proveedor no contesta. Los pasajes van
+ * numerados igual que las citas —`[1]`, `[2]`— y en el mismo orden, así que el
+ * widget los pinta como enlaces que apuntan al passage correcto.
+ *
+ * El tope está repartido: 3 000 caracteres para los ficheros de tema y 1 500
+ * para las dos fichas de estado, que no se recortan porque son las que dicen
+ * qué decreto rige cada medida.
+ */
+function respuestaDeTexto(evidencia: EvidenciaRuta[]): { respuesta: string; citas: Fuente[] } {
+  const citas: Fuente[] = [];
+  const lineas: string[] = [];
+  let gastado = 0;
+  let gastadoEstado = 0;
+  for (const e of evidencia) {
+    const esEstado = e.estado === true;
+    const usado = esEstado ? gastadoEstado : gastado;
+    const disponible =
+      (esEstado ? TOPE_TEXTO_PLAN_B_ESTADO : TOPE_TEXTO_PLAN_B_TEMA) - usado;
+    if (disponible < 40) continue;
+    const trozo = porFrase(e.texto, disponible);
+    if (!trozo || trozo.length < 40) continue;
+    const n = citas.length + 1;
+    citas.push({ titulo: e.titulo, href: e.href });
+    lineas.push(`[${n}] ${trozo}`);
+    if (esEstado) gastadoEstado += trozo.length;
+    else gastado += trozo.length;
+  }
+  return { respuesta: lineas.join('\n\n'), citas };
+}
+
+/** Lo que devuelve una llamada al modelo. */
+type ResultadoModelo =
+  | { ok: true; texto: string }
+  /** 400/404/410: ese identificador no es servible; toca el siguiente. */
+  | { ok: false; motivo: 'no-servible' }
+  /** Cualquier otra cosa: timeout, 5xx, error de red, respuesta vacía. */
+  | { ok: false; motivo: 'fallo' };
+
+/**
+ * Una llamada al modelo, con su timeout y su lectura defensiva.
+ *
+ * No lanza: cualquier fallo se traduce en un motivo, porque quien llama tiene
+ * que poder distinguir «prueba con el siguiente modelo» de «ve al plan B».
+ */
+async function llamarNim(
+  modelo: Modelo,
+  clave: string,
+  contexto: string,
+  pregunta: string,
+): Promise<ResultadoModelo> {
+  let nimRes: Response;
+  try {
+    nimRes = await fetch(`${NIM_BASE}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${clave}`,
+      },
+      body: JSON.stringify({
+        model: modelo.id,
+        temperature: modelo.temperature,
+        top_p: modelo.topP,
+        max_tokens: MAX_TOKENS_SALIDA,
+        messages: [
+          { role: 'system', content: SISTEMA },
+          {
+            role: 'user',
+            content: `CONTEXTO:\n${contexto}\n\nPREGUNTA:\n${pregunta.trim()}`,
+          },
+        ],
+      }),
+      signal: AbortSignal.timeout(TIMEOUT_NIM_MS),
+    });
+  } catch {
+    // Timeout agotado o error de red: no se reintenta con otro modelo, se va
+    // al plan B. Encadenar aquí duplicaría la espera.
+    return { ok: false, motivo: 'fallo' };
+  }
+
+  if (!nimRes.ok) {
+    // 400/404/410: el identificador no es servible con esta configuración.
+    // Solo en estos casos se prueba el siguiente de la cadena.
+    if (nimRes.status === 400 || nimRes.status === 404 || nimRes.status === 410) {
+      return { ok: false, motivo: 'no-servible' };
+    }
+    return { ok: false, motivo: 'fallo' };
+  }
+
+  let datos: {
+    choices?: {
+      message?: { content?: string; reasoning_content?: string };
+      finish_reason?: string;
+    }[];
+  };
+  try {
+    datos = (await nimRes.json()) as typeof datos;
+  } catch {
+    return { ok: false, motivo: 'fallo' };
+  }
+
+  const eleccion = datos.choices?.[0];
+  const contenido =
+    typeof eleccion?.message?.content === 'string' ? eleccion.message.content.trim() : '';
+  if (!contenido) {
+    // `content` vacío. O el modelo no respondió, o es uno de razonamiento que
+    // deja el texto en `reasoning_content`: con 350 tokens de salida ese canal
+    // no cabe, así que el plan B es la respuesta.
+    return { ok: false, motivo: 'fallo' };
+  }
+
+  let cruda = contenido;
+  if (eleccion?.finish_reason === 'length') {
+    // Cortada por el tope de tokens: se recorta al último final de frase, para
+    // no dejar la respuesta a medias.
+    const corte = cruda.lastIndexOf('. ');
+    if (corte > 0) cruda = cruda.slice(0, corte + 1);
+  }
+  return { ok: true, texto: cruda };
+}
+
 export async function POST(request: Request) {
   let cuerpo: unknown;
   try {
@@ -240,13 +497,37 @@ export async function POST(request: Request) {
     );
   }
 
-  if (cuotaAgotada(ipDe(request))) {
+  const ip = ipDe(request);
+  if (!consumirCuota(ip)) {
     return NextResponse.json(
       { error: 'Cuota agotada: inténtalo de nuevo más tarde.' },
       { status: 429 },
     );
   }
 
+  try {
+    return await responder(request, pregunta, ip);
+  } catch {
+    // Ninguna excepción sale de aquí. Un 500 vacío era lo que el widget
+    // traducía como «No hay conexión con el asistente».
+    devolverCuota(ip);
+    return NextResponse.json(
+      { error: 'El asistente no ha podido responder. Vuelve a intentarlo.' },
+      { status: 502 },
+    );
+  }
+}
+
+/**
+ * El cuerpo de la petición, ya con la cuota consumida.
+ *
+ * Va aparte de `POST()` para que el `try/catch` que devuelve un 502 con
+ * `{ error }` cubra **todas** las operaciones con red: la lectura del índice
+ * de búsqueda, su `json()`, la llamada al modelo y la lectura de su cuerpo.
+ * Antes ninguna de ellas estaba dentro de un `try`, y un fallo de proveedor
+ * se traducía en un 500 sin cuerpo.
+ */
+async function responder(request: Request, pregunta: string, ip: string): Promise<NextResponse> {
   // Pedido amplio: resumen del sitio o de un tema, en frases de las páginas.
   // La cuota y el tope de 500 caracteres ya se aplicaron arriba. No llama al
   // modelo, así que no usa el tope de 350 tokens ni la clave. Una pregunta que
@@ -254,7 +535,24 @@ export async function POST(request: Request) {
   // evidencia, recibe la negativa fija.
   const amplia = responderAmplia(pregunta);
   if (amplia) {
-    return NextResponse.json({ respuesta: amplia.respuesta, citas: amplia.citas });
+    return NextResponse.json({
+      respuesta: amplia.respuesta,
+      citas: amplia.citas,
+      origen: 'publicado',
+    });
+  }
+
+  // Un saludo no es una pregunta. Medido: «hola, buenos días» llegaba al
+  // modelo con las raíces «buen» y «dias» y contestaba con la cita
+  // equivocada. Sin llamar al modelo, y con la negativa fija.
+  if (esSaludo(pregunta)) {
+    return NextResponse.json({ respuesta: NEGATIVA, citas: [] });
+  }
+
+  // Una consulta sin palabras de contenido («de», «el») no busca nada. Antes
+  // devolvía las seis páginas al modelo, que contestaba sobre la portada.
+  if (palabrasDeConsulta(pregunta).length === 0) {
+    return NextResponse.json({ respuesta: NEGATIVA, citas: [] });
   }
 
   // Índice generado en el build, siempre fresco por construcción.
@@ -269,31 +567,22 @@ export async function POST(request: Request) {
    * al modelo. El bundle OKF elige *qué* texto se le pasa una vez que la
    * pregunta ya es del temario; no sustituye a esa puerta.
    */
-  let fuentes: Fuente[] = [];
-  let contexto = '';
-  let ambitoOk = false;
+  const evidencia: EvidenciaRuta[] = [];
 
   const okf = await cargarOkf(origen);
   if (okf) {
-    const evidencia: Evidencia[] | null = seleccionar(pregunta, okf);
-    if (evidencia) {
-      ambitoOk = true;
-      const bloque: string[] = [];
-      let gastado = 0;
-      for (const [i, e] of evidencia.entries()) {
-        if (gastado >= PRESUPUESTO) break;
-        const texto = `### [${i + 1}] ${e.titulo}\n${e.texto}`.slice(0, PRESUPUESTO - gastado);
-        bloque.push(texto);
-        gastado += texto.length;
-        fuentes.push({ titulo: e.titulo, href: e.href });
+    const seleccionada: Evidencia[] | null = seleccionar(pregunta, okf);
+    if (seleccionada) {
+      for (const e of seleccionada) {
+        evidencia.push({ titulo: e.titulo, href: e.href, texto: e.texto, estado: e.estado === true });
       }
-      contexto = bloque.join('\n\n');
     }
   }
 
-  if (!ambitoOk) {
+  if (evidencia.length === 0) {
     const indiceRes = await fetch(`${origen}/search-index.json`);
     if (!indiceRes.ok) {
+      devolverCuota(ip);
       return NextResponse.json({ error: 'Índice no disponible.' }, { status: 502 });
     }
     const indice = (await indiceRes.json()) as EntradaIndice[];
@@ -312,68 +601,61 @@ export async function POST(request: Request) {
     utiles.sort(
       (a, b) => b.puntos - a.puntos || (RANGO_TIPO[a.tipo] ?? 9) - (RANGO_TIPO[b.tipo] ?? 9),
     );
-    const bloque: string[] = [];
-    let gastado = 0;
-    utiles.forEach((r, i) => {
-      if (gastado >= PRESUPUESTO) return;
-      const texto = `### [${i + 1}] ${r.titulo}\n${r.contexto}`.slice(0, PRESUPUESTO - gastado);
-      bloque.push(texto);
-      gastado += texto.length;
-      fuentes.push({ titulo: r.titulo, href: r.href });
-    });
-    contexto = bloque.join('\n\n');
-    ambitoOk = utiles.length > 0 && contexto.trim().length >= 40;
+    for (const r of utiles) {
+      evidencia.push({ titulo: r.titulo, href: r.href, texto: r.contexto, estado: false });
+    }
   }
 
+  const { contexto, fuentes } = montarContexto(evidencia, PRESUPUESTO);
+
   // Sin contexto con peso suficiente: negativa fija, sin llamar al modelo.
-  if (!ambitoOk || contexto.trim().length < 40) {
+  if (contexto.trim().length < 40) {
     return NextResponse.json({ respuesta: NEGATIVA, citas: [] });
   }
 
   const clave = process.env.NIM_API_KEY;
   if (!clave) {
+    devolverCuota(ip);
     return NextResponse.json(
       { error: 'Asistente no disponible en este momento.' },
       { status: 503 },
     );
   }
 
-  const modelo = process.env.NIM_MODEL_ID ?? MODELO_POR_DEFECTO;
-  const nimRes = await fetch(`${NIM_BASE}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${clave}`,
-    },
-    body: JSON.stringify({
-      model: modelo,
-      temperature: 0.2,
-      max_tokens: MAX_TOKENS_SALIDA,
-      messages: [
-        { role: 'system', content: SISTEMA },
-        {
-          role: 'user',
-          content: `CONTEXTO:\n${contexto}\n\nPREGUNTA:\n${pregunta.trim()}`,
-        },
-      ],
-    }),
-    signal: AbortSignal.timeout(25000),
-  });
-  if (!nimRes.ok) {
+  /**
+   * La cadena de modelos.
+   *
+   * `NIM_MODEL_ID`, si está definido, manda sobre la cadena: es un modelo
+   * único, con la temperatura baja de siempre. Quien configura el modelo a
+   * mano no quiere que se le cambie debajo.
+   */
+  const cadena: Modelo[] = process.env.NIM_MODEL_ID
+    ? [{ id: process.env.NIM_MODEL_ID, temperature: 0.2, topP: 0.95 }]
+    : CADENA_MODELOS;
+
+  for (const modelo of cadena) {
+    const r = await llamarNim(modelo, clave, contexto, pregunta);
+    if (r.ok) {
+      const { texto: respuesta, fuentes: usadas } = ajustarCitas(r.texto, fuentes.length);
+      return NextResponse.json({
+        respuesta,
+        citas: usadas.map((i) => fuentes[i - 1]),
+        origen: 'modelo',
+      });
+    }
+    // Solo un identificador no servible pasa al siguiente modelo. Un timeout o
+    // un 5xx van al plan B: encadenar después de un timeout duplicaría la
+    // espera y no cabe en los 60 s de la función.
+    if (r.motivo === 'no-servible') continue;
+    break;
+  }
+
+  // Plan B: el modelo no está, pero el texto recuperado sí. Se responde con
+  // él, y el widget lo dice: `origen: 'texto'`.
+  const planB = respuestaDeTexto(evidencia);
+  if (planB.respuesta.trim().length === 0) {
+    devolverCuota(ip);
     return NextResponse.json({ error: 'El modelo no responde.' }, { status: 502 });
   }
-  const datos = (await nimRes.json()) as {
-    choices?: { message?: { content?: string } }[];
-  };
-  const cruda = datos.choices?.[0]?.message?.content?.trim();
-  if (!cruda) {
-    return NextResponse.json({ error: 'Respuesta vacía del modelo.' }, { status: 502 });
-  }
-
-  const { texto: respuesta, fuentes: usadas } = ajustarCitas(cruda, fuentes.length);
-
-  return NextResponse.json({
-    respuesta,
-    citas: usadas.map((i) => fuentes[i - 1]),
-  });
+  return NextResponse.json({ ...planB, origen: 'texto' });
 }

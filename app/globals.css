@@ -527,6 +527,34 @@ li {
   color: var(--ac);
 }
 
+.chat-error-bloque {
+  margin: 10px 0 0;
+}
+
+.chat-error-bloque .chat-error {
+  margin: 0;
+}
+
+.chat-reintentar {
+  margin-top: 8px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--ink);
+  font: 600 13px system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.chat-reintentar:hover {
+  border-color: var(--ac);
+}
+
+.chat-reintentar:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+
 .chat-respuesta p {
   margin: 10px 0 0;
 }

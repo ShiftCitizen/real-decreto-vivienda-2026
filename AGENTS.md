@@ -270,6 +270,63 @@ single-shot form. Keep every limit on the server and never trust the client:
   page citations, and refuses everything else. The widget repeats the
   no-legal-advice note under every answer.
 
+#### The provider failing is not a network problem
+
+Measured on 21-10-2026 against production: 2 of 6 calls to `POST /api/chat/`
+returned a **500 with an empty body** (`content-length: 0`), and the widget did
+`await res.json()` on it, so the `SyntaxError` landed in the `catch` and showed
+«No hay conexión con el asistente.». The network was fine — what broke was the
+call to the provider, and the client lied about it. The rules:
+
+- **The widget reads `res.text()` and parses with a fallback.** An empty 500
+  now reads «El asistente devolvió un error (500)»; only a genuine fetch
+  failure says «No hay conexión con el asistente.». It also offers a
+  **«Reintentar»** button that reuses the question still in the input.
+- **The model chain is a failover, not a load balancer.** `CADENA_MODELOS`
+  tries `nvidia/nemotron-3.5-lightning-30b-a3b` (30B total / 3B active, text
+  only) and then `google/gemma-3-12b-it`. NIM retires ids quickly — six were
+  already EOL — so one hard-coded id is a bet. The **next** model is tried
+  **only** on 400/404/410 (the id is not servible with that configuration). On a
+  timeout, a 5xx or a network error the route goes to the plan B instead:
+  chaining after a timeout would double the wait, and 35 s + 35 s does not fit
+  in the function's 60 s. `NIM_MODEL_ID`, when set, replaces the whole chain
+  with a single model at `temperature` 0.2.
+- **The NIM timeout is 35 s and `maxDuration` is 60.** 25 s was not enough: two
+  of the six measured calls exhausted it, while the ones that answered took
+  8.6–16.1 s. Do not lower the timeout below the slowest measured answer
+  without re-measuring.
+- **There is a plan B, and it is not an error.** If the model does not answer,
+  the route returns the retrieved passages with `origen: 'texto'`, capped at
+  4 500 characters split as 3 000 for the topic files and 1 500 for the two
+  state cards. The visitor gets the analysis instead of a 500. `origen`
+  travels in all three responses — `'publicado'` (the wide-request path),
+  `'modelo'` and `'texto'` — and the widget says which one it is; the old
+  footer claimed «generada con IA» even on the path that never calls a model.
+- **An empty `message.content` is the plan B, not the reasoning channel.**
+  Reasoning models put the text in `reasoning_content` and leave `content`
+  empty, and with `max_tokens: 350` that channel does not fit anyway. The
+  route reads `content` only; if it is empty, it goes to the plan B. When
+  `finish_reason` is `length`, the answer is trimmed back to its last sentence
+  end so it does not stop mid-sentence.
+- **No exception escapes the route.** The four unprotected points — reading
+  `search-index.json`, parsing it, calling NIM and parsing its body — are now
+  inside a `try/catch` that answers 502 with `{ error }` in JSON. The
+  `DOMException` of an expired `AbortSignal` used to become an empty 500.
+- **A failed answer gives the quota back.** `consumirCuota()` /
+  `devolverCuota()`: when the final answer is an error (no key, index
+  unavailable, unexpected failure) the unit is returned. A timeout used to
+  burn one of the ten questions per hour without answering anything.
+- **A greeting is not a question.** `esSaludo()` in `lib/busqueda.ts` is true
+  when every word of the query is a greeting or a stopword, and it is checked
+  in the route, in `buscar()` and in `seleccionar()`. Measured: «hola, buenos
+  días» reached the model with the roots «buen» and «dias» and produced the
+  wrong citation, and `buscar(indice, 'dias')` alone returns eight entries.
+  Raising `PUNTUACION_MINIMA` does not fix it: two acceptance cases score 4.9
+  and the greeting 4.8.
+- **A query with no content words is refused without calling the model.**
+  `palabrasDeConsulta(pregunta).length === 0` returns the fixed refusal. «de»
+  and «el» used to send the six pages to the model.
+
 ### 7. `lib/okf.ts` — evidence selection from the OKF bundle
 
 `buscar()` decides *whether* a question is about the decrees. `lib/okf.ts`
@@ -349,6 +406,40 @@ that identifies the third-sector file.
 Both are genuine lexical near-misses, not a broken rule; closing them needs a
 hand-written synonym list of the site's vocabulary, which this work explicitly
 does not want. Everything else in the acceptance set passes.
+
+**A block that does not fit is trimmed, not discarded.** This is the measured
+defect that the whole resilience work uncovered. In the art. 2 of the
+RDL 26/2026 — the eviction suspension — the file is troceado() into: `0` the
+`Estado:` block (203 chars) · `1` summary (259) · `2` the heading
+`### Apartado 1: demandante especulativo` (39) · `3` the Apartado 1 body (778)
+· `4` the heading `### Apartado 2: resto de demandantes` (36) · `5` the
+Apartado 2 body (624) · `6` 257 · `7` 482 · `8` 463 · `9` 632.
+
+The question "Qué pasa en el caso del impago de persona vulnerable?" scores
+`3` → 2.90, `7` → 2.90, `9` → 2.19, `5` → 1.91, so the candidates are
+`{3, 5, 7, 9}` plus the state block. The old assembly walked the blocks in
+document order and **dropped** the one that did not fit
+(`if (texto.length + b.texto.length > TOPE_FICHERO) continue;`): `0` (203) +
+`3` (778) = 982, so `5` (the Apartado 2) needed 1 607 of a 1 500 budget and
+was dropped; `7` was taken instead and the context ended at 1 465 chars
+without «Solo si no opera la enervación extraordinaria» nor «vulnerable y no
+tiene alternativa habitacional». The model then answered about buyers of
+mor portfolios. Now:
+
+- The blocks are mounted **in document order** and the one that does not fit is
+  **trimmed by sentence** (`porFraseEstricto()`) in the space that is left, not
+  discarded. A block whose space is under `MIN_FRAGMENTO = 100` is skipped, and
+  a block with no sentence end in that space is skipped too, so nothing is ever
+  cut mid-word.
+- The **section heading is attached to its block** (`encabezadosPrevios()`).
+  Without the rótulo, the model reads «Solo si no opera la enervación
+  extraordinaria…» without knowing whether it is the Apartado 1 or the Apartado
+  2, and the two are different regimes. The old "neighbour" rule in the code
+  was dead (`if (elegidos.has(c.n + 1))` never held) and its comment described
+  a behaviour that did not exist: the blocks were never sorted by score.
+- The result for that question is 1 425 chars containing both apartados and
+  both phrases. The four-part acceptance question grows from 5 964 to about
+  6 800 characters of context, still inside the route's 7 000 budget.
 
 **Files.** `okf/` holds the content files; `index.md` and `log.md` are
 converter navigation and are deliberately excluded — `index.md` contains a usage
