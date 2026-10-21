@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: "Coordinación: el RDL 27/2026 y la prórroga indefinida"
-description: "Prórroga obligatoria de cinco o siete años, indemnización de doce mensualidades, prórrogas de los arts. 10.5 y 10.6 LAU, DA 1.ª y DT única. Derogado el 2-10-2026: no se aplica."
+description: "Prórroga obligatoria de cinco o siete años, indemnización de doce mensualidades, prórrogas de los arts. 10.5 y 10.6 LAU, DA 1.ª y DT única. Pasa al RDL 28/2026, que no está en vigor (entrada prevista el 15-11-2026, convalidación pendiente); el RDL 27/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - desahucios
@@ -14,17 +14,13 @@ sources:
     title: Desahucios y alquiler
     author: human:carlos-marchena
 ---
-
 # Coordinación: el RDL 27/2026 y la prórroga indefinida
 
-El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: el RDL 27/2026 quedó derogado el 2-10-2026. La prórroga indefinida de cinco y siete años, la indemnización de doce mensualidades y las prórrogas de los arts. 10.5 y 10.6 de la LAU pasan al RDL 28/2026, que no está en vigor: su entrada en vigor está prevista para el 15-11-2026 y depende de la convalidación por la Diputación Permanente.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
+El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026.
 
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
-
-Esta sección y las tres siguientes son del RDL 27/2026 , que solo modifica el artículo 10 de la LAU. Su disposición adicional primera fija cómo convive con la prórroga extraordinaria del RDL 26/2026.
+Esta sección y las tres siguientes son del RDL 27/2026 , que solo modifica el artículo 10 de la LAU. Su disposición adicional primera fija cómo convive con la prórroga extraordinaria del RDL 26/2026. La prórroga automática de cinco y siete años y la indemnización de doce mensualidades pasan al RDL 28/2026, que no está en vigor: su entrada en vigor está prevista para el 15-11-2026, pendiente de convalidación.
 
 ### Prórroga indefinida e indemnización
 

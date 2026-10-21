@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Avales y TU CASA (arts. 15 a 19 del RDL 26/2026)
-description: "Dos líneas de avales, de hasta 2.000 M€ y de hasta 280 M€, y el préstamo TU CASA al 0 %. El art. 18 no lleva cuantía. Derogado el 2-10-2026: no se aplica."
+description: "Dos líneas de avales, de hasta 2.000 M€ y de hasta 280 M€, y el préstamo TU CASA al 0 %. El art. 18 no lleva cuantía. Vigentes por los arts. 15 a 19 del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - financiacion
@@ -14,18 +14,13 @@ sources:
     title: Financiación y cuenta
     author: human:carlos-marchena
 ---
-
 # Avales y TU CASA (arts. 15 a 19 del RDL 26/2026)
 
-El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigentes por los arts. 15 a 19 del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación). Eran de los arts. 15 a 19 del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI). El decreto fue derogado el 2-10-2026.
 
 Dos líneas de avales, no una. El art. 16 RDL 26/2026 crea una línea de 2.000 M€ para promotores de vivienda social o asequible. El art. 17 RDL 26/2026 crea otra línea, de 280 M€ , para pymes de construcción industrializada, con otorgamiento hasta 2040. El artículo 18 del RDL 26/2026 y el artículo 86 bis del RDL 8/2023 no llevan ninguna cifra : son únicamente el régimen de cobranza de cada línea. Cualquier resumen que sume las dos líneas en una sola, o que atribuya los 280 M€ al artículo 18 del RDL 26/2026, está mal.
-
 
 - Art. 15 (RDL 26/2026): se añade un sexto supuesto al artículo doce de la Ley de hipoteca mobiliaria y prenda sin desplazamiento de posesión: el conjunto de componentes industrializados destinados a la construcción industrializada de edificios, fabricados en entorno controlado para su posterior transporte, recepción, montaje y ensamblaje en obra.
 - Art. 16 (RDL 26/2026) , que modifica el artículo 86 del RDL 8/2023 ): línea de avales de hasta 2.000 M€ mediante convenios entre el Ministerio de Vivienda y Agenda Urbana y el ICO, por un plazo de hasta 35 años , para la financiación de promotores públicos y privados en forma de préstamo dentro de la Facilidad ICO MRR para Promoción de Vivienda Social o con cargo a la estrategia de inversión definida en España CRECE. La ejecución se atenderá desde una partida presupuestaria del Ministerio, de carácter ampliable. El nuevo artículo 86 bis del RDL 8/2023 fija el régimen de cobranza: el ICO aplica a la parte avalada el mismo régimen de recuperación y cobranza que a la no avalada, nunca el de crédito público; el deudor y los fiadores responden íntegramente por la deuda avalada; los créditos avalados tienen la consideración de crédito financiero y rango de crédito ordinario en el concurso, sin perjuicio de las garantías del crédito principal. art. 86 bis RDL 8/2023

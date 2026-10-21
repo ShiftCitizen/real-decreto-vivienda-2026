@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Lo que afecta al tercer sector
-description: "Exclusiones y reglas del RDL 26/2026 que el resumen señala para el tercer sector: art. 1.2, habitaciones, reducción del 70 % en el IRPF y la DA 1.ª. Estado: derogados."
+description: "Exclusiones y reglas del RDL 26/2026 que el resumen señala para el tercer sector: art. 1.2, habitaciones, reducción del 70 % en el IRPF y la DA 1.ª. Vigente por el art. 6 del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - resumen
@@ -15,17 +15,14 @@ sources:
     title: "Vivienda: los RDL 26/2026 y 27/2026, derogados"
     author: human:carlos-marchena
 ---
-
 # Lo que afecta al tercer sector
+
+Estado: vigente por el art. 6 del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), que reproduce estas exclusiones y estas reglas para el tercer sector. Eran del RDL 26/2026, derogado el 2-10-2026.
 
 - Compras: quedan fuera del límite del 70 % las adquisiciones para residencia de colectivos socialmente vulnerables por parte de entidades del tercer sector de acción social, las destinadas a la protección de las víctimas de violencia de género, las que se destinan a residencia de personas que precisen atención sociosanitaria y las de quien se adhiera a un Código de Buenas Prácticas acordado con la autoridad competente. art. 1.2 RDL 26/2026
 - Habitaciones: la LAU no se aplica a la cesión de uso de habitaciones o estancias de una vivienda que realicen las entidades del tercer sector de acción social en programas de acogida, inclusión o alojamiento de personas en situación de vulnerabilidad, sin finalidad lucrativa. art. 3.Cuatro.f RDL 26/2026
 - IRPF: reducción del 70 % para el propietario que alquila a una entidad sin fines lucrativos del título II de la Ley 49/2002 y que destine la vivienda al alquiler social con renta inferior a la del programa estatal de alquiler, al alojamiento de personas en situación de vulnerabilidad económica de la Ley 19/2021, o a un programa público o calificación que imponga limitación de la renta. art. 6.Segundo.Dos.c RDL 26/2026
 - DA 1.ª: el Gobierno regulará en seis meses la figura de proveedor social de vivienda asequible y las cooperativas de vivienda asequible, con el referente de las Housing Associations, y la certificación será exclusivamente a los efectos de la participación de estas entidades en programas o en el acceso a financiación, ventajas o especialidades en relación con tributos o procedimientos estatales. disposición adicional primera RDL 26/2026
-
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
 
 Nuevos decretos (6 de octubre de 2026). El Consejo de Ministros aprobó el 6 de octubre de 2026 dos nuevos reales decretos-ley, publicados en el BOE el 7 de octubre: RDL 29/2026 (BOE-A-2026-20823) y RDL 28/2026 (BOE-A-2026-20822). El RDL 29/2026 entró en vigor el 8 de octubre de 2026 y está pendiente de convalidación por la Diputación Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está prevista para el 15 de noviembre de 2026 y depende de convalidación. La Diputación Permanente (69 miembros, mayoría absoluta de 35) debe votar en el plazo de treinta días (hacia el 6 de noviembre de 2026). No hay fecha de sesión fijada.
 

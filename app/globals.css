@@ -787,8 +787,14 @@ th:last-child {
   border: 1px solid var(--rule);
 }
 
-/* Vocabulary: activa / pendiente / bloqueada / potestativa. Four tones, mapped
+/* Vocabulary: vigente / potestativa / pendiente / bloqueada. Four tones, mapped
    from the literal status words in the data, not one class per string. */
+.pill-vigente {
+  color: var(--ac);
+  background: var(--ac-soft);
+  border-color: transparent;
+}
+
 .pill-activa {
   color: var(--ac);
   background: var(--ac-soft);

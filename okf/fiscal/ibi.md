@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Art. 8 (RDL 26/2026). IBI
-description: "Dos regímenes de recargo por vivienda desocupada, según zona tensionada, y recargo de alojamiento turístico solo en zona tensionada. Potestativos: exigen ordenanza. Derogado el 2-10-2026: no se aplica."
+description: "Dos regímenes de recargo por vivienda desocupada, según zona tensionada, y recargo de alojamiento turístico solo en zona tensionada. Potestativos: exigen ordenanza. Vigente por el art. 8 del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - fiscal
@@ -14,15 +14,11 @@ sources:
     title: Fiscalidad
     author: human:carlos-marchena
 ---
-
 # Art. 8 (RDL 26/2026). IBI
 
-El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigente por el art. 8 del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), que reproduce estos recargos. Eran del art. 8 del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026.
 
 El artículo 8 reescribe el título del artículo 72 LRHL y añade dos apartados. Son dos regímenes distintos y no se pueden leer como uno solo : el de la vivienda desocupada difiere según el municipio esté o no declarado zona de mercado residencial tensionado.
 

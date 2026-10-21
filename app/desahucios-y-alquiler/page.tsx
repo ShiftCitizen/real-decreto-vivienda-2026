@@ -31,9 +31,12 @@ export default function DesahuciosPage() {
         <strong>Cómo está organizada esta página.</strong>
         <p>
           Las dos primeras secciones describen lo que contenía el <span className="tono-rdl26">RDL
-          26/2026</span>. La sección «Coordinación» y las tres que la siguen corresponden al{' '}
-          <span className="tono-rdl27">RDL 27/2026</span> y al nuevo régimen sancionador (Título V
-          de la LAU, añadido por el RDL 26/2026). Cada referencia lleva la etiqueta de su norma.
+          26/2026</span> y lo que reproduce ahora el <span className="tono-rdl29">RDL 29/2026</span>,
+          en vigor desde el 8-10-2026. La sección «Coordinación» y las tres que la siguen corresponden
+          al <span className="tono-rdl27">RDL 27/2026</span> y al nuevo régimen sancionador (Título V
+          de la LAU, añadido por el RDL 26/2026). La prórroga por plazos sucesivos y la indemnización
+          pasan al <span className="tono-rdl28">RDL 28/2026</span>, que no está en vigor. Cada
+          referencia lleva la etiqueta de su norma.
         </p>
       </div>
 
@@ -454,7 +457,10 @@ export default function DesahuciosPage() {
       <p className="lead">
         Esta sección y las tres siguientes son del <span className="tono-rdl27">RDL 27/2026</span>,
         que solo modifica el artículo 10 de la LAU. Su disposición adicional primera fija cómo
-        convive con la prórroga extraordinaria del RDL 26/2026.
+        convive con la prórroga extraordinaria del RDL 26/2026. La prórroga automática de cinco y
+        siete años y la indemnización de doce mensualidades pasan al{' '}
+        <span className="tono-rdl28">RDL 28/2026</span>, que no está en vigor: su entrada en vigor
+        está prevista para el 15-11-2026, pendiente de convalidación.
       </p>
 
       <h3 id={slugify('Prórroga indefinida e indemnización')}>Prórroga indefinida e indemnización</h3>

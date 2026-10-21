@@ -1,5 +1,5 @@
 ---
-type: rule
+type: Concept
 title: RDL 29/2026. Fiscalidad (arts. 6-10)
 description: "IRPF (reducciones por alquiler, deducción 10%, exención por venta a entes públicos, imputación de rentas, vivienda habitual), IVA (30 noches, obras 10%), IBI (recargos desocupada y turístico), SOCIMI (25% gravamen), IIVTNU (coeficientes)."
 tags:

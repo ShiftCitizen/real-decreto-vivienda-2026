@@ -9,7 +9,7 @@ import { slugify } from '@/lib/slug';
 export const metadata: Metadata = {
   title: 'Estado y advertencias',
   description:
-    'Ambos decretos fueron derogados el 2-10-2026 al rechazar el Congreso su convalidación. Tabla con las medidas que contenían y su estado tras la derogación, más cuatro advertencias clave.',
+    'El RDL 29/2026 está en vigor desde el 8-10-2026 y el RDL 28/2026, publicado el 7-10, entrará en vigor el 15-11 si se convalida. Tabla con la situación de cada medida y cuatro advertencias clave.',
 };
 
 /**
@@ -20,10 +20,10 @@ export const metadata: Metadata = {
  * literal strings, no way to compare them, and no CSS. Four values is enough to
  * say everything a reader needs — can I rely on this today?
  */
-type Estado = 'derogada' | 'potestativa' | 'pendiente' | 'bloqueada';
+type Estado = 'vigente' | 'potestativa' | 'pendiente' | 'bloqueada';
 
 const ESTADO_TXT: Record<Estado, string> = {
-  derogada: 'Derogada',
+  vigente: 'Vigente',
   potestativa: 'Potestativa',
   pendiente: 'Pendiente',
   bloqueada: 'Bloqueada',
@@ -42,112 +42,145 @@ type Fila = {
   etiqueta?: string;
 };
 
+/**
+ * Qué norma rige cada medida hoy.
+ *
+ * Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026, pero sus medidas
+ * no desaparecieron: el RDL 29/2026 las reproduce en lo sustancial y el
+ * RDL 28/2026 hace lo propio con la prórroga indefinida y la indemnización.
+ * Por eso la columna dice en qué decreto está cada una y no solo si está
+ * derogada. La columna «Condición» nombra la norma con su artículo, y el
+ * chatbot la lee: es lo que evita que una respuesta diga que una medida que
+ * hoy se aplica «no se aplica».
+ */
 const FILAS: Fila[] = [
   {
     medida: 'Freno a la compra especulativa del 70 %',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 1 del RDL 29/2026, en vigor desde el 8-10-2026, con el plazo ampliado hasta el 31-12-2030. Era del art. 1 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Suspensión de desahucios',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 2 del RDL 29/2026, en vigor desde el 8-10-2026, hasta el 31-12-2030. Era del art. 2 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Enervación extraordinaria',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 5.Dos del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 5 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Reforma de la LAU (temporada, habitaciones, gastos, garantías)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 3 del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 3 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Régimen sancionador de plataformas de corta duración (Título V LAU)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 3.Veinte del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 3.Veinte del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Prohibición de los seguros de impago de renta en la LAU',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 3.Diecisiete del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 3 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Prórroga extraordinaria de dos años (DF 5.ª)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'DF 5.ª del RDL 29/2026, en vigor desde el 8-10-2026. Era del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Límite del 2 % a la actualización de la renta (DF 6.ª)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'DF 6.ª del RDL 29/2026, en vigor desde el 8-10-2026, hasta el 31-12-2027. Era del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Prórroga indefinida de cinco y siete años e indemnización de doce mensualidades',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 27/2026, derogado el 2-10-2026',
+    estado: 'pendiente',
+    condicion:
+      'Art. único del RDL 28/2026: no está en vigor —entrada prevista el 15-11-2026— y está pendiente de convalidación. Era del RDL 27/2026, derogado el 2-10-2026',
+    etiqueta: 'No en vigor',
   },
   {
     medida: 'Recargos de IBI (vivienda desocupada y alojamiento turístico)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
-    nota: 'Eran potestativos y requerían ordenanza municipal; el decreto que los habilitaba fue derogado',
+    estado: 'potestativa',
+    condicion:
+      'Art. 8 del RDL 29/2026, en vigor desde el 8-10-2026. Eran del art. 8 del RDL 26/2026, derogado el 2-10-2026',
+    nota: 'Siguen siendo potestativos: dependen de una ordenanza municipal',
   },
   {
     medida: 'Exención por transmisión de vivienda a entes públicos',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 6.Segundo.Once del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 6 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'IVA de estancias cortas y de obras de renovación al 10 %',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 7 del RDL 29/2026, en vigor desde el 8-10-2026, con efectos desde el 1-12-2026. Era del art. 7 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Nueva escala de imputación de rentas (IRPF)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 6.Primero del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 6 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'TU CASA (préstamo al 0 %)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'vigente',
+    condicion:
+      'Art. 19 del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 19 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
-    medida: 'Línea de avales de 2.000 M€ (art. 16 RDL 26/2026)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    medida: 'Línea de avales de 2.000 M€',
+    estado: 'vigente',
+    condicion:
+      'Art. 16 del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 16 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
-    medida: 'Línea de avales de 280 M€ (art. 17 RDL 26/2026)',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    medida: 'Línea de avales de 280 M€',
+    estado: 'vigente',
+    condicion:
+      'Art. 17 del RDL 29/2026, en vigor desde el 8-10-2026. Era del art. 17 del RDL 26/2026, derogado el 2-10-2026',
   },
   {
     medida: 'Registro de IIC Elegibles',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'pendiente',
+    condicion:
+      'Disposición adicional segunda del RDL 29/2026, en vigor desde el 8-10-2026: la CNMV dispone de cuatro meses para crearlo',
   },
   {
     medida: 'Proveedor social de vivienda asequible y cooperativas',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'pendiente',
+    condicion:
+      'Disposición adicional primera del RDL 29/2026, en vigor desde el 8-10-2026: el Gobierno debe regular su figura en seis meses',
   },
   {
     medida: 'Comercialización de la Cuenta Financia Europa y del SIALPFE',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'pendiente',
+    condicion:
+      'Título VI del RDL 29/2026, en vigor desde el 8-10-2026, pero no puede contratarse hasta que entre en vigor la orden ministerial del art. 347.7 de la Ley de los Mercados de Valores',
   },
   {
     medida: 'Activos IIC dentro de la Cuenta',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'pendiente',
+    condicion:
+      'Título VI del RDL 29/2026, en vigor desde el 8-10-2026: solo los activos elegibles distintos de participaciones o acciones de IIC, hasta que funcione el Registro de IIC Elegibles',
   },
   {
     medida: 'Movilización entre entidades proveedoras',
-    estado: 'derogada',
-    condicion: 'Contenida en el RDL 26/2026, derogado el 2-10-2026',
+    estado: 'bloqueada',
+    condicion:
+      'No puede efectuarse hasta la entrada en vigor de la orden ministerial del art. 347.7 de la Ley de los Mercados de Valores, que el RDL obliga a aprobar en seis meses',
   },
 ];
 
@@ -156,12 +189,14 @@ export default function EstadoPage() {
     <>
       <h1>Estado de aplicación y advertencias</h1>
       <p className="lead">
-        RDL 26/2026 entró en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026, pero ambos
-        quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación.
-        Qué medidas contenían, cuáles dependían todavía de un acuerdo ministerial u
-        ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.
-        Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un
-        abogado o a un sindicato de inquilinos.
+        El RDL 29/2026 está en vigor desde el 8 de octubre de 2026 y el RDL 28/2026 se publicó el
+        7 de octubre, con entrada en vigor prevista para el 15 de noviembre. Los RDL 26/2026 y
+        27/2026 entraron en vigor el 1 y el 2 de octubre y quedaron derogados ese mismo 2-10-2026 al
+        rechazar el Congreso su convalidación: sus medidas, en lo sustancial, las reproduce ahora el
+        RDL 29/2026. Qué norma rige cada una, cuáles dependían todavía de un acuerdo ministerial u
+        ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra. Si
+        recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un
+        sindicato de inquilinos.
       </p>
 
       <AvisoEstado />
@@ -237,15 +272,16 @@ export default function EstadoPage() {
       <h2 id={slugify('Situación de cada medida')}>Situación de cada medida</h2>
 
       <p>
-        La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de
-        la convalidación, <b>quedaron derogados</b>: todas figuran como <b>Derogada</b>.
-        La columna «Condición» indica en qué decreto estaba cada medida y que fue derogada
-        ese día. Las etiquetas <b>Potestativa</b>, <b>Pendiente</b> y <b>Bloqueada</b> se
-        conservan solo para referencia histórica (indicaban el estado que habrían tenido de
-        seguir en vigor los decretos), pero no tienen efecto práctico tras la derogación.
+        La tabla resume la situación de cada medida hoy. Casi todas las del RDL 26/2026 y del RDL
+        27/2026 <b>vuelven a regir</b>, pero no por aquellos decretos: el RDL 29/2026, en vigor
+        desde el 8-10-2026 y pendiente de convalidación, las reproduce, y el RDL 28/2026 hace lo
+        propio con la prórroga indefinida y la indemnización, aunque todavía no está en vigor. La
+        columna «Condición» dice en qué decreto está cada una y qué queda pendiente. Las etiquetas{' '}
+        <b>Potestativa</b>, <b>Pendiente</b> y <b>Bloqueada</b> marcan las que dependen todavía de
+        una ordenanza municipal o de una orden ministerial, no de una convalidación.
       </p>
 
-      <ScrollTable label="Estado de aplicación de cada medida de los reales decretos-ley 26/2026 y 27/2026">
+      <ScrollTable label="Estado de aplicación de cada medida de los reales decretos-ley de vivienda">
         <table>
           <thead>
             <tr>
@@ -284,6 +320,12 @@ export default function EstadoPage() {
 
       <ul>
         <li>
+          <b>7 de octubre de 2026:</b> tercera versión. El RDL 29/2026 entró en vigor el 8-10-2026 y
+          el RDL 28/2026 quedó publicado a la espera de su entrada en vigor y de la convalidación. La
+          tabla de medidas pasó a decir qué decreto rige cada una, en lugar de darlas todas por
+          derogadas.
+        </li>
+        <li>
           <b>1 de octubre de 2026, 12:00:</b> segunda versión. Se contrastó el articulado completo
           con el BOE-A-2026-20266 y el BOE-A-2026-20385 y se corrigieron cinco errores de fondo, se
           añadieron las disposiciones que faltaban y se separaron los dos reales decretos-ley en
@@ -299,14 +341,15 @@ export default function EstadoPage() {
 
       <h3 id={slugify('Convalidación')}>Convalidación</h3>
 
-      <p>
-        El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026:
-        172 a favor y 178 en contra el RDL 26/2026; RDL 27/2026 rechazado sin cifra a
-        favor confirmada en fuente oficial y con 184 en contra.
-        Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
-        <Cite norma="ce" art="86.2" /> Si alguna medida se tramita como proyecto de ley,
-        este sitio se actualizará desde ese texto.
-      </p>
+        <p>
+          El Congreso rechazó la convalidación de los dos decretos el 2 de octubre de 2026:
+          172 a favor y 178 en contra el RDL 26/2026; RDL 27/2026 rechazado sin cifra a
+          favor confirmada en fuente oficial y con 184 en contra.
+          Ambos quedaron derogados y dejaron de estar en vigor ese día.{' '}
+          <Cite norma="ce" art="86.2" /> Ese es el historial; lo que rige hoy son el RDL
+          29/2026 y el RDL 28/2026. Si alguna medida se tramita como proyecto de ley,
+          este sitio se actualizará desde ese texto.
+        </p>
 
       <h3 id={slugify('Preámbulo y articulado')}>Preámbulo y articulado</h3>
 
@@ -320,18 +363,18 @@ export default function EstadoPage() {
 
       <h3 id={slugify('Capacidad autonómica')}>Capacidad autonómica</h3>
 
-      <p>
-        La suspensión de desahucios y la enervación extraordinaria recaen sobre la{' '}
-        <b>administración competente</b>, en general la autonómica, y el Estado compensa los gastos.{' '}
-        <Cite norma="rdl26" art="2.2 y 3" /> Pero la eficacia real depende de que esa
-        administración conteste en el plazo y tenga recursos: si no responde o informa de que no
-        cuenta con ellos, el proceso se suspende, y si tras los dos meses no ha pagado ni
-        consignado, la subrogación automática es lo que evita el lanzamiento.{' '}
-        <Cite norma="rdl26" art="5.Dos" /> En el País Vasco y en Navarra la
-        instrumentación financiera se acordará bilateralmente con sus propios regímenes.{' '}
-        <Cite norma="rdl26" art="5.Dos" /> Los recargos de IBI son potestativos y
-        dependen íntegramente de la ordenanza municipal.
-      </p>
+        <p>
+          La suspensión de desahucios y la enervación extraordinaria recaen sobre la{' '}
+          <b>administración competente</b>, en general la autonómica, y el Estado compensa los gastos.{' '}
+          <Cite norma="rdl29" art="2.2" /> Pero la eficacia real depende de que esa
+          administración conteste en el plazo y tenga recursos: si no responde o informa de que no
+          cuenta con ellos, el proceso se suspende, y si tras los dos meses no ha pagado ni
+          consignado, la subrogación automática es lo que evita el lanzamiento.{' '}
+          <Cite norma="rdl29" art="5.Dos" /> En el País Vasco y en Navarra la
+          instrumentación financiera se acordará bilateralmente con sus propios regímenes.{' '}
+          <Cite norma="rdl29" art="5.Dos" /> Los recargos de IBI son potestativos y
+          dependen íntegramente de la ordenanza municipal.
+        </p>
 
       <h3 id={slugify('Territorios forales y competencias autonómicas')}>
         Territorios forales y competencias autonómicas
