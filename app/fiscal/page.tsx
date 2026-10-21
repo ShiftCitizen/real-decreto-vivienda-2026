@@ -59,6 +59,17 @@ export default function FiscalPage() {
 
       <AvisoEstado />
 
+      <div className="box">
+        <strong>Cómo está organizada esta página.</strong>
+        <p>
+          Las secciones «Art. 6 (RDL 26/2026). IRPF», «Art. 7 (RDL 26/2026). IVA», «Art. 8 (RDL
+          26/2026). IBI» y «Arts. 9 y 10» describen lo que contenía el <span className="tono-rdl26">RDL
+          26/2026</span> y lo que reproduce ahora el <span className="tono-rdl29">RDL 29/2026</span>,
+          en vigor desde el 8-10-2026 y pendiente de convalidación. Cada referencia lleva la etiqueta
+          de su norma.
+        </p>
+      </div>
+
       <h2 id={slugify('Art. 6 (RDL 26/2026). IRPF')}>Art. 6 (RDL 26/2026). IRPF</h2>
 
       <h3>Reducción del rendimiento por alquiler de vivienda</h3>
