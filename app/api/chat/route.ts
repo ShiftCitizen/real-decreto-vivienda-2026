@@ -142,8 +142,10 @@ const PROVEEDORES: Proveedor[] = [
     nombre: 'openrouter',
     baseUrl: OPENROUTER_BASE,
     // `mistralai/mistral-small-latest` no está en la lista pública de
-    // OpenRouter (21-10-2026); este id sí.
-    modelo: 'mistralai/mistral-small-3.2-24b-instruct',
+    // OpenRouter (21-10-2026). La clave tiene límite de gasto 0 $ (log del
+    // preview: 403 «Key limit exceeded»), así que solo sirven modelos :free.
+    // Es el mismo que usan los cursos de ShiftCitizen.
+    modelo: 'google/gemma-4-31b-it:free',
     timeoutMs: 14_000,
     temperature: 0.6,
     topP: 0.95,
