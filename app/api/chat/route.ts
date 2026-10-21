@@ -201,8 +201,8 @@ const PRESUPUESTO = 7000;
  * dos fichas de estado: el estado no es decoración, es lo que hace que la
  * respuesta diga qué decreto rige la medida.
  */
-const TOPE_TEXTO_PLAN_B = 4500;
-const TOPE_TEXTO_PLAN_B_TEMA = 3000;
+const TOPE_TEXTO_PLAN_B = 5700;
+const TOPE_TEXTO_PLAN_B_TEMA = 4200; // 21-10-2026: cabe la remisión a la enervación entera (subrogación incluida)
 const TOPE_TEXTO_PLAN_B_ESTADO = 1500;
 
 const NEGATIVA =
