@@ -129,8 +129,8 @@ const PROVEEDORES: Proveedor[] = [
     baseUrl: NIM_BASE,
     // `mistralai/mistral-small-latest` no existe en el catálogo de NIM
     // (comprobado el 21-10-2026 en /v1/models). Este es el que funcionaba.
-    modelo: 'meta/llama-3.2-90b-vision-instruct',
-    timeoutMs: 30_000, // 90b es más lento; el presupuesto de 50 s sigue mandando
+    modelo: 'meta/llama-3.2-11b-vision-instruct',
+    timeoutMs: 22_000, // 90b agotaba 30 s; 11b contesta en ~10 s
     temperature: 0.2,
     topP: 0.95,
     headers: (clave: string) => ({
