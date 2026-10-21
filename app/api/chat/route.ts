@@ -83,10 +83,17 @@ export const maxDuration = 60;
  *
  * El orden importa: el failover solo se usa cuando el anterior no es
  * servible, así que la primera entrada es la que responde en el caso normal.
+ *
+ * Cadena actualizada 21-10-2026: se añaden modelos adicionales para mejorar la
+ * resiliencia ante retiros de identificadores. NIM retira ids con frecuencia,
+ * así que una cadena más larga aumenta las probabilidades de que al menos uno
+ * esté disponible.
  */
 const CADENA_MODELOS: Modelo[] = [
   { id: 'nvidia/nemotron-3.5-lightning-30b-a3b', temperature: 1.0, topP: 0.95 },
   { id: 'google/gemma-3-12b-it', temperature: 0.6, topP: 0.95 },
+  { id: 'meta/llama-3.3-70b-instruct', temperature: 0.6, topP: 0.95 },
+  { id: 'mistralai/mistral-large-3-675b-instruct-2512', temperature: 0.6, topP: 0.95 },
 ];
 
 type Modelo = { id: string; temperature: number; topP: number };
@@ -399,6 +406,11 @@ type ResultadoModelo =
  *
  * No lanza: cualquier fallo se traduce en un motivo, porque quien llama tiene
  * que poder distinguir «prueba con el siguiente modelo» de «ve al plan B».
+ *
+ * 21-10-2026: se añade logging de errores para diagnosticar fallos del
+ * proveedor. El log incluye el modelo intentado, el status HTTP y el
+ * mensaje de error, lo que permite identificar si el problema es la clave,
+ * el modelo EOL o un error transitorio.
  */
 async function llamarNim(
   modelo: Modelo,
@@ -429,15 +441,20 @@ async function llamarNim(
       }),
       signal: AbortSignal.timeout(TIMEOUT_NIM_MS),
     });
-  } catch {
+  } catch (e) {
     // Timeout agotado o error de red: no se reintenta con otro modelo, se va
     // al plan B. Encadenar aquí duplicaría la espera.
+    // Log: registra el modelo y el error para diagnóstico
+    console.error(`[NIM] Timeout/red con ${modelo.id}:`, e instanceof Error ? e.message : String(e));
     return { ok: false, motivo: 'fallo' };
   }
 
   if (!nimRes.ok) {
     // 400/404/410: el identificador no es servible con esta configuración.
     // Solo en estos casos se prueba el siguiente de la cadena.
+    // Log: registra el status y el modelo para identificar modelos EOL
+    const textoError = await nimRes.text().catch(() => 'sin cuerpo');
+    console.error(`[NIM] ${nimRes.status} con ${modelo.id}: ${textoError.slice(0, 200)}`);
     if (nimRes.status === 400 || nimRes.status === 404 || nimRes.status === 410) {
       return { ok: false, motivo: 'no-servible' };
     }
@@ -452,7 +469,8 @@ async function llamarNim(
   };
   try {
     datos = (await nimRes.json()) as typeof datos;
-  } catch {
+  } catch (e) {
+    console.error(`[NIM] Error parseando JSON de ${modelo.id}:`, e instanceof Error ? e.message : String(e));
     return { ok: false, motivo: 'fallo' };
   }
 
@@ -463,6 +481,7 @@ async function llamarNim(
     // `content` vacío. O el modelo no respondió, o es uno de razonamiento que
     // deja el texto en `reasoning_content`: con 350 tokens de salida ese canal
     // no cabe, así que el plan B es la respuesta.
+    console.error(`[NIM] ${modelo.id} devolvió content vacío`);
     return { ok: false, motivo: 'fallo' };
   }
 

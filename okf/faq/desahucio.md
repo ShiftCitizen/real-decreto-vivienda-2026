@@ -21,7 +21,7 @@ sources:
 
 El plazo de dos meses para la administración y la subrogación automática en la deuda eran del RDL 26/2026, derogado el 2-10-2026; el RDL 29/2026 los reproduce.
 
-art. 2 RDL 29/2026 art. 5.Dos RDL 29/2026 art. 22.6 LEC art. 5.Dos RDL 26/2026 art. 2 RDL 26/2026
+art. 2 RDL 29/2026 art. 5.Dos RDL 29/2026 art. 22.6 LEC
 
 ## Véase
 
