@@ -104,6 +104,8 @@ type Proveedor = {
   nombre: 'mistral' | 'nim' | 'openrouter';
   baseUrl: string;
   modelo: string;
+  /** Tope de espera de este proveedor; la suma cabe en `maxDuration`. */
+  timeoutMs: number;
   temperature: number;
   topP: number;
   headers: (clave: string) => Record<string, string>;
@@ -114,6 +116,7 @@ const PROVEEDORES: Proveedor[] = [
     nombre: 'mistral',
     baseUrl: MISTRAL_BASE,
     modelo: 'mistral-small-latest',
+    timeoutMs: 14_000,
     temperature: 0.6,
     topP: 0.95,
     headers: (clave: string) => ({
@@ -124,8 +127,11 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'nim',
     baseUrl: NIM_BASE,
-    modelo: 'mistralai/mistral-small-latest',
-    temperature: 0.6,
+    // `mistralai/mistral-small-latest` no existe en el catálogo de NIM
+    // (comprobado el 21-10-2026 en /v1/models). Este es el que funcionaba.
+    modelo: 'meta/llama-3.2-11b-vision-instruct',
+    timeoutMs: 22_000,
+    temperature: 0.2,
     topP: 0.95,
     headers: (clave: string) => ({
       'Content-Type': 'application/json',
@@ -135,7 +141,10 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'openrouter',
     baseUrl: OPENROUTER_BASE,
-    modelo: 'mistralai/mistral-small-latest',
+    // `mistralai/mistral-small-latest` no está en la lista pública de
+    // OpenRouter (21-10-2026); este id sí.
+    modelo: 'mistralai/mistral-small-3.2-24b-instruct',
+    timeoutMs: 14_000,
     temperature: 0.6,
     topP: 0.95,
     headers: (clave: string) => ({
@@ -157,6 +166,13 @@ type Modelo = { id: string; temperature: number; topP: number };
  * deja pasar todas y cabe en los 60 s de la función.
  */
 const TIMEOUT_NIM_MS = 35_000;
+
+/**
+ * Presupuesto total para la cadena de proveedores (21-10-2026). La función
+ * tiene 60 s; se dejan 10 s para la recuperación y la respuesta. Cada
+ * proveedor espera lo suyo o lo que quede del presupuesto, lo que sea menor.
+ */
+const PRESUPUESTO_CADENA_MS = 50_000;
 
 const MAX_PREGUNTA = 500;
 const MAX_TOKENS_SALIDA = 350;
@@ -468,7 +484,10 @@ async function llamarProveedor(
   clave: string,
   contexto: string,
   pregunta: string,
+  timeoutMs: number,
 ): Promise<ResultadoModelo> {
+  const etiqueta = `[chat] ${proveedor.nombre} ${proveedor.modelo}`;
+  const inicio = Date.now();
   const endpoint = proveedor.nombre === 'openrouter' ? '/chat/completions' : '/chat/completions';
   const url = `${proveedor.baseUrl}${endpoint}`;
   
@@ -490,13 +509,13 @@ async function llamarProveedor(
           },
         ],
       }),
-      signal: AbortSignal.timeout(TIMEOUT_NIM_MS),
+      signal: AbortSignal.timeout(timeoutMs),
     });
   } catch (e) {
     // Timeout agotado o error de red: no se reintenta con otro proveedor, se va
     // al plan B. Encadenar aquí duplicaría la espera.
     // Log: registra el proveedor y el error para diagnóstico
-    console.error(`[${proveedor.nombre.toUpperCase()}] Timeout/red con ${proveedor.modelo}:`, e instanceof Error ? e.message : String(e));
+    console.error(`${etiqueta} sin respuesta tras ${Date.now() - inicio} ms (tope ${timeoutMs} ms): ${(e instanceof Error ? e.message : String(e)).slice(0, 300)}`);
     return { ok: false, motivo: 'fallo' };
   }
 
@@ -505,7 +524,7 @@ async function llamarProveedor(
     // Solo en estos casos se prueba el siguiente de la cadena.
     // Log: registra el status y el proveedor para identificar modelos EOL
     const textoError = await res.text().catch(() => 'sin cuerpo');
-    console.error(`[${proveedor.nombre.toUpperCase()}] ${res.status} con ${proveedor.modelo}: ${textoError.slice(0, 200)}`);
+    console.error(`${etiqueta} status ${res.status} en ${Date.now() - inicio} ms: ${textoError.slice(0, 300)}`);
     if (res.status === 400 || res.status === 404 || res.status === 410) {
       return { ok: false, motivo: 'no-servible' };
     }
@@ -532,10 +551,11 @@ async function llamarProveedor(
     // `content` vacío. O el modelo no respondió, o es uno de razonamiento que
     // deja el texto en `reasoning_content`: con 350 tokens de salida ese canal
     // no cabe, así que el plan B es la respuesta.
-    console.error(`[${proveedor.nombre.toUpperCase()}] ${proveedor.modelo} devolvió content vacío`);
+    console.error(`${etiqueta} status ${res.status}: content vacío (finish_reason ${eleccion?.finish_reason ?? '-'})`);
     return { ok: false, motivo: 'fallo' };
   }
 
+  console.log(`${etiqueta} status ${res.status} ok en ${Date.now() - inicio} ms`);
   let cruda = contenido;
   if (eleccion?.finish_reason === 'length') {
     // Cortada por el tope de tokens: se recorta al último final de frase, para
@@ -716,6 +736,7 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
         nombre: 'nim',
         baseUrl: NIM_BASE,
         modelo: process.env.NIM_MODEL_ID,
+        timeoutMs: TIMEOUT_NIM_MS,
         temperature: 0.2,
         topP: 0.95,
         headers: (clave: string) => ({
@@ -728,6 +749,7 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
     cadena = PROVEEDORES;
   }
 
+  const inicioCadena = Date.now();
   for (const proveedor of cadena) {
     // Obtener la clave correspondiente al proveedor
     let claveProveedor: string | undefined;
@@ -748,7 +770,18 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
       continue;
     }
     
-    const r = await llamarProveedor(proveedor, claveProveedor, contexto, pregunta);
+    const queda = PRESUPUESTO_CADENA_MS - (Date.now() - inicioCadena);
+    if (queda < 3_000) {
+      console.error(`[chat] sin tiempo para ${proveedor.nombre} (quedan ${queda} ms)`);
+      break;
+    }
+    const r = await llamarProveedor(
+      proveedor,
+      claveProveedor,
+      contexto,
+      pregunta,
+      Math.min(proveedor.timeoutMs, queda),
+    );
     if (r.ok) {
       const { texto: respuesta, fuentes: usadas } = ajustarCitas(r.texto, fuentes.length);
       return NextResponse.json({
@@ -760,8 +793,11 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
     // Solo un identificador no servible pasa al siguiente proveedor. Un timeout o
     // un 5xx van al plan B: encadenar después de un timeout duplicaría la
     // espera y no cabe en los 60 s de la función.
-    if (r.motivo === 'no-servible') continue;
-    break;
+    // 21-10-2026: cualquier fallo (timeout, 4xx, 5xx, vacío) pasa al
+    // siguiente proveedor. Antes solo 400/404/410 lo hacían, y un fallo del
+    // primero (Mistral) dejaba sin probar a NIM y OpenRouter. El tope por
+    // proveedor y el presupuesto total mantienen la cadena dentro de 60 s.
+    continue;
   }
 
   // Plan B: el modelo no está, pero el texto recuperado sí. Se responde con

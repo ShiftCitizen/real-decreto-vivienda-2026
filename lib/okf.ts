@@ -74,6 +74,13 @@ export type Evidencia = {
  */
 const MAX_FICHERS = 4;
 
+/** Raíces afines (ver `seleccionar`). Clave y valores pasan por `raiz()`. */
+const AFINES_CRUDO: Record<string, string[]> = {
+  impago: ['deuda', 'renta', 'pagar'],
+  impagos: ['deuda', 'renta', 'pagar'],
+};
+const AFINES: Record<string, string[]> = {};
+
 /**
  * Puntuación mínima para considerar que un fichero es el del tema.
  *
@@ -145,7 +152,7 @@ const PESO_CUERPO = 1;
  * `df-5-y-df-6.md`, a 3 400 caracteres, y se perdía siempre. Aquí se eligen
  * **bloques** y luego se recorta, que es otra cosa.
  */
-const TOPE_FICHERO = 1500;
+const TOPE_FICHERO = 2400;
 
 /**
  * Los dos ficheros que viajan siempre con cualquier respuesta sustantiva.
@@ -557,7 +564,10 @@ function bloquesDeFichero(
   };
   const candidatos = i.bloques
     .map((b, n) => ({ n, b, p: puntua(b) }))
-    .filter((c) => c.p > 0);
+    .filter((c) => c.p > 0)
+    // Los que más puntúan, primero: si el hueco se acaba, que se acabe con
+    // los bloques que menos tienen que ver con la pregunta.
+    .sort((a, b) => b.p - a.p || a.n - b.n);
 
   const elegidos = new Set<number>();
   if (i.estado) elegidos.add(i.bloques.indexOf(i.estado));
@@ -570,33 +580,42 @@ function bloquesDeFichero(
 
   const previos = encabezadosPrevios(i.bloques);
   const montados = new Set<number>();
-  let texto = '';
-  for (const n of [...elegidos].sort((a, b) => a - b)) {
+  // Se rellena el hueco por prioridad (estado, resumen, y luego los bloques
+  // que más puntúan), pero se monta en el orden del fichero. Rellenarlo en el
+  // orden del fichero dejaba fuera un bloque muy pertinente del final —p. ej.
+  // «la suspensión no cancela la deuda de renta»— porque los primeros ya
+  // habían gastado el hueco.
+  const piezas = new Map<number, string>();
+  let largo = 0;
+  for (const n of elegidos) {
     const b = i.bloques[n];
     if (!b) continue;
-    // Hueco que queda, descontando el salto de línea del separador.
-    const hueco = TOPE_FICHERO - texto.length - (texto ? 1 : 0);
+    const hueco = TOPE_FICHERO - largo - (largo ? 1 : 0);
     if (hueco <= 0) break;
-    // El rótulo de la sección se pega a su bloque, y solo una vez.
     const h = previos[n];
     const rotulo = h >= 0 && !montados.has(h) ? i.bloques[h].texto : null;
     const cabecera = rotulo ? `${rotulo}\n` : '';
+    let pieza: string | null = null;
     if (cabecera.length + b.texto.length <= hueco) {
-      texto += (texto ? '\n' : '') + cabecera + b.texto;
-      if (h >= 0) montados.add(h);
-      montados.add(n);
-      continue;
+      pieza = cabecera + b.texto;
+    } else {
+      // No cabe entero: se recorta por frase en el hueco que queda, en vez de
+      // descartarlo. Descartarlo era lo que hacía desaparecer el Apartado 2.
+      const huecoCuerpo = hueco - cabecera.length;
+      if (huecoCuerpo < MIN_FRAGMENTO) continue;
+      const trozo = porFraseEstricto(b.texto, huecoCuerpo);
+      if (trozo === null || trozo.length < MIN_FRAGMENTO) continue;
+      pieza = cabecera + trozo;
     }
-    // No cabe entero: se recorta por frase en el hueco que queda, en vez de
-    // descartarlo. Descartarlo era lo que hacía desaparecer el Apartado 2.
-    const huecoCuerpo = hueco - cabecera.length;
-    if (huecoCuerpo < MIN_FRAGMENTO) continue;
-    const trozo = porFraseEstricto(b.texto, huecoCuerpo);
-    if (trozo === null || trozo.length < MIN_FRAGMENTO) continue;
-    texto += (texto ? '\n' : '') + cabecera + trozo;
+    piezas.set(n, pieza);
+    largo += pieza.length + (largo ? 1 : 0);
     if (h >= 0) montados.add(h);
     montados.add(n);
   }
+  let texto = [...piezas.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([, t]) => t)
+    .join('\n');
   // Si el estado se ha quedado fuera por el tope, entra igualmente: es corto y
   // es la parte que no puede faltar.
   if (i.estado && !montados.has(i.bloques.indexOf(i.estado))) {
@@ -795,6 +814,11 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
 
   const unicas = [...new Set(palabrasDeConsulta(pregunta).map(raiz))];
   if (unicas.length === 0) return null;
+  // Raíces afines para elegir bloques dentro de un fichero ya elegido: quien
+  // pregunta por el «impago» necesita el bloque que dice qué pasa con la deuda
+  // de renta, aunque no repita la palabra. Solo afecta a qué bloques entran,
+  // no a qué ficheros se eligen.
+  const afines = [...new Set([...unicas, ...unicas.flatMap((r) => (AFINES[r] ?? []).map(raiz))])];
 
   const porRuta = new Map(indexados.map((i) => [i.fichero.ruta, i] as const));
   const global = puntuarFicheros(pregunta, tabla);
@@ -839,12 +863,33 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
   for (const c of elegido.values()) {
     const i = porRuta.get(c.ruta);
     if (!i) continue;
-    const texto = bloquesDeFichero(i, unicas, indice);
+    const texto = bloquesDeFichero(i, afines, indice);
     if (texto.length === 0) continue;
     fuentes.push({ titulo: c.titulo, href: c.href, texto });
   }
 
   if (fuentes.length === 0) return null;
+
+  // Remisiones: si un fichero elegido remite a un artículo que tiene su propio
+  // fichero (p. ej. el art. 2.2 remite a la «enervación extraordinaria del
+  // art. 5.Dos RDL 29/2026»), ese fichero entra también, si queda hueco. Sin
+  // él, el modelo ve la remisión pero no el procedimiento al que remite.
+  for (const rutaElegida of [...elegido.keys()]) {
+    if (fuentes.length >= MAX_FICHERS) break;
+    const cuerpo = tabla.ficheros.find((x) => x.ruta === rutaElegida)?.cuerpo ?? '';
+    for (const otro of tabla.ficheros) {
+      if (fuentes.length >= MAX_FICHERS) break;
+      if (elegido.has(otro.ruta) || SIEMPRE.includes(otro.ruta)) continue;
+      const art = /\(art\. ([0-9]+\.[A-Za-zÁÉÍÓÚáéíóú]+) RDL 29\/2026/.exec(otro.titulo);
+      if (!art || !cuerpo.includes(`art. ${art[1]} RDL 29/2026`)) continue;
+      const io = porRuta.get(otro.ruta);
+      if (!io) continue;
+      const t = bloquesDeFichero(io, afines, indice);
+      if (t.length === 0) continue;
+      elegido.set(otro.ruta, { ruta: otro.ruta } as Candidato);
+      fuentes.push({ titulo: otro.titulo, href: otro.href, texto: t });
+    }
+  }
 
   for (const ruta of SIEMPRE) {
     const f = tabla.ficheros.find((x) => x.ruta === ruta);
@@ -887,3 +932,5 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
 
   return fuentes;
 }
+
+for (const [k, v] of Object.entries(AFINES_CRUDO)) AFINES[raiz(k)] = v;
