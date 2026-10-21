@@ -130,7 +130,7 @@ export default function NormasPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 1 de octubre de 2026.{' '}
+        Última revisión: 21 de octubre de 2026.{' '}
         <Link href="/">Volver al resumen</Link>
       </p>
     </>

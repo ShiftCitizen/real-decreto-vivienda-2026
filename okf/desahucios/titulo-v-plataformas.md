@@ -51,7 +51,7 @@ Las multas pueden incrementarse en atención a la gravedad y trascendencia del h
 
 Para el arrendador, el régimen sancionador no es lo peor. Si alquila como turismo, lo que le afecta es fiscal: la salida de la exención del IVA para arrendamientos amueblados con servicios propios de hostelería o cuando la duración a favor de un mismo arrendatario no supere las 30 noches, salvo que la vivienda sea la residencia habitual del arrendador, desde el 1 de diciembre de 2026, y el recargo de IBI de hasta el 150 % en zona tensionada. Ver la parte fiscal .
 
-Última revisión: 1 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266 y BOE-A-2026-20385 .
+Última revisión: 21 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266, BOE-A-2026-20385, BOE-A-2026-20823 y BOE-A-2026-20822.
 
 ## Véase
 

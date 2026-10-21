@@ -75,25 +75,22 @@ export const maxDuration = 60;
 /**
  * Los modelos que se prueban, en orden.
  *
- * `nemotron-3.5-lightning-30b-a3b` son 30 000 millones de parámetros con 3 000
- * activos: es más rápido que el Llama 3.2 11B que se usaba antes, y solo
- * texto. La temperatura 1,0 con `topP` 0,95 es lo que recomienda su ficha;
- * `gemma-3-12b-it` es el segundo, con temperatura 0,6 por ser un modelo de
- * instrucciones.
+ * Cadena actualizada 21-10-2026: Mistral primero, luego Nemotron, luego Llama,
+ * luego Gemma. Mistralai suele ser el más estable en NIM. La temperatura 0.6
+ * con `topP` 0.95 es un buen equilibrio entre creatividad y determinismo para
+ * este caso de uso.
  *
  * El orden importa: el failover solo se usa cuando el anterior no es
  * servible, así que la primera entrada es la que responde en el caso normal.
  *
- * Cadena actualizada 21-10-2026: se añaden modelos adicionales para mejorar la
- * resiliencia ante retiros de identificadores. NIM retira ids con frecuencia,
- * así que una cadena más larga aumenta las probabilidades de que al menos uno
- * esté disponible.
+ * NIM retira ids con frecuencia, así que una cadena de cuatro modelos aumenta
+ * las probabilidades de que al menos uno esté disponible.
  */
 const CADENA_MODELOS: Modelo[] = [
-  { id: 'nvidia/nemotron-3.5-lightning-30b-a3b', temperature: 1.0, topP: 0.95 },
-  { id: 'google/gemma-3-12b-it', temperature: 0.6, topP: 0.95 },
-  { id: 'meta/llama-3.3-70b-instruct', temperature: 0.6, topP: 0.95 },
   { id: 'mistralai/mistral-large-3-675b-instruct-2512', temperature: 0.6, topP: 0.95 },
+  { id: 'nvidia/nemotron-3.5-lightning-30b-a3b', temperature: 1.0, topP: 0.95 },
+  { id: 'meta/llama-3.3-70b-instruct', temperature: 0.6, topP: 0.95 },
+  { id: 'google/gemma-3-12b-it', temperature: 0.6, topP: 0.95 },
 ];
 
 type Modelo = { id: string; temperature: number; topP: number };

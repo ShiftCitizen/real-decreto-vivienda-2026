@@ -902,7 +902,7 @@ export default function DesahuciosPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 1 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

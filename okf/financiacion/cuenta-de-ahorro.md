@@ -40,7 +40,7 @@ El art. 20 RDL 26/2026 modifica la Ley de los Mercados de Valores: añade un art
 
 Cesiones de crédito: una protección que no estaba en el análisis anterior. La DF 1.ª añade un artículo 25 bis a la Ley 5/2019 de contratos de crédito inmobiliario. Dos reglas importan: queda prohibida la cesión de préstamos hipotecarios vencidos cuyo deudor esté acogido a las medidas del RDL 6/2012 , y cuando se ceda un crédito vencido garantizado por hipoteca sobre la vivienda habitual, la comunicación debe informar al deudor de la posibilidad de acogerse a esas medidas; si el deudor lo acredita dentro de los seis meses siguientes a la comunicación de la cesión, el cedente debe readquirir el préstamo por el mismo precio y ofrecer las medidas solicitadas, salvo que sea el propio cedente quien las ofrezca. art. 25 bis Ley 5/2019 Y se aplica a las cesiones realizadas después de la entrada en vigor , cualquiera que sea la fecha en que se hubiera celebrado el contrato. disposición final undécima.2 RDL 26/2026
 
-Última revisión: 1 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266 y BOE-A-2026-20385 .
+Última revisión: 21 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266, BOE-A-2026-20385, BOE-A-2026-20823 y BOE-A-2026-20822.
 
 ## Véase
 
