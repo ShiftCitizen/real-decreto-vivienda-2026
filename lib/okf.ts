@@ -35,7 +35,7 @@
  *  el bundle no hace es condensar, que es justo lo que separaba un corpus del
  *  curso de este.
  */
-import { normalizar, palabrasDeConsulta, raiz } from './busqueda';
+import { esSaludo, normalizar, palabrasDeConsulta, raiz } from './busqueda';
 
 export type FicheroOkf = {
   /** Ruta dentro de `okf/`. Nunca se cita: el usuario no puede abrirla. */
@@ -209,6 +209,34 @@ function porFrase(texto: string, tope: number): string {
   const corte = texto.lastIndexOf('. ', tope);
   return corte > 0 ? texto.slice(0, corte + 1) : texto.slice(0, tope);
 }
+
+/**
+ * Recorta un texto por su último final de frase, o `null` si no hay ninguno.
+ *
+ * `porFrase()` corta a la fuerza cuando no encuentra un punto, y eso deja al
+ * modelo media frase. Aquí la diferencia es que quien recorta decide: si en
+ * el hueco no hay ningún final de frase, **no se recorta nada** y el bloque
+ * entero se salta. Es lo que evita que entre un fragmento de treinta
+ * caracteres a media palabra.
+ */
+function porFraseEstricto(texto: string, tope: number): string | null {
+  if (texto.length <= tope) return texto;
+  // `tope - 1` y no `tope`: el corte tiene que caber **entero** en el hueco.
+  const corte = texto.lastIndexOf('. ', tope - 1);
+  if (corte <= 0) return null;
+  return texto.slice(0, corte + 1);
+}
+
+/**
+ * Fragmento mínimo de un bloque recortado.
+ *
+ * Por debajo, el bloque no entra: un trozo de treinta caracteres a media
+ * palabra no informa al modelo de nada y desplaza a lo que sí lo hace.
+ */
+const MIN_FRAGMENTO = 100;
+
+/** Un bloque es un encabezado de sección si empieza por «##» a «####». */
+const ENCABEZADO = /^#{2,4}\s/;
 
 // --- Índice de un solo vistazo ------------------------------------------------
 
@@ -474,6 +502,24 @@ function peso(indice: IndiceOkf, raizPregunta: string): number {
 }
 
 /**
+ * El encabezado de sección que precede a cada bloque.
+ *
+ * El bundle conserva los encabezados como bloques propios, así que un cuerpo
+ * puede no decir a qué régimen pertenece. Sin el rótulo, el modelo lee
+ * «Solo si no opera la enervación extraordinaria…» sin saber si es el Apartado
+ * 1 o el Apartado 2.
+ */
+function encabezadosPrevios(bloques: Bloque[]): number[] {
+  const previos: number[] = [];
+  let ultimo = -1;
+  for (let n = 0; n < bloques.length; n += 1) {
+    previos[n] = ultimo;
+    if (ENCABEZADO.test(bloques[n].texto)) ultimo = n;
+  }
+  return previos;
+}
+
+/**
  * Los bloques de un fichero que se le pasan al modelo.
  *
  * Tres reglas, y las tres están medidas:
@@ -481,12 +527,23 @@ function peso(indice: IndiceOkf, raizPregunta: string): number {
  * 1. **El bloque de estado entra siempre**, aunque la pregunta no lo mencione.
  *    Es lo que hace que la respuesta diga qué ha pasado con la medida sin
  *    depender de que el modelo se acuerde.
- * 2. **Los bloques que encajan, con su vecino de arriba.** Una medida y su
+ * 2. **Los bloques que encajan, con su encabezado de sección.** Una medida y su
  *    condición suelen estar en párrafos contiguos; quedarse con la frase suelta
- *    es cómo se pierde «con renta inferior a la del programa estatal».
- * 3. **Se ordena por puntación dentro del tope**, y se vuelve al orden del
- *    documento para leer. Puntuado y reordenado, un bloque de 900 caracteres
- *    come el hueco y el resto no llega nunca.
+ *    es cómo se pierde «con renta inferior a la del programa estatal». Y el
+ *    rótulo de la sección («### Apartado 2: resto de demandantes») es lo que
+ *    dice que lo que sigue es un régimen distinto del de arriba.
+ * 3. **Se monta en orden de documento y se recorta, no se descarta.** Un bloque
+ *    que no cabe entero se recorta por su último final de frase en el hueco que
+ *    queda. Descartarlo era el defecto medido que motivó todo esto: en el art.
+ *    2 del RDL 26/2026, el Apartado 2 pedía 1 607 caracteres de un tope de
+ *    1 500 y se saltaba entero, así que el modelo recibía el Apartado 1 y
+ *    contestaba sobre el demandante especulativo en vez de sobre el inquilino
+ *    vulnerable.
+ *
+ * Los candidatos se eligen **en orden de documento**, no por puntuación: se
+ * montan los seis primeros que encajan con la pregunta. Puntuarlos y montar
+ * solo los mejores era la regla que el comentario anunciaba y el código no
+ * cumplía.
  */
 function bloquesDeFichero(
   i: FicheroIndexado,
@@ -509,19 +566,40 @@ function bloquesDeFichero(
   for (const c of candidatos) {
     if (elegidos.size >= 6) break;
     elegidos.add(c.n);
-    if (elegidos.has(c.n + 1)) elegidos.add(c.n + 1);
   }
 
+  const previos = encabezadosPrevios(i.bloques);
+  const montados = new Set<number>();
   let texto = '';
   for (const n of [...elegidos].sort((a, b) => a - b)) {
     const b = i.bloques[n];
     if (!b) continue;
-    if (texto.length + b.texto.length > TOPE_FICHERO) continue;
-    texto += (texto ? '\n' : '') + b.texto;
+    // Hueco que queda, descontando el salto de línea del separador.
+    const hueco = TOPE_FICHERO - texto.length - (texto ? 1 : 0);
+    if (hueco <= 0) break;
+    // El rótulo de la sección se pega a su bloque, y solo una vez.
+    const h = previos[n];
+    const rotulo = h >= 0 && !montados.has(h) ? i.bloques[h].texto : null;
+    const cabecera = rotulo ? `${rotulo}\n` : '';
+    if (cabecera.length + b.texto.length <= hueco) {
+      texto += (texto ? '\n' : '') + cabecera + b.texto;
+      if (h >= 0) montados.add(h);
+      montados.add(n);
+      continue;
+    }
+    // No cabe entero: se recorta por frase en el hueco que queda, en vez de
+    // descartarlo. Descartarlo era lo que hacía desaparecer el Apartado 2.
+    const huecoCuerpo = hueco - cabecera.length;
+    if (huecoCuerpo < MIN_FRAGMENTO) continue;
+    const trozo = porFraseEstricto(b.texto, huecoCuerpo);
+    if (trozo === null || trozo.length < MIN_FRAGMENTO) continue;
+    texto += (texto ? '\n' : '') + cabecera + trozo;
+    if (h >= 0) montados.add(h);
+    montados.add(n);
   }
   // Si el estado se ha quedado fuera por el tope, entra igualmente: es corto y
   // es la parte que no puede faltar.
-  if (i.estado && !texto.includes(i.estado.texto)) {
+  if (i.estado && !montados.has(i.bloques.indexOf(i.estado))) {
     texto = `${i.estado.texto}\n${texto}`.slice(0, TOPE_FICHERO);
   }
   return texto.trim();
@@ -707,6 +785,11 @@ function partesDe(pregunta: string): string[] {
  * pregunta de una parte se comporta exactamente igual que antes.
  */
 export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | null {
+  // Un saludo no es una pregunta del análisis. Se comprueba antes que nada
+  // porque puntúa: «hola, buenos días» sacaba las raíces «buen» y «dias» y
+  // llegaba al modelo, que contestaba con la cita equivocada.
+  if (esSaludo(pregunta)) return null;
+
   const indice = construir(tabla);
   const { indexados } = indice;
 

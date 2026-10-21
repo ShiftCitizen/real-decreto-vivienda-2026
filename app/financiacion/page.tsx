@@ -49,6 +49,17 @@ export default function FinanciacionPage() {
 
       <AvisoEstado />
 
+      <div className="box">
+        <strong>Cómo está organizada esta página.</strong>
+        <p>
+          «Parque público (arts. 11 a 14)», «Avales y TU CASA (arts. 15 a 19)», «El mecanismo TU
+          CASA (art. 19 RDL 26/2026)» y «Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL
+          26/2026)» describen lo que contenía el <span className="tono-rdl26">RDL 26/2026</span> y
+          lo que reproduce ahora el <span className="tono-rdl29">RDL 29/2026</span>, en vigor desde
+          el 8-10-2026 y pendiente de convalidación. Cada referencia lleva la etiqueta de su norma.
+        </p>
+      </div>
+
       <div className="box warn">
         <strong>Dos líneas de avales, no una.</strong>
         <p>

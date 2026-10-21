@@ -4,7 +4,28 @@ import { useEffect, useRef, useState } from 'react';
 
 type Cita = { titulo: string; href: string };
 
-type Estado = { tipo: 'vacio' } | { tipo: 'cargando' } | { tipo: 'ok'; respuesta: string; citas: Cita[] } | { tipo: 'error'; mensaje: string };
+/**
+ * De dónde sale la respuesta.
+ *
+ * La widget dice la verdad: `publicado` son frases ya escritas en las páginas,
+ * `modelo` es la síntesis del modelo, y `texto` es el análisis tal cual, que
+ * es lo que se devuelve cuando el proveedor no contesta. Antes el pie decía
+ * siempre «Respuesta generada con IA», incluso en el camino `publicado`, que
+ * no usa ningún modelo.
+ */
+type Origen = 'publicado' | 'modelo' | 'texto';
+
+type Estado =
+  | { tipo: 'vacio' }
+  | { tipo: 'cargando' }
+  | { tipo: 'ok'; respuesta: string; citas: Cita[]; origen?: Origen }
+  | { tipo: 'error'; mensaje: string };
+
+const NOTA: Record<Origen, string> = {
+  publicado: 'Frases publicadas en el sitio; no es asesoramiento jurídico.',
+  modelo: 'Respuesta generada con IA a partir del análisis; no es asesoramiento jurídico.',
+  texto: 'Texto del análisis, sin respuesta del modelo: el proveedor no ha contestado. No es asesoramiento jurídico.',
+};
 
 /**
  * Asistente del sitio: una pregunta suelta por vez, respondida por el
@@ -53,13 +74,38 @@ export default function ChatWidget() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pregunta: texto }),
       });
-      const datos = (await res.json()) as { respuesta?: string; citas?: Cita[]; error?: string };
+      // El cuerpo se lee como texto y se convierte después, con un plan B.
+      // Antes era `await res.json()` a pelo: un 500 con cuerpo vacío —que es
+      // lo que devolvía un fallo del proveedor— producía un `SyntaxError`
+      // que el `catch` traducía como «No hay conexión con el asistente». El
+      // diagnóstico era falso: la red estaba bien.
+      const crudo = await res.text();
+      let datos: {
+        respuesta?: string;
+        citas?: Cita[];
+        error?: string;
+        origen?: Origen;
+      } = {};
+      try {
+        datos = crudo ? (JSON.parse(crudo) as typeof datos) : {};
+      } catch {
+        datos = {};
+      }
       if (!res.ok) {
-        setEstado({ tipo: 'error', mensaje: datos.error ?? 'No se pudo responder.' });
+        setEstado({
+          tipo: 'error',
+          mensaje: datos.error ?? `El asistente devolvió un error (${res.status}).`,
+        });
         return;
       }
-      setEstado({ tipo: 'ok', respuesta: datos.respuesta ?? '', citas: datos.citas ?? [] });
+      setEstado({
+        tipo: 'ok',
+        respuesta: datos.respuesta ?? '',
+        citas: datos.citas ?? [],
+        origen: datos.origen,
+      });
     } catch {
+      // Aquí sí: la petición no llegó al servidor.
       setEstado({ tipo: 'error', mensaje: 'No hay conexión con el asistente.' });
     }
   };
@@ -106,7 +152,14 @@ export default function ChatWidget() {
           </form>
 
           {estado.tipo === 'cargando' && <p className="chat-estado">Buscando en el análisis…</p>}
-          {estado.tipo === 'error' && <p className="chat-error">{estado.mensaje}</p>}
+          {estado.tipo === 'error' && (
+            <div className="chat-error-bloque">
+              <p className="chat-error">{estado.mensaje}</p>
+              <button type="button" className="chat-reintentar" onClick={() => void preguntar()}>
+                Reintentar
+              </button>
+            </div>
+          )}
           {estado.tipo === 'ok' && (
             <div className="chat-respuesta">
               {estado.respuesta
@@ -125,7 +178,7 @@ export default function ChatWidget() {
                 </ul>
               )}
               <p className="chat-aviso">
-                Respuesta generada con IA a partir del análisis; no es asesoramiento jurídico.
+                {estado.origen ? NOTA[estado.origen] : 'No es asesoramiento jurídico.'}
               </p>
             </div>
           )}

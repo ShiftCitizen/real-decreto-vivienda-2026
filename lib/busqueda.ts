@@ -171,6 +171,51 @@ const VACIAS = new Set([
   'tales',
   'les',
   'nos',
+  // Saludos y cortesía: no son de contenido, pero tampoco basta con quitar
+  // «hola» de la lista. Medido: «hola, buenos días» llegaba al modelo con las
+  // raíces «buen» y «dias», y contestaba con la cita equivocada; quitar
+  // solo «hola» y «buenos» tampoco bastaba, porque `buscar(indice, 'dias')`
+  // devuelve ocho entradas y la ruta caía al camino de `buscar()` con la
+  // cronología. Por eso los saludos van también en `SALUDOS`, con
+  // `esSaludo()` como predicado de «la pregunta entera es un saludo».
+  'hola',
+  'buenos',
+  'buenas',
+  'gracias',
+  'saludos',
+  'adios',
+]);
+
+/**
+ * Fórmulas de cortesía que no preguntan nada.
+ *
+ * Van aparte de `VACIAS` porque aquí no se descartan: se usan para **cerrar**
+ * la pregunta. «hola, buenos días» tiene palabras que no son de cortesía
+ * («días»), así que `VACIAS` no la vacía; lo que la identifica es que todas
+ * sus palabras son de cortesía o vacías.
+ *
+ * Deliberadamente corto y cerrado: una lista de sinónimos del vocabulario del
+ * sitio es justo lo que este trabajo no quiere, y aquí menos todavía, porque
+ * un saludo es un conjunto cerrado de fórmulas.
+ */
+const SALUDOS = new Set([
+  'hola',
+  'buenos',
+  'buenas',
+  'buen',
+  'buena',
+  'dias',
+  'tardes',
+  'noches',
+  'saludos',
+  'gracias',
+  'adios',
+  'hasta',
+  'luego',
+  'tal',
+  'bien',
+  'ola',
+  'hey',
 ]);
 
 /**
@@ -268,6 +313,42 @@ function frecuencia(entradas: EntradaIndice[], raizBuscada: string): number {
  */
 export function palabrasDeConsulta(consulta: string): string[] {
   return tokenizar(consulta).filter((w) => w.length >= 3 && !VACIAS.has(w) && !/^\d+$/.test(w));
+}
+
+/**
+ * ¿La consulta es un saludo y nada más?
+ *
+ * =====================================================
+ *  POR QUÉ HACE FALTA UN PREDICADO Y NO SOLO `VACIAS`
+ * =====================================================
+ *  Meter «hola» en `VACIAS` evita que un saludo contamine una pregunta real —
+ *  «hola, ¿qué pasa con el alquiler?» sigue siendo una pregunta de alquiler.
+ *  Pero no cierra el caso en que la consulta **entera** es un saludo, y ese
+ *  caso llega al modelo: medido, `seleccionar('hola, buenos días')` devolvía
+ *  evidencia no nula (raíces «buen» y «dias») y el modelo contestaba con la
+ *  cita equivocada.
+ *
+ *  Subir `PUNTUACION_MINIMA` no lo arregla: dos casos de aceptación puntúan
+ *  4,9 y el saludo 4,8, así que el saludo los supera.
+ *
+ *  La regla es deliberadamente estrecha: **todas** las palabras tienen que ser
+ *  de cortesía o vacías, y tiene que haber al menos una de cortesía. Con eso
+ *  «hola, buenos días», «gracias» y «qué tal» son saludos, y «hola, ¿qué pasa
+ *  con el alquiler?» no lo es.
+ */
+export function esSaludo(consulta: string): boolean {
+  const palabras = tokenizar(consulta);
+  if (palabras.length === 0) return false;
+  let alguno = false;
+  for (const palabra of palabras) {
+    if (SALUDOS.has(palabra)) {
+      alguno = true;
+      continue;
+    }
+    if (VACIAS.has(palabra)) continue;
+    return false;
+  }
+  return alguno;
 }
 
 const PESO_TITULO = 4;
@@ -382,6 +463,11 @@ export function buscar(
   consulta: string,
   max = 8,
 ): ResultadoBusqueda[] {
+  // Un saludo no es una búsqueda: devuelve las páginas (que es lo que hace
+  // una consulta vacía) y el modelo acabaría contestando sobre la portada.
+  // Medido: «hola, buenos días» sacaba ocho entradas del índice.
+  if (esSaludo(consulta)) return [];
+
   const aguja = normalizar(consulta.trim());
   if (!aguja) {
     return entradas
