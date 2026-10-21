@@ -83,6 +83,11 @@ export const maxDuration = 60;
  * Orden: Mistral (API directa) primero, luego NVIDIA NIM, luego OpenRouter.
  * Cada proveedor tiene su URL base y su modelo por defecto.
  *
+ * Modelos verificados (octubre 2026):
+ * - Mistral API: mistral-large-latest (alias al modelo más reciente)
+ * - NVIDIA NIM: mistralai/mistral-large-2407 (modelo actual en NIM)
+ * - OpenRouter: mistralai/mistral-large-latest
+ *
  * Variables de entorno requeridas:
  * - MISTRAL_API_KEY: para Mistral API directa
  * - NIM_API_KEY: para NVIDIA NIM
@@ -115,7 +120,7 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'nim',
     baseUrl: NIM_BASE,
-    modelo: 'mistralai/mistral-large-3-675b-instruct-2512',
+    modelo: 'mistralai/mistral-large-2407',
     temperature: 0.6,
     topP: 0.95,
     headers: (clave: string) => ({
