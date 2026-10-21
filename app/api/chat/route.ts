@@ -84,9 +84,13 @@ export const maxDuration = 60;
  * Cada proveedor tiene su URL base y su modelo por defecto.
  *
  * Modelos verificados (octubre 2026):
- * - Mistral API: mistral-large-latest (alias al modelo más reciente)
- * - NVIDIA NIM: mistralai/mistral-large-2407 (modelo actual en NIM)
- * - OpenRouter: mistralai/mistral-large-latest
+ * Usamos mistral-small-latest en todos los proveedores: es suficiente para
+ * esta tarea (respuestas cortas basadas en contexto con citas), más rápido
+ * y más económico que los modelos grandes.
+ *
+ * - Mistral API: mistral-small-latest
+ * - NVIDIA NIM: mistralai/mistral-small-latest
+ * - OpenRouter: mistralai/mistral-small-latest
  *
  * Variables de entorno requeridas:
  * - MISTRAL_API_KEY: para Mistral API directa
@@ -109,7 +113,7 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'mistral',
     baseUrl: MISTRAL_BASE,
-    modelo: 'mistral-large-latest',
+    modelo: 'mistral-small-latest',
     temperature: 0.6,
     topP: 0.95,
     headers: (clave: string) => ({
@@ -120,7 +124,7 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'nim',
     baseUrl: NIM_BASE,
-    modelo: 'mistralai/mistral-large-2407',
+    modelo: 'mistralai/mistral-small-latest',
     temperature: 0.6,
     topP: 0.95,
     headers: (clave: string) => ({
@@ -131,7 +135,7 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'openrouter',
     baseUrl: OPENROUTER_BASE,
-    modelo: 'mistralai/mistral-large-latest',
+    modelo: 'mistralai/mistral-small-latest',
     temperature: 0.6,
     topP: 0.95,
     headers: (clave: string) => ({
