@@ -177,7 +177,7 @@ const TIMEOUT_NIM_MS = 35_000;
 const PRESUPUESTO_CADENA_MS = 50_000;
 
 const MAX_PREGUNTA = 500;
-const MAX_TOKENS_SALIDA = 350;
+const MAX_TOKENS_SALIDA = 550; // 21-10-2026: cabe explicar dos procedimientos con su estado
 const CUOTA_MAX = 10;
 const CUOTA_VENTANA_MS = 60 * 60 * 1000;
 /** Cada cuántas peticiones se barren las IP caducadas. */
@@ -245,11 +245,23 @@ const SISTEMA = [
   'REGLA 6 — Nada de sí o no sobre la posición de una persona.',
   'Ante una pregunta sobre el contrato, el impago, los impuestos o la retención de la renta de alguien concreto, nunca respondas con un «sí» o un «no» secos. Explica qué dice el análisis y añade que no es asesoramiento jurídico. Aunque te pidan solo sí o no.',
   '',
+  'REGLA 6b — Estado de cada norma que cites.',
+  'Cada vez que nombres un real decreto-ley, di su estado tal como lo da el CONTEXTO (por ejemplo: en vigor desde tal fecha y pendiente de convalidación, o derogado en tal fecha). Si el CONTEXTO no da el estado, no lo inventes.',
+  '',
+  'REGLA 6c — Todos los procedimientos que respondan a la pregunta.',
+  'Si el CONTEXTO describe más de un procedimiento o mecanismo que responda a la pregunta (por ejemplo, uno remite a otro con «solo si no opera…»), explica cada uno con sus plazos, quién debe hacer qué y qué pasa si no lo hace. No te quedes solo con el primero.',
+  '',
+  'REGLA 6d — Quién actúa o paga, exactamente como dice el texto.',
+  'Atribuye cada acción, plazo, pago u obligación al sujeto que nombra el CONTEXTO (el tribunal, la administración competente, el arrendatario, el demandante…). Nunca cambies un sujeto por otro: si el texto dice que paga la administración competente, no digas que paga el tribunal.',
+  '',
+  'REGLA 6e — Cita los artículos.',
+  'Junto a cada afirmación jurídica, nombra el artículo y la norma que el CONTEXTO da para ella (por ejemplo, art. 2.2 RDL 29/2026).',
+  '',
   'REGLA 7 — Citas.',
   'Cita con su número entre corchetes, por ejemplo [1]. Cita SOLO las entradas del CONTEXTO que uses, y cita todas las que uses.',
   '',
   'REGLA 8 — Estilo.',
-  'Responde en español, en un máximo de dos o tres párrafos cortos. No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
+  'Responde en español, en un máximo de cuatro párrafos cortos. No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
 ].join('\n');
 
 // Cuota por IP en memoria del proceso. Best-effort: en serverless cada
