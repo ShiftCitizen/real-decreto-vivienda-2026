@@ -287,9 +287,15 @@ información en el contexto". That was a retrieval-cap failure, not a
 missing-content one — the bundle was complete the whole time.
 
 **Why the bundle bodies can be fed to the model here** (unlike the course
-bundle): of 606 paragraphs, list items and table cells in `okf/`, 605 appear
-unchanged in the site. That is why `okf/` is a build input rather than a
-summary to route on.
+bundle): the bundle does not condense. It was extracted from the site, and when
+the RDL 28/29 migration added the new decrees it also added the BOE articulado
+of those decrees and a one-line state note per measure. Measured against the
+built HTML, roughly half of the bundle's paragraphs, list items and table
+cells appear verbatim in a page; the rest are the BOE text, the state notes and
+the files that are not published. That is why `okf/` is a build input rather
+than a summary to route on. **Do not quote the counts**: they move with the
+content, and the numbers that matter are on the `postbuild` line of a real
+build.
 
 Three findings, each measured, that will look like arbitrary constants:
 
@@ -344,14 +350,28 @@ Both are genuine lexical near-misses, not a broken rule; closing them needs a
 hand-written synonym list of the site's vocabulary, which this work explicitly
 does not want. Everything else in the acceptance set passes.
 
-**Files.** `okf/` holds the 39 content files; `index.md` and `log.md` are
+**Files.** `okf/` holds the content files; `index.md` and `log.md` are
 converter navigation and are deliberately excluded — `index.md` contains a usage
 note addressed to whoever reads the bundle, and feeding that to the model is
 exactly the "bundle metadata is not an instruction" case. `scripts/build-okf-index.mjs`
 flattens markdown tables per row (so "Alquiler social … | 70 %" stays one unit
 and the condition stays attached to the figure), resolves each file to a live
 anchor by exact-then-containment title match, and **throws rather than writing
-a degraded table**. 37 of 39 resolve to an anchor; 2 fall back to the page.
+a degraded table**. Most files resolve to an anchor; the rest fall back to the
+page. **Do not quote the counts** — they move with the content, and the numbers
+that matter are on the `postbuild` line of a real build.
+
+**A table row is one line, and it has to stay one line.** The flattener used to
+collapse a whole table into a *single* line, because its separator regex used
+`\s*` — and `\s` matches the newline. A table therefore arrived at
+`lib/okf.ts` as one block, and `trocear()` could not split it: the four longest
+tables in the bundle were single blocks over the per-file cap, so they were
+dropped before the model ever saw them, and the chronology reached the model
+**without a single date**. The separator is now horizontal whitespace only, and
+`trocear()` recognises a row by the ` | ` between its cells (the flattener also
+strips the leading and trailing pipe, so a row no longer starts with `|`). If
+you touch either side of that, re-run `npm run check:chat` and check that a
+question about dates still brings dates.
 
 ## React gotchas in this codebase
 

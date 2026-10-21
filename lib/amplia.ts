@@ -234,7 +234,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: ESTADO,
       medida: true,
       texto:
-        'RDL 26/2026 entró en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026, pero ambos quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación. Qué medidas contenían, cuáles dependían todavía de un acuerdo ministerial u ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.',
+        'El RDL 29/2026 está en vigor desde el 8 de octubre de 2026 y el RDL 28/2026 se publicó el 7 de octubre, con entrada en vigor prevista para el 15 de noviembre. Los RDL 26/2026 y 27/2026 entraron en vigor el 1 y el 2 de octubre y quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación: sus medidas, en lo sustancial, las reproduce ahora el RDL 29/2026. Qué norma rige cada una, cuáles dependían todavía de un acuerdo ministerial u ordenanza, y las cuatro advertencias que conviene leer antes de fiarse de una cifra.',
     },
     puntos: [
       {
@@ -242,7 +242,7 @@ const PAGINAS: PaginaAmplia[] = [
         archivo: ESTADO,
         medida: true,
         texto:
-          'RDL 26/2026 entró en vigor el 1-10-2026 y RDL 27/2026 el 2-10-2026, pero ambos quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación.',
+          'Los RDL 26/2026 y 27/2026 entraron en vigor el 1 y el 2 de octubre y quedaron derogados ese mismo 2-10-2026 al rechazar el Congreso su convalidación: sus medidas, en lo sustancial, las reproduce ahora el RDL 29/2026.',
       },
       {
         titulo: 'Situación de cada medida',
@@ -250,7 +250,7 @@ const PAGINAS: PaginaAmplia[] = [
         ancla: ancla('Situación de cada medida'),
         medida: true,
         texto:
-          'La tabla resume lo que contenían los decretos; desde el 2-10-2026, tras el rechazo de la convalidación, quedaron derogados: todas figuran como Derogada.',
+          'La tabla resume la situación de cada medida hoy. Casi todas las del RDL 26/2026 y del RDL 27/2026 vuelven a regir, pero no por aquellos decretos: el RDL 29/2026, en vigor desde el 8-10-2026 y pendiente de convalidación, las reproduce, y el RDL 28/2026 hace lo propio con la prórroga indefinida y la indemnización, aunque todavía no está en vigor.',
       },
     ],
   },

@@ -1,5 +1,5 @@
 ---
-type: rule
+type: Concept
 title: "Estabilidad de los contratos de arrendamiento de vivienda habitual (RDL 28/2026)"
 description: "Prórroga obligatoria de cinco o siete años, indemnización por no renovación, prórrogas extraordinarias y régimen transitorio. Entrada en vigor: 15 de noviembre de 2026."
 tags:

@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: "Título V: régimen sancionador de las plataformas de corta duración"
-description: "Título V de la LAU (arts. 38 a 51) añadido por el RDL 26/2026: infracciones, multas y procedimiento de las plataformas de corta duración. Derogado el 2-10-2026: no se aplica."
+description: "Título V de la LAU (arts. 38 a 51) añadido por el RDL 26/2026: infracciones, multas y procedimiento de las plataformas de corta duración. Vuelve a regir por el art. 3.Veinte del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - desahucios
@@ -14,15 +14,11 @@ sources:
     title: Desahucios y alquiler
     author: human:carlos-marchena
 ---
-
 # Título V: régimen sancionador de las plataformas de corta duración
 
-El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigente por el art. 3.Veinte del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), que añade el mismo Título V a la LAU. Era del art. 3.Veinte del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026.
 
 El RDL 26/2026 añade un Título V entero a la LAU (artículos 38 a 51) para sancionar a las plataformas en línea de alquiler de corta duración por el incumplimiento de las obligaciones de suministro e intercambio de datos previstas en el Reglamento (UE) 2024/1028 ante la Ventanilla Única Digital de Arrendamientos. Es la parte del decreto que más afecta a un platform o un gestor de alquileres, y antes no estaba aquí.
 

@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Art. 1 (RDL 26/2026). Freno a la compra especulativa
-description: "Hasta el 31 de diciembre de 2028, límite de adquisición por debajo del 70 % del valor de tasación, con las exclusiones del apartado 2. Derogado el 2-10-2026: no se aplica."
+description: "Hasta el 31 de diciembre de 2028, límite de adquisición por debajo del 70 % del valor de tasación, con las exclusiones del apartado 2. Vigente por el art. 1 del RDL 29/2026 desde el 8-10-2026, con el plazo ampliado hasta el 31 de diciembre de 2030; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - desahucios
@@ -14,15 +14,11 @@ sources:
     title: Desahucios y alquiler
     author: human:carlos-marchena
 ---
-
 # Art. 1 (RDL 26/2026). Freno a la compra especulativa
 
-El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigente por el art. 1 del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), que reproduce este freno con el plazo ampliado hasta el 31 de diciembre de 2030. Era del art. 1 del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026.
 
 Hasta el 31 de diciembre de 2028, toda entidad con o sin personalidad jurídica que incluya en su objeto social la adquisición de inmuebles tiene limitada la adquisición de una vivienda, a título gratuito u oneroso, por un precio inferior al 70 % de su valor de tasación de mercado. Afecta tanto a viviendas en estado de uso como a las de edificios construidos sobre suelo de calificación residencial que cumplan los requisitos para obtener la cédula de habitabilidad, desde que dispongan de certificado de fin de obra. art. 1.1 RDL 26/2026
 

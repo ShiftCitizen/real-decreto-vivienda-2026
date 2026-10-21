@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Arts. 9 y 10 del RDL 26/2026
-description: "Gravamen especial de SOCIMI del 25 % con reducciones condicionadas, y coeficientes máximos del IIVTNU desde el 1 de diciembre de 2026. Derogado el 2-10-2026: no se aplica."
+description: "Gravamen especial de SOCIMI del 25 % con reducciones condicionadas, y coeficientes máximos del IIVTNU desde el 1 de diciembre de 2026. Vigentes por los arts. 9 y 10 del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - fiscal
@@ -14,15 +14,11 @@ sources:
     title: Fiscalidad
     author: human:carlos-marchena
 ---
-
 # Arts. 9 y 10 del RDL 26/2026
 
-El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigentes por los arts. 9 y 10 del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), que reproducen el gravamen especial y los coeficientes del IIVTNU. Eran de los arts. 9 y 10 del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026.
 
 SOCIMI: el gravamen especial pasa del 15 % general al 25 % cuando el importe de los beneficios no distribuidos derive del ejercicio de la actividad de arrendamiento de viviendas, en cualquiera de las modalidades de la LAU, o de cualquier otro arrendamiento o cesión de uso de inmuebles residenciales, incluidos los destinados a alojamiento u hospedaje, fines turísticos o de corta duración . El gravamen del 25 % se aplica solo sobre la parte de los beneficios no distribuidos que proceda de rentas que no hayan tributado al tipo general y que no se encuentren dentro del plazo de reinversión del artículo 6.1.b de la Ley 11/2009. Se devenga el día del acuerdo de aplicación del resultado por la junta general, y se autoliquida e ingresa en dos meses. art. 9.Uno RDL 26/2026 art. 9.4 Ley 11/2009
 

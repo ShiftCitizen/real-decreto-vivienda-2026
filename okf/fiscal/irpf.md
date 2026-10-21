@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Art. 6 (RDL 26/2026). IRPF
-description: "Reducciones del rendimiento por alquiler, deducción del 10 %, exención por venta a entes públicos, imputación de rentas y vivienda habitual. Derogado el 2-10-2026: no se aplica."
+description: "Reducciones del rendimiento por alquiler, deducción del 10 %, exención por venta a entes públicos, imputación de rentas y vivienda habitual. Vigente por el art. 6 del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - fiscal
@@ -14,15 +14,11 @@ sources:
     title: Fiscalidad
     author: human:carlos-marchena
 ---
-
 # Art. 6 (RDL 26/2026). IRPF
 
-El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigente por el art. 6 del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), que reproduce estas reglas de IRPF. Eran del art. 6 del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía nuevas reducciones en el IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI por vivienda desocupada y alojamientos turísticos, y el gravamen especial de las SOCIMI (Título II). El decreto fue derogado el 2-10-2026.
 
 ### Reducción del rendimiento por alquiler de vivienda
 

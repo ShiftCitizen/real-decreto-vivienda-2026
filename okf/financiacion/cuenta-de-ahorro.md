@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: Cuenta de Ahorro e Inversión Financia Europa (art. 20 del RDL 26/2026)
-description: "Cuenta y SIALP Financia Europa, Registro de IIC Elegibles, órdenes ministeriales pendientes en el texto y cesiones de crédito del art. 25 bis de la Ley 5/2019. Derogado el 2-10-2026: no se aplica."
+description: "Cuenta y SIALP Financia Europa, Registro de IIC Elegibles, órdenes ministeriales pendientes en el texto y cesiones de crédito del art. 25 bis de la Ley 5/2019. Vigente por el título VI del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - financiacion
@@ -14,15 +14,11 @@ sources:
     title: Financiación y cuenta
     author: human:carlos-marchena
 ---
-
 # Cuenta de Ahorro e Inversión Financia Europa (art. 20 del RDL 26/2026)
 
-El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI). El decreto fue derogado el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigente por el título VI del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación), aunque la comercialización sigue condicionada a la orden ministerial. Era del art. 20 del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía movilización de parque público, dos líneas de avales por 2.000 M€ y 280 M€, el préstamo TU CASA al 0 % y la nueva Cuenta de Ahorro e Inversión Financia Europa (Títulos III a VI). El decreto fue derogado el 2-10-2026.
 
 El art. 20 RDL 26/2026 modifica la Ley de los Mercados de Valores: añade un artículo 309 bis y un título XI (artículos 341 a 356) del LMV con la cuenta y los requisitos de las IIC elegibles, y las disposiciones adicionales décima y decimoprimera.
 

@@ -25,10 +25,15 @@
  *
  *  Y el cuerpo del bundle sí llega al modelo, al contrario que en el bundle del
  *  curso `curso-digitalizacion-2026`: allí los ficheros eran resúmenes con
- *  pérdidas y solo se usaban para elegir módulo. Aquí, de 606 párrafos, listas y
- *  celdas, 605 aparecen sin cambios en los cuerpos del bundle. Esa diferencia
- *  está medida por comparación fichero a fichero y es la razón de que una cosa
- *  sea aceptable y la otra no.
+ *  pérdidas y solo se usaban para elegir módulo. Aquí, de 1 047 unidades de
+ *  texto del bundle —párrafos, elementos de lista y celdas de tabla— 492
+ *  aparecen literalmente en alguna página del sitio construido (medido en
+ *  octubre de 2026, comparando el HTML construido con el cuerpo de cada
+ *  fichero). Las que no aparecen no son resúmenes: son el articulado del BOE
+ *  de los decretos nuevos (`rdl29/`, `rdl28/`), la frase de estado que lleva
+ *  cada medida y los ficheros que no se publican, como la comparación. Lo que
+ *  el bundle no hace es condensar, que es justo lo que separaba un corpus del
+ *  curso de este.
  */
 import { normalizar, palabrasDeConsulta, raiz } from './busqueda';
 
@@ -73,7 +78,8 @@ const MAX_FICHERS = 4;
  * Puntuación mínima para considerar que un fichero es el del tema.
  *
  * Con el factor de rareza de abajo, una raíz que solo aparece en un fichero vale
- * `log(1 + 39) ≈ 3,7` y otra que aparece en quince vale `1,0`. El suelo está por
+ * `log(1 + N)`, con N el número de ficheros del bundle (46 en octubre de 2026),
+ * y otra que aparece en quince vale `1,0`. El suelo está por
  * debajo de una coincidencia fuerte y por encima de una suelta, porque una
  * suelta sola no basta: se llega con dos raíces, o con una que sea **nombre de
  * un tema del sitio** («Desahucio», «IBI», «IVA», «Enervación»).
@@ -146,13 +152,63 @@ const TOPE_FICHERO = 1500;
  *
  * No por decoración: el requisito es que la respuesta lleve el estado de la
  * medida y no diga que los decretos nunca entraron en vigor. Solo estos dos
- * sitios del sitio lo dicen con precisión —«RDL 26/2026 entró en vigor el
- * 1-10-2026 y RDL 27/2026 el 2-10-2026, pero ambos quedaron derogados ese mismo
- * 2-10-2026» y «Rigen la LAU y las demás normas anteriores a los decretos»—, y
- * medido, sin ellos la respuesta de la prueba 8 no llegaba a decir que la LAU
- * sigue vigente.
+ * sitios del sitio lo dicen con precisión —«Los RDL 26/2026 y 27/2026
+ * entraron en vigor el 1 y el 2 de octubre de 2026 y quedaron derogados ese
+ * mismo 2-10-2026 al rechazar el Congreso su convalidación» y «Rigen la LAU y
+ * las demás normas anteriores a los decretos»—, y medido, sin ellos la
+ * respuesta de la prueba 8 no llegaba a decir que la LAU sigue vigente.
  */
 const SIEMPRE = ['estado/situacion-de-cada-medida.md', 'faq/esta-en-vigor.md'];
+
+/**
+ * Los bloques que llevan el estado, dentro de las dos fichas de estado.
+ *
+ * El patrón se ajusta a lo que dice hoy el bundle, no a lo que decía en
+ * octubre: el bloque que abre cada ficha dice qué decreto rige, y los
+ * siguientes son el historial. El primero que se buscaba —«Al no ser
+ * convalidados»— ya no existe en el bundle vigente. El que decía «RDL 26/2026
+ * entró» era el lead viejo de `/estado`; al reescribirse la página, el lead
+ * nuevo empieza por «RDL 29/2026 está en vigor» y es ese el que se busca.
+ */
+const BLOQUES_DE_ESTADO =
+  /^Estado:|^Nuevos decretos|^Los RDL 26\/2026 y 27\/2026 quedaron derogados|^RDL 29\/2026 está en vigor|^Rigen la LAU/i;
+
+/**
+ * Tope por ficha de estado.
+ *
+ * Con 700 se cortaba el bloque «Nuevos decretos (6 de octubre de 2026)» por la
+ * mitad, y ese bloque es el que dice que el RDL 29/2026 está en vigor desde el
+ * 8-10-2026 y que el RDL 28/2026 no lo está.
+ *
+ * Con 900 se quedaba fuera el bloque «Rigen la LAU y las demás normas
+ * anteriores a los decretos…», que es justo la frase que impide al modelo
+ * concluir que no queda nada en pie. Medido, en «¿Está en vigor ya?» ese
+ * bloque son 266 caracteres y con 900 no cabía (643 + 266 = 909, por los
+ * pelos); en «Situación de cada medida» son 57 y tampoco.
+ *
+ * Con 1 000 caben los dos bloques de cada ficha, y el total de estado queda en
+ * 1 479 caracteres: «Estado: …» + «Rigen la LAU…» (571) y «Nuevos decretos…»
+ * + «Los RDL 26/2026 y 27/2026 quedaron derogados…» (908). Los bloques que se
+ * dejan fuera son redundantes: el lead de `/estado` repite el bloque «Estado:»
+ * y el «Nuevos decretos…» de la ficha de situación repite el de la ficha
+ * «¿Está en vigor ya?». Con la pregunta más larga medida —la de cuatro
+ * partes— el contexto entero queda en 5 964 caracteres, dentro del presupuesto
+ * de la ruta (7 000).
+ */
+const TOPE_ESTADO = 1000;
+
+/**
+ * Recorta un texto por su último final de frase.
+ *
+ * Un estado de norma a medias es peor que no decir nada: deja al modelo una
+ * afirmación sin sujeto y sin fecha, que es la forma exacta del fallo que se
+ * está corrigiendo.
+ */
+function porFrase(texto: string, tope: number): string {
+  if (texto.length <= tope) return texto;
+  const corte = texto.lastIndexOf('. ', tope);
+  return corte > 0 ? texto.slice(0, corte + 1) : texto.slice(0, tope);
+}
 
 // --- Índice de un solo vistazo ------------------------------------------------
 
@@ -192,6 +248,16 @@ const cache = new WeakMap<TablaOkf, IndiceOkf>();
  * lucrativos para alquiler asequible | 70 %» tiene que ser una unidad sola, no
  * una línea de supuesto y otra de reducción. Separarlas era el modo más fácil
  * de que el modelo dijera «70 %» sin la condición que lo acompaña.
+ *
+ * Una fila se reconoce por el ` | ` que separa sus celdas: en el bundle no hay
+ * ninguna otra cosa que lo use. Antes bastaba con mirar que la línea empezara
+ * por `|`, pero el constructor aplana las tablas y les quita la barra inicial,
+ * así que la fila llega como «Medida | Estado | Condición» y se colaba en el
+ * bloque anterior. Con la tabla entera en un solo bloque, además, las tablas
+ * más largas del bundle superaban el tope por fichero y no llegaban nunca al
+ * modelo: la cronología (5 728 caracteres) se quedaba sin una sola fecha.
+ * Medido, cinco ficheros del bundle tenían bloques de más de 1 500
+ * caracteres —cuatro de ellos tablas— que no llegaban nunca al modelo.
  */
 function trocear(cuerpo: string): string[] {
   const bloques: string[] = [];
@@ -202,7 +268,7 @@ function trocear(cuerpo: string): string[] {
   };
   for (const linea of cuerpo.split('\n')) {
     const vacia = linea.trim() === '';
-    const propia = /^#{2,4}\s/.test(linea) || /^\|\s/.test(linea) || /^[-*]\s/.test(linea);
+    const propia = /^#{2,4}\s/.test(linea) || /^[-*]\s/.test(linea) || / \| /.test(linea);
     if (vacia || propia) cerrar();
     if (!vacia) actual += (actual ? ' ' : '') + linea.trim();
   }
@@ -379,7 +445,7 @@ function construir(tabla: TablaOkf): IndiceOkf {
  *
  *  · `raiz("alquiler")` es «alquil», y **«alquil» casi no existe escrito en el
  *    bundle**: el sitio dice «alquiler», «alquileres» y «alquilo», cuyas raíces
- *    son otras. Su `df` era 1, así que pesaba `log(1 + 39) ≈ 3,7`, la máxima
+ *    son otras. Su `df` era 1, así que pesaba `log(1 + N)`, la máxima
  *    posible, y «¿Puedo dejar de pagar el alquiler este mes?» daba por ganadora
  *    a la FAQ de los alquileres turísticos y a la del IRPF. Medido: eran las
  *    dos primeras, con 10,3 y 9,0 puntos, por encima del art. 3 LAU —que es el
@@ -523,7 +589,21 @@ export function puntuarFicheros(pregunta: string, tabla: TablaOkf): Candidato[] 
       if (raices / unicas.length >= PROPORCION_MINIMA_BONUS) {
         puntos += raices * BONUS_POR_RAIZ;
       }
-      // Apply penalty for non-Rule files to prevent summary/overview content from outranking specific topic files
+      // Apply penalty for non-Rule files to prevent summary/overview content from outranking specific topic files.
+      //
+      // The distinction is by **kind of document**, not by casing: a `Rule` is
+      // one specific rule with its own anchor on the site, and everything else
+      // — `Concept` (background and page-level summaries), `Table`,
+      // `Comparison`, `Program`, `Reference` — is a document that covers a
+      // whole page and therefore answers "everything" instead of "this".
+      //
+      // It used to be a case-sensitive test, and that was a trap: the four
+      // files that summarise the new RDL 28/2026 and RDL 29/2026 came out of
+      // the converter with a lowercase `rule`, so they were demoted *by
+      // accident* while looking like topic files. Demoting them is the right
+      // answer — they summarise a page and cite the page, not a section — but
+      // it has to be because they say what they are, not because of a typo.
+      // They are typed `Concept` now, next to the other page-level summaries.
       const tipoPenalty = i.fichero.tipo === 'Rule' ? 1 : 0.5;
       puntos *= tipoPenalty;
 
@@ -690,14 +770,34 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
     if (!i) continue;
     // Un recorte corto a propósito: son ficheros de estado, no de fondo, y
     // cargarlos enteros dejaría sin hueco a los temas.
+    //
+    // Los bloques se eligen **enteros**. Un estado de norma cortado a mitad
+    // de frase deja al modelo una afirmación sin sujeto, que es justo lo que
+    // no puede pasar aquí: el fallo medido de este asistente no fue que
+    // faltara el estado, fue que leyó un estado de otro día. Así que si un
+    // bloque no cabe entero, se corta por su último punto y se acaba ahí.
+    const bloques: string[] = [];
+    let largo = 0;
+    for (const b of i.bloques) {
+      if (!BLOQUES_DE_ESTADO.test(b.texto)) continue;
+      // `continue`, no `break`: un bloque que no cabe no puede dejar fuera los
+      // que sí caben detrás. Con `break`, el bloque «Nuevos decretos…» (642
+      // caracteres) de la ficha de estado consumía el tope y el «Rigen la LAU…»
+      // —la frase que dice que la LAU sigue vigente, y la que avisa de las
+      // notificaciones del 1 y del 2 de octubre— se quedaba fuera siempre.
+      if (largo + b.texto.length > TOPE_ESTADO) continue;
+      bloques.push(b.texto);
+      largo += b.texto.length + 1;
+    }
+    const texto =
+      bloques.length > 0
+        ? bloques.join('\n')
+        : (i.bloques.find((b) => BLOQUES_DE_ESTADO.test(b.texto))?.texto ?? '');
+    if (!texto) continue;
     fuentes.push({
       titulo: f.titulo,
       href: f.href,
-      texto: i.bloques
-        .filter((b) => /^Estado:|^Al no ser convalidados|Rigen la LAU|^RDL 26\/2026 entró/i.test(b.texto))
-        .map((b) => b.texto)
-        .join('\n')
-        .slice(0, 700),
+      texto: porFrase(texto, TOPE_ESTADO),
       estado: true,
     });
   }

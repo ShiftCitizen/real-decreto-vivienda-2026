@@ -1,7 +1,7 @@
 ---
 type: Rule
 title: DF 5.ª y DF 6.ª del RDL 26/2026
-description: "Prórroga extraordinaria de hasta dos años (DF 5.ª) y límite de actualización de la renta hasta el 31 de diciembre de 2027 (DF 6.ª). Derogadas el 2-10-2026: no se aplican."
+description: "Prórroga extraordinaria de hasta dos años (DF 5.ª) y límite de actualización de la renta hasta el 31 de diciembre de 2027 (DF 6.ª). Vigentes por la DF 5.ª y la DF 6.ª del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026
   - desahucios
@@ -14,15 +14,11 @@ sources:
     title: Desahucios y alquiler
     author: human:carlos-marchena
 ---
-
 # DF 5.ª y DF 6.ª del RDL 26/2026
 
-El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026: ninguna de estas medidas se aplica.
+Estado: vigentes por la DF 5.ª y la DF 6.ª del RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación). Eran del RDL 26/2026, derogado el 2-10-2026.
 
-Estado: derogados. El 2 de octubre de 2026, el Congreso rechazó la convalidación de los dos reales decretos-ley de vivienda. RDL 26/2026: 172 a favor, 178 en contra → derogado el 2-10-2026. RDL 27/2026: votos a favor no confirmados, 184 en contra → derogado el 2-10-2026.
-
-Al no ser convalidados, ambos decretos dejan de estar en vigor. Las medidas que incluían (moratoria de desahucios, límites a subidas de renta, prórrogas automáticas, indemnizaciones y el resto de este análisis) no se aplican, salvo que se aprueben por otra vía legislativa.
-
+El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026.
 
 Prórroga extraordinaria (DF 5.ª): para los contratos vigentes a la entrada en vigor en los que el periodo de prórroga obligatoria del artículo 9.1 de la LAU, el de la prórroga tácita de los apartados 10.1 y 10.2 de la LAU en su redacción anterior, o el de la tácita reconducción del artículo 1566 del Código Civil finalice antes del 31 de diciembre de 2028 , previa solicitud del arrendatario y siempre que este se encuentre al corriente de pago y lo haya estado mensualmente durante los ocho meses anteriores , se aplica una prórroga extraordinaria por plazos anuales y hasta un máximo de dos años adicionales, manteniendo los términos del contrato. disposición final quinta.1 RDL 26/2026
 

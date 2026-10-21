@@ -238,6 +238,21 @@ const ACEPTACION = [
   { n: 12, q: '¿Qué pasa con los desahucios?', primero: '/#desahucio', excluye: ['en-1-minuto'] },
   { n: 13, q: '¿Me pueden desahuciar?', primero: '/#desahucio' },
   { n: 14, q: 'suspensión de desahucios', primero: '/#desahucio' },
+  // El caso que motivó la migración a los RDL 28 y 29: la pregunta con la que
+  // se complainió de que el asistente respondía que los decretos estaban
+  // derogados. Lo que se comprueba no es lo que dice el modelo —eso no se
+  // puede comprobar sin gastarle una llamada— sino que la evidencia que recibe
+  // lleva el estado de la medida y el nombre del decreto que la rige hoy.
+  {
+    n: 15,
+    q: 'Qué pasa en el caso del impago de persona vulnerable?',
+    primero: '#art-2-rdl-262026-suspension-de-desahucios',
+    incluye: ['#art-2-rdl-262026-suspension-de-desahucios', '#situacion-de-cada-medida', '#en-vigor'],
+    // El contexto tiene que decir qué decreto rige la medida ahora.
+    contexto: ['RDL 29/2026', 'en vigor desde el 8-10-2026', 'Rigen la LAU'],
+    // Y no puede traer el estado viejo, el de los decretos derogados.
+    sin: ['Estado: derogados', 'no se aplica', 'ninguna de estas medidas'],
+  },
 ];
 
 for (const caso of ACEPTACION) {
@@ -269,6 +284,16 @@ for (const caso of ACEPTACION) {
       !r.hrefs.some((h) => h.includes(frag)),
       r.hrefs.join(' , '),
     );
+  }
+  // Lo que el modelo va a leer, no solo de dónde viene. Sin esto, una evidencia
+  // correcta puede llevar dentro un estado viejo —«derogados»— y el modelo
+  // responder con él: el fallo medido no era que faltara la medida, sino que
+  // la medida llegaba con el estado de otro día.
+  for (const frag of caso.contexto ?? []) {
+    comprobar(`P${caso.n} el contexto dice «${frag}»`, r.contexto.includes(frag));
+  }
+  for (const frag of caso.sin ?? []) {
+    comprobar(`P${caso.n} el contexto NO dice «${frag}»`, !r.contexto.includes(frag));
   }
 }
 

@@ -1,5 +1,5 @@
 ---
-type: rule
+type: Concept
 title: RDL 29/2026. Desahucios y alquiler (arts. 1-5 y DF 5ª-6ª)
 description: "Freno a la compra especulativa (70% hasta 2030), suspensión de desahucios de vulnerables, reforma de la LAU (temporal 31d-12m, habitaciones, gastos, garantías), modificación Ley 12/2023 (gran tenedor), LEC (enervación extraordinaria), prórroga extraordinaria 2 años y limitación renta 2%."
 tags:

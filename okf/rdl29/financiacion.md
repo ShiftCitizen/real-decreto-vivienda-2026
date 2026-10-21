@@ -1,5 +1,5 @@
 ---
-type: rule
+type: Concept
 title: RDL 29/2026. Financiación, parque público y Cuenta Financia Europa (arts. 11-21)
 description: "Parque público (CASA 47, Fondo 400M€, vivienda asequible 30%), avales (2.000M€ y 280M€), TU CASA (0%, 50.000€), publicidad de arrendamientos, Cuenta de Ahorro e Inversión Financia Europa (LMV)."
 tags:
