@@ -27,7 +27,7 @@ Toda referencia de este sitio va acompañada del nombre de su norma, porque el n
 - LAU , LEC , Ley 12/2023 , LIRPF y el resto son leyes y reglamentos modificados por los decretos; se identifican con su abreviatura, que es la que usa el propio BOE. Todas las normas citadas .
 - Las abreviaturas de disposición van dentro de la referencia, no en la etiqueta: «DF 5.ª» es una disposición final y «art. 10.1 LAU», un artículo con apartado.
 
-Última revisión: 7 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266, BOE-A-2026-20385, BOE-A-2026-20823 y BOE-A-2026-20822.
+Última revisión: 21 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266, BOE-A-2026-20385, BOE-A-2026-20823 y BOE-A-2026-20822.
 
 ## Véase
 

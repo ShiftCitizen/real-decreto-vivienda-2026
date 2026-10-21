@@ -54,7 +54,7 @@ Igual o superior a 20 años 0,30
 
 Si alquilas como turismo, mira los tres juntos. La salida de la exención del IVA (art. 7 del RDL 26/2026), el recargo de IBI en zona tensionada (art. 8 del RDL 26/2026) y el agravamiento del gravamen SOCIMI aplicado al alquiler turístico y de corta duración (art. 9 del RDL 26/2026) se refuerzan mutuamente . Ninguno de los tres es el coste relevante por sí solo; juntos cambian la cuenta. Y si eres una plataforma, el Título V de la LAU .
 
-Última revisión: 1 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266 y BOE-A-2026-20385 .
+Última revisión: 21 de octubre de 2026. Articulado contrastado con BOE-A-2026-20266, BOE-A-2026-20385, BOE-A-2026-20823 y BOE-A-2026-20822.
 
 ## Véase
 

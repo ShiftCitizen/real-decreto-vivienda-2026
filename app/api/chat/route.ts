@@ -6,10 +6,10 @@ import { seleccionar } from '@/lib/okf';
 import type { Evidencia, TablaOkf } from '@/lib/okf';
 
 /**
- * POST /api/chat — proxy mínimo hacia NVIDIA NIM para el asistente del sitio.
+ * POST /api/chat — proxy mínimo hacia múltiples proveedores para el asistente del sitio.
  *
  * Es la única pieza con servidor del proyecto (las páginas siguen siendo
- * estáticas): existe para que la clave de NIM nunca salga al navegador y
+ * estáticas): existe para que las claves de API nunca salgan al navegador y
  * para que nadie pueda usar el widget como un ChatGPT libre. Todo lo que
  * limita el uso vive aquí y no confía en el cliente:
  *
@@ -40,10 +40,10 @@ import type { Evidencia, TablaOkf } from '@/lib/okf';
  *  Ahora hay tres redes de seguridad, y ninguna depende de que el proveedor
  *  esté sano:
  *
- *  1. **Cadena de modelos.** Se prueba `nvidia/nemotron-3.5-lightning-30b-a3b`
- *     y, si ese identificador no es servible, `google/gemma-3-12b-it`. El
- *     catálogo de NIM se retira rápido —ya hay seis identificadores
- *     obsoletos— así que un único identificador fijo es una apuesta.
+ *  1. **Cadena de proveedores.** Se prueba Mistral (API directa), luego NVIDIA NIM,
+ *     luego OpenRouter. Cada proveedor tiene su propia clave de API. El
+ *     catálogo de modelos se retira rápido, así que una cadena de proveedores
+ *     aumenta las probabilidades de que al menos uno esté disponible.
  *  2. **Plan B.** Si el modelo no contesta, la respuesta son los pasajes
  *     recuperados, con `origen: 'texto'`. Un análisis a medias es mejor que
  *     un error: lo que el visitante pierde es la síntesis, no la información.
@@ -53,15 +53,20 @@ import type { Evidencia, TablaOkf } from '@/lib/okf';
  *
  *  El failover **solo** salta ante 400/404/410 (identificador no servible con
  *  esa configuración). Ante un timeout, un 5xx o un error de red se va al plan
- *  B: encadenar un segundo modelo tras un timeout duplicaría la espera, y
+ *  B: encadenar un segundo proveedor tras un timeout duplicaría la espera, y
  *  35 s + 35 s no caben en los 60 s de la función.
  *
- * Variables de entorno (Vercel, nunca en el repo): NIM_API_KEY (secreto),
- * NIM_MODEL_ID (opcional; si está, manda sobre la cadena y se usa solo, con
- * `temperature` 0,2).
+ * Variables de entorno (Vercel, nunca en el repo):
+ * - MISTRAL_API_KEY: clave para Mistral API directa
+ * - NIM_API_KEY: clave para NVIDIA NIM (secreto)
+ * - OPENROUTER_API_KEY: clave para OpenRouter
+ * - NIM_MODEL_ID (opcional; si está, manda sobre la cadena y se usa solo en NIM
+ *   con `temperature` 0,2).
  */
 
 const NIM_BASE = 'https://integrate.api.nvidia.com/v1';
+const MISTRAL_BASE = 'https://api.mistral.ai/v1';
+const OPENROUTER_BASE = 'https://openrouter.ai/api/v1';
 
 /**
  * Tiempo máximo de una función en Vercel.
@@ -73,20 +78,73 @@ const NIM_BASE = 'https://integrate.api.nvidia.com/v1';
 export const maxDuration = 60;
 
 /**
- * Los modelos que se prueban, en orden.
+ * Proveedores disponibles y sus modelos.
  *
- * `nemotron-3.5-lightning-30b-a3b` son 30 000 millones de parámetros con 3 000
- * activos: es más rápido que el Llama 3.2 11B que se usaba antes, y solo
- * texto. La temperatura 1,0 con `topP` 0,95 es lo que recomienda su ficha;
- * `gemma-3-12b-it` es el segundo, con temperatura 0,6 por ser un modelo de
- * instrucciones.
+ * Orden: Mistral (API directa) primero, luego NVIDIA NIM, luego OpenRouter.
+ * Cada proveedor tiene su URL base y su modelo por defecto.
  *
- * El orden importa: el failover solo se usa cuando el anterior no es
- * servible, así que la primera entrada es la que responde en el caso normal.
+ * Modelos verificados (octubre 2026):
+ * Usamos mistral-small-latest en todos los proveedores: es suficiente para
+ * esta tarea (respuestas cortas basadas en contexto con citas), más rápido
+ * y más económico que los modelos grandes.
+ *
+ * - Mistral API: mistral-small-latest
+ * - NVIDIA NIM: mistralai/mistral-small-latest
+ * - OpenRouter: mistralai/mistral-small-latest
+ *
+ * Variables de entorno requeridas:
+ * - MISTRAL_API_KEY: para Mistral API directa
+ * - NIM_API_KEY: para NVIDIA NIM
+ * - OPENROUTER_API_KEY: para OpenRouter
+ *
+ * NIM_MODEL_ID (opcional) sigue mandando sobre todo: si está definido, se usa
+ * ese modelo único en NVIDIA NIM con temperatura 0.2.
  */
-const CADENA_MODELOS: Modelo[] = [
-  { id: 'nvidia/nemotron-3.5-lightning-30b-a3b', temperature: 1.0, topP: 0.95 },
-  { id: 'google/gemma-3-12b-it', temperature: 0.6, topP: 0.95 },
+type Proveedor = {
+  nombre: 'mistral' | 'nim' | 'openrouter';
+  baseUrl: string;
+  modelo: string;
+  temperature: number;
+  topP: number;
+  headers: (clave: string) => Record<string, string>;
+};
+
+const PROVEEDORES: Proveedor[] = [
+  {
+    nombre: 'mistral',
+    baseUrl: MISTRAL_BASE,
+    modelo: 'mistral-small-latest',
+    temperature: 0.6,
+    topP: 0.95,
+    headers: (clave: string) => ({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${clave}`,
+    }),
+  },
+  {
+    nombre: 'nim',
+    baseUrl: NIM_BASE,
+    modelo: 'mistralai/mistral-small-latest',
+    temperature: 0.6,
+    topP: 0.95,
+    headers: (clave: string) => ({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${clave}`,
+    }),
+  },
+  {
+    nombre: 'openrouter',
+    baseUrl: OPENROUTER_BASE,
+    modelo: 'mistralai/mistral-small-latest',
+    temperature: 0.6,
+    topP: 0.95,
+    headers: (clave: string) => ({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${clave}`,
+      'HTTP-Referer': 'https://real-decreto-vivienda-2026.vercel.app',
+      'X-Title': 'Asistente RDL Vivienda 2026',
+    }),
+  },
 ];
 
 type Modelo = { id: string; temperature: number; topP: number };
@@ -395,29 +453,34 @@ type ResultadoModelo =
   | { ok: false; motivo: 'fallo' };
 
 /**
- * Una llamada al modelo, con su timeout y su lectura defensiva.
+ * Una llamada a un proveedor, con su timeout y su lectura defensiva.
  *
  * No lanza: cualquier fallo se traduce en un motivo, porque quien llama tiene
- * que poder distinguir «prueba con el siguiente modelo» de «ve al plan B».
+ * que poder distinguir «prueba con el siguiente proveedor» de «ve al plan B».
+ *
+ * 21-10-2026: se añade logging de errores para diagnosticar fallos del
+ * proveedor. El log incluye el modelo intentado, el status HTTP y el
+ * mensaje de error, lo que permite identificar si el problema es la clave,
+ * el modelo EOL o un error transitorio.
  */
-async function llamarNim(
-  modelo: Modelo,
+async function llamarProveedor(
+  proveedor: Proveedor,
   clave: string,
   contexto: string,
   pregunta: string,
 ): Promise<ResultadoModelo> {
-  let nimRes: Response;
+  const endpoint = proveedor.nombre === 'openrouter' ? '/chat/completions' : '/chat/completions';
+  const url = `${proveedor.baseUrl}${endpoint}`;
+  
+  let res: Response;
   try {
-    nimRes = await fetch(`${NIM_BASE}/chat/completions`, {
+    res = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${clave}`,
-      },
+      headers: proveedor.headers(clave),
       body: JSON.stringify({
-        model: modelo.id,
-        temperature: modelo.temperature,
-        top_p: modelo.topP,
+        model: proveedor.modelo,
+        temperature: proveedor.temperature,
+        top_p: proveedor.topP,
         max_tokens: MAX_TOKENS_SALIDA,
         messages: [
           { role: 'system', content: SISTEMA },
@@ -429,16 +492,21 @@ async function llamarNim(
       }),
       signal: AbortSignal.timeout(TIMEOUT_NIM_MS),
     });
-  } catch {
-    // Timeout agotado o error de red: no se reintenta con otro modelo, se va
+  } catch (e) {
+    // Timeout agotado o error de red: no se reintenta con otro proveedor, se va
     // al plan B. Encadenar aquí duplicaría la espera.
+    // Log: registra el proveedor y el error para diagnóstico
+    console.error(`[${proveedor.nombre.toUpperCase()}] Timeout/red con ${proveedor.modelo}:`, e instanceof Error ? e.message : String(e));
     return { ok: false, motivo: 'fallo' };
   }
 
-  if (!nimRes.ok) {
+  if (!res.ok) {
     // 400/404/410: el identificador no es servible con esta configuración.
     // Solo en estos casos se prueba el siguiente de la cadena.
-    if (nimRes.status === 400 || nimRes.status === 404 || nimRes.status === 410) {
+    // Log: registra el status y el proveedor para identificar modelos EOL
+    const textoError = await res.text().catch(() => 'sin cuerpo');
+    console.error(`[${proveedor.nombre.toUpperCase()}] ${res.status} con ${proveedor.modelo}: ${textoError.slice(0, 200)}`);
+    if (res.status === 400 || res.status === 404 || res.status === 410) {
       return { ok: false, motivo: 'no-servible' };
     }
     return { ok: false, motivo: 'fallo' };
@@ -451,8 +519,9 @@ async function llamarNim(
     }[];
   };
   try {
-    datos = (await nimRes.json()) as typeof datos;
-  } catch {
+    datos = (await res.json()) as typeof datos;
+  } catch (e) {
+    console.error(`[${proveedor.nombre.toUpperCase()}] Error parseando JSON de ${proveedor.modelo}:`, e instanceof Error ? e.message : String(e));
     return { ok: false, motivo: 'fallo' };
   }
 
@@ -463,6 +532,7 @@ async function llamarNim(
     // `content` vacío. O el modelo no respondió, o es uno de razonamiento que
     // deja el texto en `reasoning_content`: con 350 tokens de salida ese canal
     // no cabe, así que el plan B es la respuesta.
+    console.error(`[${proveedor.nombre.toUpperCase()}] ${proveedor.modelo} devolvió content vacío`);
     return { ok: false, motivo: 'fallo' };
   }
 
@@ -613,8 +683,13 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
     return NextResponse.json({ respuesta: NEGATIVA, citas: [] });
   }
 
-  const clave = process.env.NIM_API_KEY;
-  if (!clave) {
+  // Verificar que al menos un proveedor tenga clave configurada
+  const tieneClave = 
+    process.env.MISTRAL_API_KEY || 
+    process.env.NIM_API_KEY || 
+    process.env.OPENROUTER_API_KEY;
+  
+  if (!tieneClave) {
     devolverCuota(ip);
     return NextResponse.json(
       { error: 'Asistente no disponible en este momento.' },
@@ -623,18 +698,57 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
   }
 
   /**
-   * La cadena de modelos.
+   * La cadena de proveedores.
    *
    * `NIM_MODEL_ID`, si está definido, manda sobre la cadena: es un modelo
-   * único, con la temperatura baja de siempre. Quien configura el modelo a
-   * mano no quiere que se le cambie debajo.
+   * único en NVIDIA NIM, con la temperatura baja de siempre. Quien configura
+   * el modelo a mano no quiere que se le cambie debajo.
+   *
+   * Orden por defecto: Mistral (API directa), NVIDIA NIM, OpenRouter.
+   * Cada proveedor usa su propia clave de API.
    */
-  const cadena: Modelo[] = process.env.NIM_MODEL_ID
-    ? [{ id: process.env.NIM_MODEL_ID, temperature: 0.2, topP: 0.95 }]
-    : CADENA_MODELOS;
+  let cadena: Proveedor[];
+  
+  if (process.env.NIM_MODEL_ID) {
+    // Modo legado: solo NVIDIA NIM con el modelo especificado
+    cadena = [
+      {
+        nombre: 'nim',
+        baseUrl: NIM_BASE,
+        modelo: process.env.NIM_MODEL_ID,
+        temperature: 0.2,
+        topP: 0.95,
+        headers: (clave: string) => ({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${clave}`,
+        }),
+      },
+    ];
+  } else {
+    cadena = PROVEEDORES;
+  }
 
-  for (const modelo of cadena) {
-    const r = await llamarNim(modelo, clave, contexto, pregunta);
+  for (const proveedor of cadena) {
+    // Obtener la clave correspondiente al proveedor
+    let claveProveedor: string | undefined;
+    switch (proveedor.nombre) {
+      case 'mistral':
+        claveProveedor = process.env.MISTRAL_API_KEY;
+        break;
+      case 'nim':
+        claveProveedor = process.env.NIM_API_KEY;
+        break;
+      case 'openrouter':
+        claveProveedor = process.env.OPENROUTER_API_KEY;
+        break;
+    }
+    
+    if (!claveProveedor) {
+      console.error(`[${proveedor.nombre.toUpperCase()}] No hay clave de API configurada`);
+      continue;
+    }
+    
+    const r = await llamarProveedor(proveedor, claveProveedor, contexto, pregunta);
     if (r.ok) {
       const { texto: respuesta, fuentes: usadas } = ajustarCitas(r.texto, fuentes.length);
       return NextResponse.json({
@@ -643,7 +757,7 @@ async function responder(request: Request, pregunta: string, ip: string): Promis
         origen: 'modelo',
       });
     }
-    // Solo un identificador no servible pasa al siguiente modelo. Un timeout o
+    // Solo un identificador no servible pasa al siguiente proveedor. Un timeout o
     // un 5xx van al plan B: encadenar después de un timeout duplicaría la
     // espera y no cabe en los 60 s de la función.
     if (r.motivo === 'no-servible') continue;

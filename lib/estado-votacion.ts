@@ -66,7 +66,7 @@ export const ESTADO_VOTACION: {
 } = {
   status: 'derogados',
   fechaVotacion: '2026-10-02',
-  lastUpdated: '2026-10-07',
+  lastUpdated: '2026-10-21',
   resultados: {
     rdl26: { aFavor: 172, enContra: 178, abstenciones: 0 },
     rdl27: { aFavor: null, enContra: 184, abstenciones: 0 },

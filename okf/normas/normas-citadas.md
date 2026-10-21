@@ -74,7 +74,7 @@ El RDL 26/2026 reforma la LAU en veintidós apartados; el RDL 27/2026 reescribe 
 
 Un caso donde conviene no «corregir» la cita del decreto. El artículo 7 del RDL 26/2026 modifica la Ley del IVA en cuatro apartados, y dos de ellos se parecen mucho: el apartado Tres modifica, en la LIVA, el artículo 91.Uno.2, número 10.º —las obras de renovación y reparación, que es el tipo reducido del 10 %— y el apartado Cuatro modifica, en la LIVA, el artículo 91.Dos.1, número 6.º —las viviendas protegidas y las del régimen especial de arrendamiento de vivienda—. Es fácil intercambiarlos al citarlos; este sitio los distingue porque el resultado fiscal es distinto.
 
-Última revisión: 1 de octubre de 2026. Volver al resumen
+Última revisión: 21 de octubre de 2026. Volver al resumen
 
 ## Véase
 

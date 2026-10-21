@@ -24,7 +24,7 @@ type Estado =
 const NOTA: Record<Origen, string> = {
   publicado: 'Frases publicadas en el sitio; no es asesoramiento jurídico.',
   modelo: 'Respuesta generada con IA a partir del análisis; no es asesoramiento jurídico.',
-  texto: 'Texto del análisis, sin respuesta del modelo: el proveedor no ha contestado. No es asesoramiento jurídico.',
+  texto: 'El asistente no ha podido generar una respuesta. Mientras tanto, aquí tienes los pasajes relevantes del análisis. No es asesoramiento jurídico.',
 };
 
 /**
