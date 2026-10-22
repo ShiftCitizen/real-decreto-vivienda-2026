@@ -83,14 +83,15 @@ export const maxDuration = 60;
  * Orden: Mistral (API directa) primero, luego NVIDIA NIM, luego OpenRouter.
  * Cada proveedor tiene su URL base y su modelo por defecto.
  *
- * Modelos verificados (octubre 2026):
- * Usamos mistral-small-latest en todos los proveedores: es suficiente para
- * esta tarea (respuestas cortas basadas en contexto con citas), más rápido
- * y más económico que los modelos grandes.
- *
- * - Mistral API: mistral-small-latest
- * - NVIDIA NIM: mistralai/mistral-small-latest
- * - OpenRouter: mistralai/mistral-small-latest
+ * Modelos verificados (22-10-2026):
+ * - Mistral API: `ministral-8b-latest`. Free mode pone
+ *   `x-ratelimit-limit-req-minute: 0` en `mistral-small-latest` (429 fijo,
+ *   code 1300); Ministral 8B sí contesta (~188 req/min) y sigue el contexto
+ *   mejor que Ministral 14B en la prueba de citas. Pay-as-you-go desbloquearía
+ *   de nuevo los modelos «small/large».
+ * - NVIDIA NIM: `meta/llama-3.2-11b-vision-instruct` (`mistralai/mistral-small-latest`
+ *   no está en el catálogo de NIM).
+ * - OpenRouter: `google/gemma-4-31b-it:free` (la clave no admite modelos de pago).
  *
  * Variables de entorno requeridas:
  * - MISTRAL_API_KEY: para Mistral API directa
@@ -115,7 +116,8 @@ const PROVEEDORES: Proveedor[] = [
   {
     nombre: 'mistral',
     baseUrl: MISTRAL_BASE,
-    modelo: 'mistral-small-latest',
+    // Free mode: mistral-small-latest tiene límite 0 req/min (429 code 1300).
+    modelo: 'ministral-8b-latest',
     timeoutMs: 14_000,
     temperature: 0.6,
     topP: 0.95,
