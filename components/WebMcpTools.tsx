@@ -134,6 +134,9 @@ const normSchema = {
   additionalProperties: false,
 } as const;
 
+/** Keep the WebMCP timeline in lockstep with `CRONOLOGIA` (no hard-coded caps). */
+const TIMELINE_LIMIT = CRONOLOGIA.length;
+
 const timelineSchema = {
   type: 'object',
   properties: {
@@ -145,8 +148,8 @@ const timelineSchema = {
     limit: {
       type: 'integer',
       minimum: 1,
-      maximum: 11,
-      description: 'Maximum entries to return. Defaults to 11.',
+      maximum: TIMELINE_LIMIT,
+      description: `Maximum entries to return. Defaults to ${TIMELINE_LIMIT} (all timeline entries).`,
     },
   },
   required: [],
@@ -360,7 +363,7 @@ export default function WebMcpTools() {
             inputSchema: timelineSchema,
             annotations: { readOnlyHint: true },
             execute: async ({ query, limit }: Record<string, unknown> = {}) => {
-              const max = asNumber(limit, 11, 1, 11);
+              const max = asNumber(limit, TIMELINE_LIMIT, 1, TIMELINE_LIMIT);
               const text = typeof query === 'string' ? query.trim() : '';
               const pool = text
                 ? CRONOLOGIA.filter((e) => matchesAllWords(`${e.fecha} ${e.que}`, text))
