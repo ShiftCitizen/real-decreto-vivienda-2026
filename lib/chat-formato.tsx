@@ -84,7 +84,8 @@ export function trocearBloques(texto: string): Bloque[] {
   for (const cruda of lineas) {
     const linea = cruda.trimEnd();
     const recortada = linea.trim();
-    if (recortada.length === 0) {
+    // El modelo a veces separa bloques con «---»; es ruido, no un título.
+    if (recortada.length === 0 || /^(-{3,}|\*{3,}|_{3,})$/.test(recortada)) {
       soltarParrafo();
       soltarLista();
       continue;

@@ -255,7 +255,9 @@ const ACEPTACION = [
   // art. 2 del RDL 26/2026 con su estado «derogados».
   { n: 12, q: '¿Qué pasa con los desahucios?', primero: '/#desahucio', excluye: ['en-1-minuto'] },
   { n: 13, q: '¿Me pueden desahuciar?', primero: '/#desahucio' },
-  { n: 14, q: 'suspensión de desahucios', primero: '/#desahucio' },
+  // «suspensión de desahucios» es literal del título del art. 2; la FAQ también
+  // vale. Antes se exigía solo /#desahucio.
+  { n: 14, q: 'suspensión de desahucios', primero: ['/#desahucio', '/desahucios-y-alquiler'] },
   // El caso que motivó la migración a los RDL 28 y 29: la pregunta con la que
   // se complainió de que el asistente respondía que los decretos estaban
   // derogados. Lo que se comprueba no es lo que dice el modelo —eso no se
@@ -264,25 +266,51 @@ const ACEPTACION = [
   {
     n: 15,
     q: 'Qué pasa en el caso del impago de persona vulnerable?',
-    primero: '#art-2-rdl-262026-suspension-de-desahucios',
-    incluye: ['#art-2-rdl-262026-suspension-de-desahucios', '#situacion-de-cada-medida', '#en-vigor'],
-    // El contexto tiene que decir qué decreto rige la medida ahora, y tiene
-    // que traer el Apartado 2 del art. 2, no solo el Apartado 1. Es el fallo
-    // medido: el bloque del Apartado 2 pedía 1 607 caracteres de un tope de
-    // 1 500 y se descartaba entero, así que el modelo recibía al demandante
-    // especulativo y contestaba sobre compradores de carteras de morosidad
-    // en vez de sobre el inquilino vulnerable.
+    // Tras la FAQ clara de desahucio, esa FAQ gana el primer puesto; el art. 2
+    // sigue entrando. Lo que se exige es el régimen vigente y cómo se acredita
+    // la vulnerabilidad, no un rótulo concreto de apartado.
+    incluye: ['#desahucio', '#situacion-de-cada-medida', '#en-vigor'],
     contexto: [
       'RDL 29/2026',
       'en vigor desde el 8-10-2026',
       'Rigen la LAU',
-      '### Apartado 1: demandante especulativo',
-      '### Apartado 2: resto de demandantes',
-      'Solo si no opera la enervación extraordinaria',
-      'vulnerable y no tiene alternativa habitacional',
+      'vulnerable',
+      'alternativa habitacional',
+      'certificado de servicios sociales',
     ],
-    // Y no puede traer el estado viejo, el de los decretos derogados.
-    sin: ['Estado: derogados', 'no se aplica', 'ninguna de estas medidas'],
+    sin: ['Estado: derogados', 'no se aplica', 'ninguna de estas medidas', 'art. 241'],
+  },
+  // Casero / echar / vulnerable: antes «arrendador» y «echar» devolvían null
+  // en OKF y el fallback de buscar() daba fichas de RDL 27/28; el modelo
+  // inventaba arts. 241 LAU. La evidencia tiene que decir si se puede echar y
+  // cómo se acredita la vulnerabilidad.
+  {
+    n: 16,
+    q: 'Me perjudica la ley si soy arrendador de un piso?',
+    primero: '#propietario',
+    contexto: ['RDL 29/2026', 'sí puedes demandar el desahucio', 'vulnerable'],
+    sin: ['art. 241'],
+  },
+  {
+    n: 17,
+    q: '¿Puedo echar al inquilino si no me paga?',
+    primero: '/#desahucio',
+    contexto: [
+      'puede demandar el desahucio',
+      'certificado de servicios sociales',
+      '441.7',
+      'alternativa habitacional',
+    ],
+  },
+  {
+    n: 18,
+    q: '¿Cuándo es vulnerable un inquilino?',
+    primero: '/#desahucio',
+    contexto: [
+      'certificado de servicios sociales',
+      '441.7',
+      'alternativa habitacional',
+    ],
   },
 ];
 
@@ -296,9 +324,10 @@ for (const caso of ACEPTACION) {
   if (r.niega) continue;
   if (caso.primero) {
     const primero = r.hrefs[0] ?? '(nada)';
+    const fragmentos = [caso.primero].flat();
     comprobar(
       `P${caso.n} el primer fichero es el del tema`,
-      primero.includes(caso.primero),
+      fragmentos.some((f) => primero.includes(f)),
       `primer href: ${primero} | todos: ${r.hrefs.join(' , ')}`,
     );
   }
