@@ -65,6 +65,7 @@ const FISCAL = 'app/fiscal/page.tsx';
 const FINANCIACION = 'app/financiacion/page.tsx';
 const ESTADO = 'app/estado/page.tsx';
 const NORMAS = 'app/normas/page.tsx';
+const CONTACTO = 'app/contacto/page.tsx';
 
 const PAGINAS: PaginaAmplia[] = [
   {
@@ -280,6 +281,36 @@ const PAGINAS: PaginaAmplia[] = [
         medida: false,
         texto:
           'Las dos primeras tienen color propio porque son los dos reales decretos-ley del sitio: el RDL 26/2026 y el RDL 27/2026.',
+      },
+    ],
+  },
+  {
+    href: '/contacto',
+    titulo: 'Contacto',
+    pistas: /\b(contacto|shiftcitizen|carlos marchena|comentarios|correcciones)\b/,
+    resumen: {
+      titulo: 'Contacto',
+      archivo: CONTACTO,
+      medida: false,
+      texto:
+        'Este análisis lo elabora Carlos Marchena (ShiftCitizen). No es un despacho ni un servicio de asesoramiento jurídico: es una lectura divulgativa del articulado publicado en el BOE. Comentarios o correcciones: contacto@shiftcitizen.com.',
+    },
+    puntos: [
+      {
+        titulo: 'Quién hay detrás',
+        archivo: CONTACTO,
+        ancla: ancla('Quién hay detrás'),
+        medida: false,
+        texto:
+          'Carlos Marchena: formación en derecho, desarrollo de software con IA para el tercer sector y, desde 2021, enseñanza de programación y competencias digitales.',
+      },
+      {
+        titulo: 'Comentarios y correcciones',
+        archivo: CONTACTO,
+        ancla: ancla('Comentarios y correcciones'),
+        medida: false,
+        texto:
+          'Si encuentras un error, una omisión o quieres sugerir una mejora en este análisis, escribe a contacto@shiftcitizen.com.',
       },
     ],
   },

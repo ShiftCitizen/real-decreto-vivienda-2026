@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import SiteNav from '@/components/SiteNav';
 import WebMcpTools from '@/components/WebMcpTools';
 import ChatWidget from '@/components/ChatWidget';
+import { THEME_SCRIPT } from '@/lib/theme';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -27,7 +28,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
         <a className="skip-link" href="#contenido">
           Saltar al contenido
@@ -54,7 +58,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <a href="https://www.linkedin.com/in/cmarchena/" target="_blank" rel="noreferrer">
             Carlos Marchena
           </a>{' '}
-          2026 · Resumen no oficial elaborado con ayuda de herramientas de inteligencia
+          2026 ·{' '}
+          <a href="https://shiftcitizen.com" target="_blank" rel="noreferrer">
+            ShiftCitizen
+          </a>
+          . Resumen no oficial elaborado con ayuda de herramientas de inteligencia
           artificial. El texto oficial es el publicado en el BOE.
         </footer>
       </body>
