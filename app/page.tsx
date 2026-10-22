@@ -387,8 +387,8 @@ export default function HomePage() {
           residencia de colectivos socialmente vulnerables por parte de entidades del tercer
           sector de acción social, las destinadas a la protección de las víctimas de violencia
           de género, las que se destinan a residencia de personas que precisen atención
-          sociosanitaria y las de quien se adhiera a un Código de Buenas Prácticas acordado con
-          la autoridad competente.{' '}
+          sociosanitaria y las de quien se adhiera al Código de Buenas Prácticas aprobado por
+          Acuerdo de Consejo de Ministros.{' '}
           <CiteMap norma="rdl26" art="1.2" />
         </li>
         <li>
