@@ -190,7 +190,11 @@ export default function FinanciacionPage() {
         es un préstamo, con las condiciones de la tabla.
       </p>
 
-      <h2 id={slugify('Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)')}>
+      <h2
+        id={slugify(
+          'Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL 29/2026; antes art. 20 RDL 26/2026)',
+        )}
+      >
         Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL 29/2026; antes art. 20 RDL
         26/2026)
       </h2>

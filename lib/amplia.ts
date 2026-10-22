@@ -81,7 +81,7 @@ const PAGINAS: PaginaAmplia[] = [
     },
     puntos: [
       {
-        titulo: 'Los dos decretos',
+        titulo: 'Los decretos de octubre',
         archivo: PORTADA,
         medida: true,
         texto:
@@ -107,7 +107,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: DESAHUCIOS,
       medida: true,
       texto:
-        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera el freno a la compra especulativa, la suspensión de lanzamientos hasta 2030, la enervación extraordinaria y la reforma de la LAU; el RDL 28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la indemnización (pendiente de convalidación). Esta página describe esas medidas con las citas de los RDL 26/2026 y 27/2026, derogados el 2-10-2026, cuyo contenido reproducen en lo sustancial.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera el freno a la compra especulativa, la suspensión de lanzamientos hasta 2030, la enervación extraordinaria y la reforma de la LAU; el RDL 28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la indemnización (pendiente de convalidación). Esta página describe esas medidas citando primero el RDL 29/2026 o el RDL 28/2026 y, entre paréntesis, el artículo equivalente de los RDL 26/2026 y 27/2026, derogados el 2-10-2026, cuyo contenido reproducen en lo sustancial.',
     },
     puntos: [
       {
@@ -157,7 +157,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: FISCAL,
       medida: true,
       texto:
-        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera las reducciones en el IRPF por alquiler, el IVA sobre estancias cortas, los recargos de IBI y el gravamen especial de las SOCIMI. Esta página los describe con las citas del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera las reducciones en el IRPF por alquiler, el IVA sobre estancias cortas, los recargos de IBI y el gravamen especial de las SOCIMI. Esta página los describe citando primero el RDL 29/2026 y, entre paréntesis, el artículo equivalente del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
     },
     puntos: [
       {
@@ -200,7 +200,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: FINANCIACION,
       medida: true,
       texto:
-        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera la movilización de parque público, las líneas de avales, el préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa. Esta página los describe con las citas del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
+        'El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación) recupera la movilización de parque público, las líneas de avales, el préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa. Esta página los describe citando primero el RDL 29/2026 y, entre paréntesis, el artículo equivalente del RDL 26/2026, derogado el 2-10-2026, cuyo contenido reproduce en lo sustancial.',
     },
     puntos: [
       {
@@ -220,7 +220,9 @@ const PAGINAS: PaginaAmplia[] = [
       {
         titulo: 'Cuenta Financia Europa',
         archivo: FINANCIACION,
-        ancla: ancla('Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)'),
+        ancla: ancla(
+          'Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL 29/2026; antes art. 20 RDL 26/2026)',
+        ),
         medida: true,
         texto: 'la Cuenta de Ahorro e Inversión Financia Europa',
       },
@@ -280,7 +282,7 @@ const PAGINAS: PaginaAmplia[] = [
         ancla: ancla('Los dos reales decretos-ley'),
         medida: false,
         texto:
-          'Las dos primeras tienen color propio porque son los dos reales decretos-ley del sitio: el RDL 26/2026 y el RDL 27/2026.',
+          'Las cuatro primeras tienen color propio: el RDL 29/2026 y el RDL 28/2026 (vigente o pendiente) y, como historial, el RDL 26/2026 y el RDL 27/2026, derogados. El resto se identifica por la abreviatura que usa el propio BOE.',
       },
     ],
   },
@@ -293,7 +295,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: CONTACTO,
       medida: false,
       texto:
-        'Este análisis lo elabora Carlos Marchena (ShiftCitizen). No es un despacho ni un servicio de asesoramiento jurídico: es una lectura divulgativa del articulado publicado en el BOE. Comentarios o correcciones: contacto@shiftcitizen.com.',
+        'Este análisis lo elabora Carlos Marchena (ShiftCitizen). No es un despacho ni un servicio de asesoramiento jurídico: es una lectura divulgativa del articulado publicado en el BOE.',
     },
     puntos: [
       {
