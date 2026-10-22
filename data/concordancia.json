@@ -1,0 +1,717 @@
+{
+  "meta": {
+    "generated": "2026-10-22",
+    "sources": {
+      "rdl26": {
+        "boe": "BOE-A-2026-20266",
+        "eli": "https://www.boe.es/eli/es/rdl/2026/09/29/26"
+      },
+      "rdl27": {
+        "boe": "BOE-A-2026-20385",
+        "eli": "https://www.boe.es/eli/es/rdl/2026/09/29/27"
+      },
+      "rdl28": {
+        "boe": "BOE-A-2026-20822",
+        "eli": "https://www.boe.es/eli/es/rdl/2026/10/06/28"
+      },
+      "rdl29": {
+        "boe": "BOE-A-2026-20823",
+        "eli": "https://www.boe.es/eli/es/rdl/2026/10/06/29"
+      }
+    },
+    "method": "Rótulos de Artículo/Disposición del HTML del BOE; subapartados del sitio (p. ej. 5.Dos, 3.Veinte) heredan el mapeo del artículo padre. No se inventan equivalencias de contenido distinto.",
+    "rules": [
+      "Citar primero la norma sucesora (rdl29 o rdl28); el derogado va como «antes».",
+      "RDL 28 aún no está en vigor: es el sucesor del 27, no «vigente» hoy.",
+      "Art. 20 RDL 26 → art. 21 RDL 29; art. 20 RDL 29 es nuevo (publicidad).",
+      "DF undécima RDL 26 → DF decimoprimera RDL 29."
+    ]
+  },
+  "entries": [
+    {
+      "id": "rdl26-1",
+      "from": {
+        "norma": "rdl26",
+        "art": "1",
+        "title": "Protección del mercado de la vivienda frente a la actividad especulativa."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "1",
+        "title": "Protección del mercado de la vivienda frente a la actividad especulativa."
+      },
+      "status": "mapped",
+      "note": "Misma materia; plazo ampliado a 31-12-2030 y precisiones de redacción (ver BOE)"
+    },
+    {
+      "id": "rdl26-2",
+      "from": {
+        "norma": "rdl26",
+        "art": "2",
+        "title": "Suspensión de desahucios de personas vulnerables sin alternativa habitacional."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "2",
+        "title": "Suspensión de desahucios de personas vulnerables sin alternativa habitacional."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-3",
+      "from": {
+        "norma": "rdl26",
+        "art": "3",
+        "title": "Modificación de la Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "3",
+        "title": "Modificación de la Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-4",
+      "from": {
+        "norma": "rdl26",
+        "art": "4",
+        "title": "Modificación de la Ley 12/2023, de 24 de mayo, por el derecho a la vivienda."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "4",
+        "title": "Modificación de la Ley 12/2023, de 24 de mayo, por el derecho a la vivienda."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-5",
+      "from": {
+        "norma": "rdl26",
+        "art": "5",
+        "title": "Modificación de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "5",
+        "title": "Modificación de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-6",
+      "from": {
+        "norma": "rdl26",
+        "art": "6",
+        "title": "Modificación de la Ley 35/2006, de 28 de diciembre, del Impuesto de la Renta de las Personas físicas y de modificación parcial de las leyes de los Impuestos sob"
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "6",
+        "title": "Modificación de la Ley 35/2006, de 28 de diciembre, del Impuesto de la Renta de las Personas físicas y de modificación parcial de las leyes de los Impuestos sob"
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-7",
+      "from": {
+        "norma": "rdl26",
+        "art": "7",
+        "title": "Modificación de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "7",
+        "title": "Modificación de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-8",
+      "from": {
+        "norma": "rdl26",
+        "art": "8",
+        "title": "Modificación del texto refundido de la Ley Reguladora de las Haciendas Locales, aprobado por Real Decreto Legislativo 2/2004, de 5 de marzo."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "8",
+        "title": "Modificación del texto refundido de la Ley Reguladora de las Haciendas Locales, aprobado por Real Decreto Legislativo 2/2004, de 5 de marzo."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-9",
+      "from": {
+        "norma": "rdl26",
+        "art": "9",
+        "title": "Modificación de la Ley 11/2009, de 26 de octubre, por la que se regulan las Sociedades Anónimas Cotizadas de Inversión en el Mercado Inmobiliario."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "9",
+        "title": "Modificación de la Ley 11/2009, de 26 de octubre, por la que se regulan las Sociedades Anónimas Cotizadas de Inversión en el Mercado Inmobiliario."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-10",
+      "from": {
+        "norma": "rdl26",
+        "art": "10",
+        "title": "Impuesto sobre el Incremento de Valor de los Terrenos de Naturaleza Urbana."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "10",
+        "title": "Impuesto sobre el Incremento de Valor de los Terrenos de Naturaleza Urbana."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-11",
+      "from": {
+        "norma": "rdl26",
+        "art": "11",
+        "title": "Modificación de la Ley 33/2003, de 3 de noviembre, del Patrimonio de las Administraciones Públicas."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "11",
+        "title": "Modificación de la Ley 33/2003, de 3 de noviembre, del Patrimonio de las Administraciones Públicas."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-12",
+      "from": {
+        "norma": "rdl26",
+        "art": "12",
+        "title": "Cesión de inmuebles públicos a Casa 47."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "12",
+        "title": "Cesión de inmuebles públicos a Casa 47."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-13",
+      "from": {
+        "norma": "rdl26",
+        "art": "13",
+        "title": "Fondo de Vivienda de Impacto Social."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "13",
+        "title": "Fondo de Vivienda de Impacto Social."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-14",
+      "from": {
+        "norma": "rdl26",
+        "art": "14",
+        "title": "Regulación del concepto de vivienda asequible."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "14",
+        "title": "Regulación del concepto de vivienda asequible."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-15",
+      "from": {
+        "norma": "rdl26",
+        "art": "15",
+        "title": "Modificación de la Ley de 16 de diciembre de 1954 sobre hipoteca mobiliaria y prenda sin desplazamiento de posesión."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "15",
+        "title": "Modificación de la Ley de 16 de diciembre de 1954 sobre hipoteca mobiliaria y prenda sin desplazamiento de posesión."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-16",
+      "from": {
+        "norma": "rdl26",
+        "art": "16",
+        "title": "Modificación del Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan medidas para afrontar las consecuencias económicas y sociales derivadas de l"
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "16",
+        "title": "Modificación del Real Decreto-ley 8/2023, de 27 de diciembre, por el que se adoptan medidas para afrontar las consecuencias económicas y sociales derivadas de l"
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-17",
+      "from": {
+        "norma": "rdl26",
+        "art": "17",
+        "title": "Aprobación de una línea de avales para la cobertura parcial, por cuenta del Estado, de la financiación otorgada por el ICO a fabricantes y/o promotores que pres"
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "17",
+        "title": "Aprobación de una línea de avales para la cobertura parcial, por cuenta del Estado, de la financiación otorgada por el ICO a fabricantes y/o promotores que pres"
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-18",
+      "from": {
+        "norma": "rdl26",
+        "art": "18",
+        "title": "Régimen de cobranza."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "18",
+        "title": "Régimen de cobranza."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-19",
+      "from": {
+        "norma": "rdl26",
+        "art": "19",
+        "title": "Línea TU CASA."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "19",
+        "title": "Línea TU CASA."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-20",
+      "from": {
+        "norma": "rdl26",
+        "art": "20",
+        "title": "Modificación de la Ley 6/2023, de 17 de marzo, de los Mercados de Valores y de los Servicios de Inversión."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "21",
+        "title": "Modificación de la Ley 6/2023, de 17 de marzo, de los Mercados de Valores y de los Servicios de Inversión."
+      },
+      "status": "mapped",
+      "note": "Renumera: en RDL 29 el art. 20 pasa a ser «Publicidad de los arrendamientos» (nuevo); la modificación de la LMV/cuenta es el art. 21"
+    },
+    {
+      "id": "rdl29-20-new",
+      "from": null,
+      "to": {
+        "norma": "rdl29",
+        "art": "20",
+        "title": "Publicidad de los arrendamientos."
+      },
+      "status": "new_in_successor",
+      "note": "Solo en RDL 29/2026; no hay precedente en RDL 26/2026"
+    },
+    {
+      "id": "rdl26-disposición adicional primera",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición adicional primera",
+        "title": "Habilitación normativa para la regulación de los proveedores sociales de vivienda y las cooperativas de vivienda asequible."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición adicional primera",
+        "title": "Habilitación normativa para la regulación de los proveedores sociales de vivienda y las cooperativas de vivienda asequible."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición adicional segunda",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición adicional segunda",
+        "title": "Creación del Registro de IICC Elegibles."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición adicional segunda",
+        "title": "Creación del Registro de IICC Elegibles."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición transitoria primera",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición transitoria primera",
+        "title": "Solicitudes de prórroga extraordinaria formuladas al amparo del Real Decreto-ley 8/2026, de 20 de marzo, de medidas en el alquiler en respuesta a las consecuenc"
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición transitoria primera",
+        "title": "Solicitudes de prórroga extraordinaria formuladas al amparo del Real Decreto-ley 8/2026, de 20 de marzo, de medidas en el alquiler en respuesta a las consecuenc"
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición transitoria segunda",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición transitoria segunda",
+        "title": "Ejecuciones y lanzamientos en curso."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición transitoria segunda",
+        "title": "Ejecuciones y lanzamientos en curso."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición derogatoria única",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición derogatoria única",
+        "title": "Disposiciones que se derogan."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición derogatoria única",
+        "title": "Disposiciones que se derogan."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final primera",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final primera",
+        "title": "Modificación de la Ley 5/2019, de 15 de marzo, reguladora de los contratos de crédito inmobiliario."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final primera",
+        "title": "Modificación de la Ley 5/2019, de 15 de marzo, reguladora de los contratos de crédito inmobiliario."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final segunda",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final segunda",
+        "title": "Modificación de la Ley 20/2015, de 14 de julio, de ordenación, supervisión y solvencia de las entidades aseguradoras y reaseguradoras."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final segunda",
+        "title": "Modificación de la Ley 20/2015, de 14 de julio, de ordenación, supervisión y solvencia de las entidades aseguradoras y reaseguradoras."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final tercera",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final tercera",
+        "title": "Modificación del Reglamento del Impuesto sobre la Renta de las Personas Físicas, aprobado por el Real Decreto 439/2007, de 30 de marzo."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final tercera",
+        "title": "Modificación del Reglamento del Impuesto sobre la Renta de las Personas Físicas, aprobado por el Real Decreto 439/2007, de 30 de marzo."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final cuarta",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final cuarta",
+        "title": "Modificación del Reglamento General de las actuaciones y los procedimientos de gestión e inspección tributaria y de desarrollo de las normas comunes de los proc"
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final cuarta",
+        "title": "Modificación del Reglamento General de las actuaciones y los procedimientos de gestión e inspección tributaria y de desarrollo de las normas comunes de los proc"
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final quinta",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final quinta",
+        "title": "Prórroga extraordinaria contratos de arrendamiento de vivienda habitual."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final quinta",
+        "title": "Prórroga extraordinaria contratos de arrendamiento de vivienda habitual."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final sexta",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final sexta",
+        "title": "Limitación extraordinaria de la actualización anual de la renta de los contratos de arrendamiento de vivienda."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final sexta",
+        "title": "Limitación extraordinaria de la actualización anual de la renta de los contratos de arrendamiento de vivienda."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final séptima",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final séptima",
+        "title": "Salvaguarda de rango reglamentario."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final séptima",
+        "title": "Salvaguarda de rango reglamentario."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final octava",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final octava",
+        "title": "Habilitación para desarrollo reglamentario."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final octava",
+        "title": "Habilitación para desarrollo reglamentario."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final novena",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final novena",
+        "title": "Incorporación de derecho de la Unión Europea."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final novena",
+        "title": "Incorporación de derecho de la Unión Europea."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final décima",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final décima",
+        "title": "Títulos competenciales."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final décima",
+        "title": "Títulos competenciales."
+      },
+      "status": "mapped",
+      "note": ""
+    },
+    {
+      "id": "rdl26-disposición final undécima",
+      "from": {
+        "norma": "rdl26",
+        "art": "disposición final undécima",
+        "title": "Entrada en vigor."
+      },
+      "to": {
+        "norma": "rdl29",
+        "art": "disposición final decimoprimera",
+        "title": "Entrada en vigor."
+      },
+      "status": "mapped",
+      "note": "Renombrada undécima → decimoprimera (entrada en vigor)"
+    },
+    {
+      "id": "rdl27-único",
+      "from": {
+        "norma": "rdl27",
+        "art": "único",
+        "title": "Modificación de la Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos."
+      },
+      "to": {
+        "norma": "rdl28",
+        "art": "único",
+        "title": "Modificación de la Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos."
+      },
+      "status": "mapped",
+      "note": "Misma estructura formal; RDL 28 no está en vigor (previsto 15-11-2026, pendiente de convalidación)"
+    },
+    {
+      "id": "rdl27-disposición adicional primera",
+      "from": {
+        "norma": "rdl27",
+        "art": "disposición adicional primera",
+        "title": "Coordinación con la prórroga extraordinaria de los contratos de arrendamiento de vivienda habitual prevista en el Real Decreto-ley 26/2026, de 29 de septiembre,"
+      },
+      "to": {
+        "norma": "rdl28",
+        "art": "disposición adicional primera",
+        "title": "Coordinación con la prórroga extraordinaria de los contratos de arrendamiento de vivienda habitual prevista en el Real Decreto-ley 29/2026, de 6 de octubre, por"
+      },
+      "status": "mapped",
+      "note": "Misma estructura formal; RDL 28 no está en vigor (previsto 15-11-2026, pendiente de convalidación)"
+    },
+    {
+      "id": "rdl27-disposición adicional segunda",
+      "from": {
+        "norma": "rdl27",
+        "art": "disposición adicional segunda",
+        "title": "Referencias normativas."
+      },
+      "to": {
+        "norma": "rdl28",
+        "art": "disposición adicional segunda",
+        "title": "Referencias normativas."
+      },
+      "status": "mapped",
+      "note": "Misma estructura formal; RDL 28 no está en vigor (previsto 15-11-2026, pendiente de convalidación)"
+    },
+    {
+      "id": "rdl27-disposición transitoria única",
+      "from": {
+        "norma": "rdl27",
+        "art": "disposición transitoria única",
+        "title": "Contratos de arrendamiento vigentes."
+      },
+      "to": {
+        "norma": "rdl28",
+        "art": "disposición transitoria única",
+        "title": "Contratos de arrendamiento vigentes."
+      },
+      "status": "mapped",
+      "note": "Misma estructura formal; RDL 28 no está en vigor (previsto 15-11-2026, pendiente de convalidación)"
+    },
+    {
+      "id": "rdl27-disposición final primera",
+      "from": {
+        "norma": "rdl27",
+        "art": "disposición final primera",
+        "title": "Título competencial."
+      },
+      "to": {
+        "norma": "rdl28",
+        "art": "disposición final primera",
+        "title": "Título competencial."
+      },
+      "status": "mapped",
+      "note": "Misma estructura formal; RDL 28 no está en vigor (previsto 15-11-2026, pendiente de convalidación)"
+    },
+    {
+      "id": "rdl27-disposición final segunda",
+      "from": {
+        "norma": "rdl27",
+        "art": "disposición final segunda",
+        "title": "Entrada en vigor."
+      },
+      "to": {
+        "norma": "rdl28",
+        "art": "disposición final segunda",
+        "title": "Entrada en vigor."
+      },
+      "status": "mapped",
+      "note": "Misma estructura formal; RDL 28 no está en vigor (previsto 15-11-2026, pendiente de convalidación)"
+    }
+  ],
+  "lookup": {
+    "rdl26:1": "rdl26-1",
+    "rdl26:2": "rdl26-2",
+    "rdl26:3": "rdl26-3",
+    "rdl26:4": "rdl26-4",
+    "rdl26:5": "rdl26-5",
+    "rdl26:6": "rdl26-6",
+    "rdl26:7": "rdl26-7",
+    "rdl26:8": "rdl26-8",
+    "rdl26:9": "rdl26-9",
+    "rdl26:10": "rdl26-10",
+    "rdl26:11": "rdl26-11",
+    "rdl26:12": "rdl26-12",
+    "rdl26:13": "rdl26-13",
+    "rdl26:14": "rdl26-14",
+    "rdl26:15": "rdl26-15",
+    "rdl26:16": "rdl26-16",
+    "rdl26:17": "rdl26-17",
+    "rdl26:18": "rdl26-18",
+    "rdl26:19": "rdl26-19",
+    "rdl26:20": "rdl26-20",
+    "rdl26:disposición adicional primera": "rdl26-disposición adicional primera",
+    "rdl26:disposición adicional segunda": "rdl26-disposición adicional segunda",
+    "rdl26:disposición transitoria primera": "rdl26-disposición transitoria primera",
+    "rdl26:disposición transitoria segunda": "rdl26-disposición transitoria segunda",
+    "rdl26:disposición derogatoria única": "rdl26-disposición derogatoria única",
+    "rdl26:disposición final primera": "rdl26-disposición final primera",
+    "rdl26:disposición final segunda": "rdl26-disposición final segunda",
+    "rdl26:disposición final tercera": "rdl26-disposición final tercera",
+    "rdl26:disposición final cuarta": "rdl26-disposición final cuarta",
+    "rdl26:disposición final quinta": "rdl26-disposición final quinta",
+    "rdl26:disposición final sexta": "rdl26-disposición final sexta",
+    "rdl26:disposición final séptima": "rdl26-disposición final séptima",
+    "rdl26:disposición final octava": "rdl26-disposición final octava",
+    "rdl26:disposición final novena": "rdl26-disposición final novena",
+    "rdl26:disposición final décima": "rdl26-disposición final décima",
+    "rdl26:disposición final undécima": "rdl26-disposición final undécima",
+    "rdl27:único": "rdl27-único",
+    "rdl27:disposición adicional primera": "rdl27-disposición adicional primera",
+    "rdl27:disposición adicional segunda": "rdl27-disposición adicional segunda",
+    "rdl27:disposición transitoria única": "rdl27-disposición transitoria única",
+    "rdl27:disposición final primera": "rdl27-disposición final primera",
+    "rdl27:disposición final segunda": "rdl27-disposición final segunda"
+  }
+}
