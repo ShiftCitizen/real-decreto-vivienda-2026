@@ -21,7 +21,11 @@ Nuevos decretos (6 de octubre de 2026). El Consejo de Ministros aprobó el 6 de 
 
 Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026: el Congreso rechazó su convalidación (172 a favor y 178 en contra el RDL 26/2026; el RDL 27/2026 fue rechazado sin cifra a favor confirmada, con 184 en contra) y ambos dejan de estar en vigor desde ese día.
 
-Rigen la LAU y las demás normas anteriores a los decretos. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
+Entre el 2-10-2026 y el 8-10-2026 (entrada en vigor del RDL 29/2026):
+
+Rigen la LAU y las demás normas anteriores a los decretos.
+
+Desde el 8-10-2026 rige el RDL 29/2026 en lo que reproduce; el RDL 28/2026 sigue pendiente de entrada en vigor. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos. Si alguna medida se tramita como proyecto de ley, este sitio se actualizará desde ese texto.
 
 disposición final undécima.1 RDL 26/2026 disposición final segunda RDL 27/2026 art. 86.2 CE
 

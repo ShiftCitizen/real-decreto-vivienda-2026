@@ -48,25 +48,29 @@ export default function DesahuciosPage() {
       </h2>
 
       <p>
-        Hasta el 31 de diciembre de 2030, toda entidad con o sin personalidad jurídica que
-        incluya en su objeto social la adquisición de inmuebles tiene limitada la adquisición de
-        una vivienda, a título gratuito u oneroso, por un precio inferior al 70 % de su valor de
-        mercado ajustado. Afecta tanto a viviendas en estado de uso como a las de edificios
-        construidos sobre suelo de calificación residencial que cumplan los requisitos para
-        obtener la cédula de habitabilidad, desde que dispongan de certificado de fin de obra.{' '}
-        <CiteMap norma="rdl26" art="1.1" /> El RDL 26/2026, derogado, fijaba el mismo tope del
-        70 % solo hasta el 31-12-2028 y hablaba de «valor de tasación de mercado»; eso ya no
-        rige.
+        Hasta el 31 de diciembre de 2030, toda entidad con o sin personalidad jurídica dedicada a
+        adquirir inmuebles o carteras de préstamos hipotecarios impagados por un precio claramente
+        inferior a su valor de tasación de mercado, así como las personas jurídicas que sean gran
+        tenedor conforme a la legislación estatal de vivienda (o las entidades de su mismo grupo o
+        que actúen por su cuenta), tiene limitada la adquisición de una vivienda, a título gratuito
+        u oneroso, por un valor de contraprestación inferior al 70 % de su valor de mercado,
+        determinado a la fecha del acuerdo vinculante por una sociedad de tasación homologada e
+        inscrita en el Banco de España. Afecta tanto a viviendas en estado de uso como a las de
+        edificios construidos sobre suelo de calificación residencial que cumplan los requisitos
+        para obtener la cédula de habitabilidad, desde que dispongan de certificado de fin de obra.{' '}
+        <CiteMap norma="rdl26" art="1.1" /> El RDL 26/2026, derogado, limitaba el mismo tope del
+        70 % solo hasta el 31-12-2028, con un ámbito subjetivo distinto («objeto social» la
+        adquisición de inmuebles) y hablaba de «valor de tasación de mercado»; eso ya no rige.
       </p>
 
       <p>
         Quedan fuera las cinco finalidades del apartado 2: destino a vivienda habitual a precio
-        asequible o social durante un plazo mínimo de cinco años; residencia de personas que
-        precisen atención sociosanitaria; residencia de colectivos socialmente vulnerables por
-        parte de entidades del tercer sector; protección de las víctimas de violencia de género,
-        tanto de atención como residencial; y cuando la persona jurídica compradora acredite su
-        adhesión a un Código de Buenas Prácticas acordado con la autoridad competente en materia de
-        vivienda (las entidades públicas se entienden adheridas).{' '}
+        asequible o social hasta al menos el 31-12-2030; residencia de personas que precisen
+        atención sociosanitaria; residencia de colectivos socialmente vulnerables por parte de
+        entidades del tercer sector; protección de las víctimas de violencia de género, tanto de
+        atención como residencial; y cuando las entidades compradoras acrediten su adhesión al
+        Código de Buenas Prácticas aprobado por Acuerdo de Consejo de Ministros (las entidades
+        públicas de vivienda social o asequible se entienden cumpliendo esa condición).{' '}
         <CiteMap norma="rdl26" art="1.2.e" />
       </p>
 
