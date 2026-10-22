@@ -54,7 +54,8 @@ export default function FiscalPage() {
         El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación)
         recupera las reducciones en el IRPF por alquiler, el IVA sobre estancias
         cortas, los recargos de IBI y el gravamen especial de las SOCIMI. Esta
-        página los describe con las citas del RDL 26/2026, derogado el 2-10-2026,
+        página los describe citando primero el RDL 29/2026 y, entre paréntesis, el artículo
+        equivalente del RDL 26/2026, derogado el 2-10-2026,
         cuyo contenido reproduce en lo sustancial.
       </p>
 

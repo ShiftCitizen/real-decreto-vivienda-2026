@@ -44,7 +44,8 @@ export default function FinanciacionPage() {
         El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación)
         recupera la movilización de parque público, las líneas de avales, el
         préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa.
-        Esta página los describe con las citas del RDL 26/2026, derogado el
+        Esta página los describe citando primero el RDL 29/2026 y, entre
+        paréntesis, el artículo equivalente del RDL 26/2026, derogado el
         2-10-2026, cuyo contenido reproduce en lo sustancial.
       </p>
 
@@ -54,10 +55,11 @@ export default function FinanciacionPage() {
         <strong>Cómo está organizada esta página.</strong>
         <p>
           «Parque público (arts. 11 a 14)», «Avales y TU CASA (arts. 15 a 19)», «El mecanismo TU
-          CASA (art. 19 RDL 26/2026)» y «Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL
-          26/2026)» describen lo que contenía el <span className="tono-rdl26">RDL 26/2026</span> y
-          lo que reproduce ahora el <span className="tono-rdl29">RDL 29/2026</span>, en vigor desde
-          el 8-10-2026 y pendiente de convalidación. Cada referencia lleva la etiqueta de su norma.
+          CASA (art. 19 RDL 29/2026)» y «Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL
+          29/2026; antes art. 20 RDL 26/2026)» describen lo que reproduce el{' '}
+          <span className="tono-rdl29">RDL 29/2026</span>, en vigor desde el 8-10-2026 y pendiente
+          de convalidación. El art. 20 del RDL 29/2026 es distinto: publicidad de arrendamientos
+          (nuevo; no existía en el RDL 26/2026). Cada referencia lleva la etiqueta de su norma.
         </p>
       </div>
 
@@ -188,7 +190,8 @@ export default function FinanciacionPage() {
       </p>
 
       <h2 id={slugify('Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)')}>
-        Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)
+        Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL 29/2026; antes art. 20 RDL
+        26/2026)
       </h2>
 
       <p>

@@ -22,7 +22,8 @@ export default function DesahuciosPage() {
         hasta 2030, la enervación extraordinaria y la reforma de la LAU; el RDL
         28/2026 trae la prórroga por plazos sucesivos de cinco y siete años y la
         indemnización (pendiente de convalidación). Esta página describe esas
-        medidas con las citas de los RDL 26/2026 y 27/2026, derogados el 2-10-2026,
+        medidas citando primero el RDL 29/2026 o el RDL 28/2026 y, entre paréntesis, el
+        artículo equivalente de los RDL 26/2026 y 27/2026, derogados el 2-10-2026,
         cuyo contenido reproducen en lo sustancial.
       </p>
 
@@ -42,17 +43,19 @@ export default function DesahuciosPage() {
       </div>
 
       <h2 id={slugify('Art. 1 (RDL 26/2026). Freno a la compra especulativa')}>
-        Art. 1 (RDL 26/2026). Freno a la compra especulativa
+        Art. 1 RDL 29/2026 (antes RDL 26/2026). Freno a la compra especulativa
       </h2>
 
       <p>
-        Hasta el 31 de diciembre de 2028, toda entidad con o sin personalidad jurídica que
+        Hasta el 31 de diciembre de 2030, toda entidad con o sin personalidad jurídica que
         incluya en su objeto social la adquisición de inmuebles tiene limitada la adquisición de
         una vivienda, a título gratuito u oneroso, por un precio inferior al 70 % de su valor de
-        tasación de mercado. Afecta tanto a viviendas en estado de uso como a las de edificios
+        mercado ajustado. Afecta tanto a viviendas en estado de uso como a las de edificios
         construidos sobre suelo de calificación residencial que cumplan los requisitos para
         obtener la cédula de habitabilidad, desde que dispongan de certificado de fin de obra.{' '}
-        <CiteMap norma="rdl26" art="1.1" />
+        <CiteMap norma="rdl26" art="1.1" /> El RDL 26/2026, derogado, fijaba el mismo tope del
+        70 % solo hasta el 31-12-2028 y hablaba de «valor de tasación de mercado»; eso ya no
+        rige.
       </p>
 
       <p>
@@ -76,7 +79,7 @@ export default function DesahuciosPage() {
       </p>
 
       <h2 id={slugify('Art. 2 (RDL 26/2026). Suspensión de desahucios hasta el 31-12-2030')}>
-        Art. 2 (RDL 26/2026). Suspensión de desahucios hasta el 31-12-2030
+        Art. 2 RDL 29/2026 (antes RDL 26/2026). Suspensión de desahucios hasta el 31-12-2030
       </h2>
 
       <h3>Apartado 1: demandante especulativo</h3>
