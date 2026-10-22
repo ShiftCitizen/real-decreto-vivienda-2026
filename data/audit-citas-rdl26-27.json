@@ -1,0 +1,1063 @@
+{
+  "generated": "2026-10-22",
+  "scope": "Typed citations only (<Cite norma=\"rdl26|rdl27\"> and faq/cronologia objects). Prose mentions of the decree names are excluded.",
+  "total": 108,
+  "by_page": {
+    "/desahucios-y-alquiler": {
+      "count": 26,
+      "by_art": {
+        "rdl26 · 1.1": 1,
+        "rdl26 · 1.2.e": 1,
+        "rdl26 · 1.3 y 4": 1,
+        "rdl26 · 2.1": 1,
+        "rdl26 · 5.Dos": 1,
+        "rdl26 · 2.2": 3,
+        "rdl26 · 5": 1,
+        "rdl26 · disposición transitoria segunda": 1,
+        "rdl26 · 4": 1,
+        "rdl26 · 4.Uno": 1,
+        "rdl26 · disposición final quinta.1": 2,
+        "rdl27 · disposición adicional primera.3": 1,
+        "rdl26 · disposición final quinta.2": 1,
+        "rdl26 · disposición final sexta": 1,
+        "rdl27 · único.1": 1,
+        "rdl27 · disposición transitoria única.1": 1,
+        "rdl27 · disposición transitoria única.2": 1,
+        "rdl27 · disposición transitoria única.3": 1,
+        "rdl27 · disposición transitoria única.4": 1,
+        "rdl27 · disposición transitoria única.5": 1,
+        "rdl27 · disposición adicional segunda": 1,
+        "rdl27 · disposición final primera": 1,
+        "rdl27 · disposición final segunda": 1
+      }
+    },
+    "FAQ (lib/faq.ts → portada)": {
+      "count": 26,
+      "by_art": {
+        "rdl26 · 3.Once": 1,
+        "rdl26 · disposición final sexta": 1,
+        "rdl26 · 5.Dos": 1,
+        "rdl26 · 2": 1,
+        "rdl27 · único.1": 1,
+        "rdl27 · disposición transitoria única.1": 1,
+        "rdl27 · disposición transitoria única.2 y 3": 1,
+        "rdl27 · disposición transitoria única.5": 1,
+        "rdl26 · 4.Uno": 1,
+        "rdl26 · 14": 1,
+        "rdl26 · 11": 1,
+        "rdl26 · 9.Uno.5": 1,
+        "rdl26 · 9.Dos": 1,
+        "rdl26 · disposición final undécima.3.a": 1,
+        "rdl26 · disposición final undécima.3.b y c": 1,
+        "rdl26 · disposición final octava.2": 1,
+        "rdl26 · disposición adicional segunda": 1,
+        "rdl26 · 3.Veinte": 1,
+        "rdl26 · 8.Cuatro": 1,
+        "rdl26 · 6.Segundo.Cuatro": 1,
+        "rdl26 · 6.Segundo.Once": 1,
+        "rdl26 · 6.Segundo.Doce": 2,
+        "rdl26 · disposición final tercera.Uno": 1,
+        "rdl26 · 7.Cuatro": 1,
+        "rdl26 · 6.Segundo.Cinco": 1
+      }
+    },
+    "/financiacion": {
+      "count": 24,
+      "by_art": {
+        "rdl26 · 16": 1,
+        "rdl26 · 17": 1,
+        "rdl26 · 11": 1,
+        "rdl26 · 19": 1,
+        "rdl26 · 20": 1,
+        "rdl26 · 6.Segundo.Cinco.1.f": 1,
+        "rdl26 · 6.Segundo.Doce.5": 1,
+        "rdl26 · 6.Segundo.Cinco.3": 1,
+        "rdl26 · 6.Segundo.Cinco": 1,
+        "rdl26 · 6.Segundo.Doce": 2,
+        "rdl26 · 6.Segundo.Siete.1.c y e": 1,
+        "rdl26 · 6.Segundo.Siete.3": 2,
+        "rdl26 · disposición adicional primera": 1,
+        "rdl26 · disposición adicional segunda": 1,
+        "rdl26 · disposición final tercera.Uno": 1,
+        "rdl26 · disposición final tercera.Dos": 1,
+        "rdl26 · disposición final tercera.Tres y Cuatro": 1,
+        "rdl26 · disposición final cuarta": 1,
+        "rdl26 · disposición final octava.2": 1,
+        "rdl26 · disposición final undécima.3": 1,
+        "rdl26 · disposición final novena": 1,
+        "rdl26 · disposición final undécima.2": 1
+      }
+    },
+    "/fiscal": {
+      "count": 17,
+      "by_art": {
+        "rdl26 · 6.Segundo.Dos": 1,
+        "rdl26 · 6.Segundo.Catorce": 1,
+        "rdl26 · 6.Segundo.Tres y Cuatro": 1,
+        "rdl26 · 6.Segundo.Cuatro": 1,
+        "rdl26 · 6.Segundo.Once": 2,
+        "rdl26 · 6.Segundo.Doce": 1,
+        "rdl26 · 6.Tercero.Dos": 1,
+        "rdl26 · 6.Tercero.Uno": 1,
+        "rdl26 · disposición final tercera.Uno": 1,
+        "rdl26 · 7.Uno": 1,
+        "rdl26 · 7.Tres": 1,
+        "rdl26 · 7.Cuatro": 1,
+        "rdl26 · 9.Uno": 1,
+        "rdl26 · 9.Uno.5": 1,
+        "rdl26 · 9.Dos": 1,
+        "rdl26 · 10": 1
+      }
+    },
+    "cronología (lib/cronologia.ts)": {
+      "count": 5,
+      "by_art": {
+        "rdl27 · único.1": 1,
+        "rdl27 · disposición final segunda": 1,
+        "rdl26 · 1 a 5": 1,
+        "rdl26 · disposiciones finales quinta y sexta": 1,
+        "rdl26 · disposición final undécima.1": 1
+      }
+    },
+    "/": {
+      "count": 4,
+      "by_art": {
+        "rdl26 · 1.2": 1,
+        "rdl26 · 3.Cuatro.f": 1,
+        "rdl26 · 6.Segundo.Dos.c": 1,
+        "rdl26 · disposición adicional primera": 1
+      }
+    },
+    "/normas": {
+      "count": 4,
+      "by_art": {
+        "rdl26 · disposición final undécima.1": 1,
+        "rdl27 · disposición final segunda": 1,
+        "rdl26 · 3.Ocho": 1,
+        "rdl26 · disposición final quinta.1": 1
+      }
+    },
+    "/estado": {
+      "count": 2,
+      "by_art": {
+        "rdl26 · disposición final décima.8": 1,
+        "rdl27 · disposición final primera": 1
+      }
+    }
+  },
+  "detail": {
+    "/desahucios-y-alquiler": {
+      "count": 26,
+      "by_art": {
+        "rdl26 · 1.1": 1,
+        "rdl26 · 1.2.e": 1,
+        "rdl26 · 1.3 y 4": 1,
+        "rdl26 · 2.1": 1,
+        "rdl26 · 5.Dos": 1,
+        "rdl26 · 2.2": 3,
+        "rdl26 · 5": 1,
+        "rdl26 · disposición transitoria segunda": 1,
+        "rdl26 · 4": 1,
+        "rdl26 · 4.Uno": 1,
+        "rdl26 · disposición final quinta.1": 2,
+        "rdl27 · disposición adicional primera.3": 1,
+        "rdl26 · disposición final quinta.2": 1,
+        "rdl26 · disposición final sexta": 1,
+        "rdl27 · único.1": 1,
+        "rdl27 · disposición transitoria única.1": 1,
+        "rdl27 · disposición transitoria única.2": 1,
+        "rdl27 · disposición transitoria única.3": 1,
+        "rdl27 · disposición transitoria única.4": 1,
+        "rdl27 · disposición transitoria única.5": 1,
+        "rdl27 · disposición adicional segunda": 1,
+        "rdl27 · disposición final primera": 1,
+        "rdl27 · disposición final segunda": 1
+      },
+      "items": [
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 54,
+          "norma": "rdl26",
+          "art": "1.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 65,
+          "norma": "rdl26",
+          "art": "1.2.e",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 73,
+          "norma": "rdl26",
+          "art": "1.3 y 4",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 91,
+          "norma": "rdl26",
+          "art": "2.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 100,
+          "norma": "rdl26",
+          "art": "5.Dos",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 100,
+          "norma": "rdl26",
+          "art": "2.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 122,
+          "norma": "rdl26",
+          "art": "2.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 143,
+          "norma": "rdl26",
+          "art": "2.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 187,
+          "norma": "rdl26",
+          "art": "5",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 197,
+          "norma": "rdl26",
+          "art": "disposición transitoria segunda",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 380,
+          "norma": "rdl26",
+          "art": "4",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 397,
+          "norma": "rdl26",
+          "art": "4.Uno",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 413,
+          "norma": "rdl26",
+          "art": "disposición final quinta.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 435,
+          "norma": "rdl26",
+          "art": "disposición final quinta.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 436,
+          "norma": "rdl27",
+          "art": "disposición adicional primera.3",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 441,
+          "norma": "rdl26",
+          "art": "disposición final quinta.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 452,
+          "norma": "rdl26",
+          "art": "disposición final sexta",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 475,
+          "norma": "rdl27",
+          "art": "único.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 698,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 703,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 709,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.3",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 720,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.4",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 732,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.5",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 741,
+          "norma": "rdl27",
+          "art": "disposición adicional segunda",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 745,
+          "norma": "rdl27",
+          "art": "disposición final primera",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/desahucios-y-alquiler/page.tsx",
+          "line": 747,
+          "norma": "rdl27",
+          "art": "disposición final segunda",
+          "kind": "Cite"
+        }
+      ]
+    },
+    "FAQ (lib/faq.ts → portada)": {
+      "count": 26,
+      "by_art": {
+        "rdl26 · 3.Once": 1,
+        "rdl26 · disposición final sexta": 1,
+        "rdl26 · 5.Dos": 1,
+        "rdl26 · 2": 1,
+        "rdl27 · único.1": 1,
+        "rdl27 · disposición transitoria única.1": 1,
+        "rdl27 · disposición transitoria única.2 y 3": 1,
+        "rdl27 · disposición transitoria única.5": 1,
+        "rdl26 · 4.Uno": 1,
+        "rdl26 · 14": 1,
+        "rdl26 · 11": 1,
+        "rdl26 · 9.Uno.5": 1,
+        "rdl26 · 9.Dos": 1,
+        "rdl26 · disposición final undécima.3.a": 1,
+        "rdl26 · disposición final undécima.3.b y c": 1,
+        "rdl26 · disposición final octava.2": 1,
+        "rdl26 · disposición adicional segunda": 1,
+        "rdl26 · 3.Veinte": 1,
+        "rdl26 · 8.Cuatro": 1,
+        "rdl26 · 6.Segundo.Cuatro": 1,
+        "rdl26 · 6.Segundo.Once": 1,
+        "rdl26 · 6.Segundo.Doce": 2,
+        "rdl26 · disposición final tercera.Uno": 1,
+        "rdl26 · 7.Cuatro": 1,
+        "rdl26 · 6.Segundo.Cinco": 1
+      },
+      "items": [
+        {
+          "file": "lib/faq.ts",
+          "line": 44,
+          "norma": "rdl26",
+          "art": "3.Once",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 45,
+          "norma": "rdl26",
+          "art": "disposición final sexta",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 62,
+          "norma": "rdl26",
+          "art": "5.Dos",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 63,
+          "norma": "rdl26",
+          "art": "2",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 98,
+          "norma": "rdl27",
+          "art": "único.1",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 110,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.1",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 111,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.2 y 3",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 112,
+          "norma": "rdl27",
+          "art": "disposición transitoria única.5",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 126,
+          "norma": "rdl26",
+          "art": "4.Uno",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 139,
+          "norma": "rdl26",
+          "art": "14",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 140,
+          "norma": "rdl26",
+          "art": "11",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 141,
+          "norma": "rdl26",
+          "art": "9.Uno.5",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 142,
+          "norma": "rdl26",
+          "art": "9.Dos",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 155,
+          "norma": "rdl26",
+          "art": "disposición final undécima.3.a",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 156,
+          "norma": "rdl26",
+          "art": "disposición final undécima.3.b y c",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 157,
+          "norma": "rdl26",
+          "art": "disposición final octava.2",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 158,
+          "norma": "rdl26",
+          "art": "disposición adicional segunda",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 174,
+          "norma": "rdl26",
+          "art": "3.Veinte",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 175,
+          "norma": "rdl26",
+          "art": "8.Cuatro",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 188,
+          "norma": "rdl26",
+          "art": "6.Segundo.Cuatro",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 202,
+          "norma": "rdl26",
+          "art": "6.Segundo.Once",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 204,
+          "norma": "rdl26",
+          "art": "6.Segundo.Doce",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 216,
+          "norma": "rdl26",
+          "art": "disposición final tercera.Uno",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 228,
+          "norma": "rdl26",
+          "art": "7.Cuatro",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 243,
+          "norma": "rdl26",
+          "art": "6.Segundo.Cinco",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/faq.ts",
+          "line": 246,
+          "norma": "rdl26",
+          "art": "6.Segundo.Doce",
+          "kind": "obj"
+        }
+      ]
+    },
+    "/financiacion": {
+      "count": 24,
+      "by_art": {
+        "rdl26 · 16": 1,
+        "rdl26 · 17": 1,
+        "rdl26 · 11": 1,
+        "rdl26 · 19": 1,
+        "rdl26 · 20": 1,
+        "rdl26 · 6.Segundo.Cinco.1.f": 1,
+        "rdl26 · 6.Segundo.Doce.5": 1,
+        "rdl26 · 6.Segundo.Cinco.3": 1,
+        "rdl26 · 6.Segundo.Cinco": 1,
+        "rdl26 · 6.Segundo.Doce": 2,
+        "rdl26 · 6.Segundo.Siete.1.c y e": 1,
+        "rdl26 · 6.Segundo.Siete.3": 2,
+        "rdl26 · disposición adicional primera": 1,
+        "rdl26 · disposición adicional segunda": 1,
+        "rdl26 · disposición final tercera.Uno": 1,
+        "rdl26 · disposición final tercera.Dos": 1,
+        "rdl26 · disposición final tercera.Tres y Cuatro": 1,
+        "rdl26 · disposición final cuarta": 1,
+        "rdl26 · disposición final octava.2": 1,
+        "rdl26 · disposición final undécima.3": 1,
+        "rdl26 · disposición final novena": 1,
+        "rdl26 · disposición final undécima.2": 1
+      },
+      "items": [
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 66,
+          "norma": "rdl26",
+          "art": "16",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 67,
+          "norma": "rdl26",
+          "art": "17",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 90,
+          "norma": "rdl26",
+          "art": "11",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 184,
+          "norma": "rdl26",
+          "art": "19",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 194,
+          "norma": "rdl26",
+          "art": "20",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 223,
+          "norma": "rdl26",
+          "art": "6.Segundo.Cinco.1.f",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 224,
+          "norma": "rdl26",
+          "art": "6.Segundo.Doce.5",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 234,
+          "norma": "rdl26",
+          "art": "6.Segundo.Cinco.3",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 239,
+          "norma": "rdl26",
+          "art": "6.Segundo.Cinco",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 242,
+          "norma": "rdl26",
+          "art": "6.Segundo.Doce",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 263,
+          "norma": "rdl26",
+          "art": "6.Segundo.Siete.1.c y e",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 268,
+          "norma": "rdl26",
+          "art": "6.Segundo.Siete.3",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 272,
+          "norma": "rdl26",
+          "art": "6.Segundo.Siete.3",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 288,
+          "norma": "rdl26",
+          "art": "disposición adicional primera",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 294,
+          "norma": "rdl26",
+          "art": "disposición adicional segunda",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 298,
+          "norma": "rdl26",
+          "art": "disposición final tercera.Uno",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 300,
+          "norma": "rdl26",
+          "art": "disposición final tercera.Dos",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 301,
+          "norma": "rdl26",
+          "art": "disposición final tercera.Tres y Cuatro",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 302,
+          "norma": "rdl26",
+          "art": "6.Segundo.Doce",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 313,
+          "norma": "rdl26",
+          "art": "disposición final cuarta",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 320,
+          "norma": "rdl26",
+          "art": "disposición final octava.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 329,
+          "norma": "rdl26",
+          "art": "disposición final undécima.3",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 334,
+          "norma": "rdl26",
+          "art": "disposición final novena",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/financiacion/page.tsx",
+          "line": 353,
+          "norma": "rdl26",
+          "art": "disposición final undécima.2",
+          "kind": "Cite"
+        }
+      ]
+    },
+    "/fiscal": {
+      "count": 17,
+      "by_art": {
+        "rdl26 · 6.Segundo.Dos": 1,
+        "rdl26 · 6.Segundo.Catorce": 1,
+        "rdl26 · 6.Segundo.Tres y Cuatro": 1,
+        "rdl26 · 6.Segundo.Cuatro": 1,
+        "rdl26 · 6.Segundo.Once": 2,
+        "rdl26 · 6.Segundo.Doce": 1,
+        "rdl26 · 6.Tercero.Dos": 1,
+        "rdl26 · 6.Tercero.Uno": 1,
+        "rdl26 · disposición final tercera.Uno": 1,
+        "rdl26 · 7.Uno": 1,
+        "rdl26 · 7.Tres": 1,
+        "rdl26 · 7.Cuatro": 1,
+        "rdl26 · 9.Uno": 1,
+        "rdl26 · 9.Uno.5": 1,
+        "rdl26 · 9.Dos": 1,
+        "rdl26 · 10": 1
+      },
+      "items": [
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 111,
+          "norma": "rdl26",
+          "art": "6.Segundo.Dos",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 123,
+          "norma": "rdl26",
+          "art": "6.Segundo.Catorce",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 136,
+          "norma": "rdl26",
+          "art": "6.Segundo.Tres y Cuatro",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 145,
+          "norma": "rdl26",
+          "art": "6.Segundo.Cuatro",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 158,
+          "norma": "rdl26",
+          "art": "6.Segundo.Once",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 168,
+          "norma": "rdl26",
+          "art": "6.Segundo.Once",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 171,
+          "norma": "rdl26",
+          "art": "6.Segundo.Doce",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 182,
+          "norma": "rdl26",
+          "art": "6.Tercero.Dos",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 189,
+          "norma": "rdl26",
+          "art": "6.Tercero.Uno",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 199,
+          "norma": "rdl26",
+          "art": "disposición final tercera.Uno",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 213,
+          "norma": "rdl26",
+          "art": "7.Uno",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 227,
+          "norma": "rdl26",
+          "art": "7.Tres",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 238,
+          "norma": "rdl26",
+          "art": "7.Cuatro",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 371,
+          "norma": "rdl26",
+          "art": "9.Uno",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 382,
+          "norma": "rdl26",
+          "art": "9.Uno.5",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 393,
+          "norma": "rdl26",
+          "art": "9.Dos",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/fiscal/page.tsx",
+          "line": 402,
+          "norma": "rdl26",
+          "art": "10",
+          "kind": "Cite"
+        }
+      ]
+    },
+    "cronología (lib/cronologia.ts)": {
+      "count": 5,
+      "by_art": {
+        "rdl27 · único.1": 1,
+        "rdl27 · disposición final segunda": 1,
+        "rdl26 · 1 a 5": 1,
+        "rdl26 · disposiciones finales quinta y sexta": 1,
+        "rdl26 · disposición final undécima.1": 1
+      },
+      "items": [
+        {
+          "file": "lib/cronologia.ts",
+          "line": 74,
+          "norma": "rdl27",
+          "art": "único.1",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/cronologia.ts",
+          "line": 76,
+          "norma": "rdl27",
+          "art": "disposición final segunda",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/cronologia.ts",
+          "line": 83,
+          "norma": "rdl26",
+          "art": "1 a 5",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/cronologia.ts",
+          "line": 84,
+          "norma": "rdl26",
+          "art": "disposiciones finales quinta y sexta",
+          "kind": "obj"
+        },
+        {
+          "file": "lib/cronologia.ts",
+          "line": 85,
+          "norma": "rdl26",
+          "art": "disposición final undécima.1",
+          "kind": "obj"
+        }
+      ]
+    },
+    "/": {
+      "count": 4,
+      "by_art": {
+        "rdl26 · 1.2": 1,
+        "rdl26 · 3.Cuatro.f": 1,
+        "rdl26 · 6.Segundo.Dos.c": 1,
+        "rdl26 · disposición adicional primera": 1
+      },
+      "items": [
+        {
+          "file": "app/page.tsx",
+          "line": 390,
+          "norma": "rdl26",
+          "art": "1.2",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/page.tsx",
+          "line": 397,
+          "norma": "rdl26",
+          "art": "3.Cuatro.f",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/page.tsx",
+          "line": 405,
+          "norma": "rdl26",
+          "art": "6.Segundo.Dos.c",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/page.tsx",
+          "line": 413,
+          "norma": "rdl26",
+          "art": "disposición adicional primera",
+          "kind": "Cite"
+        }
+      ]
+    },
+    "/normas": {
+      "count": 4,
+      "by_art": {
+        "rdl26 · disposición final undécima.1": 1,
+        "rdl27 · disposición final segunda": 1,
+        "rdl26 · 3.Ocho": 1,
+        "rdl26 · disposición final quinta.1": 1
+      },
+      "items": [
+        {
+          "file": "app/normas/page.tsx",
+          "line": 76,
+          "norma": "rdl26",
+          "art": "disposición final undécima.1",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/normas/page.tsx",
+          "line": 82,
+          "norma": "rdl27",
+          "art": "disposición final segunda",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/normas/page.tsx",
+          "line": 99,
+          "norma": "rdl26",
+          "art": "3.Ocho",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/normas/page.tsx",
+          "line": 107,
+          "norma": "rdl26",
+          "art": "disposición final quinta.1",
+          "kind": "Cite"
+        }
+      ]
+    },
+    "/estado": {
+      "count": 2,
+      "by_art": {
+        "rdl26 · disposición final décima.8": 1,
+        "rdl27 · disposición final primera": 1
+      },
+      "items": [
+        {
+          "file": "app/estado/page.tsx",
+          "line": 387,
+          "norma": "rdl26",
+          "art": "disposición final décima.8",
+          "kind": "Cite"
+        },
+        {
+          "file": "app/estado/page.tsx",
+          "line": 392,
+          "norma": "rdl27",
+          "art": "disposición final primera",
+          "kind": "Cite"
+        }
+      ]
+    }
+  }
+}
