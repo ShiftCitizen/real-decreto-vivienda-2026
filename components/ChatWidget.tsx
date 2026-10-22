@@ -120,7 +120,7 @@ export default function ChatWidget() {
         aria-controls="asistente"
         onClick={() => (abierto ? cerrar() : setAbierto(true))}
       >
-        <span aria-hidden="true">?</span>
+        <span aria-hidden="true">💬</span>
         <span className="chat-fab-label">Pregunta a los decretos</span>
       </button>
 
@@ -155,8 +155,8 @@ export default function ChatWidget() {
 
           {estado.tipo === 'cargando' && (
             <div className="chat-estado" role="status">
-              <span className="chat-loader" aria-hidden="true" />
               <span>Buscando en los decretos…</span>
+              <span className="chat-loader" aria-hidden="true" />
             </div>
           )}
           {estado.tipo === 'error' && (

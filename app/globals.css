@@ -499,7 +499,8 @@ li {
 }
 
 .chat-fab > span:first-child {
-  font: 700 18px/1 Georgia, serif;
+  font-size: 1.05em;
+  line-height: 1;
 }
 
 .chat-fab:hover {
