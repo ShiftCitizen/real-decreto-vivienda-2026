@@ -6,6 +6,7 @@ import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import Timeline from '@/components/Timeline';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 export const metadata: Metadata = {
   title: 'Estado y advertencias',
@@ -405,7 +406,7 @@ export default function EstadoPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: {revisionDe('/estado')}. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}

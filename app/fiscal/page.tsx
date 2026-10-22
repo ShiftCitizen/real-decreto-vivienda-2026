@@ -5,6 +5,7 @@ import Cite from '@/components/Cite';
 import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 export const metadata: Metadata = {
   title: 'Fiscalidad',
@@ -455,7 +456,7 @@ export default function FiscalPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: {revisionDe('/fiscal')}. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

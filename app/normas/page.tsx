@@ -5,6 +5,7 @@ import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import { NORMAS, NORMA_IDS } from '@/lib/normas';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 export const metadata: Metadata = {
   title: 'Normas citadas',
@@ -131,7 +132,7 @@ export default function NormasPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026.{' '}
+        Última revisión: {revisionDe('/normas')}.{' '}
         <Link href="/">Volver al resumen</Link>
       </p>
     </>

@@ -6,6 +6,7 @@ import FaqList from '@/components/FaqList';
 import ScrollTable from '@/components/ScrollTable';
 import { CRONOLOGIA } from '@/lib/cronologia';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 /**
  * MAIN PAGE — DOCUMENTACIÓN DE MANTENIMIENTO (requerido por spec)
@@ -469,7 +470,7 @@ export default function HomePage() {
       </ul>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: {revisionDe('/')}. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}

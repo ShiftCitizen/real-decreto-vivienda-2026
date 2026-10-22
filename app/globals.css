@@ -1169,7 +1169,8 @@ th:last-child {
    Cabecera de la página
    -------------------------------------------------------------------------- */
 
-.page-meta {
+.page-meta,
+.meta-revision {
   font: 13px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--mute);
 }
