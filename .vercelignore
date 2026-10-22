@@ -15,6 +15,12 @@ public/search-index.json
 # vieja subiría por `public/` y /api/chat leería la tabla equivocada.
 public/okf-index.json
 
+# Generados por postbuild (`scripts/build-llms-txt.mjs`, no por
+# build-okf-index.mjs). Sin estas líneas, una copia vieja en public/ haría
+# sombra al llms.txt fresco del build en Vercel.
+public/llms.txt
+public/llms-full.txt
+
 # Never deploy a local build: Vercel runs its own `npm run build`, and shipping
 # out/ risks serving stale HTML that predates the build.
 out

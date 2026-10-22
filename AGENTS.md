@@ -4,11 +4,13 @@ Guidance for AI agents working in this repository. Read before editing.
 
 ## What this project is
 
-A hybrid Next.js 16 + TypeScript site that explains two Spanish
-**reales decreto-ley** on housing (RDL 26/2026 and RDL 27/2026). It is a reading
-aid, not legal advice, and the site says so.
+A hybrid Next.js 16 + TypeScript site that explains the Spanish 2026 housing
+**reales decreto-ley**: RDL 29/2026 (in force since 2026-10-08, pending
+convalidation) and RDL 28/2026 (published; planned entry 2026-11-15 if
+convalidated), with RDL 26/2026 and RDL 27/2026 as repealed history
+(2026-10-02). It is a reading aid, not legal advice, and the site says so.
 
-**There is no database.** All six pages are statically prerendered; the only
+**There is no database.** All seven pages are statically prerendered; the only
 server code is `POST /api/chat`, the chatbot proxy (it holds the NIM key
 server-side so the widget cannot become a free ChatGPT). Every other change
 must still work as static output.
@@ -38,7 +40,7 @@ them off the `postbuild` line of a real build.
 `output: 'export'` — `/api/chat` is a dynamic route handler, so a pure export
 build would reject it. Therefore:
 
-- All six pages stay statically prerendered; the **only** server code allowed
+- All seven pages stay statically prerendered; the **only** server code allowed
   is `POST /api/chat`. No server actions, no other route handlers, no dynamic
   rendering, no ISR anywhere else.
 - `redirects()`, `rewrites()` and `headers()` in `next.config.mjs` are
@@ -496,11 +498,12 @@ These have already caused real bugs here. Re-introducing them will cause them ag
   `<strong>`, `<em>` and same-page `<a href="#…">` only. Do not widen any tag
   allowlist without a reason.
 - **Do not retype legal text from memory.** Every substantive claim in the site
-  was checked against the BOE texts of RDL 26/2026 (`BOE-A-2026-20266`) and
-  RDL 27/2026 (`BOE-A-2026-20385`). If you cannot verify a claim against the
-  source, **remove it** rather than hedge it. Two unverifiable claims were
-  already deleted for exactly this reason, and `/estado` carries an explicit
-  "Lo que este sitio no afirma" box because of it.
+  was checked against the BOE texts of RDL 29/2026 (`BOE-A-2026-20823`),
+  RDL 28/2026 (`BOE-A-2026-20822`), and the repealed RDL 26/2026
+  (`BOE-A-2026-20266`) and RDL 27/2026 (`BOE-A-2026-20385`). If you cannot
+  verify a claim against the source, **remove it** rather than hedge it. Two
+  unverifiable claims were already deleted for exactly this reason, and
+  `/estado` carries an explicit "Lo que este sitio no afirma" box because of it.
 - Figures that belong to a norm *other than* the decree being discussed (the two
   LAU figures on the home page, for instance) must keep `norma` and `cita`
   separate in `FIGURAS`: `norma` is which decree introduces the figure, `cita`

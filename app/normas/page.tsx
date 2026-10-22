@@ -23,8 +23,10 @@ export default function NormasPage() {
       </p>
 
       <p>
-        Las dos primeras tienen color propio porque son los dos reales decretos-ley del sitio: el{' '}
-        <b className="tono-rdl26">RDL 26/2026</b> y el <b className="tono-rdl27">RDL 27/2026</b>. El resto se identifica por la abreviatura que usa el propio BOE.
+        Las cuatro primeras tienen color propio: el <b className="tono-rdl29">RDL 29/2026</b> y el{' '}
+        <b className="tono-rdl28">RDL 28/2026</b> (vigente o pendiente) y, como historial, el{' '}
+        <b className="tono-rdl26">RDL 26/2026</b> y el <b className="tono-rdl27">RDL 27/2026</b>,
+        derogados. El resto se identifica por la abreviatura que usa el propio BOE.
       </p>
 
       <ScrollTable label="Normas citadas en el análisis">

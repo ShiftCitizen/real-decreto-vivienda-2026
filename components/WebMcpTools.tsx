@@ -89,6 +89,9 @@ const searchSchema = {
   additionalProperties: false,
 } as const;
 
+/** Default page chunk for `read_page`; callers paginate with `offset`. */
+const READ_PAGE_CHUNK = 4000;
+
 const readSchema = {
   type: 'object',
   properties: {
@@ -96,6 +99,18 @@ const readSchema = {
       type: 'string',
       description:
         'Page to read: a relative path or a URL of this same site, one of: /, /desahucios-y-alquiler/, /fiscal/, /financiacion/, /estado/, /normas/, /contacto/.',
+    },
+    offset: {
+      type: 'integer',
+      minimum: 0,
+      description:
+        '0-based character offset into the page text. Defaults to 0. Use with truncated/totalLength to read the rest.',
+    },
+    limit: {
+      type: 'integer',
+      minimum: 1,
+      maximum: READ_PAGE_CHUNK,
+      description: `Maximum characters to return. Defaults to ${READ_PAGE_CHUNK}.`,
     },
   },
   required: ['path'],
@@ -134,6 +149,9 @@ const normSchema = {
   additionalProperties: false,
 } as const;
 
+/** Keep the WebMCP timeline in lockstep with `CRONOLOGIA` (no hard-coded caps). */
+const TIMELINE_LIMIT = CRONOLOGIA.length;
+
 const timelineSchema = {
   type: 'object',
   properties: {
@@ -145,8 +163,8 @@ const timelineSchema = {
     limit: {
       type: 'integer',
       minimum: 1,
-      maximum: 11,
-      description: 'Maximum entries to return. Defaults to 11.',
+      maximum: TIMELINE_LIMIT,
+      description: `Maximum entries to return. Defaults to ${TIMELINE_LIMIT} (all timeline entries).`,
     },
   },
   required: [],
@@ -219,11 +237,11 @@ export default function WebMcpTools() {
           {
             name: 'read_page',
             description:
-              'Return the main text of one of the seven site pages, without navigation or menus. Accepts only the listed site paths (including /contacto/).',
+              'Return the main text of one of the seven site pages, without navigation or menus. Accepts only the listed site paths (including /contacto/). Long pages are chunked: if truncated is true, call again with offset set to the returned nextOffset until truncated is false.',
             inputSchema: readSchema,
             annotations: { readOnlyHint: true },
             execute: async (
-              { path }: Record<string, unknown> = {},
+              { path, offset, limit }: Record<string, unknown> = {},
               { signal }: { signal?: AbortSignal } = {},
             ) => {
               // Accept relative paths and absolute URLs of this same site,
@@ -255,7 +273,19 @@ export default function WebMcpTools() {
               const body =
                 document_.querySelector('main')?.textContent?.replace(/\s+/g, ' ').trim() ??
                 '';
-              return { title, text: body.slice(0, 4000) };
+              const start = asNumber(offset, 0, 0, Math.max(body.length, 0));
+              const chunk = asNumber(limit, READ_PAGE_CHUNK, 1, READ_PAGE_CHUNK);
+              const text = body.slice(start, start + chunk);
+              const end = start + text.length;
+              const truncated = end < body.length;
+              return {
+                title,
+                text,
+                offset: start,
+                totalLength: body.length,
+                truncated,
+                ...(truncated ? { nextOffset: end } : {}),
+              };
             },
           },
           { signal: controller.signal },
@@ -360,7 +390,7 @@ export default function WebMcpTools() {
             inputSchema: timelineSchema,
             annotations: { readOnlyHint: true },
             execute: async ({ query, limit }: Record<string, unknown> = {}) => {
-              const max = asNumber(limit, 11, 1, 11);
+              const max = asNumber(limit, TIMELINE_LIMIT, 1, TIMELINE_LIMIT);
               const text = typeof query === 'string' ? query.trim() : '';
               const pool = text
                 ? CRONOLOGIA.filter((e) => matchesAllWords(`${e.fecha} ${e.que}`, text))
