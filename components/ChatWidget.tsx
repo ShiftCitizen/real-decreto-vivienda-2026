@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { formatearRespuesta } from '@/lib/chat-formato';
 
 type Cita = { titulo: string; href: string };
 
@@ -162,12 +163,7 @@ export default function ChatWidget() {
           )}
           {estado.tipo === 'ok' && (
             <div className="chat-respuesta">
-              {estado.respuesta
-                .split(/\n+/)
-                .filter((linea) => linea.trim().length > 0)
-                .map((linea, i) => (
-                  <p key={i}>{linea}</p>
-                ))}
+              {formatearRespuesta(estado.respuesta)}
               {estado.citas.length > 0 && (
                 <ul className="chat-citas">
                   {estado.citas.map((cita, i) => (

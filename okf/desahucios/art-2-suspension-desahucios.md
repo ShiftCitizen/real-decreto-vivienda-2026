@@ -20,6 +20,10 @@ Estado: vigente por el art. 2 del RDL 29/2026 (en vigor desde el 8-10-2026, pend
 
 El RDL 26/2026 preveía freno a la compra especulativa, suspensión de lanzamientos hasta 2030, enervación extraordinaria y reforma de la LAU. El RDL 27/2026 establecía una prórroga indefinida de cinco y siete años. Ambos decretos fueron derogados el 2-10-2026. El RDL 29/2026 reproduce y actualiza estas medidas.
 
+### Quién cuenta como vulnerable (para poder echar o no al inquilino)
+
+El casero puede demandar el desahucio. El freno del art. 2 solo opera si el demandado está en situación de vulnerabilidad y sin alternativa habitacional. La vulnerabilidad se acredita con un certificado de servicios sociales o con los criterios del art. 441.7 de la LEC; este análisis no reproduce aquí los umbrales numéricos de ese artículo. Sin esa acreditación o si hay alternativa habitacional, no entra la suspensión especial y el desahucio sigue el régimen ordinario de la LAU y la LEC. art. 2.1 RDL 29/2026 art. 441.7 LEC
+
 ### Apartado 1: demandante especulativo
 
 Si el demandante es una entidad con o sin personalidad jurídica dedicada a adquirir inmuebles o carteras de préstamo hipotecario impagados por un precio claramente inferior al de su tasación de mercado, con el objeto de eludir los mecanismos de función social de la vivienda o maximizar su rentabilidad, y el demandado se encuentra en situación de vulnerabilidad y sin alternativa habitacional, el tribunal suspende el proceso por auto. La suspensión también es aplicable cuando ya se hubiera dictado sentencia o auto acordando el lanzamiento, siempre que este no se hubiera ejecutado efectivamente. art. 2.1 RDL 29/2026 Quedan excluidos los entes públicos y las empresas o sociedades del sector públicas cuya finalidad sea la promoción y gestión de vivienda social y asequible.

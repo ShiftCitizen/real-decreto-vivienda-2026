@@ -74,12 +74,35 @@ export type Evidencia = {
  */
 const MAX_FICHERS = 4;
 
-/** Raíces afines (ver `seleccionar`). Clave y valores pasan por `raiz()`. */
+/**
+ * Raíces afines. Clave y valores pasan por `raiz()`.
+ *
+ * Sirven para **elegir fichero** y para trocear bloques: «arrendador» no
+ * aparece en el título de la FAQ del propietario, «echar» no es «desahuciar»,
+ * y sin este mapa la ruta caía al `buscar()` de normas (RDL 27/28) y el modelo
+ * inventaba el régimen. Medido 22-10-2026 con «Me perjudica… arrendador» y
+ * «¿Puedo echar al inquilino…?».
+ */
 const AFINES_CRUDO: Record<string, string[]> = {
   impago: ['deuda', 'renta', 'pagar'],
   impagos: ['deuda', 'renta', 'pagar'],
+  arrendador: ['propietario', 'casero'],
+  arrendadora: ['propietario', 'casero'],
+  casero: ['propietario', 'arrendador'],
+  casera: ['propietario', 'arrendador'],
+  echar: ['desahuciar', 'desahucio'],
+  perjudica: ['afecta'],
+  prejudica: ['afecta', 'perjudica'],
+  perjudicar: ['afecta'],
+  cualifica: ['vulnerable', 'acredita'],
+  califica: ['vulnerable', 'acredita'],
 };
 const AFINES: Record<string, string[]> = {};
+
+/** Expande las raíces de la pregunta con sus afines (sin duplicar). */
+function conAfines(raices: string[]): string[] {
+  return [...new Set([...raices, ...raices.flatMap((r) => (AFINES[r] ?? []).map(raiz))])];
+}
 
 /**
  * Puntuación mínima para considerar que un fichero es el del tema.
@@ -653,7 +676,10 @@ export function puntuarFicheros(pregunta: string, tabla: TablaOkf): Candidato[] 
   const tokens = palabrasDeConsulta(pregunta).map(raiz);
   if (tokens.length === 0) return [];
   const preguntaPlana = plano(pregunta);
-  const unicas = [...new Set(tokens)];
+  // Afines también al puntuar ficheros (no solo al trocear bloques): si no,
+  // «arrendador» / «echar» no alcanzan PUNTUACION_MINIMA y la ruta hace
+  // fallback a normas sueltas.
+  const unicas = conAfines([...new Set(tokens)]);
 
   return indexados
     .map((i) => {
@@ -812,13 +838,11 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
   const indice = construir(tabla);
   const { indexados } = indice;
 
-  const unicas = [...new Set(palabrasDeConsulta(pregunta).map(raiz))];
+  const unicas = conAfines([...new Set(palabrasDeConsulta(pregunta).map(raiz))]);
   if (unicas.length === 0) return null;
-  // Raíces afines para elegir bloques dentro de un fichero ya elegido: quien
-  // pregunta por el «impago» necesita el bloque que dice qué pasa con la deuda
-  // de renta, aunque no repita la palabra. Solo afecta a qué bloques entran,
-  // no a qué ficheros se eligen.
-  const afines = [...new Set([...unicas, ...unicas.flatMap((r) => (AFINES[r] ?? []).map(raiz))])];
+  // Las mismas afines alimentan el troceo de bloques dentro del fichero ya
+  // elegido (p. ej. «impago» → bloque de la deuda de renta).
+  const afines = unicas;
 
   const porRuta = new Map(indexados.map((i) => [i.fichero.ruta, i] as const));
   const global = puntuarFicheros(pregunta, tabla);

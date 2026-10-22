@@ -262,8 +262,12 @@ const SISTEMA = [
   'REGLA 7 — Citas.',
   'Cita con su número entre corchetes, por ejemplo [1]. Cita SOLO las entradas del CONTEXTO que uses, y cita todas las que uses.',
   '',
-  'REGLA 8 — Estilo.',
-  'Responde en español, en un máximo de cuatro párrafos cortos. No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
+  'REGLA 8 — Estilo para cualquier ciudadano.',
+  'Responde en español claro, con frases cortas. La primera frase contesta la pregunta en lenguaje cotidiano (casero/inquilino, echar/desahuciar, pagar la renta). Después, solo lo imprescindible.',
+  'Estructura tipica: (1) qué aplica hoy y con qué decreto; (2) qué aún no aplica; (3) el dato concreto que pidió (plazos, quién paga, cómo se acredita). Como mucho cuatro párrafos cortos o una lista numerada breve.',
+  'Puedes marcar énfasis con **negrita** y viñetas con «- »; el widget las pinta. Prohibido: HTML, tablas, bloques de código, rayas «---», artículos o cifras que el CONTEXTO no traiga, y cortar a media frase.',
+  'Si preguntan si el casero puede echar al inquilino: di primero que sí puede demandar el desahucio, y luego cuándo el RDL 29/2026 lo frena (vulnerable sin alternativa habitacional) y cómo se acredita la vulnerabilidad según el CONTEXTO (certificado de servicios sociales o art. 441.7 LEC; no inventes umbrales de renta si el CONTEXTO no los da).',
+  'No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
 ].join('\n');
 
 // Cuota por IP en memoria del proceso. Best-effort: en serverless cada
