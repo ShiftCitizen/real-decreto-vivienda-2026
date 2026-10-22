@@ -41,7 +41,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
     fecha: '8-10-2026',
     que: 'Entrada en vigor del RDL 29/2026 (día siguiente a su publicación en el BOE), salvo disposición en contrario. Pendiente de convalidación por la Diputación Permanente. Desde ese día rigen el freno a la compra especulativa, la suspensión de desahucios, la enervación extraordinaria, la reforma de la LAU, la prórroga extraordinaria de dos años y el límite del 2 % a la actualización de la renta.',
     citas: [
-      { norma: 'rdl29', art: 'disposición final undécima.1' },
+      { norma: 'rdl29', art: 'disposición final decimoprimera.1' },
       { norma: 'rdl29', art: '1 a 5' },
       { norma: 'rdl29', art: 'disposiciones finales quinta y sexta' },
     ],
@@ -50,7 +50,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
     fecha: '7-10-2026',
     que: 'Publicación en el «BOE» núm. 249 de los RDL 29/2026 (BOE-A-2026-20823) y 28/2026 (BOE-A-2026-20822), aprobados por el Consejo de Ministros el 6 de octubre de 2026.',
     citas: [
-      { norma: 'rdl29', art: 'disposición final undécima.1' },
+      { norma: 'rdl29', art: 'disposición final decimoprimera.1' },
       { norma: 'rdl28', art: 'disposición final segunda' },
     ],
   },
@@ -58,7 +58,7 @@ export const CRONOLOGIA: CronologiaEntry[] = [
     fecha: '6-10-2026',
     que: 'El Consejo de Ministros aprueba dos nuevos reales decretos-ley de vivienda: el RDL 29/2026 (paquete principal: desahucios, alquiler, fiscal, financiación) y el RDL 28/2026 (estabilidad de los contratos de arrendamiento). Ambos se publican en el BOE el 7 de octubre.',
     citas: [
-      { norma: 'rdl29', art: 'disposición final undécima.1' },
+      { norma: 'rdl29', art: 'disposición final decimoprimera.1' },
       { norma: 'rdl28', art: 'disposición final segunda' },
     ],
   },

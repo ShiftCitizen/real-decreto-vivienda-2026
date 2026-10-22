@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Cite from '@/components/Cite';
+import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import { NORMAS, NORMA_IDS } from '@/lib/normas';
 import { slugify } from '@/lib/slug';
@@ -73,13 +74,13 @@ export default function NormasPage() {
           páginas 127818 a 127913 (<b>96 páginas</b>). Veinte artículos en seis títulos y una
           disposición adicional primera, una segunda, dos transitorias, derogatoria única y once
           disposiciones finales. Entra en vigor el <b>1 de octubre de 2026</b>.{' '}
-          <Cite norma="rdl26" art="disposición final undécima.1" />
+          <CiteMap norma="rdl26" art="disposición final undécima.1" />
         </li>
         <li>
           <b className="tono-rdl27">RDL 27/2026</b> — «BOE» núm. 243, de 1 de octubre de 2026 (
           <b>8 páginas</b>). Un <b>artículo único</b> que modifica el artículo 10 de la LAU, más
           dos disposiciones adicionales, una transitoria y dos finales. Entra en vigor el{' '}
-          <b>2 de octubre de 2026</b>. <Cite norma="rdl27" art="disposición final segunda" />
+          <b>2 de octubre de 2026</b>. <CiteMap norma="rdl27" art="disposición final segunda" />
         </li>
       </ul>
 
@@ -96,7 +97,7 @@ export default function NormasPage() {
           que <b>sustituye</b> las prórrogas anuales de hasta tres años; el artículo 3, apartado{' '}
           <b>Ocho</b> del <span className="tono-rdl26">RDL 26/2026</span> es el que lo había
           modificado antes, con otro régimen.{' '}
-          <Cite norma="rdl26" art="3.Ocho" />
+          <CiteMap norma="rdl26" art="3.Ocho" />
         </li>
         <li>
           La prórroga extraordinaria de la DF 5.ª pertenece al{' '}
@@ -104,7 +105,7 @@ export default function NormasPage() {
           prórrogas extraordinarias renumeradas —un año por vulnerabilidad y hasta tres años en zona
           tensionada— están en los apartados 5 y 6 del artículo 10 de la LAU según el{' '}
           <span className="tono-rdl27">RDL 27/2026</span>.{' '}
-          <Cite norma="rdl26" art="disposición final quinta.1" />{' '}
+          <CiteMap norma="rdl26" art="disposición final quinta.1" />{' '}
           <Cite norma="lau" art="10.5 y 10.6" />
         </li>
         <li>

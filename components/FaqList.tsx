@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import Cite from '@/components/Cite';
+import { renderCitas } from '@/components/CiteMap';
 import { FAQ } from '@/lib/faq';
 
 function openFromHash() {
@@ -38,11 +38,7 @@ export default function FaqList() {
             {item.respuesta.map((parrafo, i) => (
               <p key={i}>{parrafo}</p>
             ))}
-            <span className="cite-block">
-              {item.citas.map((cita) => (
-                <Cite key={`${cita.norma}-${cita.art}`} norma={cita.norma} art={cita.art} />
-              ))}{' '}
-            </span>
+            <span className="cite-block">{renderCitas(item.citas)} </span>
           </div>
         </details>
       ))}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
+import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
 
@@ -108,7 +109,7 @@ export default function FiscalPage() {
         contrato anterior. Las zonas de mercado residencial tensionado a
         las que puede aplicarse son las de la resolución que apruebe el Ministerio de Vivienda y
         Agenda Urbana.{' '}
-        <Cite norma="rdl26" art="6.Segundo.Dos" />
+        <CiteMap norma="rdl26" art="6.Segundo.Dos" />
       </p>
 
       <p>
@@ -120,7 +121,7 @@ export default function FiscalPage() {
         el cumplimiento del plazo mínimo de cinco años del artículo 9 de la LAU tenga lugar con
         posterioridad al 1 de diciembre de 2026, siempre que el arrendador no sea gran tenedor y
         la renta no supere el límite máximo del sistema de índices de referencia.{' '}
-        <Cite norma="rdl26" art="6.Segundo.Catorce" /> <Cite norma="lirpf" art="disposición transitoria trigésima octava.2" />
+        <CiteMap norma="rdl26" art="6.Segundo.Catorce" /> <Cite norma="lirpf" art="disposición transitoria trigésima octava.2" />
       </p>
 
       <h3>Lo que cambia de verdad en el IRPF</h3>
@@ -133,7 +134,7 @@ export default function FiscalPage() {
           inferior a 33.007,20 €. La base máxima de la deducción es de 11.630 € anuales para bases
           imponibles hasta 23.007,20 €, reduciéndose en 1,163 por cada euro de exceso sobre esa cifra
           hasta 33.007,20 €.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Tres y Cuatro" /> <Cite norma="lirpf" art="68.6" />
+          <CiteMap norma="rdl26" art="6.Segundo.Tres y Cuatro" /> <Cite norma="lirpf" art="68.6" />
         </p>
         <p>
           <b>Requisito de titularidad:</b> se exige que durante al menos la mitad del período
@@ -142,7 +143,7 @@ export default function FiscalPage() {
           un derecho real de uso o disfrute constituido sobre otra vivienda distante a menos de
           50 km de la vivienda arrendada, salvo que exista una resolución
           administrativa o judicial que les impida su uso como residencia.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Cuatro" /> <Cite norma="lirpf" art="68.6" />
+          <CiteMap norma="rdl26" art="6.Segundo.Cuatro" /> <Cite norma="lirpf" art="68.6" />
         </p>
       </div>
 
@@ -155,7 +156,7 @@ export default function FiscalPage() {
           transmisión total inferior a 800.000 €. Requiere que la vivienda haya permanecido{' '}
           <b>desocupada de forma continuada y sin causa justificada durante los dos años</b> anteriores
           a la transmisión —las causas justificadas son las que enumera el artículo 72.4 bis LRHL—.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Once" />{' '}
+          <CiteMap norma="rdl26" art="6.Segundo.Once" />{' '}
           <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1-2" />
         </li>
         <li>
@@ -165,10 +166,10 @@ export default function FiscalPage() {
           en el plazo de <b>seis meses</b> desde la transmisión (o desde la entrada
           en vigor de la orden ministerial de información si esta fuera posterior), el valor de
           transmisión que proporcionalmente se corresponda con la ganancia patrimonial no exenta.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Once" />{' '}
+          <CiteMap norma="rdl26" art="6.Segundo.Once" />{' '}
           <Cite norma="lirpf" art="disposición adicional sexagésima quinta.1" /> El importe total
           acumulado de las aportaciones a esa cuenta no puede exceder de <b>800.000 €</b>.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Doce" />{' '}
+          <CiteMap norma="rdl26" art="6.Segundo.Doce" />{' '}
           <Cite norma="lirpf" art="disposición adicional sexagésima sexta.5" />
         </li>
         <li>
@@ -179,14 +180,14 @@ export default function FiscalPage() {
           exceso de 1.000.000 €. Si el inmueble careciera de valor catastral o no se hubiera
           notificado, se computa el 50 % del mayor valor verificado por la Administración o el
           precio de adquisición.{' '}
-          <Cite norma="rdl26" art="6.Tercero.Dos" /> <Cite norma="lirpf" art="85.1" />
+          <CiteMap norma="rdl26" art="6.Tercero.Dos" /> <Cite norma="lirpf" art="85.1" />
         </li>
         <li>
           <b>Rendimiento en caso de parentesco:</b> si el arrendatario es cónyuge o pariente
           hasta el tercer grado, el rendimiento neto total no podrá ser inferior al que resulte de
           aplicar el porcentaje medio efectivo a que se refiere el artículo 85 LIRPF sobre el valor
           catastral, computando además los inmuebles del artículo 24 LIRPF.{' '}
-          <Cite norma="rdl26" art="6.Tercero.Uno" />
+          <CiteMap norma="rdl26" art="6.Tercero.Uno" />
         </li>
         <li>
           <b>Vivienda habitual a efectos del Reglamento del IRPF</b> (DF 3.ª): para las exenciones
@@ -196,7 +197,7 @@ export default function FiscalPage() {
           consanguinidad o afinidad; y la del
           cónyuge que debe abandonar el domicilio por separación, divorcio o nulidad, siempre que
           el requisito de ocupación efectiva concurra en el cónyuge que permaneció en la misma.{' '}
-          <Cite norma="rdl26" art="disposición final tercera.Uno" />
+          <CiteMap norma="rdl26" art="disposición final tercera.Uno" />
         </li>
       </ul>
 
@@ -210,7 +211,7 @@ export default function FiscalPage() {
           hotelera; o segundo, cuando la duración de la cesión a favor de un mismo arrendatario sea
           igual o inferior a <b>30 noches</b>, salvo que la cesión se produce en la vivienda en la
           que el arrendador tenga su residencia habitual, en cuyo caso estará exenta.{' '}
-          <Cite norma="rdl26" art="7.Uno" /> <Cite norma="liva" art="20.Uno.23.e" /> Tributan al
+          <CiteMap norma="rdl26" art="7.Uno" /> <Cite norma="liva" art="20.Uno.23.e" /> Tributan al
           10 %. <Cite norma="liva" art="91.Uno.2.2" />
         </li>
         <li>
@@ -224,7 +225,7 @@ export default function FiscalPage() {
           su ejecución o, si los aporta, su coste no exceda del 40 % de la base imponible de la
           operación; y que la contraprestación se haya pagado mediante tarjeta de crédito o débito,
           transferencia bancaria, cheque nominativo o ingreso en cuentas de entidades de crédito.{' '}
-          <Cite norma="rdl26" art="7.Tres" /> <Cite norma="liva" art="91.Uno.2.10" />
+          <CiteMap norma="rdl26" art="7.Tres" /> <Cite norma="liva" art="91.Uno.2.10" />
         </li>
         <li>
           <b>Tipo superreducido</b> (con efectos desde el 1-12-2026) para las viviendas calificadas
@@ -235,7 +236,7 @@ export default function FiscalPage() {
           y para las viviendas que adquieran las
           entidades del régimen especial de arrendamiento de vivienda si a sus rentas se aplica la
           bonificación del artículo 49.1 de la Ley del Impuesto sobre Sociedades.{' '}
-          <Cite norma="rdl26" art="7.Cuatro" /> <Cite norma="liva" art="91.Dos.1.6" />
+          <CiteMap norma="rdl26" art="7.Cuatro" /> <Cite norma="liva" art="91.Dos.1.6" />
         </li>
       </ul>
 
@@ -368,7 +369,7 @@ export default function FiscalPage() {
         tipo general y que no se encuentren dentro del plazo de reinversión del artículo 6.1.b de la
         Ley 11/2009. Se devenga el día del acuerdo de aplicación del resultado por la junta general, y
         se autoliquida e ingresa en dos meses.{' '}
-        <Cite norma="rdl26" art="9.Uno" /> <Cite norma="lic" art="9.4" />
+        <CiteMap norma="rdl26" art="9.Uno" /> <Cite norma="lic" art="9.4" />
       </p>
 
       <p>
@@ -379,7 +380,7 @@ export default function FiscalPage() {
         tanto las viviendas asequibles como las protegidas del artículo 3 de la Ley 12/2023, y el
         80 % se calcula sobre el <b>balance consolidado</b> si la sociedad es dominante de un
         grupo de SOCIMI, computando solo el parque en alquiler en territorio español.{' '}
-        <Cite norma="rdl26" art="9.Uno.5" />
+        <CiteMap norma="rdl26" art="9.Uno.5" />
       </p>
 
       <div className="box">
@@ -390,7 +391,7 @@ export default function FiscalPage() {
           <b>2026</b> que no hubieran finalizado a la entrada en vigor, y <b>más del 70 %</b> en los
           iniciados dentro de <b>2027</b>. En ambos años se sigue exigiendo, para la reducción del
           100 %, la reinversión del beneficio en el plazo de tres años.{' '}
-          <Cite norma="rdl26" art="9.Dos" /> Quien diga «el 80 %» sin más está
+          <CiteMap norma="rdl26" art="9.Dos" /> Quien diga «el 80 %» sin más está
           simplificando: en 2026 y 2027 los umbrales reales son otros dos.
         </p>
       </div>
@@ -399,7 +400,7 @@ export default function FiscalPage() {
         <b>IIVTNU:</b> con efectos desde el 1 de diciembre de 2026, se fijan los importes máximos
         de los coeficientes aplicables sobre el valor del terreno en el momento del devengo, según
         el periodo de generación del incremento.{' '}
-        <Cite norma="rdl26" art="10" />
+        <CiteMap norma="rdl26" art="10" />
       </p>
 
       <ScrollTable label="Coeficientes máximos del IIVTNU con efectos desde el 1 de diciembre de 2026">

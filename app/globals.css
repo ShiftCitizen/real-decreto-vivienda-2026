@@ -810,6 +810,21 @@ li {
   color: var(--ac2);
 }
 
+/* Concordancia: vigente + (antes derogado). */
+.cite-map {
+  font-style: normal;
+}
+
+.cite-map-antes,
+.cite-map-nota {
+  font: 500 0.86em system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--mute);
+}
+
+.cite-map--pending .cite-map-nota {
+  color: var(--warn);
+}
+
 /* --------------------------------------------------------------------------
    Tipografía de página (reglas originales de styles.css)
    -------------------------------------------------------------------------- */

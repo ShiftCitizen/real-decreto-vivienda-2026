@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
+import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
 
@@ -51,7 +52,7 @@ export default function DesahuciosPage() {
         tasación de mercado. Afecta tanto a viviendas en estado de uso como a las de edificios
         construidos sobre suelo de calificación residencial que cumplan los requisitos para
         obtener la cédula de habitabilidad, desde que dispongan de certificado de fin de obra.{' '}
-        <Cite norma="rdl26" art="1.1" />
+        <CiteMap norma="rdl26" art="1.1" />
       </p>
 
       <p>
@@ -62,7 +63,7 @@ export default function DesahuciosPage() {
         tanto de atención como residencial; y cuando la persona jurídica compradora acredite su
         adhesión a un Código de Buenas Prácticas acordado con la autoridad competente en materia de
         vivienda (las entidades públicas se entienden adheridas).{' '}
-        <Cite norma="rdl26" art="1.2.e" />
+        <CiteMap norma="rdl26" art="1.2.e" />
       </p>
 
       <p>
@@ -70,7 +71,7 @@ export default function DesahuciosPage() {
         vigor —aunque no estén inscritas, y sin que la escritura pueda modificarse después por
         adenda— ni a las adquisiciones que deriven de procedimientos de ejecución judicial o
         hipotecaria.{' '}
-        <Cite norma="rdl26" art="1.3 y 4" /> Las exclusiones se resumen en el{' '}
+        <CiteMap norma="rdl26" art="1.3 y 4" /> Las exclusiones se resumen en el{' '}
         <Link href="/">resumen</Link>.
       </p>
 
@@ -88,7 +89,7 @@ export default function DesahuciosPage() {
         vulnerabilidad y sin alternativa habitacional, el tribunal suspende el proceso por auto.
         La suspensión también es aplicable cuando ya se hubiera dictado sentencia o auto
         acordando el lanzamiento, siempre que este no se hubiera ejecutado efectivamente.{' '}
-        <Cite norma="rdl26" art="2.1" /> Quedan excluidos los entes públicos y las
+        <CiteMap norma="rdl26" art="2.1" /> Quedan excluidos los entes públicos y las
         empresas o sociedades del sector públicas cuya finalidad sea la promoción y gestión de
         vivienda social y asequible.
       </p>
@@ -97,7 +98,7 @@ export default function DesahuciosPage() {
 
       <p>
         Solo si no opera la enervación extraordinaria del{' '}
-        <Cite norma="rdl26" art="5.Dos" />. <Cite norma="rdl26" art="2.2" /> Si el demandado es vulnerable y no tiene
+        <CiteMap norma="rdl26" art="5.Dos" />. <CiteMap norma="rdl26" art="2.2" /> Si el demandado es vulnerable y no tiene
         alternativa habitacional, y la administración competente no ha ofrecido una alternativa
         digna y adecuada, el tribunal requiere informe a la administración competente para que
         exprese qué recursos tiene disponibles y los ofrezca. Si no hay respuesta o se informa de
@@ -119,7 +120,7 @@ export default function DesahuciosPage() {
         contractual dejada de percibir y los costes de suministros impagados. No son compensables
         el lucro cesante hipotético ni los daños morales; la demora en el pago genera los
         intereses correspondientes.{' '}
-        <Cite norma="rdl26" art="2.2" />
+        <CiteMap norma="rdl26" art="2.2" />
       </p>
 
       <div className="box warn">
@@ -140,7 +141,7 @@ export default function DesahuciosPage() {
           física que tenga la condición de gran tenedor. Tampoco prevalecerá la situación de
           vulnerabilidad económica de la parte demandada cuando la parte demandante sea una persona
           física titular de dos o menos viviendas.»{' '}
-          <Cite norma="rdl26" art="2.2" /> El texto no garantiza la suspensión en ninguno de los dos casos.
+          <CiteMap norma="rdl26" art="2.2" /> El texto no garantiza la suspensión en ninguno de los dos casos.
         </p>
       </div>
 
@@ -184,7 +185,7 @@ export default function DesahuciosPage() {
       </div>
 
       <p>
-        El apartado uno del <Cite norma="rdl26" art="5" /> añade además que la demanda de
+        El apartado uno del <CiteMap norma="rdl26" art="5" /> añade además que la demanda de
         ejecución hipotecaria debe
         indicar si el inmueble es vivienda habitual del deudor y si el ejecutante tiene la
         condición de gran tenedora de vivienda; si dice que no la tiene, hay que acompañar
@@ -194,7 +195,7 @@ export default function DesahuciosPage() {
         que no se
         hubiera practicado el lanzamiento, y permite a la persona ejecutada pedirlo aunque el
         trámite ya se hubiera resuelto o se hubiera agotado el plazo máximo de suspensión.{' '}
-        <Cite norma="rdl26" art="disposición transitoria segunda" />
+        <CiteMap norma="rdl26" art="disposición transitoria segunda" />
       </p>
 
       <h2 id={slugify('Art. 3 (RDL 26/2026). Reforma de la LAU')}>
@@ -377,7 +378,7 @@ export default function DesahuciosPage() {
       <h2 id={slugify('Art. 4 (RDL 26/2026). Ley 12/2023')}>Art. 4 (RDL 26/2026). Ley 12/2023</h2>
 
       <p>
-        El <Cite norma="rdl26" art="4" /> modifica la definición de gran tenedor del artículo
+        El <CiteMap norma="rdl26" art="4" /> modifica la definición de gran tenedor del artículo
         3.k){' '}
         <Cite norma="l123" art="3.k" /> Los umbrales no cambian: más de diez inmuebles urbanos de
         uso residencial, o más de 1.500 m² construidos de uso residencial, excluyendo en todo caso
@@ -394,7 +395,7 @@ export default function DesahuciosPage() {
         umbral o no. La definición puede además particularizarse en la declaración de entorno de
         mercado residencial tensionado hasta los titulares de cinco o más inmuebles, cuando así lo
         motive la comunidad autónoma en su memoria justificativa.{' '}
-        <Cite norma="rdl26" art="4.Uno" />
+        <CiteMap norma="rdl26" art="4.Uno" />
       </p>
 
       <h2 id={slugify('DF 5.ª y DF 6.ª')}>DF 5.ª y DF 6.ª</h2>
@@ -410,7 +411,7 @@ export default function DesahuciosPage() {
         <b>lo haya estado mensualmente durante los ocho meses anteriores</b>, se aplica una
         prórroga extraordinaria por plazos anuales y hasta un máximo de dos años adicionales,
         manteniendo los términos del contrato.{' '}
-        <Cite norma="rdl26" art="disposición final quinta.1" />
+        <CiteMap norma="rdl26" art="disposición final quinta.1" />
       </p>
 
       <div className="box warn">
@@ -432,13 +433,13 @@ export default function DesahuciosPage() {
           preferente». Por la disposición adicional primera.3 del RDL 27/2026, esa referencia debe
           entenderse hecha al nuevo artículo 10.6 de la LAU (prórroga extraordinaria en zona
           tensionada de hasta tres años), aplicable con carácter preferente.{' '}
-          <Cite norma="rdl26" art="disposición final quinta.1" />{' '}
-          <Cite norma="rdl27" art="disposición adicional primera.3" />
+          <CiteMap norma="rdl26" art="disposición final quinta.1" />{' '}
+          <CiteMap norma="rdl27" art="disposición adicional primera.3" />
         </p>
         <p>
           No procede cuando arrendador y arrendatario acuerden renovar o celebrar un contrato
           nuevo con una renta inferior al menos un 5 % a la del contrato vigente.{' '}
-          <Cite norma="rdl26" art="disposición final quinta.2" />
+          <CiteMap norma="rdl26" art="disposición final quinta.2" />
         </p>
       </div>
 
@@ -449,7 +450,7 @@ export default function DesahuciosPage() {
         precios de referencia,{' '}
         <b>no procederá incremento alguno</b>; en los demás casos, el incremento será el del nuevo
         pacto entre las partes y, en ausencia de pacto, <b>no podrá superar el 2 %</b>.{' '}
-        <Cite norma="rdl26" art="disposición final sexta" />
+        <CiteMap norma="rdl26" art="disposición final sexta" />
       </p>
 
       <h2 id="coordinacion">Coordinación: el RDL 27/2026 y la prórroga indefinida</h2>
@@ -472,7 +473,7 @@ export default function DesahuciosPage() {
         cinco años de duración —siete en el caso de persona jurídica— y siempre que ninguna de
         las partes haya notificado su voluntad de no renovar: el arrendador con{' '}
         <b>seis meses de antelación</b> y el arrendatario con dos meses.{' '}
-        <Cite norma="rdl27" label="artículo" art="único.1" />
+        <CiteMap norma="rdl27" label="artículo" art="único.1" />
       </p>
 
       <p>
@@ -695,18 +696,18 @@ export default function DesahuciosPage() {
           La nueva prórroga se aplica a los contratos de vivienda habitual{' '}
           <b>vigentes el 2 de octubre de 2026</b>, respecto de los vencimientos del contrato o de
           cualquiera de sus prórrogas que se produzcan con posterioridad al día siguiente a dicha fecha.{' '}
-          <Cite norma="rdl27" art="disposición transitoria única.1" />
+          <CiteMap norma="rdl27" art="disposición transitoria única.1" />
         </li>
         <li>
           Si quedaban <b>menos de seis meses</b> para el vencimiento, el preaviso del arrendador
           puede hacerse con una antelación mínima de <b>cuatro meses</b> en lugar de seis.{' '}
-          <Cite norma="rdl27" art="disposición transitoria única.2" />
+          <CiteMap norma="rdl27" art="disposición transitoria única.2" />
         </li>
         <li>
           Los contratos que ya estaban en el periodo de prórroga del artículo 10.1 de la LAU{' '}
           <b>anterior</b> continúan en él hasta su término, y solo a su término se les aplica el
           régimen nuevo.{' '}
-          <Cite norma="rdl27" art="disposición transitoria única.3" /> (Nota: el apartado 1 de la DT
+          <CiteMap norma="rdl27" art="disposición transitoria única.3" /> (Nota: el apartado 1 de la DT
           única remite erróneamente a «el apartado 4» para referirse a esta regla de continuidad de
           contratos en prórroga anterior, cuando el régimen se regula en el apartado 3 de la propia
           disposición transitoria).
@@ -717,7 +718,7 @@ export default function DesahuciosPage() {
           realizada al artículo 10 en la redacción del RDL 27/2026,{' '}
           <b>sin perjuicio del régimen transitorio</b> para los contratos vigentes y para las
           comunicaciones de no renovación hechas antes del 2 de octubre.{' '}
-          <Cite norma="rdl27" art="disposición transitoria única.4" />
+          <CiteMap norma="rdl27" art="disposición transitoria única.4" />
         </li>
         <li>
           Los contratos en <b>tácita reconducción</b> del artículo 1566 del Código Civil quedan
@@ -729,7 +730,7 @@ export default function DesahuciosPage() {
           en reconducción. Las comunicaciones para poner fin a la reconducción{' '}
           <b>hechas válidamente antes del 2 de octubre conservan su eficacia y no generan
           indemnización</b>.{' '}
-          <Cite norma="rdl27" art="disposición transitoria única.5" />
+          <CiteMap norma="rdl27" art="disposición transitoria única.5" />
         </li>
       </ul>
 
@@ -738,13 +739,13 @@ export default function DesahuciosPage() {
         <b>salvo la coordinación específica de la DA 1.ª</b>, las referencias que otras normas
         hagan a los apartados 2 y 3 del artículo 10 LAU en su redacción anterior se entiendan{' '}
         <b>hechas a los apartados quinto y sexto</b>, respectivamente ({' '}
-        <Cite norma="rdl27" art="disposición adicional segunda" />); y la disposición final
+        <CiteMap norma="rdl27" art="disposición adicional segunda" />); y la disposición final
         primera, que ancla el decreto en el{' '}
         <b>artículo 149.1.8.ª de la CE</b> en materia de legislación civil, sin perjuicio de los derechos
         civiles forales o especiales y de las bases de las obligaciones contractuales ({' '}
-        <Cite norma="ce" art="149.1.8" /> <Cite norma="rdl27" art="disposición final primera" />).
+        <Cite norma="ce" art="149.1.8" /> <CiteMap norma="rdl27" art="disposición final primera" />).
         Entra en vigor el día siguiente al de su publicación, esto es, el 2 de octubre de 2026({' '}
-        <Cite norma="rdl27" art="disposición final segunda" />).
+        <CiteMap norma="rdl27" art="disposición final segunda" />).
       </p>
 
       <h2 id={slugify('Título V: régimen sancionador de las plataformas de corta duración')}>
