@@ -68,6 +68,7 @@ const ALLOWED_PATHS = [
   '/financiacion/',
   '/estado/',
   '/normas/',
+  '/contacto/',
 ];
 
 const searchSchema = {
@@ -89,7 +90,7 @@ const readSchema = {
     path: {
       type: 'string',
       description:
-        'Page to read: a relative path or a URL of this same site, one of: /, /desahucios-y-alquiler/, /fiscal/, /financiacion/, /estado/, /normas/.',
+        'Page to read: a relative path or a URL of this same site, one of: /, /desahucios-y-alquiler/, /fiscal/, /financiacion/, /estado/, /normas/, /contacto/.',
     },
   },
   required: ['path'],

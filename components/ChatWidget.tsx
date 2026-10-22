@@ -50,7 +50,6 @@ export default function ChatWidget() {
 
   // Escape a nivel de documento: si el botón queda deshabilitado durante la
   // carga pierde el foco y el Escape no burbujearía desde dentro del panel.
-  // Mismo patrón que el cajón móvil de SiteNav.
   useEffect(() => {
     if (!abierto) return;
     const alTeclar = (event: KeyboardEvent) => {
@@ -119,16 +118,18 @@ export default function ChatWidget() {
         className="chat-fab"
         aria-expanded={abierto}
         aria-controls="asistente"
-        aria-label="Preguntar al asistente del análisis"
         onClick={() => (abierto ? cerrar() : setAbierto(true))}
       >
         <span aria-hidden="true">?</span>
+        <span className="chat-fab-label">Pregunta a los decretos</span>
       </button>
 
       {abierto && (
         <section className="chat-panel" id="asistente" role="dialog" aria-label="Asistente del análisis">
           <p className="chat-intro">
             Pregunta sobre el análisis. Solo responde a partir de su contenido.
+            Comentarios o correcciones:{' '}
+            <a href="mailto:contacto@shiftcitizen.com">contacto@shiftcitizen.com</a>.
           </p>
           <form
             className="chat-form"
@@ -152,7 +153,12 @@ export default function ChatWidget() {
             </button>
           </form>
 
-          {estado.tipo === 'cargando' && <p className="chat-estado">Buscando en el análisis…</p>}
+          {estado.tipo === 'cargando' && (
+            <div className="chat-estado" role="status">
+              <span className="chat-loader" aria-hidden="true" />
+              <span>Buscando en los decretos…</span>
+            </div>
+          )}
           {estado.tipo === 'error' && (
             <div className="chat-error-bloque">
               <p className="chat-error">{estado.mensaje}</p>

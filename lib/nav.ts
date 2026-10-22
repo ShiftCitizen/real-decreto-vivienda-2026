@@ -64,6 +64,12 @@ export const NAV_SECTIONS: NavSection[] = [
         resumen:
           'Registro de los reales decretos-ley, leyes y reglamentos que se citan en este análisis, con su enlace permanente en el BOE.',
       },
+      {
+        href: '/contacto',
+        label: 'Contacto',
+        resumen:
+          'Quién elabora este análisis y cómo enviar comentarios o correcciones a ShiftCitizen.',
+      },
     ],
   },
 ];

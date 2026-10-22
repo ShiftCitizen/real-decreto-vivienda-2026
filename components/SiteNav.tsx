@@ -5,36 +5,20 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { NAV_SECTIONS, normalizePath } from '@/lib/nav';
 import SearchPalette from '@/components/SearchPalette';
+import MobileNav from '@/components/MobileNav';
+import ThemeToggle from '@/components/ThemeToggle';
 
 type PageSection = { id: string; label: string };
 
 /**
- * Sidebar navigation, mobile drawer and the ⌘K trigger.
- *
- * The nav itself is rendered as part of the React tree, so it is present in the
- * initial HTML: no fetch, no flash of missing navigation. Only the active-link
- * highlighting, the drawer and the per-page section list need the client.
+ * Desktop sidebar (with ⌘K search) plus the ShiftCitizen-style mobile tab bar.
+ * No burger menu: on narrow viewports the tab bar and "Más" sheet replace it.
  */
 export default function SiteNav() {
   const pathname = usePathname();
   const current = normalizePath(pathname);
-  const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [sections, setSections] = useState<PageSection[]>([]);
-
-  // Close the drawer on navigation and on Escape.
-  useEffect(() => {
-    setOpen(false);
-  }, [current]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
-    };
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, [open]);
 
   const onShortcut = useCallback((event: KeyboardEvent) => {
     if ((event.metaKey || event.ctrlKey) && (event.key === 'k' || event.key === 'K')) {
@@ -65,7 +49,6 @@ export default function SiteNav() {
         label: (heading.textContent ?? '').trim(),
         level: Number(heading.tagName.slice(1)),
       }))
-      // Only h2 in the outline; h3 rows are noise at this length.
       .filter((heading) => heading.level === 2)
       .map(({ id, label }) => ({ id, label }));
     setSections(found);
@@ -73,33 +56,14 @@ export default function SiteNav() {
 
   return (
     <>
-      <div className="mobile-bar">
-        <button
-          type="button"
-          className="menu-toggle"
-          aria-label="Abrir menú"
-          aria-expanded={open}
-          aria-controls="sidebar"
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div className="mobile-title">Vivienda 2026</div>
-      </div>
-
-      <div
-        className={`sidebar-overlay${open ? ' visible' : ''}`}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
-
-      <nav className={`sidebar${open ? ' open' : ''}`} id="sidebar" aria-label="Site">
+      <nav className="sidebar" id="sidebar" aria-label="Site">
         <div className="sidebar-header">
-          <Link className="sidebar-brand" href="/">
-            Vivienda 2026
-          </Link>
+          <div className="sidebar-header-row">
+            <Link className="sidebar-brand" href="/">
+              Vivienda 2026
+            </Link>
+            <ThemeToggle label="Cambiar entre tema claro y oscuro" />
+          </div>
           <div className="sidebar-subtitle">
             RDL 26/2026 y 27/2026 · función social de la vivienda
           </div>
@@ -155,6 +119,7 @@ export default function SiteNav() {
         </div>
       </nav>
 
+      <MobileNav onSearch={() => setSearchOpen(true)} />
       <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
