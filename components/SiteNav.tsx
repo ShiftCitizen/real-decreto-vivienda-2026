@@ -65,7 +65,7 @@ export default function SiteNav() {
             <ThemeToggle label="Cambiar entre tema claro y oscuro" />
           </div>
           <div className="sidebar-subtitle">
-            RDL 26/2026 y 27/2026 · función social de la vivienda
+            RDL 29/2026 y 28/2026 · 26/27 derogados · función social de la vivienda
           </div>
         </div>
 
