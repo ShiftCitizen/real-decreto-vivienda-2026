@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
+import CiteMap from '@/components/CiteMap';
 import FaqList from '@/components/FaqList';
 import ScrollTable from '@/components/ScrollTable';
 import { CRONOLOGIA } from '@/lib/cronologia';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 /**
  * MAIN PAGE — DOCUMENTACIÓN DE MANTENIMIENTO (requerido por spec)
@@ -385,16 +387,16 @@ export default function HomePage() {
           residencia de colectivos socialmente vulnerables por parte de entidades del tercer
           sector de acción social, las destinadas a la protección de las víctimas de violencia
           de género, las que se destinan a residencia de personas que precisen atención
-          sociosanitaria y las de quien se adhiera a un Código de Buenas Prácticas acordado con
-          la autoridad competente.{' '}
-          <Cite norma="rdl26" art="1.2" />
+          sociosanitaria y las de quien se adhiera al Código de Buenas Prácticas aprobado por
+          Acuerdo de Consejo de Ministros.{' '}
+          <CiteMap norma="rdl26" art="1.2" />
         </li>
         <li>
           <strong>Habitaciones:</strong> la LAU no se aplica a la cesión de uso de habitaciones o
           estancias de una vivienda que realicen las entidades del tercer sector de acción social
           en programas de acogida, inclusión o alojamiento de personas en situación de
           vulnerabilidad, sin finalidad lucrativa.{' '}
-          <Cite norma="rdl26" art="3.Cuatro.f" />
+          <CiteMap norma="rdl26" art="3.Cuatro.f" />
         </li>
         <li>
           <strong>IRPF:</strong> reducción del 70 % para el propietario que alquila a una entidad
@@ -402,7 +404,7 @@ export default function HomePage() {
           alquiler social con renta inferior a la del programa estatal de alquiler, al alojamiento
           de personas en situación de vulnerabilidad económica de la Ley 19/2021, o a un programa
           público o calificación que imponga limitación de la renta.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Dos.c" />
+          <CiteMap norma="rdl26" art="6.Segundo.Dos.c" />
         </li>
         <li>
           <strong>DA 1.ª:</strong> el Gobierno regulará en seis meses la figura de proveedor
@@ -410,7 +412,7 @@ export default function HomePage() {
           de las Housing Associations, y la certificación será exclusivamente a los efectos de la
           participación de estas entidades en programas o en el acceso a financiación, ventajas o
           especialidades en relación con tributos o procedimientos estatales.{' '}
-          <Cite norma="rdl26" art="disposición adicional primera" />
+          <CiteMap norma="rdl26" art="disposición adicional primera" />
         </li>
       </ul>
 
@@ -468,7 +470,7 @@ export default function HomePage() {
       </ul>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: {revisionDe('/')}. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}

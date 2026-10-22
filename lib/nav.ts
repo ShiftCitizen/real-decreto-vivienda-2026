@@ -27,7 +27,7 @@ export const NAV_SECTIONS: NavSection[] = [
         href: '/',
         label: 'Resumen',
         resumen:
-          'Qué cambian los reales decretos-ley 26/2026 y 27/2026, en cifras y en fechas.',
+          'Qué cambian los RDL 29/2026 y 28/2026 (y qué quedó derogado de los 26/2026 y 27/2026), en cifras y en fechas.',
       },
       {
         href: '/desahucios-y-alquiler',

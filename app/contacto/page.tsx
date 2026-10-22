@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 export const metadata: Metadata = {
   title: 'Contacto',
@@ -52,6 +53,8 @@ export default function ContactoPage() {
         Respuestas a mensajes personales sobre tu caso concreto quedan fuera del
         alcance de este sitio.
       </p>
+
+      <p className="page-meta">Última revisión: {revisionDe('/contacto')}.</p>
     </>
   );
 }

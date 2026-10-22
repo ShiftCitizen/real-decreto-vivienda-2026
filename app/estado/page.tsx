@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
+import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import Timeline from '@/components/Timeline';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 export const metadata: Metadata = {
   title: 'Estado y advertencias',
@@ -384,12 +386,12 @@ export default function EstadoPage() {
         La disposición final décima.8 respeta los regímenes civiles forales o especiales, los
         regímenes tributarios forales de concerto y convenio económico del País Vasco y Navarra, y
         la competencia autónoma en ordenación del territorio, urbanismo y vivienda.{' '}
-        <Cite norma="rdl26" art="disposición final décima.8" /> El RDL 27/2026 se dicta bajo el{' '}
+        <CiteMap norma="rdl26" art="disposición final décima.8" /> El RDL 27/2026 se dicta bajo el{' '}
         <b>artículo 149.1.8.ª CE</b> en materia de legislación civil, «sin perjuicio de la
         conservación, modificación y desarrollo por las comunidades autónomas de los derechos
         civiles, forales o especiales, allí donde existan, y, en todo caso, sobre las bases de las
         obligaciones contractuales».{' '}
-        <Cite norma="ce" art="149.1.8" /> <Cite norma="rdl27" art="disposición final primera" />
+        <Cite norma="ce" art="149.1.8" /> <CiteMap norma="rdl27" art="disposición final primera" />
       </p>
 
       <div className="box warn">
@@ -404,7 +406,7 @@ export default function EstadoPage() {
       </div>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: {revisionDe('/estado')}. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>,{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823">BOE-A-2026-20823</a> y{' '}

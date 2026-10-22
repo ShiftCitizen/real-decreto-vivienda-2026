@@ -3,14 +3,14 @@
   "version": "1.0",
   "standard": "https://agents-txt.com",
   "site": {
-    "name": "Vivienda 2026: RDL 26/2026 y RDL 27/2026",
+    "name": "Vivienda 2026: RDL 29/2026 y RDL 28/2026",
     "url": "https://real-decreto-vivienda-2026.vercel.app",
-    "description": "Reading guide on two Spanish 2026 housing decree-laws, both repealed. No agent payments or authentication."
+    "description": "Reading guide on Spanish 2026 housing decree-laws. RDL 29/2026 in force since 2026-10-08 (pending convalidation); RDL 28/2026 not yet in force; RDL 26/2026 and 27/2026 repealed 2026-10-02. No agent payments or authentication."
   },
   "webmcp": [
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/",
-      "description": "Vote result, key figures, timeline, FAQs and the eight read-only tools."
+      "description": "Status, key figures, timeline, FAQs and the nine read-only WebMCP tools (includes get_concordance)."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/",
@@ -22,7 +22,7 @@
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/financiacion/",
-      "description": "Public housing stock, guarantees, TU CASA loans and the Financia Europa account."
+      "description": "Public housing stock, guarantees, TU CASA loans and the Financia Europa account (art. 21 RDL 29)."
     },
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/estado/",
@@ -31,6 +31,10 @@
     {
       "url": "https://real-decreto-vivienda-2026.vercel.app/normas/",
       "description": "Cited norms with BOE identifier."
+    },
+    {
+      "url": "https://real-decreto-vivienda-2026.vercel.app/contacto/",
+      "description": "Author and feedback contact."
     }
   ]
 }

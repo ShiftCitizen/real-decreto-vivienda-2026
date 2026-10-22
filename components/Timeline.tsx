@@ -1,4 +1,4 @@
-import Cite from '@/components/Cite';
+import { renderCitas } from '@/components/CiteMap';
 import { CRONOLOGIA } from '@/lib/cronologia';
 
 /**
@@ -18,10 +18,7 @@ export default function Timeline() {
         <li key={`${hito.fecha}-${i}`} className="timeline-hito">
           <time dateTime={aISO(hito.fecha) ?? undefined}>{hito.fecha}</time>
           <p>
-            {hito.que}{' '}
-            {hito.citas.map((cita) => (
-              <Cite key={`${cita.norma}-${cita.art}`} norma={cita.norma} art={cita.art} />
-            ))}
+            {hito.que} {renderCitas(hito.citas)}
           </p>
         </li>
       ))}

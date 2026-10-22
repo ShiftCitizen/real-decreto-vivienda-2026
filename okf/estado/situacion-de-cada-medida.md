@@ -51,7 +51,11 @@ La tabla resume la situación de cada medida hoy. Casi todas las del RDL 26/2026
 
 Los RDL 26/2026 y 27/2026 quedaron derogados el 2-10-2026 y no están en vigor; el RDL 29/2026 y el RDL 28/2026 son los que rigen. Si recibiste una notificación fechada el 1 o el 2 de octubre, llévala a un abogado o a un sindicato de inquilinos.
 
+Entre el 2-10-2026 y el 8-10-2026 (entrada en vigor del RDL 29/2026):
+
 Rigen la LAU y las demás normas anteriores a los decretos.
+
+Desde el 8-10-2026 rige el RDL 29/2026 en lo que reproduce; el RDL 28/2026 sigue pendiente de entrada en vigor.
 
 ## Véase
 

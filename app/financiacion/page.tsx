@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import AvisoEstado from '@/components/AvisoEstado';
 import Cite from '@/components/Cite';
+import CiteMap from '@/components/CiteMap';
 import ScrollTable from '@/components/ScrollTable';
 import { slugify } from '@/lib/slug';
+import { revisionDe } from '@/lib/revisiones';
 
 export const metadata: Metadata = {
   title: 'Financiación y cuenta',
@@ -43,7 +45,8 @@ export default function FinanciacionPage() {
         El RDL 29/2026 (en vigor desde el 8-10-2026, pendiente de convalidación)
         recupera la movilización de parque público, las líneas de avales, el
         préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa.
-        Esta página los describe con las citas del RDL 26/2026, derogado el
+        Esta página los describe citando primero el RDL 29/2026 y, entre
+        paréntesis, el artículo equivalente del RDL 26/2026, derogado el
         2-10-2026, cuyo contenido reproduce en lo sustancial.
       </p>
 
@@ -53,18 +56,19 @@ export default function FinanciacionPage() {
         <strong>Cómo está organizada esta página.</strong>
         <p>
           «Parque público (arts. 11 a 14)», «Avales y TU CASA (arts. 15 a 19)», «El mecanismo TU
-          CASA (art. 19 RDL 26/2026)» y «Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL
-          26/2026)» describen lo que contenía el <span className="tono-rdl26">RDL 26/2026</span> y
-          lo que reproduce ahora el <span className="tono-rdl29">RDL 29/2026</span>, en vigor desde
-          el 8-10-2026 y pendiente de convalidación. Cada referencia lleva la etiqueta de su norma.
+          CASA (art. 19 RDL 29/2026)» y «Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL
+          29/2026; antes art. 20 RDL 26/2026)» describen lo que reproduce el{' '}
+          <span className="tono-rdl29">RDL 29/2026</span>, en vigor desde el 8-10-2026 y pendiente
+          de convalidación. El art. 20 del RDL 29/2026 es distinto: publicidad de arrendamientos
+          (nuevo; no existía en el RDL 26/2026). Cada referencia lleva la etiqueta de su norma.
         </p>
       </div>
 
       <div className="box warn">
         <strong>Dos líneas de avales, no una.</strong>
         <p>
-          El <Cite norma="rdl26" art="16" /> crea una línea de <b>2.000 M€</b> para promotores de
-          vivienda social o asequible. El <Cite norma="rdl26" art="17" /> crea <b>otra</b> línea,
+          El <CiteMap norma="rdl26" art="16" /> crea una línea de <b>2.000 M€</b> para promotores de
+          vivienda social o asequible. El <CiteMap norma="rdl26" art="17" /> crea <b>otra</b> línea,
           de <b>280 M€</b>, para pymes de construcción industrializada, con otorgamiento hasta
           2040. El <b>artículo 18 del RDL 26/2026 y el artículo 86 bis del RDL 8/2023 no llevan ninguna cifra</b>: son
           únicamente el <i>régimen de cobranza</i> de cada línea. Cualquier resumen que sume las
@@ -87,7 +91,7 @@ export default function FinanciacionPage() {
           escrituras y se hace constar en el Registro de la Propiedad; en las viviendas calificadas
           con algún régimen de protección pública, empieza a regir finalizado el plazo de
           protección.{' '}
-          <Cite norma="rdl26" art="11" />
+          <CiteMap norma="rdl26" art="11" />
         </li>
         <li>
           <b>Art. 12 (RDL 26/2026):</b> se aportan a CASA 47, por orden ministerial y con pleno carácter
@@ -181,17 +185,22 @@ export default function FinanciacionPage() {
       </ScrollTable>
 
       <p>
-        El <Cite norma="rdl26" art="19" /> crea el mecanismo para <b>completar</b> la financiación
+        El <CiteMap norma="rdl26" art="19" /> crea el mecanismo para <b>completar</b> la financiación
         privada de quienes accedan a su primera vivienda habitual hipotecada. No es una giveaway:
         es un préstamo, con las condiciones de la tabla.
       </p>
 
-      <h2 id={slugify('Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)')}>
-        Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)
+      <h2
+        id={slugify(
+          'Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL 29/2026; antes art. 20 RDL 26/2026)',
+        )}
+      >
+        Cuenta de Ahorro e Inversión Financia Europa (art. 21 RDL 29/2026; antes art. 20 RDL
+        26/2026)
       </h2>
 
       <p>
-        El <Cite norma="rdl26" art="20" /> modifica la Ley de los Mercados de Valores: añade un
+        El <CiteMap norma="rdl26" art="20" /> modifica la Ley de los Mercados de Valores: añade un
         artículo 309 bis y un título XI (artículos 341 a 356) <b>del LMV</b> con la cuenta y los
         requisitos de las IIC elegibles, y las disposiciones adicionales décima y decimoprimera.
       </p>
@@ -220,8 +229,8 @@ export default function FinanciacionPage() {
           <b>Aportaciones.</b> El límite es de <b>150.000 € pendientes de recuperar</b> en la cuenta
           ordinaria, y de <b>800.000 € acumulados</b> en la modalidad de reinversión, donde las
           disposiciones no minoran el importe acumulado a efectos del límite.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Cinco.1.f" />{' '}
-          <Cite norma="rdl26" art="6.Segundo.Doce.5" /> No computan como aportación el
+          <CiteMap norma="rdl26" art="6.Segundo.Cinco.1.f" />{' '}
+          <CiteMap norma="rdl26" art="6.Segundo.Doce.5" /> No computan como aportación el
           producto de transmisión o reembolso de activos que permanezca dentro de la misma cuenta,
           ni los importes procedentes de operaciones corporativas sobre activos ya
           integrados.{' '}
@@ -231,15 +240,15 @@ export default function FinanciacionPage() {
           <b>Tributación.</b> Las ganancias o pérdidas patrimoniales por transmisión o reembolso
           <b> no se integran</b> en la base imponible hasta que se efectúe una disposición total o
           parcial; las ganancias tributan al disponer.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Cinco.3" /> En la cuenta de la modalidad general, la parte
+          <CiteMap norma="rdl26" art="6.Segundo.Cinco.3" /> En la cuenta de la modalidad general, la parte
           de la ganancia atribuible a aportaciones que hayan permanecido en la cuenta más de cinco
           años queda excluida en un 100 % hasta 10.000 € por contribuyente y en un 20 % sobre el
           resto.{' '}
           <Cite norma="lirpf" art="95 ter.4" />{' '}
-          <Cite norma="rdl26" art="6.Segundo.Cinco" /> En la cuenta de reinversión, esa misma parte
+          <CiteMap norma="rdl26" art="6.Segundo.Cinco" /> En la cuenta de reinversión, esa misma parte
           queda excluida en un 20 %, sin la exclusión del 100 % de los primeros 10.000 €.{' '}
           <Cite norma="lirpf" art="disposición adicional sexagésima sexta.2" />{' '}
-          <Cite norma="rdl26" art="6.Segundo.Doce" />
+          <CiteMap norma="rdl26" art="6.Segundo.Doce" />
         </li>
         <li>
           <b>IIC elegibles.</b> Solo pueden integrarse acciones y participaciones de IIC{' '}
@@ -260,16 +269,16 @@ export default function FinanciacionPage() {
           <b>10.000 € anuales</b> —frente a los 5.000 € del SIALP ordinario— y{' '}
           <b>sin garantía mínima del 85 %</b> que sí exige el plan de ahorro a largo plazo
           ordinario.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Siete.1.c y e" /> Solo pueden integrarse
+          <CiteMap norma="rdl26" art="6.Segundo.Siete.1.c y e" /> Solo pueden integrarse
           acciones de sociedades del EEE, participaciones de IIC que cumplan los requisitos del
           capítulo II y renta fija con calificación crediticia mínima BBB, sin derivados; y{' '}
           <b>al menos el 30 %</b> del valor de cada conjunto de activos debe corresponder a
           instrumentos de renta variable.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Siete.3" /> Si un activo deja de ser
+          <CiteMap norma="rdl26" art="6.Segundo.Siete.3" /> Si un activo deja de ser
           elegible, la entidad dispone de un <b>plazo de subsanación de tres meses</b>; si no se
           corrige, el seguro pierde la consideración de SIALP Financia Europa y deja de aplicarse la
           exención.{' '}
-          <Cite norma="rdl26" art="6.Segundo.Siete.3" />
+          <CiteMap norma="rdl26" art="6.Segundo.Siete.3" />
         </li>
       </ul>
 
@@ -285,21 +294,21 @@ export default function FinanciacionPage() {
           las cooperativas, tomando como referente las Housing Associations. La certificación será{' '}
           <b>exclusivamente</b> a efectos de participación en programas o de acceso a financiación,
           ventajas o especialidades en relación con tributos o procedimientos estatales.{' '}
-          <Cite norma="rdl26" art="disposición adicional primera" />
+          <CiteMap norma="rdl26" art="disposición adicional primera" />
         </li>
         <li>
           <b>DA 2.ª:</b> en el plazo máximo de <b>cuatro meses</b> desde la entrada en vigor, la
           CNMV creará el Registro de IIC Elegibles y habilitará los medios para solicitar la
           inscripción.{' '}
-          <Cite norma="rdl26" art="disposición adicional segunda" />
+          <CiteMap norma="rdl26" art="disposición adicional segunda" />
         </li>
         <li>
           <b>DF 3.ª (reglamento del IRPF):</b> modifica el RIRPF en tres materias independientes:
-          el concepto de vivienda habitual a efectos de exención por reinversión (<Cite norma="rdl26" art="disposición final tercera.Uno" />);
+          el concepto de vivienda habitual a efectos de exención por reinversión (<CiteMap norma="rdl26" art="disposición final tercera.Uno" />);
           la ampliación de la declaración informativa de Planes de Ahorro a Largo Plazo para incluir
-          los SIALP Financia Europa (<Cite norma="rdl26" art="disposición final tercera.Dos" />);
-          y las normas sobre retenciones e ingresos a cuenta (<Cite norma="rdl26" art="disposición final tercera.Tres y Cuatro" />).
-          La tributación de las cuentas de reinversión se regula en la disposición adicional sexagésima sexta de la LIRPF (<Cite norma="rdl26" art="6.Segundo.Doce" />).
+          los SIALP Financia Europa (<CiteMap norma="rdl26" art="disposición final tercera.Dos" />);
+          y las normas sobre retenciones e ingresos a cuenta (<CiteMap norma="rdl26" art="disposición final tercera.Tres y Cuatro" />).
+          La tributación de las cuentas de reinversión se regula en la disposición adicional sexagésima sexta de la LIRPF (<CiteMap norma="rdl26" art="6.Segundo.Doce" />).
         </li>
         <li>
           <b>DF 4.ª</b> (reglamento de gestión tributaria): nuevo{' '}
@@ -310,14 +319,14 @@ export default function FinanciacionPage() {
           liquidativos e identificaciones de activos a 31 de diciembre, incluida la causa de
           cancelación y, en su caso, la de fallecimiento o pérdida de la condición de
           contribuyente.{' '}
-          <Cite norma="rdl26" art="disposición final cuarta" />
+          <CiteMap norma="rdl26" art="disposición final cuarta" />
         </li>
         <li>
           <b>DF 8.ª.2:</b> la orden a que se refiere el artículo 347.7 de la Ley de los Mercados de
           Valores —que regula la movilización entre entidades proveedoras—{' '}
           <b>debe aprobarse en el plazo de seis meses</b> desde la entrada en vigor del real
           decreto-ley.{' '}
-          <Cite norma="rdl26" art="disposición final octava.2" />
+          <CiteMap norma="rdl26" art="disposición final octava.2" />
         </li>
         <li>
           <b>DF 11.ª.3:</b> la Cuenta y los SIALP Financia Europa{' '}
@@ -326,12 +335,12 @@ export default function FinanciacionPage() {
           podrán comercializarse con los activos elegibles distintos de participaciones o acciones
           de IIC; y <b>no podrán efectuarse movilizaciones</b> hasta la orden del artículo 347 de
           la LMV.{' '}
-          <Cite norma="rdl26" art="disposición final undécima.3" />
+          <CiteMap norma="rdl26" art="disposición final undécima.3" />
         </li>
         <li>
           <b>DF 9.ª:</b> el decreto incorpora parcialmente la Directiva (UE) 2021/2167, sobre
           administradores y compradores de créditos.{' '}
-          <Cite norma="rdl26" art="disposición final novena" />
+          <CiteMap norma="rdl26" art="disposición final novena" />
         </li>
       </ul>
 
@@ -350,12 +359,12 @@ export default function FinanciacionPage() {
           <Cite norma="lrga" art="25 bis" /> Y se aplica a las cesiones realizadas{' '}
           <b>después de la entrada en vigor</b>, cualquiera que sea la fecha en que se hubiera
           celebrado el contrato.{' '}
-          <Cite norma="rdl26" art="disposición final undécima.2" />
+          <CiteMap norma="rdl26" art="disposición final undécima.2" />
         </p>
       </div>
 
       <p className="page-meta">
-        Última revisión: 21 de octubre de 2026. Articulado contrastado con{' '}
+        Última revisión: {revisionDe('/financiacion')}. Articulado contrastado con{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266">BOE-A-2026-20266</a> y{' '}
         <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385">BOE-A-2026-20385</a>.
       </p>

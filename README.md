@@ -1,10 +1,12 @@
 # real-decreto-vivienda-2026
 
-Sitio de lectura que explica qué cambian los **reales decreto-ley 26/2026** y
-**27/2026** (vivienda), en cifras y en fechas. No es asesoramiento jurídico y el
-sitio lo dice explícitamente en `/estado`.
+Sitio de lectura que explica los **reales decreto-ley de vivienda de 2026**: el
+**RDL 29/2026** (en vigor desde el 8-10-2026, pendiente de convalidación) y el
+**RDL 28/2026** (publicado; entrada prevista el 15-11-2026 si se convalida), con
+los **RDL 26/2026** y **27/2026** como historial (derogados el 2-10-2026). No es
+asesoramiento jurídico y el sitio lo dice explícitamente en `/estado`.
 
-Sitio híbrido Next.js 16: las seis páginas se prerenderizan como estáticas y
+Sitio híbrido Next.js 16: las siete páginas se prerenderizan como estáticas y
 hay una única ruta dinámica, `POST /api/chat` (el proxy del asistente, que
 guarda la clave de NIM en el servidor). **No hay base de datos**.
 
@@ -27,8 +29,10 @@ El contenido se ha contrastado con los textos oficiales del BOE:
 
 | Norma | BOE | ELI |
 | --- | --- | --- |
-| RDL 26/2026 | `BOE-A-2026-20266` | <https://www.boe.es/eli/es/rdl/2026/09/29/26> |
-| RDL 27/2026 | `BOE-A-2026-20385` | <https://www.boe.es/eli/es/rdl/2026/09/29/27> |
+| RDL 29/2026 | `BOE-A-2026-20823` | <https://www.boe.es/eli/es/rdl/2026/10/06/29> |
+| RDL 28/2026 | `BOE-A-2026-20822` | <https://www.boe.es/eli/es/rdl/2026/10/06/28> |
+| RDL 26/2026 (derogado) | `BOE-A-2026-20266` | <https://www.boe.es/eli/es/rdl/2026/09/29/26> |
+| RDL 27/2026 (derogado) | `BOE-A-2026-20385` | <https://www.boe.es/eli/es/rdl/2026/09/29/27> |
 
 Los identificadores y etiquetas de cada norma están en `lib/normas.ts`, que es la
 única fuente de verdad para el resto del sitio.
@@ -45,6 +49,7 @@ app/
   financiacion/               avales, TU CASA, parque público
   estado/                     qué está en vigor y qué no, con advertencias
   normas/                     registro de normas y guía «no confundas estas dos»
+  contacto/                   autor y canal de comentarios
 components/
   Cite.tsx                    <cite> con referencia a artículo + norma
   FaqList.tsx                 FAQ desplegable + apertura por deep link
@@ -52,9 +57,13 @@ components/
   SiteNav.tsx                 sidebar, cajón móvil, disparador de búsqueda, índice «En esta página»
   SearchPalette.tsx           paleta ⌘K / Ctrl-K
   ChatWidget.tsx              asistente (pregunta suelta, vía /api/chat)
-  WebMcpTools.tsx             eight read-only English WebMCP tools (Chrome with flag only)
+  WebMcpTools.tsx             nine read-only English WebMCP tools (Chrome with flag only; includes get_concordance)
+  CiteMap.tsx                 cita vigente + (antes derogado) vía data/concordancia.json
 lib/
-  normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts   busqueda.ts
+  normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts   busqueda.ts   concordancia.ts   revisiones.ts
+data/
+  concordancia.json           equivalencias RDL 26→29 y 27→28 (fuente BOE)
+  audit-citas-rdl26-27.json   inventario previo a la migración de citas
 app/api/chat/
   route.ts                    proxy a NVIDIA NIM con cuota, tope y negativa sin LLM
 scripts/
@@ -104,7 +113,7 @@ bueno: se pierde la búsqueda por secciones sin que el log del build dé ninguna
 pista. No borres ese fichero, y añade aquí cualquier otro fichero generado que
 acaba en `public/`.
 
-## Estado post-votación (2-10-2026: ambos derogados)
+## Estado normativo (RDL 29/28 vigentes o pendientes; 26/27 derogados el 2-10-2026)
 
 Textos clave y cómo actualizarlos si hay novedades:
 

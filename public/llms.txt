@@ -1,28 +1,49 @@
-# Vivienda 2026: RDL 26/2026 y RDL 27/2026, derogados
+# Vivienda 2026: RDL 29/2026 y RDL 28/2026
 
-> Ayuda de lectura, en español, sobre dos reales decretos-ley españoles de vivienda de 2026, ambos derogados el 2-10-2026 al rechazar el Congreso su convalidación. Es material divulgativo, sin valor de asesoramiento jurídico; prevalece el texto oficial del BOE.
+> Ayuda de lectura, en español, sobre los reales decretos-ley españoles de vivienda de octubre de 2026. Material divulgativo, sin valor de asesoramiento jurídico; prevalece el texto oficial del BOE. Elaborado con ayuda de herramientas de inteligencia artificial.
 
-El sitio tiene seis páginas estáticas, sin JavaScript necesario para leerlas: todo el contenido está en el HTML. Sus medidas se describen en pasado: quedaron derogadas el 2-10-2026 y no se aplican. Cada referencia a un artículo nombra su norma (RDL 26/2026, RDL 27/2026, LAU, LEC, Ley 12/2023, LIRPF, LIVA, LRHL, LMV, CE y otras). La portada trae el resultado de la votación y sus consecuencias; el estado de cualquier tramitación futura se comprueba en la página de estado. En navegadores compatibles con WebMCP, cada página expone además ocho herramientas de solo lectura en inglés (search_site, read_page, list_pages, get_faqs, list_norms, get_norm, get_timeline y get_site_status) que responden sobre este mismo contenido.
+## Estado actual (última actualización de datos: 2026-10-22)
+
+- **RDL 29/2026** (BOE-A-2026-20823): en vigor desde el 8-10-2026, pendiente de convalidación. Reproduce en lo sustancial el RDL 26/2026.
+- **RDL 28/2026** (BOE-A-2026-20822): publicado el 7-10-2026; **no está en vigor** (entrada prevista el 15-11-2026 solo si se convalida). Reproduce el RDL 27/2026.
+- **RDL 26/2026** y **RDL 27/2026**: derogados el 2-10-2026 al no ser convalidados.
+- El RDL 29/2026 entró en vigor el 8-10-2026 y está pendiente de convalidación por la Diputación Permanente. El RDL 28/2026 no está en vigor: su entrada en vigor está prevista para el 15-11-2026 y depende de que la Diputación Permanente lo convalidé antes.
+
+Las páginas de detalle citan primero el artículo de la norma sucesora y, entre paréntesis, el del decreto derogado. La tabla de concordancia está en `data/concordancia.json` y la expone WebMCP como `get_concordance`.
 
 ## Páginas
 
-- [Resumen](https://real-decreto-vivienda-2026.vercel.app/): resultado de la votación del 2-10-2026 y consecuencias, qué cambian los dos decretos, cifras, cronología, tercer sector, preguntas frecuentes y cómo leer las citas.
-- [Desahucios y alquiler](https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/): freno a la compra especulativa, suspensión de desahucios, enervación extraordinaria, reforma de la LAU, prórroga indefinida de cinco y siete años con indemnización, y régimen sancionador de plataformas de corta duración.
-- [Fiscalidad](https://real-decreto-vivienda-2026.vercel.app/fiscal/): IRPF por alquiler, deducción por alquiler habitual, IVA de estancias cortas y obras, recargos de IBI, gravamen especial de las SOCIMI e IIVTNU.
-- [Financiación y cuenta](https://real-decreto-vivienda-2026.vercel.app/financiacion/): parque público y CASA 47, avales, préstamo TU CASA y Cuenta de Ahorro e Inversión Financia Europa.
-- [Estado y advertencias](https://real-decreto-vivienda-2026.vercel.app/estado/): qué está en vigor, qué depende de un acto posterior y advertencias (convalidación, preámbulo frente a articulado, competencias autonómicas).
-- [Normas citadas](https://real-decreto-vivienda-2026.vercel.app/normas/): reales decretos-ley, leyes y reglamentos citados, con identificador BOE y enlace permanente.
+- [Resumen](https://real-decreto-vivienda-2026.vercel.app/): Qué cambian los RDL 29/2026 y 28/2026 (y qué quedó derogado de los 26/2026 y 27/2026), en cifras y en fechas.
+- [Desahucios y alquiler](https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/): Freno a la compra especulativa, suspensión de lanzamientos, enervación extraordinaria, reforma de la LAU y régimen sancionador de las plataformas de alquiler de corta duración.
+- [Fiscalidad](https://real-decreto-vivienda-2026.vercel.app/fiscal/): IRPF por alquiler, IVA sobre estancias cortas, recargos de IBI y el gravamen especial de las SOCIMI.
+- [Financiación y cuenta](https://real-decreto-vivienda-2026.vercel.app/financiacion/): Parque público, líneas de avales, el préstamo TU CASA al 0 % y la Cuenta de Ahorro e Inversión Financia Europa.
+- [Estado y advertencias](https://real-decreto-vivienda-2026.vercel.app/estado/): Qué está ya en vigor, qué depende de un acuerdo ministerial y qué advertencia conviene leer antes de fiarse de una cifra.
+- [Normas citadas](https://real-decreto-vivienda-2026.vercel.app/normas/): Registro de los reales decretos-ley, leyes y reglamentos que se citan en este análisis, con su enlace permanente en el BOE.
+- [Contacto](https://real-decreto-vivienda-2026.vercel.app/contacto/): Quién elabora este análisis y cómo enviar comentarios o correcciones a ShiftCitizen.
 
-## Fuentes oficiales
+## Fuentes oficiales (BOE)
 
-- [RDL 26/2026 en el BOE](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20266): texto oficial del decreto de 96 páginas (BOE-A-2026-20266).
-- [RDL 27/2026 en el BOE](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20385): texto oficial del decreto de 8 páginas (BOE-A-2026-20385).
+- [RDL 29/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20823) (BOE-A-2026-20823; ELI: https://www.boe.es/eli/es/rdl/2026/10/06/29).
+- [RDL 28/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20822) (BOE-A-2026-20822; ELI: https://www.boe.es/eli/es/rdl/2026/10/06/28).
+- [RDL 26/2026 (derogado)](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20266) (BOE-A-2026-20266; ELI: https://www.boe.es/eli/es/rdl/2026/09/29/26).
+- [RDL 27/2026 (derogado)](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20385) (BOE-A-2026-20385; ELI: https://www.boe.es/eli/es/rdl/2026/09/29/27).
+
+## Concordancia (resumen)
+
+- Entradas mapeadas artículo a artículo: 42. Pendientes de revisión humana: 0. Solo en el sucesor: 1.
+- Renumeraciones clave: art. 20 RDL 26 (LMV/cuenta) → art. 21 RDL 29; art. 20 RDL 29 es nuevo (publicidad de arrendamientos). DF undécima RDL 26 → DF decimoprimera RDL 29.
+- Tabla completa: ver `/llms-full.txt` o la herramienta WebMCP `get_concordance`.
 
 ## Datos legibles por máquina
 
-- [Índice de búsqueda](https://real-decreto-vivienda-2026.vercel.app/search-index.json): índice JSON con las páginas, secciones con ancla, preguntas frecuentes y normas del sitio; cada entrada lleva título, href, sección y extracto.
-- [Mapa del sitio](https://real-decreto-vivienda-2026.vercel.app/sitemap.xml): las seis páginas con fecha de última modificación.
+- [Índice de búsqueda](https://real-decreto-vivienda-2026.vercel.app/search-index.json)
+- [Mapa del sitio](https://real-decreto-vivienda-2026.vercel.app/sitemap.xml)
+- [agents.txt](https://real-decreto-vivienda-2026.vercel.app/agents.txt) / [agents.json](https://real-decreto-vivienda-2026.vercel.app/agents.json)
 
-## Optional
+## WebMCP
 
-- [Repositorio y estado del proyecto](https://real-decreto-vivienda-2026.vercel.app/estado/): historial de actualizaciones del análisis.
+En Chrome con WebMCP, cada página registra herramientas de solo lectura en inglés: search_site, read_page, list_pages, get_faqs, list_norms, get_norm, get_timeline, get_concordance, get_site_status. Las citas a decretos derogados incluyen el artículo sucesor en `formerly` cuando hay mapeo.
+
+## Aviso
+
+No es asesoramiento jurídico. Si una cifra o plazo de este sitio contradice el BOE, prevalece el BOE.

@@ -44,6 +44,11 @@ import type { NormaId } from '@/lib/normas';
 import { ALL_LINKS } from '@/lib/nav';
 import { CRONOLOGIA } from '@/lib/cronologia';
 import { ESTADO_VOTACION } from '@/lib/estado-votacion';
+import {
+  citarParaAgente,
+  entradasConcordancia,
+  metaConcordancia,
+} from '@/lib/concordancia';
 
 /**
  * Read-only WebMCP tools for this site.
@@ -84,6 +89,9 @@ const searchSchema = {
   additionalProperties: false,
 } as const;
 
+/** Default page chunk for `read_page`; callers paginate with `offset`. */
+const READ_PAGE_CHUNK = 4000;
+
 const readSchema = {
   type: 'object',
   properties: {
@@ -91,6 +99,18 @@ const readSchema = {
       type: 'string',
       description:
         'Page to read: a relative path or a URL of this same site, one of: /, /desahucios-y-alquiler/, /fiscal/, /financiacion/, /estado/, /normas/, /contacto/.',
+    },
+    offset: {
+      type: 'integer',
+      minimum: 0,
+      description:
+        '0-based character offset into the page text. Defaults to 0. Use with truncated/totalLength to read the rest.',
+    },
+    limit: {
+      type: 'integer',
+      minimum: 1,
+      maximum: READ_PAGE_CHUNK,
+      description: `Maximum characters to return. Defaults to ${READ_PAGE_CHUNK}.`,
     },
   },
   required: ['path'],
@@ -129,6 +149,9 @@ const normSchema = {
   additionalProperties: false,
 } as const;
 
+/** Keep the WebMCP timeline in lockstep with `CRONOLOGIA` (no hard-coded caps). */
+const TIMELINE_LIMIT = CRONOLOGIA.length;
+
 const timelineSchema = {
   type: 'object',
   properties: {
@@ -140,8 +163,8 @@ const timelineSchema = {
     limit: {
       type: 'integer',
       minimum: 1,
-      maximum: 11,
-      description: 'Maximum entries to return. Defaults to 11.',
+      maximum: TIMELINE_LIMIT,
+      description: `Maximum entries to return. Defaults to ${TIMELINE_LIMIT} (all timeline entries).`,
     },
   },
   required: [],
@@ -175,8 +198,8 @@ function asNumber(value: unknown, fallback: number, min: number, max: number): n
     : fallback;
 }
 
-function cite(label: string, article: string): { norm: string; article: string } {
-  return { norm: label, article };
+function citeNorma(norma: NormaId, art: string) {
+  return citarParaAgente(norma, art);
 }
 
 export default function WebMcpTools() {
@@ -190,7 +213,7 @@ export default function WebMcpTools() {
           {
             name: 'search_site',
             description:
-              'Search the reading guide on Spanish housing decrees RDL 26/2026 and RDL 27/2026 (both repealed on 2026-10-02). Returns matching titles, links, sections and excerpts.',
+              'Search this reading guide on Spanish housing decrees. In force today: RDL 29/2026 (since 2026-10-08, pending convalidation). RDL 28/2026 is published but not yet in force (planned 2026-11-15 if convalidated). RDL 26/2026 and RDL 27/2026 were repealed on 2026-10-02. Returns matching titles, links, sections and excerpts.',
             inputSchema: searchSchema,
             annotations: { readOnlyHint: true },
             execute: async (
@@ -214,17 +237,17 @@ export default function WebMcpTools() {
           {
             name: 'read_page',
             description:
-              'Return the main text of one of the six site pages, without navigation or menus. Accepts only the six site paths.',
+              'Return the main text of one of the seven site pages, without navigation or menus. Accepts only the listed site paths (including /contacto/). Long pages are chunked: if truncated is true, call again with offset set to the returned nextOffset until truncated is false.',
             inputSchema: readSchema,
             annotations: { readOnlyHint: true },
             execute: async (
-              { path }: Record<string, unknown> = {},
+              { path, offset, limit }: Record<string, unknown> = {},
               { signal }: { signal?: AbortSignal } = {},
             ) => {
               // Accept relative paths and absolute URLs of this same site,
               // so the href returned by search_site works as-is. Anything
               // else (another origin, unknown path) is rejected: this tool
-              // only reads the six site pages.
+              // only reads the site pages listed in ALLOWED_PATHS.
               const raw = typeof path === 'string' ? path : '';
               let pathname: string;
               try {
@@ -250,7 +273,19 @@ export default function WebMcpTools() {
               const body =
                 document_.querySelector('main')?.textContent?.replace(/\s+/g, ' ').trim() ??
                 '';
-              return { title, text: body.slice(0, 4000) };
+              const start = asNumber(offset, 0, 0, Math.max(body.length, 0));
+              const chunk = asNumber(limit, READ_PAGE_CHUNK, 1, READ_PAGE_CHUNK);
+              const text = body.slice(start, start + chunk);
+              const end = start + text.length;
+              const truncated = end < body.length;
+              return {
+                title,
+                text,
+                offset: start,
+                totalLength: body.length,
+                truncated,
+                ...(truncated ? { nextOffset: end } : {}),
+              };
             },
           },
           { signal: controller.signal },
@@ -259,7 +294,7 @@ export default function WebMcpTools() {
           {
             name: 'list_pages',
             description:
-              'List the six site pages with their paths and labels.',
+              'List the site pages with their paths, labels and one-line summaries.',
             inputSchema: { type: 'object', properties: {}, additionalProperties: false },
             annotations: { readOnlyHint: true },
             execute: async () => {
@@ -268,6 +303,7 @@ export default function WebMcpTools() {
                 path: link.href === '/' ? '/' : `${link.href}/`,
                 url: link.href === '/' ? `${origin}/` : `${origin}${link.href}/`,
                 label: link.label,
+                summary: link.resumen,
               }));
             },
           },
@@ -277,7 +313,7 @@ export default function WebMcpTools() {
           {
             name: 'get_faqs',
             description:
-              'Return the frequently asked questions with their full answers and cited norms/articles. Pass query to filter, otherwise the first FAQs are listed.',
+              'Return the frequently asked questions with their full answers and cited norms/articles. Citations to repealed RDL 26/27 include the successor article in `formerly` when mapped. Pass query to filter, otherwise the first FAQs are listed.',
             inputSchema: faqsSchema,
             annotations: { readOnlyHint: true },
             execute: async ({ query, limit }: Record<string, unknown> = {}) => {
@@ -293,7 +329,7 @@ export default function WebMcpTools() {
                 id: f.id,
                 question: f.pregunta,
                 answer: f.respuesta.join('\n\n'),
-                citations: f.citas.map((c) => cite(NORMAS[c.norma].etiqueta, c.art)),
+                citations: f.citas.map((c) => citeNorma(c.norma, c.art)),
                 href: `${origin}/#${f.id}`,
               }));
             },
@@ -350,11 +386,11 @@ export default function WebMcpTools() {
           {
             name: 'get_timeline',
             description:
-              'Return the timeline of the two decrees (publication, entry into force, deferred effects, deadlines) with cited norms/articles. Pass query to filter.',
+              'Return the timeline of the four housing decrees (publication, entry into force, deferred effects, deadlines) with cited norms/articles. Citations to repealed decrees include the successor article when mapped. Pass query to filter.',
             inputSchema: timelineSchema,
             annotations: { readOnlyHint: true },
             execute: async ({ query, limit }: Record<string, unknown> = {}) => {
-              const max = asNumber(limit, 11, 1, 11);
+              const max = asNumber(limit, TIMELINE_LIMIT, 1, TIMELINE_LIMIT);
               const text = typeof query === 'string' ? query.trim() : '';
               const pool = text
                 ? CRONOLOGIA.filter((e) => matchesAllWords(`${e.fecha} ${e.que}`, text))
@@ -362,7 +398,7 @@ export default function WebMcpTools() {
               return pool.slice(0, max).map((e) => ({
                 date: e.fecha,
                 event: e.que,
-                citations: e.citas.map((c) => cite(NORMAS[c.norma].etiqueta, c.art)),
+                citations: e.citas.map((c) => citeNorma(c.norma, c.art)),
               }));
             },
           },
@@ -370,9 +406,31 @@ export default function WebMcpTools() {
         );
         await context.registerTool(
           {
+            name: 'get_concordance',
+            description:
+              'Return the article-to-article concordance RDL 26/2026→29/2026 and RDL 27/2026→28/2026 (from BOE headings). Use this before citing a repealed decree article. Includes the renumbering art. 20→21 (LMV/cuenta) and DF undécima→decimoprimera.',
+            inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+            annotations: { readOnlyHint: true },
+            execute: async () => ({
+              meta: metaConcordancia(),
+              entries: entradasConcordancia().map((e) => ({
+                id: e.id,
+                status: e.status,
+                note: e.note,
+                from: e.from
+                  ? { norma: e.from.norma, art: e.from.art, title: e.from.title }
+                  : null,
+                to: e.to ? { norma: e.to.norma, art: e.to.art, title: e.to.title } : null,
+              })),
+            }),
+          },
+          { signal: controller.signal },
+        );
+        await context.registerTool(
+          {
             name: 'get_site_status',
             description:
-              'Return the parliamentary status of the two decrees (vote date, results, whether anything still applies).',
+              'Return parliamentary and vigency status: repealed RDL 26/27 (vote results), RDL 29 (in force pending convalidation), RDL 28 (not yet in force).',
             inputSchema: { type: 'object', properties: {}, additionalProperties: false },
             annotations: { readOnlyHint: true },
             execute: async () => ({
@@ -381,6 +439,7 @@ export default function WebMcpTools() {
               lastUpdated: ESTADO_VOTACION.lastUpdated,
               results: ESTADO_VOTACION.resultados,
               note: ESTADO_VOTACION.notaFutura,
+              current: ESTADO_VOTACION.nuevos,
             }),
           },
           { signal: controller.signal },
