@@ -555,8 +555,36 @@ li {
   outline-offset: 2px;
 }
 
-.chat-respuesta p {
+.chat-respuesta {
+  font: 14.5px/1.55 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+}
+
+.chat-respuesta p,
+.chat-respuesta ol,
+.chat-respuesta ul {
   margin: 10px 0 0;
+}
+
+.chat-respuesta ol,
+.chat-respuesta ul {
+  padding-left: 1.25em;
+}
+
+.chat-respuesta li {
+  margin: 0.35em 0 0;
+}
+
+.chat-respuesta li > ul {
+  margin-top: 0.25em;
+}
+
+.chat-respuesta strong {
+  font-weight: 600;
+}
+
+.chat-respuesta em {
+  font-style: italic;
 }
 
 .chat-citas {

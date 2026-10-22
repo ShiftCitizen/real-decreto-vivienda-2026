@@ -263,7 +263,7 @@ const SISTEMA = [
   'Cita con su número entre corchetes, por ejemplo [1]. Cita SOLO las entradas del CONTEXTO que uses, y cita todas las que uses.',
   '',
   'REGLA 8 — Estilo.',
-  'Responde en español, en un máximo de cuatro párrafos cortos. No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
+  'Responde en español. Como mucho cuatro párrafos cortos, o una lista numerada breve si hay varios procedimientos. Puedes marcar énfasis con **negrita** y viñetas con «- »; el widget las pinta. No uses HTML, tablas ni bloques de código. No muestres tu razonamiento ni nombres las reglas. Solo cuando ninguna entrada del CONTEXTO guarde relación con la pregunta, responde exactamente: «Eso queda fuera del ámbito de este análisis».',
 ].join('\n');
 
 // Cuota por IP en memoria del proceso. Best-effort: en serverless cada
