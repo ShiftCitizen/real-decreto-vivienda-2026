@@ -5,9 +5,14 @@
 # This site accepts no agent payments, requires no authentication, and exposes
 # no MCP server, skills, AgentCards or UCP profiles: those blocks are omitted
 # (their absence means they do not exist). It only declares its in-browser
-# WebMCP tools: all six pages register the same eight read-only tools
+# WebMCP tools: every page registers the same nine read-only tools
 # (search_site, read_page, list_pages, get_faqs, list_norms, get_norm,
-# get_timeline, get_site_status).
+# get_timeline, get_concordance, get_site_status).
+#
+# Legal state (short): RDL 29/2026 in force since 2026-10-08 (pending
+# convalidation); RDL 28/2026 published, not yet in force (planned 2026-11-15);
+# RDL 26/2026 and RDL 27/2026 repealed 2026-10-02. Use get_concordance before
+# citing a repealed article. Full agent-oriented summary: /llms.txt
 
 WebMCP: https://real-decreto-vivienda-2026.vercel.app/
 WebMCP: https://real-decreto-vivienda-2026.vercel.app/desahucios-y-alquiler/
@@ -15,3 +20,4 @@ WebMCP: https://real-decreto-vivienda-2026.vercel.app/fiscal/
 WebMCP: https://real-decreto-vivienda-2026.vercel.app/financiacion/
 WebMCP: https://real-decreto-vivienda-2026.vercel.app/estado/
 WebMCP: https://real-decreto-vivienda-2026.vercel.app/normas/
+WebMCP: https://real-decreto-vivienda-2026.vercel.app/contacto/

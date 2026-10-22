@@ -52,9 +52,13 @@ components/
   SiteNav.tsx                 sidebar, cajón móvil, disparador de búsqueda, índice «En esta página»
   SearchPalette.tsx           paleta ⌘K / Ctrl-K
   ChatWidget.tsx              asistente (pregunta suelta, vía /api/chat)
-  WebMcpTools.tsx             eight read-only English WebMCP tools (Chrome with flag only)
+  WebMcpTools.tsx             nine read-only English WebMCP tools (Chrome with flag only; includes get_concordance)
+  CiteMap.tsx                 cita vigente + (antes derogado) vía data/concordancia.json
 lib/
-  normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts   busqueda.ts
+  normas.ts   nav.ts   cronologia.ts   faq.ts   slug.ts   busqueda.ts   concordancia.ts   revisiones.ts
+data/
+  concordancia.json           equivalencias RDL 26→29 y 27→28 (fuente BOE)
+  audit-citas-rdl26-27.json   inventario previo a la migración de citas
 app/api/chat/
   route.ts                    proxy a NVIDIA NIM con cuota, tope y negativa sin LLM
 scripts/

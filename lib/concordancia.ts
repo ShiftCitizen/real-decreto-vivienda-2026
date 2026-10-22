@@ -7,7 +7,7 @@
  */
 
 import raw from '@/data/concordancia.json';
-import type { NormaId } from '@/lib/normas';
+import { NORMAS, type NormaId } from '@/lib/normas';
 
 export type ConcordStatus = 'mapped' | 'pending' | 'new_in_successor' | 'exclusive_repealed';
 
@@ -47,13 +47,18 @@ export function padreDeArt(art: string): string | null {
     if (m) return m[1];
   }
   if (/^único(\.|$)/i.test(t) || t === 'único') return 'único';
-  if (/^disposiciones\b/i.test(t) || /\by\b/.test(t) && /^disposición/i.test(t)) {
+  if (/^disposiciones\b/i.test(t) || /^\d+\s+a\s+\d+/i.test(t)) {
     // «disposiciones finales quinta y sexta», «1 a 5» — no auto-mapear
     return null;
   }
-  if (/^\d+\s+a\s+\d+/i.test(t)) return null;
   if (/^disposición\b/i.test(t)) {
-    return t.replace(/\.\d+.*$/, '').replace(/\.(Uno|Dos|Tres|Cuatro|Cinco)\b.*$/i, '').trim();
+    // «disposición final tercera.Tres y Cuatro» u otras compuestos con «y»:
+    // no inventar un padre único.
+    if (/\by\b/i.test(t)) return null;
+    return t
+      .replace(/\.(Uno|Dos|Tres|Cuatro|Cinco|Seis|Siete|Ocho|Nueve|Diez)\b.*$/i, '')
+      .replace(/\.\d+(\.\S+)*$/, '')
+      .trim();
   }
   return null;
 }
@@ -140,4 +145,39 @@ export function entradasConcordancia(): ConcordEntry[] {
 
 export function metaConcordancia(): ConcordFile['meta'] {
   return DATA.meta;
+}
+
+/** Forma plana para WebMCP / llms: vigente + opcional «antes». */
+export type CitaAgente = {
+  norm: string;
+  article: string;
+  formerly?: { norm: string; article: string };
+  note?: string;
+};
+
+/**
+ * Formatea una cita tipada para agentes. Si es rdl26/rdl27 y hay mapeo,
+ * devuelve la norma sucesora y el derogado en `formerly`.
+ */
+export function citarParaAgente(norma: NormaId, art: string): CitaAgente {
+  if (esNormaDerogada(norma)) {
+    const r = resolverCita(norma, art);
+    if (r.status === 'mapped' && r.vigente) {
+      return {
+        norm: NORMAS[r.vigente.norma].etiqueta,
+        article: r.vigente.art,
+        formerly: {
+          norm: NORMAS[r.antes.norma].etiqueta,
+          article: r.antes.art,
+        },
+        note: r.note || undefined,
+      };
+    }
+    return {
+      norm: NORMAS[norma].etiqueta,
+      article: art,
+      note: r.note || 'Derogado; equivalencia pendiente de revisión humana',
+    };
+  }
+  return { norm: NORMAS[norma].etiqueta, article: art };
 }
