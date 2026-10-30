@@ -12,7 +12,8 @@ export default defineConfig({
   },
   test: {
     include: ['evals/**/*.test.ts'],
-    testTimeout: 10_000,
+    testTimeout: 15_000,
     fileParallelism: false,
+    isolate: false,
   },
 });

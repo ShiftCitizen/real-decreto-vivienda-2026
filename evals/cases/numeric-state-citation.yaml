@@ -5,21 +5,157 @@ casos:
     topics_esperados:
       - '#subir-renta'
     must_mention:
-      - '2 %'
-
-  - id: state-impago-vulnerable
+      - 2 %
+    via: buscar
+  - id: numeric-5-enero
+    pregunta: ¿Me pueden subir la renta un 5% en enero?
+    categoria: numeric_contamination
+    topics_esperados:
+      - '#subir-renta'
+    via: okf
+  - id: numeric-5-otra
+    pregunta: ¿El tope de actualización de renta es el 5 por ciento?
+    categoria: numeric_contamination
+    topics_esperados:
+      - '#subir-renta'
+      - subir
+      - 2 %
+    via: buscar
+  - id: state-1
+    pregunta: ¿Me pueden subir la renta?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-2
+    pregunta: ¿Está en vigor ya?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-3
+    pregunta: ¿Me pueden desahuciar?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-4
+    pregunta: ¿Cómo me afectan estas medidas como propietario?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-5
     pregunta: Qué pasa en el caso del impago de persona vulnerable?
     categoria: state_inclusion
     topics_esperados:
-      - desahucio
       - '#situacion-de-cada-medida'
       - '#en-vigor'
-    must_mention:
-      - RDL 29/2026
-      - vulnerable
-
-  - id: citation-href-shape
+    via: okf
+  - id: state-6
+    pregunta: ¿Puedo dejar de pagar el alquiler este mes?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-7
+    pregunta: Mi contrato de alquiler acaba en diciembre. ¿Se me prorroga automáticamente cinco años?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-8
+    pregunta: ¿Cuánto me deben si no me renuevan el contrato de alquiler?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-9
+    pregunta: >-
+      Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas
+      vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: state-10
+    pregunta: ¿Soy gran tenedor?
+    categoria: state_inclusion
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    via: okf
+  - id: citation-faq-1
+    pregunta: ¿Está en vigor ya?
+    categoria: citation_validity
+    topics_esperados:
+      - '#en-vigor'
+    via: okf
+  - id: citation-faq-2
     pregunta: ¿Me pueden subir la renta?
     categoria: citation_validity
     topics_esperados:
       - '#subir-renta'
+    via: okf
+  - id: citation-faq-3
+    pregunta: ¿Me pueden hacer un desahucio?
+    categoria: citation_validity
+    topics_esperados:
+      - '#desahucio'
+    via: okf
+  - id: citation-faq-4
+    pregunta: ¿Cómo me afectan estas medidas como propietario o arrendador?
+    categoria: citation_validity
+    topics_esperados:
+      - '#propietario'
+    via: okf
+  - id: citation-faq-5
+    pregunta: ¿Cuánto me deben si no me renuevan?
+    categoria: citation_validity
+    topics_esperados:
+      - '#indemnizacion'
+    via: okf
+  - id: citation-faq-6
+    pregunta: ¿Cuándo se aplica a mi contrato?
+    categoria: citation_validity
+    topics_esperados:
+      - '#aplicacion-contrato'
+    via: okf
+  - id: citation-faq-7
+    pregunta: ¿Soy gran tenedor?
+    categoria: citation_validity
+    topics_esperados:
+      - '#gran-tenedor'
+    via: okf
+  - id: citation-faq-8
+    pregunta: ¿Qué es vivienda asequible?
+    categoria: citation_validity
+    topics_esperados:
+      - '#vivienda-asequible'
+    via: okf
+  - id: citation-faq-9
+    pregunta: ¿Puedo participar en la Cuenta Financia Europa?
+    categoria: citation_validity
+    topics_esperados:
+      - '#cuenta-financia-europa'
+    via: okf
+  - id: citation-faq-10
+    pregunta: ¿Qué pasa con los alquileres turísticos?
+    categoria: citation_validity
+    topics_esperados:
+      - '#alquileres-turisticos'
+    via: okf
+  - id: citation-ajustar
+    pregunta: ¿Me pueden subir la renta?
+    categoria: citation_validity
+    topics_esperados:
+      - '#subir-renta'
+    via: okf

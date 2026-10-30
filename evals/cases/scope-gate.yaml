@@ -3,28 +3,87 @@ casos:
     pregunta: Dame una receta de tortilla de patatas.
     categoria: scope_gate
     niega: true
-
   - id: scope-tiempo
     pregunta: ¿Qué tiempo hace mañana en Madrid?
     categoria: scope_gate
     niega: true
-
   - id: scope-python
     pregunta: ¿Cómo se escribe un bucle en Python?
     categoria: scope_gate
     niega: true
-
+  - id: scope-futbol
+    pregunta: ¿Quién ganó la Champions League?
+    categoria: scope_gate
+    niega: true
+  - id: scope-crypto
+    pregunta: ¿Debo invertir en bitcoin?
+    categoria: scope_gate
+    niega: true
+  - id: scope-receta2
+    pregunta: Cómo hacer paella valenciana
+    categoria: scope_gate
+    niega: true
+  - id: scope-clima
+    pregunta: ¿Va a llover en Barcelona el domingo?
+    categoria: scope_gate
+    niega: true
+  - id: scope-codigo
+    pregunta: Explícame qué es un monorepo en Node
+    categoria: scope_gate
+    niega: true
+  - id: scope-medico
+    pregunta: ¿Qué antibiótico tomo para una amigdalitis?
+    categoria: scope_gate
+    niega: true
+  - id: scope-viaje
+    pregunta: Mejores hoteles en París
+    categoria: scope_gate
+    niega: true
   - id: scope-saludo-hola
     pregunta: hola, buenos días
     categoria: scope_gate
     niega: true
-
   - id: scope-saludo-gracias
     pregunta: gracias
     categoria: scope_gate
     niega: true
-
-  - id: scope-solo-stopwords
+  - id: scope-saludo-quetal
+    pregunta: qué tal
+    categoria: scope_gate
+    niega: true
+  - id: scope-saludo-tardes
+    pregunta: buenas tardes
+    categoria: scope_gate
+    niega: true
+  - id: scope-saludo-adios
+    pregunta: adiós
+    categoria: scope_gate
+    niega: true
+  - id: scope-stopwords
     pregunta: de el la los
+    categoria: scope_gate
+    niega: true
+  - id: scope-vacio-ish
+    pregunta: por con en a
+    categoria: scope_gate
+    niega: true
+  - id: scope-legal-adj-trafico
+    pregunta: ¿Cuál es la multa por saltarse un semáforo en rojo?
+    categoria: scope_gate
+    niega: true
+  - id: scope-legal-adj-pesca
+    pregunta: ¿Qué cuota de pesca tengo en el Cantábrico este año?
+    categoria: scope_gate
+    niega: true
+  - id: scope-ajedrez
+    pregunta: ¿Cuál es la apertura española en ajedrez?
+    categoria: scope_gate
+    niega: true
+  - id: scope-jardin
+    pregunta: Cómo podar un limonero en febrero
+    categoria: scope_gate
+    niega: true
+  - id: scope-foto
+    pregunta: Mejor ISO para foto nocturna con luna llena
     categoria: scope_gate
     niega: true

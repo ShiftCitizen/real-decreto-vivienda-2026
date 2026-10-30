@@ -1,44 +1,369 @@
 casos:
+  - id: single-faq-1
+    pregunta: ¿Está en vigor ya?
+    categoria: single_intent
+    topics_esperados:
+      - '#en-vigor'
+    via: okf
+  - id: single-faq-2
+    pregunta: ¿Me pueden subir la renta?
+    categoria: single_intent
+    topics_esperados:
+      - '#subir-renta'
+    via: okf
+  - id: single-faq-3
+    pregunta: ¿Me pueden hacer un desahucio?
+    categoria: single_intent
+    topics_esperados:
+      - desahucio
+      - '#desahucio'
+    via: okf
+  - id: single-faq-4
+    pregunta: ¿Me pueden desahuciar?
+    categoria: single_intent
+    topics_esperados:
+      - desahucio
+      - '#desahucio'
+    via: okf
+  - id: single-faq-5
+    pregunta: ¿Cómo me afectan estas medidas como propietario o arrendador?
+    categoria: single_intent
+    topics_esperados:
+      - '#propietario'
+    via: okf
+  - id: single-faq-6
+    pregunta: ¿Cuánto me deben si no me renuevan?
+    categoria: single_intent
+    topics_esperados:
+      - '#indemnizacion'
+    via: okf
+  - id: single-faq-7
+    pregunta: ¿Cuándo se aplica a mi contrato?
+    categoria: single_intent
+    topics_esperados:
+      - '#aplicacion-contrato'
+    via: okf
+  - id: single-faq-8
+    pregunta: ¿Soy gran tenedor?
+    categoria: single_intent
+    topics_esperados:
+      - '#gran-tenedor'
+    via: okf
+  - id: single-faq-9
+    pregunta: ¿Qué es vivienda asequible?
+    categoria: single_intent
+    topics_esperados:
+      - '#vivienda-asequible'
+    via: okf
+  - id: single-faq-10
+    pregunta: ¿Puedo participar en la Cuenta Financia Europa?
+    categoria: single_intent
+    topics_esperados:
+      - '#cuenta-financia-europa'
+    via: okf
+  - id: single-faq-11
+    pregunta: ¿Qué pasa con los alquileres turísticos?
+    categoria: single_intent
+    topics_esperados:
+      - '#alquileres-turisticos'
+    via: okf
+  - id: single-faq-12
+    pregunta: ¿Qué exige la deducción por alquiler en el IRPF?
+    categoria: single_intent
+    topics_esperados:
+      - '#deduccion-alquiler-requisitos'
+    via: okf
+  - id: single-faq-13
+    pregunta: ¿Cómo funciona la reinversión en la Cuenta Financia Europa Reinversión?
+    categoria: single_intent
+    topics_esperados:
+      - '#reinversion-financia-europa'
+    via: okf
+  - id: single-faq-14
+    pregunta: ¿Sigue siendo vivienda habitual si me mudo por edad o dependencia?
+    categoria: single_intent
+    topics_esperados:
+      - '#vivienda-habitual-mayores-65'
+    via: okf
+  - id: single-faq-15
+    pregunta: ¿Qué viviendas llevan IVA superreducido?
+    categoria: single_intent
+    topics_esperados:
+      - '#iva-superreducido-protegida'
+    via: okf
+  - id: single-faq-16
+    pregunta: ¿Cómo tributa la Cuenta Financia Europa a los cinco años?
+    categoria: single_intent
+    topics_esperados:
+      - '#cuenta-tributacion-10-000'
+    via: okf
+  - id: single-ibi
+    pregunta: ¿Me suben el IBI por tener una vivienda en alquiler?
+    categoria: single_intent
+    topics_esperados:
+      - IBI
+      - ibi
+    via: buscar
+  - id: single-iva
+    pregunta: ¿Qué IVA pago si vendo el piso que no es mi vivienda habitual?
+    categoria: single_intent
+    topics_esperados:
+      - IVA
+      - iva
+    via: buscar
+  - id: single-habitual
+    pregunta: Mi madre tiene 82 años y vive de la pensión, ¿sigue siendo vivienda habitual?
+    categoria: single_intent
+    topics_esperados:
+      - habitual
+    via: buscar
+  - id: single-turistas
+    pregunta: ¿Qué multa me pueden poner por alquilar el piso a turistas sin permiso?
+    categoria: single_intent
+    topics_esperados:
+      - turístic
+      - turistic
+      - turista
+    via: buscar
+  - id: single-tope5
+    pregunta: ¿El límite de subida de la renta es del 5 %?
+    categoria: single_intent
+    topics_esperados:
+      - '#subir-renta'
+      - subir
+    via: buscar
   - id: single-prorroga
     pregunta: Mi contrato de alquiler acaba en diciembre. ¿Se me prorroga automáticamente cinco años?
     categoria: single_intent
     topics_esperados:
       - '#coordinacion'
-
-  - id: single-tercer-sector
-    pregunta: Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?
+      - prórroga
+      - prorroga
+    via: okf
+  - id: single-tercer
+    pregunta: >-
+      Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas
+      vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?
     categoria: single_intent
-    # FAQ propietario también trae la reducción del tercer sector (chat-check).
     topics_esperados:
       - '#propietario'
-      - '#lo-que-afecta-al-tercer-sector'
-
-  - id: single-subir-renta
-    pregunta: ¿Me pueden subir la renta un 5% en enero?
-    categoria: single_intent
-    topics_esperados:
-      - '#subir-renta'
-
-  - id: single-lau
+      - tercer
+    via: okf
+  - id: single-lau-impago
     pregunta: ¿Puedo dejar de pagar el alquiler este mes?
     categoria: single_intent
     topics_esperados:
       - '#art-3-rdl-262026-reforma-de-la-lau'
-    must_not_mention:
-      - alquileres-turisticos
-      - deduccion-alquiler
-
-  - id: single-desahucio-demanda
-    pregunta: Soy inquilino y me han puesto una demanda de desahucio por no poder pagar. ¿Me protege algo de lo que aprobó el Gobierno?
+      - reforma
+    via: okf
+  - id: single-indemnizacion
+    pregunta: ¿Cuánto me deben si no me renuevan el contrato de alquiler?
     categoria: single_intent
-    # La FAQ consolidada de desahucio gana en `/` (sin hash); el art. 2 puede ir detrás.
+    topics_esperados:
+      - '#indemnizacion'
+      - indemniz
+    via: okf
+  - id: single-propietario
+    pregunta: ¿Cómo me afectan estas medidas como propietario?
+    categoria: single_intent
+    topics_esperados:
+      - '#propietario'
+      - propietario
+    via: okf
+  - id: single-desahucios-q
+    pregunta: ¿Qué pasa con los desahucios?
+    categoria: single_intent
     topics_esperados:
       - desahucio
-    must_not_mention:
-      - cuenta-de-ahorro
-
-  - id: single-faq-literal-renta
+    via: okf
+  - id: single-desahuciar
+    pregunta: ¿Me pueden desahuciar?
+    categoria: single_intent
+    topics_esperados:
+      - desahucio
+    via: okf
+  - id: single-suspension
+    pregunta: suspensión de desahucios
+    categoria: single_intent
+    topics_esperados:
+      - desahucio
+      - /desahucios-y-alquiler
+    via: okf
+  - id: single-arrendador
+    pregunta: Me perjudica la ley si soy arrendador de un piso?
+    categoria: single_intent
+    topics_esperados:
+      - '#propietario'
+      - propietario
+    via: okf
+  - id: single-echar
+    pregunta: ¿Puedo echar al inquilino si no me paga?
+    categoria: single_intent
+    topics_esperados:
+      - desahucio
+    via: okf
+  - id: single-vulnerable-def
+    pregunta: ¿Cuándo es vulnerable un inquilino?
+    categoria: single_intent
+    topics_esperados:
+      - desahucio
+    via: okf
+  - id: single-literal-renta
     pregunta: ¿Me pueden subir la renta?
     categoria: single_intent
     topics_esperados:
       - '#subir-renta'
+    via: okf
+  - id: single-literal-vigor
+    pregunta: ¿Está en vigor ya?
+    categoria: single_intent
+    topics_esperados:
+      - '#en-vigor'
+    via: okf
+  - id: single-gran-tenedor
+    pregunta: ¿Soy gran tenedor?
+    categoria: single_intent
+    topics_esperados:
+      - '#gran-tenedor'
+      - tenedor
+    via: okf
+  - id: single-sec-1
+    pregunta: Quién hay detrás
+    categoria: single_intent
+    topics_esperados:
+      - '#quien-hay-detras'
+      - Quién hay detrás
+    via: buscar
+  - id: single-sec-2
+    pregunta: Comentarios y correcciones
+    categoria: single_intent
+    topics_esperados:
+      - '#comentarios-y-correcciones'
+      - Comentarios y correccion
+    via: buscar
+  - id: single-sec-3
+    pregunta: Art. 1 (RDL 26/2026). Freno a la compra especulativa
+    categoria: single_intent
+    topics_esperados:
+      - '#art-1-rdl-262026-freno-a-la-compra-especulativa'
+      - Art. 1 (RDL 26/2026). Fr
+    via: buscar
+  - id: single-sec-4
+    pregunta: Art. 2 (RDL 26/2026). Suspensión de desahucios hasta el 31-12-2030
+    categoria: single_intent
+    topics_esperados:
+      - '#art-2-rdl-262026-suspension-de-desahucios-hasta-el-31-12-2030'
+      - Art. 2 (RDL 26/2026). Su
+    via: buscar
+  - id: single-sec-5
+    pregunta: Enervación extraordinaria (art. 5 RDL 26/2026; nuevo art. 22.6 LEC)
+    categoria: single_intent
+    topics_esperados:
+      - '#enervacion-extraordinaria-art-5-rdl-262026-nuevo-art-226-lec'
+      - Enervación extraordinari
+    via: buscar
+  - id: single-sec-6
+    pregunta: Art. 3 (RDL 26/2026). Reforma de la LAU
+    categoria: single_intent
+    topics_esperados:
+      - '#art-3-rdl-262026-reforma-de-la-lau'
+      - Art. 3 (RDL 26/2026). Re
+    via: buscar
+  - id: single-sec-7
+    pregunta: Art. 4 (RDL 26/2026). Ley 12/2023
+    categoria: single_intent
+    topics_esperados:
+      - '#art-4-rdl-262026-ley-122023'
+      - Art. 4 (RDL 26/2026). Le
+    via: buscar
+  - id: single-sec-8
+    pregunta: DF 5.ª y DF 6.ª
+    categoria: single_intent
+    topics_esperados:
+      - '#df-5-y-df-6'
+      - DF 5.ª y DF 6.ª
+    via: buscar
+  - id: single-sec-9
+    pregunta: 'Coordinación: el RDL 27/2026 y la prórroga indefinida'
+    categoria: single_intent
+    topics_esperados:
+      - '#coordinacion'
+      - 'Coordinación: el RDL 27/'
+    via: buscar
+  - id: single-sec-10
+    pregunta: Prórroga indefinida e indemnización
+    categoria: single_intent
+    topics_esperados:
+      - '#prorroga-indefinida-e-indemnizacion'
+      - Prórroga indefinida e in
+    via: buscar
+  - id: single-sec-11
+    pregunta: 'Prórrogas extraordinarias: art. 10.5 y 10.6 de la LAU'
+    categoria: single_intent
+    topics_esperados:
+      - '#prorrogas-extraordinarias-art-105-y-106-de-la-lau'
+      - Prórrogas extraordinaria
+    via: buscar
+  - id: single-sec-12
+    pregunta: 'DA 1.ª: coordinación con la DF 5.ª'
+    categoria: single_intent
+    topics_esperados:
+      - '#da-1-coordinacion-con-la-df-5'
+      - 'DA 1.ª: coordinación con'
+    via: buscar
+  - id: single-sec-13
+    pregunta: 'DT única: qué contratos quedan dentro'
+    categoria: single_intent
+    topics_esperados:
+      - '#dt-unica-que-contratos-quedan-dentro'
+      - 'DT única: qué contratos '
+    via: buscar
+  - id: single-sec-14
+    pregunta: 'Título V: régimen sancionador de las plataformas de corta duración'
+    categoria: single_intent
+    topics_esperados:
+      - '#titulo-v-regimen-sancionador-de-las-plataformas-de-corta-duracion'
+      - 'Título V: régimen sancio'
+    via: buscar
+  - id: single-sec-15
+    pregunta: Nuevos decretos de 6 de octubre de 2026
+    categoria: single_intent
+    topics_esperados:
+      - '#nuevos-decretos-de-6-de-octubre-de-2026'
+      - 'Nuevos decretos de 6 de '
+    via: buscar
+  - id: single-sec-16
+    pregunta: Situación de cada medida
+    categoria: single_intent
+    topics_esperados:
+      - '#situacion-de-cada-medida'
+      - Situación de cada medida
+    via: buscar
+  - id: single-sec-17
+    pregunta: Línea de tiempo
+    categoria: single_intent
+    topics_esperados:
+      - '#linea-de-tiempo'
+      - Línea de tiempo
+    via: buscar
+  - id: single-sec-18
+    pregunta: Historial de actualizaciones
+    categoria: single_intent
+    topics_esperados:
+      - '#historial-de-actualizaciones'
+      - Historial de actualizaci
+    via: buscar
+  - id: single-sec-19
+    pregunta: Cuatro advertencias
+    categoria: single_intent
+    topics_esperados:
+      - '#cuatro-advertencias'
+      - Cuatro advertencias
+    via: buscar
+  - id: single-sec-20
+    pregunta: Convalidación
+    categoria: single_intent
+    topics_esperados:
+      - '#convalidacion'
+      - Convalidación
+    via: buscar

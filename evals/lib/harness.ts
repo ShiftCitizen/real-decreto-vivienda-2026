@@ -1,18 +1,21 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { buscar, esSaludo, palabrasDeConsulta } from '@/lib/busqueda';
 import { seleccionar } from '@/lib/okf';
+import { responderAmplia } from '@/lib/amplia';
 import type { TablaOkf } from '@/lib/okf';
 import type { EntradaIndice } from '@/lib/busqueda';
+import type { CasoEval } from '../types';
 
-export type ResultadoOkf = {
+export type ResultadoRetrieval = {
   niega: boolean;
   titulos: string[];
   hrefs: string[];
   contexto: string;
 };
 
-const root = join(import.meta.dirname, '../..');
+const root = join(fileURLToPath(new URL('.', import.meta.url)), '../..');
 
 export function cargarIndices(): { indice: EntradaIndice[]; okf: TablaOkf } {
   const indice = JSON.parse(
@@ -22,7 +25,7 @@ export function cargarIndices(): { indice: EntradaIndice[]; okf: TablaOkf } {
   return { indice, okf };
 }
 
-export function comoOkf(pregunta: string, okf: TablaOkf): ResultadoOkf {
+export function comoOkf(pregunta: string, okf: TablaOkf): ResultadoRetrieval {
   const evidencia = seleccionar(pregunta, okf);
   if (!evidencia) return { niega: true, titulos: [], hrefs: [], contexto: '' };
   return {
@@ -33,7 +36,7 @@ export function comoOkf(pregunta: string, okf: TablaOkf): ResultadoOkf {
   };
 }
 
-export function comoBuscar(pregunta: string, indice: EntradaIndice[]) {
+export function comoBuscar(pregunta: string, indice: EntradaIndice[]): ResultadoRetrieval {
   const utiles = buscar(indice, pregunta).slice(0, 3);
   return {
     niega: utiles.length === 0,
@@ -43,7 +46,17 @@ export function comoBuscar(pregunta: string, indice: EntradaIndice[]) {
   };
 }
 
-/** Scope gate como en la ruta: saludo, sin palabras de contenido, o OKF vacío. */
+export function recuperar(
+  caso: CasoEval,
+  okf: TablaOkf,
+  indice: EntradaIndice[],
+): ResultadoRetrieval {
+  if (caso.via === 'buscar' || caso.categoria === 'numeric_contamination') {
+    return comoBuscar(caso.pregunta, indice);
+  }
+  return comoOkf(caso.pregunta, okf);
+}
+
 export function esNegativaScope(pregunta: string, okf: TablaOkf): boolean {
   if (esSaludo(pregunta)) return true;
   if (palabrasDeConsulta(pregunta).length === 0) return true;
@@ -60,12 +73,18 @@ export function hrefValido(href: string, indice: EntradaIndice[]): boolean {
   });
 }
 
-/** Match against href and/or title (FAQ de desahucio vive en `/` sin hash). */
 export function coincideTopic(
   hrefs: string[],
   topic: string,
   titulos: string[] = [],
 ): boolean {
-  if (hrefs.some((h) => h.includes(topic))) return true;
-  return titulos.some((t) => t.toLowerCase().includes(topic.toLowerCase()));
+  const t = topic.toLowerCase();
+  if (hrefs.some((h) => h.toLowerCase().includes(t))) return true;
+  return titulos.some((titulo) => titulo.toLowerCase().includes(t));
+}
+
+export function ampliaOk(pregunta: string): boolean {
+  const r = responderAmplia(pregunta);
+  if (!r || !r.respuesta?.trim()) return false;
+  return Array.isArray(r.citas) && r.citas.length > 0;
 }

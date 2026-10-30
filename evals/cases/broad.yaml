@@ -1,0 +1,16 @@
+casos:
+  - id: broad-resumen
+    pregunta: Hazme un resumen de lo que aprobó el Gobierno sobre vivienda
+    categoria: broad
+  - id: broad-dame-resumen
+    pregunta: dame un resumen
+    categoria: broad
+  - id: broad-sitio
+    pregunta: Hazme un resumen de este sitio
+    categoria: broad
+  - id: broad-analisis
+    pregunta: Dame un resumen de este análisis
+    categoria: broad
+  - id: broad-puntos-clave
+    pregunta: ¿Cuáles son los puntos clave de la web?
+    categoria: broad
