@@ -1,0 +1,25 @@
+casos:
+  - id: numeric-tope-renta
+    pregunta: ¿El límite de subida de la renta es del 5 %?
+    categoria: numeric_contamination
+    topics_esperados:
+      - '#subir-renta'
+    must_mention:
+      - '2 %'
+
+  - id: state-impago-vulnerable
+    pregunta: Qué pasa en el caso del impago de persona vulnerable?
+    categoria: state_inclusion
+    topics_esperados:
+      - desahucio
+      - '#situacion-de-cada-medida'
+      - '#en-vigor'
+    must_mention:
+      - RDL 29/2026
+      - vulnerable
+
+  - id: citation-href-shape
+    pregunta: ¿Me pueden subir la renta?
+    categoria: citation_validity
+    topics_esperados:
+      - '#subir-renta'

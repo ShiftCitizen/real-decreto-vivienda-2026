@@ -8,6 +8,8 @@
     "build": "next build",
     "postbuild": "node scripts/build-search-index.mjs && node scripts/build-okf-index.mjs",
     "check:chat": "node scripts/chat-check.mjs",
+    "eval:retrieval": "vitest run --config vitest.eval.config.mts",
+    "eval:faithfulness": "node scripts/eval-faithfulness.mjs",
     "typecheck": "tsc --noEmit",
     "start": "next start"
   },
@@ -17,10 +19,13 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "js-yaml": "^5.5.0",
     "serve": "^14.2.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
   }
 }

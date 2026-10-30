@@ -1,0 +1,44 @@
+casos:
+  - id: single-prorroga
+    pregunta: Mi contrato de alquiler acaba en diciembre. ¿Se me prorroga automáticamente cinco años?
+    categoria: single_intent
+    topics_esperados:
+      - '#coordinacion'
+
+  - id: single-tercer-sector
+    pregunta: Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?
+    categoria: single_intent
+    # FAQ propietario también trae la reducción del tercer sector (chat-check).
+    topics_esperados:
+      - '#propietario'
+      - '#lo-que-afecta-al-tercer-sector'
+
+  - id: single-subir-renta
+    pregunta: ¿Me pueden subir la renta un 5% en enero?
+    categoria: single_intent
+    topics_esperados:
+      - '#subir-renta'
+
+  - id: single-lau
+    pregunta: ¿Puedo dejar de pagar el alquiler este mes?
+    categoria: single_intent
+    topics_esperados:
+      - '#art-3-rdl-262026-reforma-de-la-lau'
+    must_not_mention:
+      - alquileres-turisticos
+      - deduccion-alquiler
+
+  - id: single-desahucio-demanda
+    pregunta: Soy inquilino y me han puesto una demanda de desahucio por no poder pagar. ¿Me protege algo de lo que aprobó el Gobierno?
+    categoria: single_intent
+    # La FAQ consolidada de desahucio gana en `/` (sin hash); el art. 2 puede ir detrás.
+    topics_esperados:
+      - desahucio
+    must_not_mention:
+      - cuenta-de-ahorro
+
+  - id: single-faq-literal-renta
+    pregunta: ¿Me pueden subir la renta?
+    categoria: single_intent
+    topics_esperados:
+      - '#subir-renta'

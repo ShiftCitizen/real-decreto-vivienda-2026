@@ -1,0 +1,30 @@
+casos:
+  - id: scope-receta
+    pregunta: Dame una receta de tortilla de patatas.
+    categoria: scope_gate
+    niega: true
+
+  - id: scope-tiempo
+    pregunta: ¿Qué tiempo hace mañana en Madrid?
+    categoria: scope_gate
+    niega: true
+
+  - id: scope-python
+    pregunta: ¿Cómo se escribe un bucle en Python?
+    categoria: scope_gate
+    niega: true
+
+  - id: scope-saludo-hola
+    pregunta: hola, buenos días
+    categoria: scope_gate
+    niega: true
+
+  - id: scope-saludo-gracias
+    pregunta: gracias
+    categoria: scope_gate
+    niega: true
+
+  - id: scope-solo-stopwords
+    pregunta: de el la los
+    categoria: scope_gate
+    niega: true

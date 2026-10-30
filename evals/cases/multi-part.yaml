@@ -1,0 +1,18 @@
+casos:
+  - id: multi-cuatro-partes
+    pregunta: >-
+      Tengo un piso alquilado desde 2022 a una persona física y el contrato vence
+      en diciembre de 2026. Mi casero no me ha dicho nada y me preocupa que me
+      suban la renta un 5% en enero. Además mi hermana está en situación vulnerable
+      y quiere saber si podría ser desahuciada, y quiero saber qué pasa con la
+      deducción por alquiler en el IRPF. ¿Qué se aplica ahora y qué no?
+    categoria: multi_part
+    min_topics: 2
+    # Ranking actual (medido): propietario + deducción IRPF + FAQ desahucio en `/`.
+    topics_esperados:
+      - '#propietario'
+      - '#deduccion-alquiler-requisitos'
+      - desahucio
+    must_not_mention:
+      - alquileres-turisticos
+      - normas-citadas

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { responderAmplia } from '@/lib/amplia';
 import { buscar, esSaludo, palabrasDeConsulta } from '@/lib/busqueda';
 import type { EntradaIndice } from '@/lib/busqueda';
+import { ajustarCitas } from '@/lib/citas';
 import { seleccionar } from '@/lib/okf';
 import type { Evidencia, TablaOkf } from '@/lib/okf';
 
@@ -402,36 +403,6 @@ async function cargarOkf(origen: string, cabeceras: HeadersInit = {}): Promise<T
 type Fuente = { titulo: string; href: string };
 /** Una evidencia con su texto: lo que ve el modelo, o lo que ve el plan B. */
 type EvidenciaRuta = Fuente & { texto: string; estado?: boolean };
-
-/**
- * Deja solo las fuentes citadas y **renumera** para que `[n]` siga apuntando a
- * la correcta.
- *
- * El widget pinta las citas como enlaces en el mismo orden que las marcas `[n]`
- * del texto, así que con un hueco intermedio `[3]` apuntaría a la fuente
- * equivocada. Se recoge el conjunto de números citados, se ordenan y se
- * reescriben a 1..n, y el texto se ajusta con el mismo mapa. Solo se listan las
- * que el modelo usó de verdad: cada fuente no relacionada que se liste es una
- * fuente que no debería estar.
- */
-function ajustarCitas(respuesta: string, total: number): { texto: string; fuentes: number[] } {
-  const citadas = [
-    ...new Set(
-      [...respuesta.matchAll(/\[(\d{1,2})\]/g)]
-        .map((m) => Number(m[1]))
-        .filter((n) => n >= 1 && n <= total),
-    ),
-  ].sort((a, b) => a - b);
-  const usadas = citadas.length > 0 ? citadas : [1];
-  // mapa: número original → número nuevo (1-based). El iterador da (valor, índice),
-  // así que `viejo` es el número original y `i + 1` el nuevo correlativo.
-  const mapa = new Map(usadas.map((viejo, i) => [viejo, i + 1]));
-  const texto = respuesta.replace(/\[(\d{1,2})\]/g, (marca, n) => {
-    const viejo = Number(n);
-    return mapa.has(viejo) ? `[${mapa.get(viejo)}]` : marca;
-  });
-  return { texto, fuentes: usadas };
-}
 
 /**
  * Monta el contexto que ve el modelo, y las fuentes que lo sostienen.

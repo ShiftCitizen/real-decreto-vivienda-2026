@@ -1,0 +1,42 @@
+name: evals
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      faithfulness:
+        description: 'Run faithfulness (Mistral) — ADR 0001 under demand only'
+        type: boolean
+        default: false
+
+jobs:
+  retrieval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm run eval:retrieval
+      # Legacy gate — still the production retrieval smoke.
+      - run: npm run check:chat
+
+  faithfulness:
+    if: github.event_name == 'workflow_dispatch' && inputs.faithfulness == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Faithfulness (Mistral only — never NIM)
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        run: npm run eval:faithfulness
