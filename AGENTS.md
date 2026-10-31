@@ -16,10 +16,14 @@ must still work as static output.
 ## Commands
 
 ```bash
-npm run typecheck   # tsc --noEmit  — run this after every change
-npm run build       # hybrid build + regenerates the search index
-npm start           # next start locally (needs a prior build; the API only lives here or on Vercel)
-npm run dev         # dev server
+npm run typecheck         # tsc --noEmit  — run this after every change
+npm run build             # hybrid build + regenerates the search index
+npm start                 # next start locally (needs a prior build; the API only lives here or on Vercel)
+npm run dev               # dev server
+npm run check:chat        # legacy retrieval smoke (needs a prior build)
+npm run eval:retrieval    # Vitest evals — no LLM; needs built indexes
+# faithfulness — on demand only (ADR 0001); never NIM / never POST /api/chat:
+# MISTRAL_API_KEY=… npm run eval:faithfulness
 ```
 
 `npm run build` is the only correct way to regenerate the search index. Run
@@ -464,6 +468,33 @@ strips the leading and trailing pipe, so a row no longer starts with `|`). If
 you touch either side of that, re-run `npm run check:chat` and check that a
 question about dates still brings dates.
 
+### 8. Chatbot evals — retrieval in CI; faithfulness on demand
+
+Full policy: `docs/adr/0001-evals-sin-quemar-tokens-del-sitio.md` (ADR 0001).
+Agents must not invent a nightly faithfulness cron or wire evals through
+production NIM.
+
+- **Retrieval / scope / structural citations** — local only
+  (`lib/okf`, `lib/busqueda`, built indexes). `npm run eval:retrieval` and
+  `npm run check:chat` after a build. The PR workflow
+  `.github/workflows/evals.yml` runs these; it needs **no** LLM secrets.
+- **Faithfulness** — Mistral with a separate `MISTRAL_API_KEY`, **under
+  demand only** (`npm run eval:faithfulness` or the workflow's
+  `workflow_dispatch` input). Run it when you change the system prompt,
+  model chain / `NIM_MODEL_ID`, context assembly (`montarContexto`, plan B
+  caps), or `ajustarCitas()`, or when regenerating the baseline. Do **not**
+  run it on every PR, on every push to `main`, or on a daily cron.
+- **Forbidden for evals:** `NIM_API_KEY`, `POST /api/chat` (prod or preview),
+  or any path that burns the public assistant quota. Ollama is optional
+  local only — not the default and not CI.
+- Faithfulness against Mistral measures the pipeline + that model; it does
+  **not** by itself certify Nemotron/Gemma in production. A prod NIM
+  measurement is a separate, explicit one-off.
+
+Corpus and gates live under `evals/` (OpenSpec `evals-chatbot-harness`).
+Do not reintroduce a nightly faithfulness job to «close» KL-S-032/036 —
+those specs are on-demand by design.
+
 ## React gotchas in this codebase
 
 These have already caused real bugs here. Re-introducing them will cause them again.
@@ -589,6 +620,10 @@ Do not report a change as done on the strength of the code alone.
 - `npm run typecheck` clean.
 - `npm run build` succeeds; the `postbuild` line reports the expected entry
   counts and `citation audit: 0`.
+- If search, OKF, `lib/busqueda`, `lib/okf`, or chat retrieval changed, also
+  run `npm run eval:retrieval` (and `npm run check:chat` when the smoke is
+  in play). Do **not** burn `MISTRAL_API_KEY` / faithfulness unless the
+  change hits the on-demand triggers in §8 / ADR 0001.
 - If search or deep links changed, check the built HTML rather than the source —
   the client component will not render server-side.
 - Measure rather than assume: `getBoundingClientRect`, computed styles, canvas
