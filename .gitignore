@@ -13,3 +13,6 @@ public/search-index.json
 # scripts/build-okf-index.mjs, never hand-authored.
 public/okf-index.json
 .env*
+
+# Informes generados por npm run eval:retrieval
+evals/reports/

@@ -1,6 +1,6 @@
 ---
 type: Rule
-title: Art. 2 (RDL 29/2026). Suspensión de desahucios hasta el 31-12-2030
+title: Art. 2 (RDL 26/2026). Suspensión de desahucios hasta el 31-12-2030
 description: "Suspensión si el demandado es vulnerable y no tiene alternativa habitacional, con los límites que el propio art. 2.2 escribe. Vigente por el art. 2 del RDL 29/2026 desde el 8-10-2026, pendiente de convalidación; el régimen original era del RDL 26/2026, derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026

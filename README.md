@@ -134,6 +134,21 @@ borres `.vercel/project.json`.
 Las URLs antiguas `*.html` del sitio estático anterior **no** están redirigidas.
 Fue una decisión consciente, no un descuido.
 
+## Decisiones de arquitectura
+
+Los ADR viven en [`docs/adr/`](./docs/adr/). El primero fija cómo se evalúa el
+asistente sin gastar la cuota NIM del sitio: retrieval local/CI; faithfulness
+con Mistral free tier **bajo demanda** (no nightly).
+
+```bash
+npm run build            # índices necesarios para los evals
+npm run eval:retrieval   # sin LLM; Vitest + evals/cases/*.yaml
+MISTRAL_API_KEY=… npm run eval:faithfulness   # solo bajo demanda (ADR 0001)
+```
+
+`check:chat` sigue siendo el smoke legacy de retrieval. OpenSpec:
+`openspec/changes/evals-chatbot-harness/`.
+
 ## Reglas para quien edite
 
 Lee [`AGENTS.md`](./AGENTS.md) antes de tocar nada. En resumen:

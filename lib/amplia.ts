@@ -293,7 +293,7 @@ const PAGINAS: PaginaAmplia[] = [
       archivo: CONTACTO,
       medida: false,
       texto:
-        'Este análisis lo elabora Carlos Marchena (ShiftCitizen). No es un despacho ni un servicio de asesoramiento jurídico: es una lectura divulgativa del articulado publicado en el BOE. Comentarios o correcciones: contacto@shiftcitizen.com.',
+        'Este análisis lo elabora Carlos Marchena (ShiftCitizen). No es un despacho ni un servicio de asesoramiento jurídico: es una lectura divulgativa del articulado publicado en el BOE.',
     },
     puntos: [
       {

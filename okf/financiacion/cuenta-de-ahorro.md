@@ -1,6 +1,6 @@
 ---
 type: Rule
-title: Cuenta de Ahorro e Inversión Financia Europa (art. 20 del RDL 26/2026)
+title: Cuenta de Ahorro e Inversión Financia Europa (art. 20 RDL 26/2026)
 description: "Cuenta y SIALP Financia Europa, Registro de IIC Elegibles, órdenes ministeriales pendientes en el texto y cesiones de crédito del art. 25 bis de la Ley 5/2019. Vigente por el título VI del RDL 29/2026 desde el 8-10-2026; el RDL 26/2026 quedó derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026

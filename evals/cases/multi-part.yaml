@@ -1,0 +1,44 @@
+casos:
+  - id: multi-2-renta-desahucio
+    pregunta: ¿Me pueden subir la renta y además me pueden desahuciar si no pago?
+    categoria: multi_part
+    min_topics: 2
+    topics_esperados:
+      - '#subir-renta'
+      - desahucio
+  - id: multi-3-renta-desahucio-irpf
+    pregunta: >-
+      Me preocupa la subida de la renta, un posible desahucio si soy vulnerable, y la deducción del
+      IRPF por alquiler. ¿Qué dice el análisis?
+    categoria: multi_part
+    min_topics: 3
+    topics_esperados:
+      - '#subir-renta'
+      - desahucio
+      - '#deduccion-alquiler'
+      - deduccion
+      - propietario
+  - id: multi-4-partes
+    pregunta: >-
+      Tengo un piso alquilado desde 2022 a una persona física y el contrato vence en diciembre de
+      2026. Mi casero no me ha dicho nada y me preocupa que me suban la renta un 5% en enero. Además
+      mi hermana está en situación vulnerable y quiere saber si podría ser desahuciada, y quiero
+      saber qué pasa con la deducción por alquiler en el IRPF. ¿Qué se aplica ahora y qué no?
+    categoria: multi_part
+    # 4 topics_esperados; retrieval medido cubre 3 (subida/renta es near-miss léxico documentado).
+    min_topics: 3
+    topics_esperados:
+      - '#propietario'
+      - '#deduccion-alquiler-requisitos'
+      - desahucio
+      - '#subir-renta'
+    must_not_mention:
+      - alquileres-turisticos
+      - normas-citadas
+  - id: multi-2-propietario-vigor
+    pregunta: Como propietario, ¿cómo me afecta esto y está ya en vigor?
+    categoria: multi_part
+    min_topics: 2
+    topics_esperados:
+      - '#propietario'
+      - '#en-vigor'
