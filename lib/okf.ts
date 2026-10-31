@@ -74,6 +74,18 @@ export type Evidencia = {
  */
 const MAX_FICHERS = 4;
 
+/** Tope de ficheros de tema por defecto (producción). */
+export const MAX_FICHERS_DEFECTO = MAX_FICHERS;
+
+/**
+ * Opciones de selección — solo las usa el harness de evals (arm C).
+ * Sin opciones, el comportamiento es el de producción.
+ */
+export type OpcionesSeleccion = {
+  maxFicheros?: number;
+  topeFichero?: number;
+};
+
 /**
  * Raíces afines. Clave y valores pasan por `raiz()`.
  *
@@ -177,6 +189,15 @@ const PESO_CUERPO = 1;
  */
 const TOPE_FICHERO = 2400;
 
+/** Tope de caracteres por fichero por defecto (producción). */
+export const TOPE_FICHERO_DEFECTO = TOPE_FICHERO;
+
+/** Rutas de estado que viajan siempre con toda respuesta sustantiva. */
+export const SIEMPRE_RUTAS = [
+  'estado/situacion-de-cada-medida.md',
+  'faq/esta-en-vigor.md',
+] as const;
+
 /**
  * Los dos ficheros que viajan siempre con cualquier respuesta sustantiva.
  *
@@ -188,7 +209,7 @@ const TOPE_FICHERO = 2400;
  * las demás normas anteriores a los decretos»—, y medido, sin ellos la
  * respuesta de la prueba 8 no llegaba a decir que la LAU sigue vigente.
  */
-const SIEMPRE = ['estado/situacion-de-cada-medida.md', 'faq/esta-en-vigor.md'];
+const SIEMPRE: readonly string[] = SIEMPRE_RUTAS;
 
 /**
  * Los bloques que llevan el estado, dentro de las dos fichas de estado.
@@ -579,6 +600,7 @@ function bloquesDeFichero(
   i: FicheroIndexado,
   raicesPregunta: string[],
   indice: IndiceOkf,
+  topeFichero: number = TOPE_FICHERO,
 ): string {
   const puntua = (b: Bloque): number => {
     let p = 0;
@@ -613,7 +635,7 @@ function bloquesDeFichero(
   for (const n of elegidos) {
     const b = i.bloques[n];
     if (!b) continue;
-    const hueco = TOPE_FICHERO - largo - (largo ? 1 : 0);
+    const hueco = topeFichero - largo - (largo ? 1 : 0);
     if (hueco <= 0) break;
     const h = previos[n];
     const rotulo = h >= 0 && !montados.has(h) ? i.bloques[h].texto : null;
@@ -642,7 +664,7 @@ function bloquesDeFichero(
   // Si el estado se ha quedado fuera por el tope, entra igualmente: es corto y
   // es la parte que no puede faltar.
   if (i.estado && !montados.has(i.bloques.indexOf(i.estado))) {
-    texto = `${i.estado.texto}\n${texto}`.slice(0, TOPE_FICHERO);
+    texto = `${i.estado.texto}\n${texto}`.slice(0, topeFichero);
   }
   return texto.trim();
 }
@@ -829,7 +851,14 @@ function partesDe(pregunta: string): string[] {
  * ficheros temáticos distintos en lugar de cuatro facetas del mismo, y una
  * pregunta de una parte se comporta exactamente igual que antes.
  */
-export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | null {
+export function seleccionar(
+  pregunta: string,
+  tabla: TablaOkf,
+  opciones: OpcionesSeleccion = {},
+): Evidencia[] | null {
+  const maxFicheros = opciones.maxFicheros ?? MAX_FICHERS;
+  const topeFichero = opciones.topeFichero ?? TOPE_FICHERO;
+
   // Un saludo no es una pregunta del análisis. Se comprueba antes que nada
   // porque puntúa: «hola, buenos días» sacaba las raíces «buen» y «dias» y
   // llegaba al modelo, que contestaba con la cita equivocada.
@@ -877,7 +906,7 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
 
   const elegido = new Map<string, Candidato>();
   const anadir = (c: Candidato): void => {
-    if (!elegido.has(c.ruta) && elegido.size < MAX_FICHERS) elegido.set(c.ruta, c);
+    if (!elegido.has(c.ruta) && elegido.size < maxFicheros) elegido.set(c.ruta, c);
   };
 
   for (const parte of porParte) anadir(parte.mejor);
@@ -887,7 +916,7 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
   for (const c of elegido.values()) {
     const i = porRuta.get(c.ruta);
     if (!i) continue;
-    const texto = bloquesDeFichero(i, afines, indice);
+    const texto = bloquesDeFichero(i, afines, indice, topeFichero);
     if (texto.length === 0) continue;
     fuentes.push({ titulo: c.titulo, href: c.href, texto });
   }
@@ -899,16 +928,16 @@ export function seleccionar(pregunta: string, tabla: TablaOkf): Evidencia[] | nu
   // art. 5.Dos RDL 29/2026»), ese fichero entra también, si queda hueco. Sin
   // él, el modelo ve la remisión pero no el procedimiento al que remite.
   for (const rutaElegida of [...elegido.keys()]) {
-    if (fuentes.length >= MAX_FICHERS) break;
+    if (fuentes.length >= maxFicheros) break;
     const cuerpo = tabla.ficheros.find((x) => x.ruta === rutaElegida)?.cuerpo ?? '';
     for (const otro of tabla.ficheros) {
-      if (fuentes.length >= MAX_FICHERS) break;
+      if (fuentes.length >= maxFicheros) break;
       if (elegido.has(otro.ruta) || SIEMPRE.includes(otro.ruta)) continue;
       const art = /\(art\. ([0-9]+\.[A-Za-zÁÉÍÓÚáéíóú]+) RDL 29\/2026/.exec(otro.titulo);
       if (!art || !cuerpo.includes(`art. ${art[1]} RDL 29/2026`)) continue;
       const io = porRuta.get(otro.ruta);
       if (!io) continue;
-      const t = bloquesDeFichero(io, afines, indice);
+      const t = bloquesDeFichero(io, afines, indice, topeFichero);
       if (t.length === 0) continue;
       elegido.set(otro.ruta, { ruta: otro.ruta } as Candidato);
       fuentes.push({ titulo: otro.titulo, href: otro.href, texto: t });
