@@ -1,6 +1,6 @@
 ---
 type: Rule
-title: "¿Me pueden hacer un desahucio? ¿Me pueden desahuciar? ¿Qué pasa con los desahucios? ¿Puede el casero echar al inquilino y quién cuenta como vulnerable?"
+title: "¿Me pueden hacer un desahucio? ¿Me pueden desahuciar? ¿Puede el casero echar al inquilino y quién cuenta como vulnerable? ¿Qué pasa con los desahucios?"
 description: "Sí se puede demandar el desahucio; el RDL 29/2026 frena el lanzamiento solo si el inquilino es vulnerable (certificado de servicios sociales o art. 441.7 LEC) y sin alternativa habitacional. En vigor desde el 8-10-2026, pendiente de convalidación."
 tags:
   - rdl-vivienda-2026

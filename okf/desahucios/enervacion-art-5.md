@@ -1,6 +1,6 @@
 ---
 type: Rule
-title: Enervación extraordinaria (art. 5.Dos RDL 29/2026; nuevo art. 22.6 LEC)
+title: Enervación extraordinaria (art. 5 RDL 26/2026; nuevo art. 22.6 LEC)
 description: "Plazo improrrogable de dos meses para la administración, subrogación automática y ausencia de lanzamiento según el articulado, no según el preámbulo. Vigente por el art. 5.Dos del RDL 29/2026 desde el 8-10-2026, pendiente de convalidación; el régimen original era del art. 5 del RDL 26/2026, derogado el 2-10-2026."
 tags:
   - rdl-vivienda-2026

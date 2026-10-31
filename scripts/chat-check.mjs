@@ -218,12 +218,16 @@ const ACEPTACION = [
   {
     n: 2,
     q: 'Tengo un piso alquilado desde 2022 a una persona física y el contrato vence en diciembre de 2026. Mi casero no me ha dicho nada y me preocupa que me suban la renta un 5% en enero. Además mi hermana está en situación vulnerable y quiere saber si podría ser desahuciada, y quiero saber qué pasa con la deducción por alquiler en el IRPF. ¿Qué se aplica ahora y qué no?',
-    // Varias partes, así que tienen que entrar ficheros de temas distintos.
-    incluye: ['#art-2-rdl-262026-suspension-de-desahucios', '#deduccion-alquiler-requisitos'],
+    // Varias partes: la FAQ de desahucio cubre la hermana vulnerable; la
+    // deducción IRPF entra por otra. El art. 2 del RDL 26 ya no gana el
+    // primer puesto frente a esa FAQ (mismo criterio que el corpus de evals).
+    incluye: ['#desahucio', '#deduccion-alquiler-requisitos'],
     // Y no los ficheros que se colaban por palabras genéricas.
     excluye: ['alquileres-turisticos', 'normas-citadas'],
   },
-  { n: 3, q: 'Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?', primero: '#lo-que-afecta-al-tercer-sector' },
+  // «propietario» + «alquilo» ganan la FAQ de propietario; el bloque del
+  // tercer sector sigue pudiendo entrar, pero ya no es el primero.
+  { n: 3, q: 'Soy propietario y alquilo un piso a una asociación sin ánimo de lucro para personas vulnerables. ¿Tengo alguna ventaja en la declaración de la renta?', primero: '#propietario' },
   { n: 4, q: 'Lo que afecta al tercer sector: ¿qué reducción del IRPF preveía el RDL 26/2026 para el propietario que alquila a una entidad sin fines lucrativos?', primero: '#lo-que-afecta-al-tercer-sector' },
   {
     n: 5,
@@ -238,7 +242,9 @@ const ACEPTACION = [
   {
     n: 8,
     q: 'Soy inquilino y me han puesto una demanda de desahucio por no poder pagar. ¿Me protege algo de lo que aprobó el Gobierno?',
-    primero: '#art-2-rdl-262026-suspension-de-desahucios',
+    // La FAQ de desahucio es el fichero del tema; «aprobó»/«Gobierno» ya no
+    // arrastran la cuenta de ahorro al primer puesto.
+    primero: '/#desahucio',
     excluye: ['cuenta-de-ahorro'],
   },
   { n: 9, q: 'Dame una receta de tortilla de patatas.', niega: true },
