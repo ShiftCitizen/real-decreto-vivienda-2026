@@ -1,18 +1,21 @@
 # Evals del chatbot Vivienda 2026
 
 Harness local (ADR 0001). Retrieval / scope / citas estructurales van en CI
-sin LLM. Faithfulness y context-baseline son **bajo demanda** y usan solo
-`MISTRAL_API_KEY` — nunca `NIM_API_KEY` ni `POST /api/chat`.
+sin LLM. Faithfulness es **bajo demanda** y usa solo `MISTRAL_API_KEY` —
+nunca `NIM_API_KEY` ni `POST /api/chat`.
 
 ## Comandos
 
 ```bash
 npm run build                 # índices search + OKF
-npm run eval:retrieval        # vitest (retrieval, scope, citas, context smoke)
+npm run eval:retrieval        # vitest (retrieval, scope, citas)
 MISTRAL_API_KEY=… npm run eval:faithfulness
 MISTRAL_API_KEY=… npm run eval:faithfulness -- --update-baseline
-MISTRAL_API_KEY=… npm run eval:context
 ```
+
+El experimento retrieval vs full OKF vs retrieval-large vive en la rama
+`evals/context-baseline-experiment` (PR aparte); no forma parte de este
+árbol de producción.
 
 ## Baseline de respuestas (`fixtures/baseline-responses.json`)
 
@@ -51,10 +54,3 @@ futuro; **no** autorizan embeddings en esta tarea.
 
 Informe committed: `docs/evals/paraphrase-lexical-2026-11-06.md`
 (`node scripts/report-paraphrase.mjs`).
-
-## Context baseline
-
-`npm run eval:context` compara retrieval vs full OKF vs retrieval-large.
-Informes generados en `evals/reports/` (gitignored). Sin `MISTRAL_API_KEY` la
-corrida LLM queda bloqueada — ver `docs/evals/context-baseline-BLOCKED-2026-11-06.md`.
-El smoke de `context-baseline.test.ts` sigue en `eval:retrieval`.

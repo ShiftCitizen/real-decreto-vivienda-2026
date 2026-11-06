@@ -60,10 +60,9 @@ import type { Evidencia, TablaOkf } from '@/lib/okf';
  *     fallo inesperado es un 502 con `{ error }` en JSON, que el widget
  *     muestra como lo que es.
  *
- *  El failover **solo** salta ante 400/404/410 (identificador no servible con
- *  esa configuración). Ante un timeout, un 5xx o un error de red se va al plan
- *  B: encadenar un segundo proveedor tras un timeout duplicaría la espera, y
- *  35 s + 35 s no caben en los 60 s de la función.
+ *  El failover ante timeout/5xx/red ahora pasa al siguiente proveedor dentro
+ *  del presupuesto de cadena (50 s). Un segundo timeout completo no debe
+ *  caber solo: por eso cada brazo tiene su propio `timeoutMs` (14 s / 22 s).
  *
  * Variables de entorno (Vercel, nunca en el repo):
  * - MISTRAL_API_KEY: clave para Mistral API directa
@@ -80,9 +79,9 @@ const OPENROUTER_BASE = 'https://openrouter.ai/api/v1';
 /**
  * Tiempo máximo de una función en Vercel.
  *
- * El timeout del modelo son 35 s, así que 60 s dejan margen para el resto de
- * la función y para un failover —que solo ocurre ante errores rápidos— sin
- * depender de que el plan de Vercel lo permita por defecto.
+ * Cada brazo de `PROVEEDORES` espera ≤22 s (NIM) o 14 s (Mistral/OpenRouter),
+ * y el presupuesto de cadena son 50 s; 60 s dejan margen para recuperación y
+ * respuesta sin depender de que el plan de Vercel lo permita por defecto.
  */
 export const maxDuration = 60;
 
@@ -169,16 +168,14 @@ const PROVEEDORES: Proveedor[] = [
   },
 ];
 
-type Modelo = { id: string; temperature: number; topP: number };
-
 /**
- * Timeout de la llamada al modelo.
+ * Timeout del override `NIM_MODEL_ID` (cadena de un solo proveedor).
  *
- * Con 25 s se agotaba: dos de las seis llamadas medidas en producción lo
- * agotaron. Las que contestaron tardaron entre 8,6 y 16,1 s, así que 35 s
- * deja pasar todas y cabe en los 60 s de la función.
+ * Alineado con el brazo Mistral/OpenRouter de producción (14 s). El brazo
+ * NIM por defecto en `PROVEEDORES` usa 22 s; este override no debe reintroducir
+ * el antiguo tope de 35 s, que descuadraba el presupuesto de la cadena.
  */
-const TIMEOUT_NIM_MS = 35_000;
+const TIMEOUT_NIM_MS = 14_000;
 
 /**
  * Presupuesto total para la cadena de proveedores (21-10-2026). La función
@@ -196,14 +193,14 @@ const CUOTA_VENTANA_MS = 60 * 60 * 1000;
 const CUOTA_LIMPIEZA_CADA = 50;
 
 /**
- * Tope del texto que devuelve el plan B.
+ * Tope del texto que devuelve el plan B (intencional desde 21-10-2026).
  *
- * Son 3 000 caracteres para los ficheros de tema y 1 500 reservados para las
- * dos fichas de estado: el estado no es decoración, es lo que hace que la
- * respuesta diga qué decreto rige la medida.
+ * 4 200 caracteres para los ficheros de tema (antes 3 000: cabía mal la
+ * remisión a la enervación con subrogación) y 1 500 reservados para las dos
+ * fichas de estado: el estado no es decoración, es lo que hace que la
+ * respuesta diga qué decreto rige la medida. Total nominal 5 700.
  */
-const TOPE_TEXTO_PLAN_B = 5700;
-const TOPE_TEXTO_PLAN_B_TEMA = 4200; // 21-10-2026: cabe la remisión a la enervación entera (subrogación incluida)
+const TOPE_TEXTO_PLAN_B_TEMA = 4200;
 const TOPE_TEXTO_PLAN_B_ESTADO = 1500;
 
 // Cuota por IP en memoria del proceso. Best-effort: en serverless cada
@@ -355,7 +352,7 @@ function porFrase(texto: string, tope: number): string | null {
  * numerados igual que las citas —`[1]`, `[2]`— y en el mismo orden, así que el
  * widget los pinta como enlaces que apuntan al passage correcto.
  *
- * El tope está repartido: 3 000 caracteres para los ficheros de tema y 1 500
+ * El tope está repartido: 4 200 caracteres para los ficheros de tema y 1 500
  * para las dos fichas de estado, que no se recortan porque son las que dicen
  * qué decreto rige cada medida.
  */
