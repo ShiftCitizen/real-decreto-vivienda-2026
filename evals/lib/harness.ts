@@ -73,6 +73,59 @@ export function hrefValido(href: string, indice: EntradaIndice[]): boolean {
   });
 }
 
+/**
+ * Exige coincidencia exacta del href (incluida el ancla). Un match solo de
+ * página base no cuenta: sirve para claims que necesitan un pasaje concreto.
+ */
+export function hrefAnclaExacta(href: string, indice: EntradaIndice[]): boolean {
+  if (!href.startsWith('/')) return false;
+  if (href.includes('.md')) return false;
+  return indice.some((e) => e.href === href);
+}
+
+export type PasajeEvidencia = { href: string; texto: string };
+
+/**
+ * ¿El href citado apunta a un pasaje que contiene las frases exigidas?
+ * Un match de página base sin el ancla correcto NO basta.
+ */
+export function citaSoportaPasaje(
+  citedHref: string,
+  requiredPhrases: string[],
+  passages: PasajeEvidencia[],
+): { ok: boolean; reason: string } {
+  const exact = passages.find((p) => p.href === citedHref);
+  if (!exact) {
+    const base = citedHref.split('#')[0] || '/';
+    const pageOnly = passages.some((p) => (p.href.split('#')[0] || '/') === base);
+    if (pageOnly) {
+      return { ok: false, reason: 'page-base match without required anchor/passage' };
+    }
+    return { ok: false, reason: 'cited href not in evidence' };
+  }
+  for (const phrase of requiredPhrases) {
+    if (!exact.texto.toLowerCase().includes(phrase.toLowerCase())) {
+      return { ok: false, reason: `missing phrase: ${phrase}` };
+    }
+  }
+  return { ok: true, reason: 'supported' };
+}
+
+/** Marcadores [n] presentes en la respuesta (sin filtrar por total). */
+export function citasMarcadas(respuesta: string): number[] {
+  return [...respuesta.matchAll(/\[(\d{1,2})\]/g)].map((m) => Number(m[1]));
+}
+
+/**
+ * True cuando `ajustarCitas` inventa la fuente [1] porque no había ningún
+ * marcador válido. Eso es una reparación de presentación, no prueba de
+ * soporte evidencial.
+ */
+export function esReparacionFuente1(respuesta: string, total: number): boolean {
+  const validas = citasMarcadas(respuesta).filter((n) => n >= 1 && n <= total);
+  return validas.length === 0 && total >= 1;
+}
+
 export function coincideTopic(
   hrefs: string[],
   topic: string,

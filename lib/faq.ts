@@ -88,11 +88,12 @@ export const FAQ: FaqEntry[] = [
     id: 'indemnizacion',
     pregunta: '¿Cuánto me deben si no me renuevan?',
     respuesta: [
-      'Vuelve a estar en vigor por el artículo único del RDL 28/2026 (pendiente de convalidación): prórroga por plazos sucesivos de cinco y siete años e indemnización por no renovación.',
+      'Aún no: el artículo único del RDL 28/2026 no está en vigor (entrada prevista el 15-11-2026 si se convalida). Cuando entre en vigor traería prórroga por plazos sucesivos de cinco y siete años e indemnización por no renovación.',
       'Las seis excepciones del apartado 10.2 (necesidad del arrendador, no ocupación, otra vivienda, contrato nuevo, rechazo de oferta y vulnerabilidad del arrendador) eran del texto del RDL 27/2026, derogado el 2-10-2026; el RDL 28/2026 las reproduce.',
     ],
     citas: [
       { norma: 'rdl28', art: 'único.1' },
+      { norma: 'rdl28', art: 'disposición final segunda' },
       { norma: 'lau', art: '10.1' },
       { norma: 'lau', art: '10.2' },
       { norma: 'rdl27', art: 'único.1' },
@@ -102,11 +103,12 @@ export const FAQ: FaqEntry[] = [
     id: 'aplicacion-contrato',
     pregunta: '¿Cuándo se aplica a mi contrato?',
     respuesta: [
-      'El régimen transitorio es ahora el de la disposición transitoria única del RDL 28/2026 (pendiente de convalidación): se aplica a los vencimientos posteriores a su entrada en vigor.',
-      'Los preavisos de cuatro meses y las reglas de tácita reconducción del texto derogado tienen su equivalente en esa transitoria. Los contratos se rigen por la LAU anterior cuando no aplica el régimen nuevo.',
+      'Todavía no se aplica el régimen nuevo: la disposición transitoria única del RDL 28/2026 (no en vigor; entrada prevista el 15-11-2026 si se convalida) se aplicaría a los vencimientos posteriores a su entrada en vigor.',
+      'Los preavisos de cuatro meses y las reglas de tácita reconducción del texto derogado tienen su equivalente en esa transitoria. Mientras el RDL 28/2026 no entre en vigor, los contratos se rigen por la LAU anterior.',
     ],
     citas: [
       { norma: 'rdl28', art: 'disposición transitoria única' },
+      { norma: 'rdl28', art: 'disposición final segunda' },
       { norma: 'rdl27', art: 'disposición transitoria única.1' },
       { norma: 'rdl27', art: 'disposición transitoria única.2 y 3' },
       { norma: 'rdl27', art: 'disposición transitoria única.5' },

@@ -10,6 +10,7 @@
     "check:chat": "node scripts/chat-check.mjs",
     "eval:retrieval": "vitest run --config vitest.eval.config.mts",
     "eval:faithfulness": "node scripts/eval-faithfulness.mjs",
+    "eval:context": "node scripts/eval-context-baseline.mjs",
     "typecheck": "tsc --noEmit",
     "start": "next start"
   },

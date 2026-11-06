@@ -1,0 +1,78 @@
+# Paráfrasis informales de ciudadano. Miden recall léxico/OKF antes de
+# considerar retrieval semántico. Expected evidence grounded in the corpus.
+casos:
+  - id: para-casero-echar
+    pregunta: ¿Puede el casero echarme si dejo de pagar?
+    categoria: paraphrase
+    topics_esperados:
+      - '#desahucio'
+      - desahucio
+    via: okf
+  - id: para-casero-desahuciar
+    pregunta: Me quiere desahuciar el casero, ¿qué puedo hacer?
+    categoria: paraphrase
+    topics_esperados:
+      - '#desahucio'
+      - desahucio
+    via: okf
+  - id: para-arrendador-echar
+    pregunta: ¿Puedo echar al inquilino si no me paga la renta?
+    categoria: paraphrase
+    topics_esperados:
+      - '#desahucio'
+      - desahucio
+    via: okf
+  - id: para-indemnizacion-informal
+    pregunta: Si no me renuevan el alquiler, ¿me tienen que pagar algo?
+    categoria: paraphrase
+    topics_esperados:
+      - '#indemnizacion'
+      - indemniz
+    via: okf
+  - id: para-indemnizacion-doce
+    pregunta: ¿Me deben doce meses de renta si el casero no renueva?
+    categoria: paraphrase
+    topics_esperados:
+      - '#indemnizacion'
+      - indemniz
+    via: okf
+  - id: para-no-renovacion-pago
+    pregunta: El casero no quiere renovarme, ¿cuánto me tiene que abonar?
+    categoria: paraphrase
+    topics_esperados:
+      - '#indemnizacion'
+      - indemniz
+    via: okf
+  - id: para-vigor-rdl28
+    pregunta: ¿Ya está en marcha lo de las prórrogas de cinco años?
+    categoria: paraphrase
+    topics_esperados:
+      - '#en-vigor'
+      - '#aplicacion-contrato'
+      - '#indemnizacion'
+      - vigor
+    via: okf
+  - id: para-subida-renta-casero
+    pregunta: ¿El casero me puede subir mucho el alquiler este año?
+    categoria: paraphrase
+    topics_esperados:
+      - '#subir-renta'
+      - subir
+    via: okf
+  - id: para-prorroga-contrato
+    pregunta: Mi contrato se acaba pronto, ¿se alarga solo?
+    categoria: paraphrase
+    topics_esperados:
+      - '#aplicacion-contrato'
+      - '#coordinacion'
+      - prorroga
+      - prórroga
+    via: okf
+  - id: para-vulnerable-desahucio
+    pregunta: Soy vulnerable y no tengo otro piso, ¿me pueden echar igual?
+    categoria: paraphrase
+    topics_esperados:
+      - '#desahucio'
+      - desahucio
+      - vulnerable
+    via: okf

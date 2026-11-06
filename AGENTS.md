@@ -24,6 +24,8 @@ npm run check:chat        # legacy retrieval smoke (needs a prior build)
 npm run eval:retrieval    # Vitest evals — no LLM; needs built indexes
 # faithfulness — on demand only (ADR 0001); never NIM / never POST /api/chat:
 # MISTRAL_API_KEY=… npm run eval:faithfulness
+# context baseline (retrieval vs full bundle) — manual only, never in PR CI:
+# MISTRAL_API_KEY=… npm run eval:context
 ```
 
 `npm run build` is the only correct way to regenerate the search index. Run
@@ -493,7 +495,9 @@ production NIM.
 
 Corpus and gates live under `evals/` (OpenSpec `evals-chatbot-harness`).
 Do not reintroduce a nightly faithfulness job to «close» KL-S-032/036 —
-those specs are on-demand by design.
+those specs are on-demand by design. The retrieval-vs-full-bundle experiment
+(`npm run eval:context`) is also manual-only — never add it to the PR
+workflow.
 
 ## React gotchas in this codebase
 
