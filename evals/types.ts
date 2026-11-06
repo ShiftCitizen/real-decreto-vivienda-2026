@@ -6,6 +6,8 @@ export const CATEGORIAS = [
   'numeric_contamination',
   'citation_validity',
   'state_inclusion',
+  /** Paráfrasis informales: se reportan aparte; no diluyen Recall@1 de single_intent. */
+  'paraphrase',
 ] as const;
 
 export type Categoria = (typeof CATEGORIAS)[number];

@@ -1,0 +1,113 @@
+{
+  "created": "2026-11-06",
+  "note": "Lexical/OKF paraphrase recall. Misses are evidence for a later semantic candidate generator behind existing scope controls — not authorization to add embeddings now.",
+  "handled_count": 3,
+  "miss_count": 7,
+  "total": 10,
+  "handled": [
+    {
+      "id": "para-arrendador-echar",
+      "pregunta": "¿Puedo echar al inquilino si no me paga la renta?",
+      "top": "/#desahucio",
+      "titulo": "¿Me pueden hacer un desahucio? ¿Me pueden desahuciar? ¿Puede el casero echar al inquilino y quién cuenta como vulnerable? ¿Qué pasa con los desahucios?",
+      "hrefs": [
+        "/#desahucio",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-vigor-rdl28",
+      "pregunta": "¿Ya está en marcha lo de las prórrogas de cinco años?",
+      "top": "/desahucios-y-alquiler#coordinacion",
+      "titulo": "Coordinación: el RDL 27/2026 y la prórroga indefinida",
+      "hrefs": [
+        "/desahucios-y-alquiler#coordinacion",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-vulnerable-desahucio",
+      "pregunta": "Soy vulnerable y no tengo otro piso, ¿me pueden echar igual?",
+      "top": "/#desahucio",
+      "titulo": "¿Me pueden hacer un desahucio? ¿Me pueden desahuciar? ¿Puede el casero echar al inquilino y quién cuenta como vulnerable? ¿Qué pasa con los desahucios?",
+      "hrefs": [
+        "/#desahucio",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    }
+  ],
+  "misses": [
+    {
+      "id": "para-casero-echar",
+      "pregunta": "¿Puede el casero echarme si dejo de pagar?",
+      "top": "/#propietario",
+      "titulo": "¿Cómo me afectan estas medidas como propietario o arrendador?",
+      "hrefs": [
+        "/#propietario",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-casero-desahuciar",
+      "pregunta": "Me quiere desahuciar el casero, ¿qué puedo hacer?",
+      "top": "/#propietario",
+      "titulo": "¿Cómo me afectan estas medidas como propietario o arrendador?",
+      "hrefs": [
+        "/#propietario",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-indemnizacion-informal",
+      "pregunta": "Si no me renuevan el alquiler, ¿me tienen que pagar algo?",
+      "top": null,
+      "titulo": null,
+      "hrefs": []
+    },
+    {
+      "id": "para-indemnizacion-doce",
+      "pregunta": "¿Me deben doce meses de renta si el casero no renueva?",
+      "top": "/#propietario",
+      "titulo": "¿Cómo me afectan estas medidas como propietario o arrendador?",
+      "hrefs": [
+        "/#propietario",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-no-renovacion-pago",
+      "pregunta": "El casero no quiere renovarme, ¿cuánto me tiene que abonar?",
+      "top": "/#propietario",
+      "titulo": "¿Cómo me afectan estas medidas como propietario o arrendador?",
+      "hrefs": [
+        "/#propietario",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-subida-renta-casero",
+      "pregunta": "¿El casero me puede subir mucho el alquiler este año?",
+      "top": "/#propietario",
+      "titulo": "¿Cómo me afectan estas medidas como propietario o arrendador?",
+      "hrefs": [
+        "/#propietario",
+        "/estado#situacion-de-cada-medida",
+        "/#en-vigor"
+      ]
+    },
+    {
+      "id": "para-prorroga-contrato",
+      "pregunta": "Mi contrato se acaba pronto, ¿se alarga solo?",
+      "top": null,
+      "titulo": null,
+      "hrefs": []
+    }
+  ]
+}

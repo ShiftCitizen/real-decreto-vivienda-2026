@@ -4,13 +4,28 @@
  * Usa solo MISTRAL_API_KEY. Nunca NIM_API_KEY ni POST /api/chat de producción.
  *
  *   MISTRAL_API_KEY=… npm run eval:faithfulness
+ *   MISTRAL_API_KEY=… npm run eval:faithfulness -- --update-baseline
+ *
+ * Alineación con la app (2026-11-06):
+ * - System prompt: el mismo `SISTEMA` de `lib/chat-sistema.ts` (producción).
+ * - Modelo por defecto: `ministral-8b-latest` (brazo Mistral de producción).
+ * - max_tokens: `MAX_TOKENS_SALIDA` (550).
+ * Deltas documentados (no se cierran aquí a propósito):
+ * - temperature 0.2 (reproducibilidad); producción usa 0.6 en el brazo Mistral.
+ * - Solo Mistral API; producción puede caer a NIM u OpenRouter.
+ * - La heurística de solape (≥0.7 por frase, ratio ≥0.95) no prueba semántica
+ *   jurídica: una paráfrasis fiel puede fallar y una cita incorrecta con
+ *   solape léxico alto puede pasar. No afirma fiabilidad de producción.
+ *
+ * El baseline committed es extractivo (corpus publicado), no salidas de modelo.
+ * `--update-baseline` lo sustituye por respuestas del modelo eval; documenta
+ * la procedencia en el JSON.
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { load as parseYaml } from 'js-yaml';
 import { registerHooks } from 'node:module';
-import { pathToFileURL } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 
@@ -42,10 +57,16 @@ if (!mistralKey) {
 }
 
 const { seleccionar } = await import('@/lib/okf');
+const { SISTEMA, MAX_TOKENS_SALIDA } = await import('@/lib/chat-sistema');
 
 const okf = JSON.parse(readFileSync(join(root, 'public/okf-index.json'), 'utf8'));
 const baselinePath = join(root, 'evals/fixtures/baseline-responses.json');
 const casesDir = join(root, 'evals/cases');
+
+/** Modelo del brazo Mistral de producción; override con MISTRAL_MODEL_ID. */
+const MODEL = process.env.MISTRAL_MODEL_ID || 'ministral-8b-latest';
+/** Eval usa 0.2 a propósito (ver cabecera); prod Mistral usa 0.6. */
+const TEMPERATURE = Number(process.env.MISTRAL_EVAL_TEMPERATURE || 0.2);
 
 function cargarGolden() {
   const out = [];
@@ -105,15 +126,11 @@ async function llamarMistral(pregunta, contexto) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: process.env.MISTRAL_MODEL_ID || 'mistral-small-latest',
-      temperature: 0.2,
-      max_tokens: 350,
+      model: MODEL,
+      temperature: TEMPERATURE,
+      max_tokens: MAX_TOKENS_SALIDA,
       messages: [
-        {
-          role: 'system',
-          content:
-            'Responde solo con el CONTEXTO. Si no está, dilo. Cita con [n]. No inventes cifras.',
-        },
+        { role: 'system', content: SISTEMA },
         { role: 'user', content: `CONTEXTO:\n${contexto}\n\nPREGUNTA:\n${pregunta}` },
       ],
     }),
@@ -129,11 +146,15 @@ async function llamarMistral(pregunta, contexto) {
 const golden = cargarGolden();
 const baseline = existsSync(baselinePath)
   ? JSON.parse(readFileSync(baselinePath, 'utf8'))
-  : { version: 1, responses: {} };
+  : { version: 2, responses: {} };
 const actualizar = process.argv.includes('--update-baseline');
+const respuestasBaseline = baseline.responses || {};
 
 let fallos = 0;
-const nuevas = { ...baseline.responses };
+const nuevas = { ...respuestasBaseline };
+
+console.log(`Modelo eval: ${MODEL} · max_tokens=${MAX_TOKENS_SALIDA} · temp=${TEMPERATURE}`);
+console.log(`Baseline kind: ${baseline.kind || 'unknown'} · cases=${golden.length}`);
 
 for (const c of golden) {
   const ev = seleccionar(c.pregunta, okf);
@@ -151,12 +172,23 @@ for (const c of golden) {
     continue;
   }
   const { ok, ratio, unsupported } = fidelidad(respuesta, contexto);
-  const prev = baseline.responses[c.id];
+  const prev = respuestasBaseline[c.id];
   if (prev && prev === respuesta) {
     console.log(`  ok   ${c.id} (igual al baseline, faithfulness=${(ratio ?? 1).toFixed(2)})`);
   } else if (prev && !actualizar) {
-    console.log(`  DIFF ${c.id}: respuesta distinta del baseline (usa --update-baseline si es intencional)`);
-    fallos += 1;
+    // Extractive baselines are not expected to equal model output.
+    if (baseline.kind === 'extractive-corpus') {
+      if (!ok) {
+        console.log(`  FALLA ${c.id}: faithfulness=${(ratio ?? 0).toFixed(2)} (vs evidencia; baseline extractivo no exige igualdad)`);
+        for (const u of unsupported.slice(0, 3)) console.log(`         unsupported: ${u.slice(0, 120)}`);
+        fallos += 1;
+      } else {
+        console.log(`  ok   ${c.id} faithfulness=${(ratio ?? 1).toFixed(2)} (baseline extractivo; no se compara igualdad)`);
+      }
+    } else {
+      console.log(`  DIFF ${c.id}: respuesta distinta del baseline (usa --update-baseline si es intencional)`);
+      fallos += 1;
+    }
   } else if (!ok) {
     console.log(`  FALLA ${c.id}: faithfulness=${(ratio ?? 0).toFixed(2)}`);
     for (const u of unsupported.slice(0, 3)) console.log(`         unsupported: ${u.slice(0, 120)}`);
@@ -167,9 +199,18 @@ for (const c of golden) {
   nuevas[c.id] = respuesta;
 }
 
-const baselineVacio = Object.keys(baseline.responses || {}).length === 0;
-if (actualizar || baselineVacio) {
-  writeFileSync(baselinePath, JSON.stringify({ version: 1, responses: nuevas }, null, 2) + '\n');
+if (actualizar) {
+  const out = {
+    version: 2,
+    kind: 'model-mistral',
+    created: new Date().toISOString().slice(0, 10),
+    provenance: `Generated by eval-faithfulness.mjs with ${MODEL}; SISTEMA from lib/chat-sistema.ts; temp=${TEMPERATURE}. Not production NIM/OpenRouter.`,
+    model: MODEL,
+    max_tokens: MAX_TOKENS_SALIDA,
+    temperature: TEMPERATURE,
+    responses: nuevas,
+  };
+  writeFileSync(baselinePath, JSON.stringify(out, null, 2) + '\n');
   console.log(`\nBaseline escrito en ${baselinePath}`);
 }
 

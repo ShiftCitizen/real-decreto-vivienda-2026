@@ -75,3 +75,26 @@ describe('KL-S-030 broad', () => {
     }
   });
 });
+
+describe('citizen paraphrases (lexical baseline)', () => {
+  it('reporta aciertos y fallos sin diluir Recall@1', () => {
+    const paras = casos.filter((c) => c.categoria === 'paraphrase');
+    expect(paras.length).toBeGreaterThanOrEqual(8);
+    const handled: string[] = [];
+    const misses: string[] = [];
+    for (const c of paras) {
+      const r = recuperar(c, okf, indice);
+      const hit =
+        !r.niega &&
+        (c.topics_esperados ?? []).some((t) => coincideTopic(r.hrefs, t, r.titulos));
+      const line = `${c.id}: «${c.pregunta}» → ${r.hrefs[0] ?? '(niega)'} (${r.titulos[0] ?? ''})`;
+      if (hit) handled.push(line);
+      else misses.push(line);
+    }
+    // Evidencia para un candidato semántico futuro — no falla el CI por misses.
+    console.log(`paraphrase handled ${handled.length}/${paras.length}`);
+    for (const h of handled) console.log(`  OK  ${h}`);
+    for (const m of misses) console.log(`  MISS ${m}`);
+    expect(handled.length + misses.length).toBe(paras.length);
+  });
+});
